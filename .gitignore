@@ -5,3 +5,6 @@ tools/codex_watch.py
 tools/codex_notify_imessage.sh
 .env.local
 tools/.env.local
+
+# macOS
+.DS_Store
