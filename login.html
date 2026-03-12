@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ログイン・新規登録 | CanadaClassi</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root{
+      --primary:#d80621;
+      --primary-dark:#b1051a;
+      --bg:#f6f7f9;
+      --card:#ffffff;
+      --text:#222;
+      --muted:#666;
+      --border:rgba(0,0,0,.08);
+      --shadow:0 16px 40px rgba(0,0,0,.10);
+      --radius:16px;
+
+      /* メープルリーフ（見出し・箇条書き用） */
+      --ml: url("Mapleleaf_transparent.png");
+    }
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans JP",sans-serif;
+      color:var(--text);
+      background:var(--bg);
+    }
+
+    .auth-main{ padding:18px 0 60px; }
+    .auth-container{
+      width:min(1040px,92%);
+      margin:0 auto;
+    }
+
+    .auth-card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-top:0;
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      margin-top:0;
+    }
+
+    /* 2カラム：左説明 / 右フォーム */
+    .auth-split{
+      display:grid;
+      grid-template-columns: minmax(0,1fr) minmax(360px,420px);
+      min-height: 520px;
+      align-items: stretch;
+    }
+
+    .auth-left{
+      padding:28px 26px 24px;
+      border-right:1px solid var(--border);
+      background:transparent !important;
+    }
+
+    .auth-right{
+      padding:22px;
+      background:#fff;
+    }
+
+    .left-top{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      margin-bottom:18px;
+    }
+
+    .left-top img{
+      width:84px;
+      height:84px;
+      object-fit:contain;
+      border-radius:18px;
+      background:transparent;
+      border:none;
+      padding:0;
+      filter: drop-shadow(0 10px 22px rgba(0,0,0,.10));
+    }
+
+    .left-top h1{
+      margin:0;
+      font-size:1.28rem;
+      letter-spacing:.02em;
+      line-height:1.2;
+    }
+    .left-top p{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-size:.94rem;
+      line-height:1.55;
+    }
+
+    .feature-box{ margin-top:10px; }
+
+    /* 目次（左カラム上部） */
+    .toc{
+      margin:14px 0 8px;
+      padding:0;
+      border:0;
+      border-radius:0;
+      background:transparent !important;
+      box-shadow:none;
+    }
+    nav.toc{
+      background:transparent !important;
+      color:inherit !important;
+      border-top:0 !important;
+      padding:0 !important;
+      margin:14px 0 8px !important;
+    }
+    nav.toc a{
+      background:transparent !important;
+      border-bottom:0 !important;
+      box-shadow:none !important;
+    }
+    .auth-left .toc-title{
+      margin:0 0 4px;
+      font-weight:900;
+      font-size:1.02rem;
+      letter-spacing:.01em;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text) !important;
+      opacity:1;
+    }
+    .toc-title .mini-illu{
+      width:22px;
+      height:22px;
+      object-fit:contain;
+      background:transparent;
+      border:0;
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,.15));
+    }
+    .toc-list{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:6px;
+    }
+    .auth-left .toc-item a,
+    .auth-left .toc-item a:visited{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      color:#333 !important;
+      font-weight:700;
+      font-size:.9rem;
+      line-height:1.35;
+      padding:6px 0;
+      border-radius:0;
+      border:0;
+      background:transparent !important;
+      transition:.15s;
+      opacity:1;
+    }
+    .toc-item a:hover{
+      transform: translateX(4px);
+      color:var(--primary-dark);
+      background:transparent !important;
+    }
+    .toc-item a:hover{
+      text-shadow:0 4px 10px rgba(216,6,33,.28);
+    }
+    .toc-item a:hover .ml-bullet{
+      filter: drop-shadow(0 8px 14px rgba(216,6,33,.35));
+      transform: translateY(-2px) scale(1.04);
+    }
+    .toc-item a .ml-bullet{
+      transition: filter .2s ease, transform .2s ease;
+    }
+    .toc-item a:focus-visible{
+      outline:2px solid rgba(216,6,33,.35);
+      outline-offset:4px;
+      border-radius:6px;
+    }
+    .toc::before,
+    .toc::after,
+    .toc-list{
+      background:transparent !important;
+    }
+    .ml-bullet{
+      width:18px;
+      height:18px;
+      object-fit:contain;
+      background:transparent;
+      border:0;
+      flex:0 0 auto;
+    }
+
+    /* 説明ブロック内のミニイラスト（ロゴ2〜5の活用） */
+    .inline-illu{
+      width:52px;
+      height:52px;
+      object-fit:contain;
+      background:transparent;
+      border:0;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.10));
+      flex:0 0 auto;
+    }
+    .feature-item.has-illu{
+      display:grid;
+      grid-template-columns: 1fr 56px;
+      gap:10px;
+      align-items:center;
+    }
+    .feature-item.has-illu .feature-dot{ display:none !important; }
+    .feature-item.has-illu .illu-wrap{
+      display:flex;
+      justify-content:flex-end;
+      align-items:center;
+    }
+
+    nav.toc ul{ display:grid !important; gap:10px; }
+    .toc-list{ grid-auto-flow: row; }
+    .nav{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      justify-content:center;
+      flex:1;
+      min-width: 240px;
+    }
+    .nav a{
+      text-decoration:none;
+      color:#333;
+      font-weight:900;
+      padding:8px 10px;
+      border-radius:10px;
+    }
+    .nav a:hover{ background:rgba(0,0,0,.04); }
+
+    .header-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:nowrap;
+      justify-content:flex-end;
+    }
+
+    .icon-btn{
+      width:auto;
+      height:44px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:0 10px;
+      border-radius:14px;
+      border:1px solid rgba(0,0,0,.12);
+      background:#fff;
+      text-decoration:none;
+      color:#333;
+    }
+    .icon-btn:hover{ background:rgba(0,0,0,.04); }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      height:44px;
+      padding:0 14px;
+      border-radius:14px;
+      font-weight:1000;
+      text-decoration:none;
+      cursor:pointer;
+      border:1px solid rgba(216,6,33,.35);
+      color:var(--primary-dark);
+      background:#fff;
+      white-space:nowrap;
+    }
+    .btn:hover{ background:rgba(216,6,33,.06); }
+
+    .btn-post{
+      border:0;
+      background:var(--primary);
+      color:#fff;
+    }
+    .btn-post:hover{ opacity:.92; background:var(--primary); }
+
+    .area-select,
+    .lang-select{
+      height:44px;
+      padding:0 12px;
+      border-radius:14px;
+      border:1px solid rgba(0,0,0,.14);
+      background:#fff;
+      font-weight:900;
+      color:#333;
+      max-width: 190px;
+    }
+
+    @media (max-width: 860px){
+      .nav{ display:none; }
+      .brand{ min-width: auto; }
+      .brand img{ width:44px; height:44px; }
+      .brand .brand-name{ font-size:1.12rem; }
+      .brand .brand-sub{ font-size:.84rem; }
+      .area-select,
+      .lang-select{ max-width: 160px; }
+      .header-actions{ flex-wrap:nowrap; }
+    }
+
+    @media (max-width: 520px){
+      .header-actions{ gap:8px; }
+      .btn{ padding:0 12px; border-radius:12px; }
+      .area-select,
+      .lang-select{ max-width: 140px; }
+    }
+
+    /* Contact text (no mapleleaf / no bold) */
+    .contact-text{
+      margin:0;
+      color:#444;
+      font-size:.92rem;
+      line-height:1.7;
+      font-weight:400;
+    }
+
+    /* セクション */
+    .section{
+      margin-top:12px;
+      padding:12px;
+      border:1px solid rgba(0,0,0,.06);
+      border-radius:12px;
+      background:#fff;
+      scroll-margin-top: 90px;
+      transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+    }
+    .section:first-of-type{ margin-top:10px; }
+    .section:hover{
+      border-color: rgba(216,6,33,.18);
+      box-shadow: 0 10px 24px rgba(216,6,33,.08);
+      transform: translateY(-1px);
+    }
+
+    .section h2{
+      margin:0 0 10px;
+      font-size:1.02rem;
+      letter-spacing:.01em;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .section h2{
+      transition: color .2s ease;
+    }
+    .section h2::after{
+      content:"";
+      flex:1 1 auto;
+      height:2px;
+      margin-left:8px;
+      background:linear-gradient(90deg, rgba(216,6,33,.25), rgba(216,6,33,0));
+      opacity:.35;
+      transform:scaleX(.35);
+      transform-origin:left;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+    .section:hover h2{
+      color:var(--primary-dark);
+    }
+    .section:hover h2::after{
+      opacity:.7;
+      transform:scaleX(1);
+    }
+
+    /* ★ここが重要：赤丸ではなくメープルリーフを強制 */
+    .section h2::before{ display:none !important; }
+
+    /* Mapleleaf icon for section titles (inline <img>) */
+    .title-ml{
+      width:22px;
+      height:22px;
+      object-fit:contain;
+      background:transparent;
+      border:0;
+      flex:0 0 auto;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,.10));
+    }
+
+    .section .lead{
+      margin:0 0 10px;
+      color:var(--muted);
+      font-size:.92rem;
+      line-height:1.6;
+    }
+
+    @media (max-width: 860px){
+      /* スマホ：入力フォームを先に表示（上部） */
+      .auth-split{ display:flex; flex-direction:column; }
+      .auth-right{ order:1; }
+      .auth-left{ order:2; border-right:none; border-bottom:1px solid var(--border); }
+      .flow-wrap{ grid-template-columns:1fr; }
+
+      /* スマホ：バッジは折り返さない（内側で改行させない） */
+      .flow-badge{ white-space:nowrap; }
+    }
+
+    /* Feature cards */
+    .feature-grid{
+      display:grid;
+      gap:10px;
+      margin:0;
+      padding:0;
+      list-style:none;
+    }
+    .feature-item{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:12px 12px;
+      border:1px solid rgba(0,0,0,.08);
+      border-radius:14px;
+      background:#fff;
+    }
+
+    /* ★赤い丸(dot)は使わない（統一） */
+    .feature-dot{ display:none !important; }
+    .feature-item > .feature-dot{ display:none !important; }
+
+    /* 統一：左のメープルリーフを擬似要素で表示 */
+    .feature-item::before{
+      content:"";
+      width:18px;
+      height:18px;
+      margin-top:3px;
+      flex:0 0 auto;
+      background-image:var(--ml) !important;
+      background-size:contain;
+      background-repeat:no-repeat;
+      background-position:center;
+      opacity:.95;
+    }
+
+    /* Allow disabling the left mapleleaf for specific feature rows */
+    .feature-item.no-bullet::before{ display:none !important; }
+
+    .feature-item.has-illu::before{ display:none; } /* 右側イラスト付きの行は左アイコンを省略 */
+
+    .feature-item .t{
+      font-weight:900;
+      font-size:.95rem;
+      margin:0;
+    }
+    .feature-item .d{
+      margin:4px 0 0;
+      color:#555;
+      font-size:.9rem;
+      line-height:1.55;
+    }
+
+    /* Flow */
+    .flow-wrap{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    .flow-card{
+      border:1px solid rgba(0,0,0,.08);
+      border-radius:14px;
+      background:#fff;
+      padding:12px;
+    }
+    .flow-card .who{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-weight:900;
+      margin:0 0 10px;
+      font-size:.95rem;
+    }
+    .flow-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      height:22px;
+      padding:0 10px;
+      border-radius:999px;
+      background:rgba(216,6,33,.08);
+      color:var(--primary-dark);
+      font-weight:900;
+      font-size:.78rem;
+      border:1px solid rgba(216,6,33,.18);
+
+      /* 追加：バッジ内部で折り返さない（投稿する が 分割されない） */
+      white-space:nowrap;
+    }
+    .steps{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:8px;
+    }
+    .step{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+    }
+    .step .n{
+      width:22px;
+      height:22px;
+      border-radius:999px;
+      background:var(--primary);
+      color:#fff;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:900;
+      font-size:.78rem;
+      flex:0 0 auto;
+      margin-top:1px;
+    }
+    .step .txt{
+      font-size:.9rem;
+      color:#444;
+      line-height:1.55;
+    }
+
+    /* Safety */
+    .safety{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:8px;
+    }
+    .safety li{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:10px 12px;
+      border:1px solid rgba(0,0,0,.08);
+      border-radius:14px;
+      background:#fff;
+      font-size:.9rem;
+      color:#444;
+      line-height:1.55;
+    }
+    .safety .mark{
+      width:18px;
+      height:18px;
+      border-radius:6px;
+      background:rgba(216,6,33,.10);
+      border:1px solid rgba(216,6,33,.20);
+      color:var(--primary-dark);
+      font-weight:900;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-size:.75rem;
+      flex:0 0 auto;
+      margin-top:2px;
+    }
+
+    /* Calendar showcase */
+    .calendar-figure{
+      margin:12px auto 0;
+      padding:0;
+      border:0;
+      border-radius:0;
+      background:transparent;
+      max-width: 340px; /* 少し小さめに */
+    }
+    .calendar-figure img{
+      width:100%;
+      height:auto;
+      display:block;
+      background:transparent;
+      border:0;
+      border-radius:14px;
+      filter: drop-shadow(0 14px 28px rgba(0,0,0,.14));
+    }
+    .calendar-figure figcaption{
+      margin-top:10px;
+      color:#555;
+      font-size:.9rem;
+      line-height:1.65;
+    }
+
+    /* 右フォーム（カード感） */
+    .right-head{ margin-bottom:14px; }
+    .right-head .title{
+      margin:0;
+      font-size:1.28rem;
+      letter-spacing:.02em;
+      line-height:1.2;
+      font-weight:700;
+    }
+    .right-head .sub{ margin:6px 0 0; color:var(--muted); font-size:.92rem; line-height:1.55; }
+
+    .tabs{ display:flex; gap:10px; margin:14px 0 16px; }
+    .tab{
+      flex:1;
+      border:1px solid var(--border);
+      background:#fff;
+      padding:10px 12px;
+      border-radius:12px;
+      font-weight:900;
+      cursor:pointer;
+      transition:.15s;
+      color:#333;
+    }
+    .tab.active{
+      border-color:rgba(216,6,33,.35);
+      box-shadow:0 0 0 3px rgba(216,6,33,.08);
+      color:var(--primary-dark);
+    }
+
+    .panel{ display:none; }
+    .panel.active{ display:block; }
+
+    .form-grid{ display:grid; gap:12px; }
+    .form-row label{
+      display:block;
+      font-weight:900;
+      font-size:.92rem;
+      margin-bottom:6px;
+    }
+
+    .form-row input,
+    .form-row select{
+      width:100%;
+      box-sizing:border-box;
+      padding:12px 12px;
+      border-radius:12px;
+      border:1px solid rgba(0,0,0,.12);
+      background:#fbfbfb;
+      font-size:16px;
+      outline:none;
+    }
+    .form-row input:focus,
+    .form-row select:focus{
+      border-color:rgba(216,6,33,.45);
+      box-shadow:0 0 0 3px rgba(216,6,33,.10);
+    }
+
+    .inline-note{
+      font-size:.85rem;
+      color:#666;
+      margin-top:6px;
+      line-height:1.55;
+    }
+
+    .check-row{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      font-size:.9rem;
+      color:#555;
+      margin:10px 0 14px;
+    }
+    .check-row input{ margin-top:3px; }
+
+    .auth-actions{ display:grid; gap:10px; margin-top:8px; }
+
+    .btn-primary{
+      width:100%;
+      padding:12px 14px;
+      background:var(--primary);
+      color:#fff;
+      border:none;
+      border-radius:10px;
+      font-weight:900;
+      cursor:pointer;
+    }
+    .btn-primary:hover{ opacity:.92; }
+
+    .btn-secondary{
+      width:100%;
+      padding:12px 14px;
+      background:transparent;
+      color:var(--primary-dark);
+      border:1px solid rgba(216,6,33,.35);
+      border-radius:10px;
+      font-weight:900;
+      cursor:pointer;
+    }
+    .btn-secondary:hover{ background:rgba(216,6,33,.06); }
+
+    .helper-links{
+      margin-top:10px;
+      font-size:.9rem;
+      color:var(--muted);
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .helper-links a{
+      color:var(--primary-dark);
+      text-decoration:none;
+      font-weight:900;
+    }
+    .helper-links a:hover{ text-decoration:underline; }
+
+    /* Password toggle (SVG) */
+    .password-wrap{
+      position:relative;
+      display:flex;
+      align-items:center;
+    }
+    .password-wrap input{ width:100%; padding-right:46px; }
+
+    .pw-toggle{
+      position:absolute;
+      right:10px;
+      top:50%;
+      transform:translateY(-50%);
+      border:0;
+      background:transparent;
+      cursor:pointer;
+      padding:6px;
+      border-radius:10px;
+      opacity:.85;
+    }
+    .pw-toggle:hover{ background:rgba(0,0,0,.05); opacity:1; }
+
+    .pw-toggle svg{
+      width:18px;
+      height:18px;
+      display:block;
+      stroke:#444;
+      fill:none;
+      stroke-width:2;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+    .pw-toggle .icon-eye-off{ display:none; }
+    .pw-toggle.is-on .icon-eye{ display:none; }
+    .pw-toggle.is-on .icon-eye-off{ display:block; }
+
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:18px;
+      transform:translateX(-50%);
+      background:rgba(0,0,0,.85);
+      color:#fff;
+      padding:10px 14px;
+      border-radius:999px;
+      font-size:.92rem;
+      z-index:9999;
+      display:none;
+      max-width:min(92vw,560px);
+      text-align:center;
+    }
+    .toast.show{ display:block; }
+
+    @media (max-width: 980px){
+      .auth-split{ grid-template-columns: 1fr 380px; }
+    }
+    @media (max-width: 860px){
+      .auth-split{ grid-template-columns: 1fr; }
+      .auth-left{ border-right:none; border-bottom:1px solid var(--border); }
+    }
+    @media (max-width: 520px){
+      .auth-left{ padding:18px 16px; }
+      .auth-right{ padding:16px; }
+      .left-top img{ width:68px; height:68px; }
+
+      /* スマホ：バッジ（投稿する/探す/はじめる/ログイン後）を上段にして改行崩れを防ぐ */
+      .flow-card .who{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:6px;
+        line-height:1.25;
+      }
+      .flow-card .who .flow-badge{
+        margin:0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 共通ヘッダー（他ページと雰囲気を統一） -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">
+        <a href="index.html" class="logo-link" aria-label="CanadaClassi ホーム">
+          <img src="logo1_transparent.png" alt="CanadaClassi ロゴ" class="logo-img" />
+          <div class="logo-text">
+            <span class="en">CanadaClassi</span>
+            <span class="ja">カナダくらし</span>
+          </div>
+        </a>
+      </div>
+      <div class="header-right-pc">
+        <div class="auth-buttons">
+          <div class="cc-notice">
+            <button type="button" class="btn-icon btn-notice-bell" id="notifBell" title="お知らせ" aria-label="お知らせ" data-cc-notice-toggle>
+              <svg class="cc-icon cc-bell-icon" viewBox="0 0 448 512" aria-hidden="true">
+                <path d="M224 512a64 64 0 0 0 64-64H160a64 64 0 0 0 64 64zm215.39-149.33C419.37 343 384 312 384 240c0-79.7-56.5-145.6-128-158.5V48a48 48 0 1 0-96 0v33.5C88.5 94.4 32 160.3 32 240c0 72-35.4 103-55.4 122.7A31.9 31.9 0 0 0 0 384a32 32 0 0 0 32 32h384a32 32 0 0 0 32-32 31.9 31.9 0 0 0-8.61-21.33z" fill="currentColor"/>
+              </svg>
+              <span class="sr-only cc-notif-label">お知らせ</span>
+              <span class="notification-dot"></span>
+            </button>
+            <div class="cc-notice-dropdown" data-cc-notice-dropdown hidden>
+              <div class="cc-notice-header">
+                <div class="cc-notice-title">お知らせ</div>
+                <label class="cc-notice-filter">
+                  <input type="checkbox" data-cc-notice-unread />
+                  <span>未読のみ</span>
+                </label>
+                <button type="button" class="cc-notice-markall" data-cc-notice-markall>すべて既読</button>
+              </div>
+              <div class="cc-notice-list" data-cc-notice-list></div>
+              <div class="cc-notice-footer">
+                <a href="mypage.html?tab=notices">すべて見る</a>
+              </div>
+            </div>
+          </div>
+
+          <a href="post.html" class="btn-post" id="post-button">
+            <i class="fa-solid fa-camera"></i> 投稿作成
+          </a>
+
+          <a href="login.html" class="btn-login" id="login-button">
+            <i class="fa-regular fa-circle-user"></i> ログイン・新規登録
+          </a>
+        </div>
+
+        <div class="settings-group">
+          <select id="area-select" class="cc-hidden-select" aria-label="エリア（主要）">
+            <option value="canada_all">🇨🇦 全カナダ</option>
+            <option value="vancouver">バンクーバー, BC</option>
+            <option value="victoria">ビクトリア, BC</option>
+            <option value="whistler">ウィスラー, BC</option>
+            <option value="kelowna">ケロウナ, BC</option>
+            <option value="calgary">カルガリー, AB</option>
+            <option value="banff">バンフ, AB</option>
+            <option value="edmonton">エドモントン, AB</option>
+            <option value="winnipeg">ウィニペグ, MB</option>
+            <option value="ottawa">オタワ, ON</option>
+            <option value="toronto">トロント, ON</option>
+            <option value="montreal">モントリオール, QC</option>
+            <option value="halifax">ハリファックス, NS</option>
+            <option value="other">その他（カナダの都市）</option>
+            <option value="japan">🇯🇵 日本</option>
+          </select>
+          <select id="area-select-sub" class="cc-hidden-select" aria-label="その他の都市">
+            <option value="">その他のカナダ都市</option>
+            <optgroup label="ユーコン準州（YT）">
+              <option value="whitehorse">ホワイトホース, YT</option>
+            </optgroup>
+            <optgroup label="ブリティッシュコロンビア州（BC）">
+              <option value="abbotsford">アボッツフォード, BC</option>
+              <option value="burnaby">バーナビー, BC</option>
+              <option value="kamloops">カムループス, BC</option>
+              <option value="nanaimo">ナナイモ, BC</option>
+              <option value="prince_george">プリンスジョージ, BC</option>
+              <option value="richmond">リッチモンド, BC</option>
+              <option value="surrey">サレー, BC</option>
+            </optgroup>
+            <optgroup label="アルバータ州（AB）">
+              <option value="kananaskis">カナナスキス, AB</option>
+              <option value="canmore">キャンモア, AB</option>
+              <option value="fort_mcmurray">フォートマクマレー, AB</option>
+              <option value="medicine_hat">メディシンハット, AB</option>
+              <option value="lake_louise">ルイーズ湖, AB</option>
+              <option value="red_deer">レッドディア, AB</option>
+              <option value="lethbridge">レスブリッジ, AB</option>
+            </optgroup>
+            <optgroup label="サスカチュワン州（SK）">
+              <option value="regina">レジャイナ, SK</option>
+              <option value="saskatoon">サスカトゥーン, SK</option>
+            </optgroup>
+            <optgroup label="マニトバ州（MB）">
+              <option value="brandon">ブランドン, MB</option>
+            </optgroup>
+            <optgroup label="オンタリオ州（ON）">
+              <option value="oakville">オークビル, ON</option>
+              <option value="oshawa">オシャワ, ON</option>
+              <option value="kingston">キングストン, ON</option>
+              <option value="kitchener">キッチナー, ON</option>
+              <option value="guelph">ゲルフ, ON</option>
+              <option value="sudbury">サドベリー, ON</option>
+              <option value="thunder_bay">サンダーベイ, ON</option>
+              <option value="niagara_falls">ナイアガラフォールズ, ON</option>
+              <option value="barrie">バリー, ON</option>
+              <option value="hamilton">ハミルトン, ON</option>
+              <option value="mississauga">ミシサガ, ON</option>
+              <option value="markham">マーカム, ON</option>
+              <option value="vaughan">ヴォーン, ON</option>
+              <option value="london_on">ロンドン, ON</option>
+              <option value="waterloo">ウォータールー, ON</option>
+              <option value="windsor">ウィンザー, ON</option>
+            </optgroup>
+            <optgroup label="ケベック州（QC）">
+              <option value="gatineau">ガティノー, QC</option>
+              <option value="laval">ラヴァル, QC</option>
+              <option value="longueuil">ロンゲール, QC</option>
+              <option value="quebec_city">ケベックシティ, QC</option>
+            </optgroup>
+            <optgroup label="ニューブランズウィック州（NB）">
+              <option value="fredericton">フレデリクトン, NB</option>
+              <option value="moncton">モンクトン, NB</option>
+              <option value="saint_john">セントジョン, NB</option>
+            </optgroup>
+            <optgroup label="プリンスエドワードアイランド州（PE）">
+              <option value="charlottetown">シャーロットタウン, PE</option>
+            </optgroup>
+            <optgroup label="ノバスコシア州（NS）">
+              <option value="sydney_ns">シドニー, NS</option>
+            </optgroup>
+            <optgroup label="ニューファンドランド・ラブラドール州（NL）">
+              <option value="st_johns">セントジョンズ, NL</option>
+            </optgroup>
+          </select>
+          <select id="lang-select" class="cc-hidden-select" aria-label="言語">
+            <option value="ja">JP</option>
+            <option value="en">EN</option>
+            <option value="fr">FR</option>
+          </select>
+
+          <div class="cc-dropdown" data-cc-dropdown="area">
+            <button class="cc-dd-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-location-dot"></i>
+              <span class="cc-dd-value" data-cc-dd-value="area"></span>
+            </button>
+            <div class="cc-dd-menu" role="menu">
+              <div class="cc-dd-note">表示する都市を切り替え、カレンダーや投稿一覧の内容を変更します。</div>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="canada_all">🇨🇦 全カナダ</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="vancouver">バンクーバー, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="victoria">ビクトリア, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="whistler">ウィスラー, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="kelowna">ケロウナ, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="calgary">カルガリー, AB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="banff">バンフ, AB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="edmonton">エドモントン, AB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="winnipeg">ウィニペグ, MB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="ottawa">オタワ, ON</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="toronto">トロント, ON</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="montreal">モントリオール, QC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="halifax">ハリファックス, NS</button>
+              <div class="cc-dd-submenu" data-cc-dd-submenu>
+                <button class="cc-dd-item cc-dd-subtoggle" type="button" data-cc-dd-subtoggle>
+                  その他のカナダ都市
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
+                <div class="cc-dd-subpanel" hidden>
+                  <div class="cc-dd-group-title">ユーコン準州（YT）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="whitehorse">ホワイトホース, YT</button>
+                  <div class="cc-dd-group-title">ブリティッシュコロンビア州（BC）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="abbotsford">アボッツフォード, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="burnaby">バーナビー, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kamloops">カムループス, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="nanaimo">ナナイモ, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="prince_george">プリンスジョージ, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="richmond">リッチモンド, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="surrey">サレー, BC</button>
+                  <div class="cc-dd-group-title">アルバータ州（AB）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kananaskis">カナナスキス, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="canmore">キャンモア, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="fort_mcmurray">フォートマクマレー, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="medicine_hat">メディシンハット, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="lake_louise">ルイーズ湖, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="red_deer">レッドディア, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="lethbridge">レスブリッジ, AB</button>
+                  <div class="cc-dd-group-title">サスカチュワン州（SK）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="regina">レジャイナ, SK</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="saskatoon">サスカトゥーン, SK</button>
+                  <div class="cc-dd-group-title">マニトバ州（MB）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="brandon">ブランドン, MB</button>
+                  <div class="cc-dd-group-title">オンタリオ州（ON）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="oakville">オークビル, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="oshawa">オシャワ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kingston">キングストン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kitchener">キッチナー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="guelph">ゲルフ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="sudbury">サドベリー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="thunder_bay">サンダーベイ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="niagara_falls">ナイアガラフォールズ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="barrie">バリー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="hamilton">ハミルトン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="mississauga">ミシサガ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="markham">マーカム, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="vaughan">ヴォーン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="london_on">ロンドン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="waterloo">ウォータールー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="windsor">ウィンザー, ON</button>
+                  <div class="cc-dd-group-title">ケベック州（QC）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="gatineau">ガティノー, QC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="laval">ラヴァル, QC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="longueuil">ロンゲール, QC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="quebec_city">ケベックシティ, QC</button>
+                  <div class="cc-dd-group-title">ニューブランズウィック州（NB）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="fredericton">フレデリクトン, NB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="moncton">モンクトン, NB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="saint_john">セントジョン, NB</button>
+                  <div class="cc-dd-group-title">プリンスエドワードアイランド州（PE）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="charlottetown">シャーロットタウン, PE</button>
+                  <div class="cc-dd-group-title">ノバスコシア州（NS）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="sydney_ns">シドニー, NS</button>
+                  <div class="cc-dd-group-title">ニューファンドランド・ラブラドール州（NL）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="st_johns">セントジョンズ, NL</button>
+                </div>
+              </div>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="japan">🇯🇵 日本</button>
+            </div>
+          </div>
+
+          <div class="cc-dropdown" data-cc-dropdown="lang">
+            <button class="cc-dd-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-globe"></i>
+              <span class="cc-dd-value" data-cc-dd-value="lang"></span>
+            </button>
+            <div class="cc-dd-menu" role="menu">
+              <div class="cc-dd-note">表示言語を切り替えるためのプルダウンです。</div>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="lang" data-value="ja">JP</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="lang" data-value="en">EN</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="lang" data-value="fr">FR</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="auth-main">
+    <div class="auth-container">
+      <section class="auth-card" aria-label="ログイン・新規登録">
+        <div class="auth-split">
+
+          <!-- 左：説明 -->
+          <div class="auth-left">
+            <div class="left-top">
+              <img src="logo2_transparent.png" alt="CanadaClassi ペンギン（ロゴ）">
+              <div>
+                <h1>ログイン・新規登録</h1>
+                <p>投稿や掲示板の閲覧はログイン不要です。登録すると投稿やメッセージのやり取りなど、もっと便利に使いこなせます。</p>
+              </div>
+            </div>
+
+            <nav class="toc" aria-label="このページの内容">
+              <p class="toc-title">
+                <img class="mini-illu" src="Mapleleaf_transparent.png" alt="">
+                このページの内容
+              </p>
+              <ul class="toc-list">
+                <li class="toc-item"><a href="#sec-how"><img class="ml-bullet" src="Mapleleaf_transparent.png" alt="">CanadaClassiの使い方</a></li>
+                <li class="toc-item"><a href="#sec-classified"><img class="ml-bullet" src="Mapleleaf2_transparent.png" alt="">クラシファイド投稿の使い方（かんたん）</a></li>
+                <li class="toc-item"><a href="#sec-flow"><img class="ml-bullet" src="Mapleleaf_transparent.png" alt="">利用の流れ</a></li>
+                <li class="toc-item"><a href="#sec-calendar"><img class="ml-bullet" src="Mapleleaf2_transparent.png" alt="">イベントカレンダー</a></li>
+                <li class="toc-item"><a href="#sec-safety"><img class="ml-bullet" src="Mapleleaf_transparent.png" alt="">安心・安全のために</a></li>
+                <li class="toc-item"><a href="#sec-contact"><img class="ml-bullet" src="Mapleleaf2_transparent.png" alt="">お問い合わせ</a></li>
+              </ul>
+            </nav>
+
+            <div class="feature-box">
+
+              <section id="sec-how" class="section" aria-label="CanadaClassiの使い方">
+                <h2><img class="title-ml" src="Mapleleaf_transparent.png" alt="">はじめに（CanadaClassiの使い方）</h2>
+                <p class="lead">仕事や家探しから、日々のちょっとした相談まで。みんなの生活情報が詰まったコミュニティサイトです。見るだけなら登録不要。ログインすると、投稿者への連絡や情報のシェアもできるようになります。</p>
+                <ul class="feature-grid">
+                  <li class="feature-item has-illu">
+                    <div>
+                      <p class="t">求人が探しやすい</p>
+                      <p class="d">エリアやカテゴリで探しやすく整理。応募や質問はログイン後にチャットで。</p>
+                    </div>
+                    <div class="illu-wrap"><img class="inline-illu" src="logo7_transparent.png" alt=""></div>
+                  </li>
+
+                  <li class="feature-item has-illu">
+                    <div>
+                      <p class="t">住まい・暮らし情報もまとめて</p>
+                      <p class="d">シェアハウス・部屋探しの情報や、生活のヒントを同じ場所で見つけられます。</p>
+                    </div>
+                    <div class="illu-wrap"><img class="inline-illu" src="logo3_transparent.png" alt=""></div>
+                  </li>
+
+                  <li class="feature-item has-illu">
+                    <div>
+                      <p class="t">掲示板で相談できる</p>
+                      <p class="d">質問・仲間募集・情報交換など、まずは掲示板から気軽に。</p>
+                    </div>
+                    <div class="illu-wrap"><img class="inline-illu" src="logo5_transparent.png" alt=""></div>
+                  </li>
+
+                  <li class="feature-item has-illu">
+                    <div>
+                      <p class="t">イベントはカレンダーで一目でわかる</p>
+                      <p class="d">カレンダーでイベント情報を把握。参加も集客もスムーズになる導線をご活用ください。</p>
+                    </div>
+                    <div class="illu-wrap"><img class="inline-illu" src="logo4_transparent.png" alt=""></div>
+                  </li>
+
+                  <li class="feature-item has-illu">
+                    <div>
+                      <p class="t">学校・お役立ち情報もチェック</p>
+                      <p class="d">語学学校や生活に役立つ情報も揃っています。</p>
+                    </div>
+                    <div class="illu-wrap"><img class="inline-illu" src="logo6_transparent.png" alt=""></div>
+                  </li>
+                </ul>
+              </section>
+
+              <section id="sec-classified" class="section" aria-label="クラシファイド投稿の使い方">
+                <h2><img class="title-ml" src="Mapleleaf2_transparent.png" alt="">クラシファイド（投稿のしかた）</h2>
+                <p class="lead">CanadaClassiはみなさまのカナダでの挑戦をサポートします。仕事探し、住まい探し、そして生活の変化に伴うモノの売る・譲るまで、ワーホリや留学生の暮らしに必須の情報が集まっています。見たい情報がすぐに見つかるコミュニティを、あなたの現地での生活の土台づくりにご活用ください。</p>
+                <div class="flow-wrap">
+                  <div class="flow-card">
+                    <p class="who"><span class="flow-badge">投稿する</span>掲載のコツ</p>
+                    <ol class="steps">
+                      <li class="step"><span class="n">1</span><span class="txt">写真とタイトルで内容が一目で伝わるように</span></li>
+                      <li class="step"><span class="n">2</span><span class="txt">目安エリアと受け渡しの希望（場所・時間帯など）をひとこと</span></li>
+                      <li class="step"><span class="n">3</span><span class="txt">質問が来たらチャットでやり取り</span></li>
+                      <li class="step"><span class="n">4</span><span class="txt">募集が終わったら「受付終了」にして整理</span></li>
+                    </ol>
+                  </div>
+                  <div class="flow-card">
+                    <p class="who"><span class="flow-badge">探す</span>見つけ方</p>
+                    <ol class="steps">
+                      <li class="step"><span class="n">1</span><span class="txt">キーワードやカテゴリで探す</span></li>
+                      <li class="step"><span class="n">2</span><span class="txt">気になる投稿は詳細と条件をチェック</span></li>
+                      <li class="step"><span class="n">3</span><span class="txt">ログイン後にチャットで連絡（質問・受け渡しの相談）</span></li>
+                      <li class="step"><span class="n">4</span><span class="txt">やり取りはサイト内で完結（プロトタイプ）</span></li>
+                    </ol>
+                  </div>
+                </div>
+              </section>
+
+              <section id="sec-flow" class="section" aria-label="利用の流れ">
+                <h2><img class="title-ml" src="Mapleleaf_transparent.png" alt="">利用の流れ（閲覧 → ログイン後）</h2>
+                <p class="lead">CanadaClassiはログインなしで自由にご覧いただけます。会員登録（無料）をすると、投稿・連絡・管理など、サイトをより便利に使いこなせます。</p>
+                <div class="flow-wrap">
+                  <div class="flow-card">
+                    <p class="who"><span class="flow-badge">はじめる</span>まずは閲覧</p>
+                    <ol class="steps">
+                      <li class="step"><span class="n">1</span><span class="txt">ホームで新着をチェック</span></li>
+                      <li class="step"><span class="n">2</span><span class="txt">求人・住まい・掲示板をカテゴリで探す</span></li>
+                      <li class="step"><span class="n">3</span><span class="txt">イベントはカレンダーで日程を確認</span></li>
+                    </ol>
+                  </div>
+
+                  <div class="flow-card">
+                    <p class="who"><span class="flow-badge">ログイン後</span>連絡・投稿・管理</p>
+                    <ol class="steps">
+                      <li class="step"><span class="n">1</span><span class="txt">会員登録（無料）してログイン</span></li>
+                      <li class="step"><span class="n">2</span><span class="txt">チャットで質問・応募・相談ができる</span></li>
+                      <li class="step"><span class="n">3</span><span class="txt">投稿の編集・受付終了はマイページで</span></li>
+                    </ol>
+                  </div>
+                </div>
+              </section>
+
+              <section id="sec-calendar" class="section" aria-label="イベントカレンダー">
+                <h2><img class="title-ml" src="Mapleleaf2_transparent.png" alt="">イベントカレンダー（予定が一目でわかる）</h2>
+                <p class="lead">イベントがある日は、カレンダーに『予定あり』と表示されます。日付をクリックして詳細をチェック！あなた好みの面白いイベントに出会えるかもしれません。</p>
+                <figure class="calendar-figure">
+                  <img src="calendar_demo_transparent.png" alt="イベントカレンダー（例）">
+                  <figcaption>
+                    ※画像はイメージです。<code>calendar_demo_transparent.png</code> を同じフォルダに置くと表示されます。<br>
+                    右上のエリア切替に合わせて、カレンダーの時刻表示も切り替わります。
+                  </figcaption>
+                </figure>
+              </section>
+
+              <section id="sec-safety" class="section" aria-label="安心・安全のために">
+                <h2><img class="title-ml" src="Mapleleaf_transparent.png" alt="">安心・安全のために（大事）</h2>
+                <ul class="safety">
+                  <li><span class="mark" aria-hidden="true">!</span><span>個人情報（住所・連絡先）の共有は慎重に。まずはチャット内で調整。</span></li>
+                  <li><span class="mark" aria-hidden="true">!</span><span>不自然に急かす連絡や、外部アプリへの誘導には注意。困ったら掲示板で相談も。</span></li>
+                  <li><span class="mark" aria-hidden="true">!</span><span>会う場合は人目のある場所で。「誰と・いつ・どこで」を知人に共有すると安心。</span></li>
+                </ul>
+              </section>
+
+              <section id="sec-contact" class="section" aria-label="お問い合わせ">
+                <h2><img class="title-ml" src="Mapleleaf2_transparent.png" alt="">お問い合わせ</h2>
+                <p class="contact-text">会員登録等についてご不明な点がある方は xxxx@xxxx.com へお問い合わせください。</p>
+              </section>
+
+            </div>
+          </div>
+
+          <!-- 右：フォーム -->
+          <div class="auth-right">
+            <div class="right-head">
+              <p class="title">アカウントへアクセス</p>
+              <p class="sub">ログイン、または新規登録して機能を利用できます。</p>
+            </div>
+
+            <div class="tabs" role="tablist" aria-label="ログイン/新規登録切替">
+              <button id="tab-login" class="tab active" role="tab" aria-selected="true" aria-controls="panel-login" type="button">ログイン</button>
+              <button id="tab-signup" class="tab" role="tab" aria-selected="false" aria-controls="panel-signup" type="button">新規登録</button>
+            </div>
+
+            <!-- ログイン -->
+            <div id="panel-login" class="panel active" role="tabpanel" aria-labelledby="tab-login">
+              <form id="login-form" class="form-grid cc-validate" autocomplete="on" novalidate>
+                <div class="form-row">
+                  <label for="login-email">メールアドレス</label>
+                  <input id="login-email" name="login-email" type="email" autocomplete="email" placeholder="例：hana@example.com" required />
+                </div>
+
+                <div class="form-row">
+                  <label for="login-pass">パスワード</label>
+                  <div class="password-wrap">
+                    <input id="login-pass" name="login-pass" type="password" autocomplete="current-password" placeholder="パスワード" required />
+                    <button type="button" class="pw-toggle" data-target="login-pass" aria-label="パスワード表示切替">
+                      <svg class="icon-eye" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                      </svg>
+                      <svg class="icon-eye-off" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M3 3l18 18"></path>
+                        <path d="M10.6 10.6a3 3 0 004.2 4.2"></path>
+                        <path d="M9.88 5.1A10.4 10.4 0 0112 5c6.5 0 10 7 10 7a17.6 17.6 0 01-4.2 5.3"></path>
+                        <path d="M6.2 6.2A17.8 17.8 0 002 12s3.5 7 10 7a10.5 10.5 0 004.1-.8"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="auth-actions">
+                  <button class="btn-primary" type="submit">ログインする</button>
+                </div>
+
+                <div class="cc-form-error" id="loginError" aria-live="polite" hidden>
+                  <span class="cc-error-ico" aria-hidden="true"><i class="fa-solid fa-triangle-exclamation"></i></span>
+                  <span class="cc-error-text"></span>
+                </div>
+
+                <div class="helper-links">
+                  <a href="#" id="go-signup">アカウントをお持ちでない方</a>
+                  <a href="forgot.html">パスワードを忘れた方</a>
+                </div>
+              </form>
+            </div>
+
+            <!-- 新規登録 -->
+            <div id="panel-signup" class="panel" role="tabpanel" aria-labelledby="tab-signup">
+              <form id="signup-form" class="form-grid cc-validate" autocomplete="off" novalidate>
+                <div class="form-row">
+                  <label for="signup-email">メールアドレス</label>
+                  <input id="signup-email" name="signup-email" type="email" autocomplete="email" placeholder="例：hana@example.com" required />
+                </div>
+
+                <div class="form-row">
+                  <label for="account-name">アカウント名</label>
+                  <input id="account-name" name="account-name" type="text" placeholder="例：Hana / 花子カナダ" maxlength="32" required />
+                  <p class="inline-note">アカウント名は32文字以内。ひらがな・カタカナ・漢字・英語・フランス語・数字・記号が利用可（スペース可）。このアカウント名は投稿やメッセージなどで表示されます。</p>
+                </div>
+
+                <div class="form-row">
+                  <label for="signup-pass">パスワード</label>
+                  <div class="password-wrap">
+                    <input id="signup-pass" name="signup-pass" type="password" autocomplete="new-password" placeholder="パスワードは8〜16文字以内" required />
+                    <button type="button" class="pw-toggle" data-target="signup-pass" aria-label="パスワード表示切替">
+                      <svg class="icon-eye" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                      </svg>
+                      <svg class="icon-eye-off" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M3 3l18 18"></path>
+                        <path d="M10.6 10.6a3 3 0 004.2 4.2"></path>
+                        <path d="M9.88 5.1A10.4 10.4 0 0112 5c6.5 0 10 7 10 7a17.6 17.6 0 01-4.2 5.3"></path>
+                        <path d="M6.2 6.2A17.8 17.8 0 002 12s3.5 7 10 7a10.5 10.5 0 004.1-.8"></path>
+                      </svg>
+                    </button>
+                  </div>
+                  <p class="inline-note">パスワードは8〜16文字以内。使用できる文字：英字・数字・記号（スペース不可）。</p>
+                </div>
+
+                <div class="form-row">
+                  <label for="signup-pass2">パスワード（確認）</label>
+                  <div class="password-wrap">
+                    <input id="signup-pass2" name="signup-pass2" type="password" autocomplete="new-password" placeholder="もう一度入力" required />
+                    <button type="button" class="pw-toggle" data-target="signup-pass2" aria-label="パスワード表示切替">
+                      <svg class="icon-eye" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                      </svg>
+                      <svg class="icon-eye-off" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M3 3l18 18"></path>
+                        <path d="M10.6 10.6a3 3 0 004.2 4.2"></path>
+                        <path d="M9.88 5.1A10.4 10.4 0 0112 5c6.5 0 10 7 10 7a17.6 17.6 0 01-4.2 5.3"></path>
+                        <path d="M6.2 6.2A17.8 17.8 0 002 12s3.5 7 10 7a10.5 10.5 0 004.1-.8"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <label for="default-city-primary">お住まいの都市（デフォルトエリア）</label>
+                  <div class="cc-dropdown cc-select">
+                    <button class="cc-dd-toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+                      <span class="cc-dd-value"></span>
+                    </button>
+                    <div class="cc-dd-menu" role="listbox"></div>
+                    <select id="default-city-primary" name="default-city-primary" class="cc-hidden-select" required>
+                      <option value="" selected disabled>都市を選択してください。</option>
+                      <option value="vancouver">バンクーバー, BC</option>
+                      <option value="victoria">ビクトリア, BC</option>
+                      <option value="whistler">ウィスラー, BC</option>
+                      <option value="kelowna">ケロウナ, BC</option>
+                      <option value="calgary">カルガリー, AB</option>
+                      <option value="banff">バンフ, AB</option>
+                      <option value="edmonton">エドモントン, AB</option>
+                      <option value="winnipeg">ウィニペグ, MB</option>
+                      <option value="ottawa">オタワ, ON</option>
+                      <option value="toronto">トロント, ON</option>
+                      <option value="montreal">モントリオール, QC</option>
+                      <option value="halifax">ハリファックス, NS</option>
+                      <option value="other">その他のカナダ都市</option>
+                      <option value="japan">日本</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="check-row">
+                  <input id="agree" name="agree" type="checkbox" required />
+                  <label for="agree">利用規約・プライバシーポリシーに同意します（プロトタイプ）</label>
+                </div>
+
+                <div class="auth-actions">
+                  <button class="btn-primary" type="submit">新規登録する</button>
+                  <button class="btn-secondary" type="button" id="go-login">すでにアカウントをお持ちの方</button>
+                </div>
+
+                <div class="cc-form-error" id="registerError" aria-live="polite" hidden>
+                  <span class="cc-error-ico" aria-hidden="true"><i class="fa-solid fa-triangle-exclamation"></i></span>
+                  <span class="cc-error-text"></span>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer" aria-label="フッター">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <img src="logo1_transparent.png" alt="CanadaClassi Logo" class="footer-logo" />
+          <div>
+            <div class="footer-brand-title">CanadaClassi</div>
+            <div class="footer-brand-sub">カナダくらし</div>
+          </div>
+        </div>
+        <p class="footer-desc">留学・ワーホリの暮らしをつなぐクラシファイド。</p>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">サイトマップ</div>
+        <div class="footer-sitemap">
+          <a href="index.html">ホーム</a>
+          <a href="list.html">クラシファイド</a>
+          <a href="static.html?type=school">学校情報</a>
+          <a href="board.html">掲示板</a>
+          <a href="static.html?type=links">外部リンク</a>
+          <a href="static.html?type=tips">お役立ち情報</a>
+          <a href="mypage.html?tab=inquiries">メッセージ</a>
+          <a href="login.html">ログイン</a>
+          <a href="mypage.html">マイページ</a>
+          <a href="post.html">投稿</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">ご案内</div>
+        <div class="footer-links">
+          <a href="static.html?type=notice">管理者からのお知らせ</a>
+          <a href="static.html?type=guide">ご利用ガイド</a>
+          <a href="static.html?type=post-guide">投稿・取引ガイド</a>
+          <a href="static.html?type=scam">詐欺などのご注意</a>
+          <a href="static.html?type=terms">利用規約</a>
+          <a href="static.html?type=privacy">プライバシーポリシー</a>
+          <a href="sitemap.html">サイトマップ</a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <div class="footer-copy">© 2024 CanadaClassi</div>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div class="modal-overlay" id="cc-login-modal" hidden>
+    <div class="modal">
+      <div class="modal-head">
+        <h3>お知らせ</h3>
+        <button class="modal-close" type="button" data-login-modal-close aria-label="閉じる">×</button>
+      </div>
+      <div class="modal-body" id="cc-login-message"></div>
+      <div class="modal-actions">
+        <button class="btn btn-primary" type="button" data-login-modal-confirm>閉じる</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    (function(){
+      const tabLogin = document.getElementById('tab-login');
+      const tabSignup = document.getElementById('tab-signup');
+      const panelLogin = document.getElementById('panel-login');
+      const panelSignup = document.getElementById('panel-signup');
+      const goSignup = document.getElementById('go-signup');
+      const goLogin = document.getElementById('go-login');
+      const loginForm = document.getElementById('login-form');
+      const signupForm = document.getElementById('signup-form');
+
+      function resetValidation(form) {
+        if (!form) return;
+        form.classList.remove('is-submitted');
+        form.querySelectorAll('.form-row, .field').forEach((row) => {
+          row.classList.remove('is-invalid', 'is-touched');
+        });
+        form.querySelectorAll('.cc-form-error').forEach((el) => {
+          const textEl = el.querySelector('.cc-error-text');
+          if (textEl) textEl.textContent = '';
+          el.hidden = true;
+        });
+        form.querySelectorAll('.warn-icon').forEach((el) => {
+          el.hidden = true;
+          el.style.display = 'none';
+        });
+      }
+
+      function show(which){
+        const isLogin = which === 'login';
+        tabLogin.classList.toggle('active', isLogin);
+        tabSignup.classList.toggle('active', !isLogin);
+        tabLogin.setAttribute('aria-selected', String(isLogin));
+        tabSignup.setAttribute('aria-selected', String(!isLogin));
+        panelLogin.classList.toggle('active', isLogin);
+        panelSignup.classList.toggle('active', !isLogin);
+        resetValidation(loginForm);
+        resetValidation(signupForm);
+      }
+      tabLogin.addEventListener('click', ()=>show('login'));
+      tabSignup.addEventListener('click', ()=>show('signup'));
+      if(goSignup) goSignup.addEventListener('click', (e)=>{ e.preventDefault(); show('signup'); });
+      if(goLogin) goLogin.addEventListener('click', ()=>show('login'));
+      resetValidation(loginForm);
+      resetValidation(signupForm);
+
+      // パスワード表示切替（SVG）
+      document.addEventListener('click', (e)=>{
+        const btn = e.target?.closest?.('.pw-toggle');
+        if(!btn) return;
+        const id = btn.getAttribute('data-target');
+        const input = document.getElementById(id);
+        if(!input) return;
+
+        const isPassword = input.type === 'password';
+        input.type = isPassword ? 'text' : 'password';
+        btn.classList.toggle('is-on', isPassword);
+      });
+
+      const toast = document.getElementById('toast');
+      function pop(msg){
+        const modal = document.getElementById('cc-login-modal');
+        const body = document.getElementById('cc-login-message');
+        if (!modal || !body) {
+          toast.textContent = msg;
+          toast.classList.add('show');
+          setTimeout(()=>toast.classList.remove('show'), 2400);
+          return;
+        }
+        body.textContent = msg;
+        modal.hidden = false;
+      }
+
+      const loginModal = document.getElementById('cc-login-modal');
+      if (loginModal) {
+        const closeBtn = loginModal.querySelector('[data-login-modal-close]');
+        const confirmBtn = loginModal.querySelector('[data-login-modal-confirm]');
+        const hide = () => { loginModal.hidden = true; };
+        if (closeBtn) closeBtn.addEventListener('click', hide);
+        if (confirmBtn) confirmBtn.addEventListener('click', hide);
+        loginModal.addEventListener('click', (e) => {
+          if (e.target === loginModal) hide();
+        });
+      }
+
+      const loginError = document.getElementById('loginError');
+      const signupError = document.getElementById('registerError');
+      function setInlineError(el, msg){
+        if (!el) return;
+        const textEl = el.querySelector('.cc-error-text');
+        if (textEl) textEl.textContent = msg || '';
+        el.hidden = !msg;
+      }
+      function lockForm(form, locked){
+        if (!form) return;
+        const btn = form.querySelector('button[type="submit"], input[type="submit"]');
+        if (btn) btn.disabled = !!locked;
+      }
+
+      // ログイン処理は script.js 側で判定・遷移
+      if (loginForm) {
+        loginForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          setInlineError(loginError, '');
+          if (window.CanadaClassiDev && typeof window.CanadaClassiDev.ccHandleLogin === 'function') {
+            lockForm(loginForm, true);
+            const res = window.CanadaClassiDev.ccHandleLogin(e);
+            if (res && res.message) setInlineError(loginError, res.message);
+            if (res && res.ok) return;
+            lockForm(loginForm, false);
+            return;
+          }
+          lockForm(loginForm, false);
+          pop('ログイン処理に失敗しました。');
+        });
+      }
+
+      if (signupForm) signupForm.addEventListener('submit', (e)=>{
+        if (window.CanadaClassiDev && typeof window.CanadaClassiDev.ccHandleSignup === 'function') {
+          setInlineError(signupError, '');
+          lockForm(signupForm, true);
+          const res = window.CanadaClassiDev.ccHandleSignup(e);
+          if (res && res.message && !res.ok) setInlineError(signupError, res.message);
+          if (res && res.ok) {
+            if (res && res.message) pop(res.message);
+            setTimeout(()=>{ window.location.href = 'index.html'; }, 700);
+            return;
+          }
+          lockForm(signupForm, false);
+          return;
+        }
+        e.preventDefault();
+        pop('新規登録処理はプロトタイプ仕様です（script.js側で保存）');
+      });
+    })();
+  </script>
+</body>
+</html>

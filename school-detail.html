@@ -1,0 +1,1082 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CanadaClassi</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    referrerpolicy="no-referrer"
+  />
+</head>
+<body data-cc-nav="">
+  <header class="site-header" data-cc-header>
+    <div class="container header-inner">
+      <div class="logo">
+        <a href="./index.html" class="logo-link" aria-label="CanadaClassi ホーム">
+          <img src="./logo1_transparent.png" alt="CanadaClassi Logo" class="logo-img" />
+          <div class="logo-text">
+            <span class="en">CanadaClassi</span>
+            <span class="ja">カナダくらし</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="header-right-pc">
+        <div class="auth-buttons">
+          <div class="cc-notice">
+            <button type="button" class="btn-icon btn-notice-bell" id="notifBell" title="お知らせ" aria-label="お知らせ" data-cc-notice-toggle>
+              <svg class="cc-icon cc-bell-icon" viewBox="0 0 448 512" aria-hidden="true">
+                <path d="M224 512a64 64 0 0 0 64-64H160a64 64 0 0 0 64 64zm215.39-149.33C419.37 343 384 312 384 240c0-79.7-56.5-145.6-128-158.5V48a48 48 0 1 0-96 0v33.5C88.5 94.4 32 160.3 32 240c0 72-35.4 103-55.4 122.7A31.9 31.9 0 0 0 0 384a32 32 0 0 0 32 32h384a32 32 0 0 0 32-32 31.9 31.9 0 0 0-8.61-21.33z" fill="currentColor"/>
+              </svg>
+              <span class="sr-only cc-notif-label">お知らせ</span>
+              <span class="notification-dot"></span>
+            </button>
+            <div class="cc-notice-dropdown" data-cc-notice-dropdown hidden>
+              <div class="cc-notice-header">
+                <div class="cc-notice-title">お知らせ</div>
+                <label class="cc-notice-filter">
+                  <input type="checkbox" data-cc-notice-unread />
+                  <span>未読のみ</span>
+                </label>
+                <button type="button" class="cc-notice-markall" data-cc-notice-markall>すべて既読</button>
+              </div>
+              <div class="cc-notice-list" data-cc-notice-list></div>
+              <div class="cc-notice-footer">
+                <a href="mypage.html?tab=notices">すべて見る</a>
+              </div>
+            </div>
+          </div>
+
+          <a href="post.html" class="btn-post" id="post-button">
+            <i class="fa-solid fa-camera"></i> 投稿作成
+          </a>
+
+          <a href="login.html" class="btn-login" id="login-button">
+            <i class="fa-regular fa-circle-user"></i> ログイン・新規登録
+          </a>
+        </div>
+
+        <div class="settings-group">
+          <select id="area-select" class="cc-hidden-select" aria-label="エリア（主要）">
+            <option value="canada_all">🇨🇦 全カナダ</option>
+            <option value="vancouver">バンクーバー, BC</option>
+            <option value="victoria">ビクトリア, BC</option>
+            <option value="whistler">ウィスラー, BC</option>
+            <option value="kelowna">ケロウナ, BC</option>
+            <option value="calgary">カルガリー, AB</option>
+            <option value="banff">バンフ, AB</option>
+            <option value="edmonton">エドモントン, AB</option>
+            <option value="winnipeg">ウィニペグ, MB</option>
+            <option value="ottawa">オタワ, ON</option>
+            <option value="toronto">トロント, ON</option>
+            <option value="montreal">モントリオール, QC</option>
+            <option value="halifax">ハリファックス, NS</option>
+            <option value="other">その他（カナダの都市）</option>
+            <option value="japan">🇯🇵 日本</option>
+          </select>
+          <select id="area-select-sub" class="cc-hidden-select" aria-label="その他の都市">
+            <option value="">その他のカナダ都市</option>
+          </select>
+          <div class="cc-dropdown" data-cc-dropdown="area">
+            <button class="cc-dd-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-location-dot"></i>
+              <span class="cc-dd-value" data-cc-dd-value="area"></span>
+            </button>
+            <div class="cc-dd-menu" role="menu">
+              <div class="cc-dd-note">主要都市や地域を選択できます。</div>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="canada_all">🇨🇦 全カナダ</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="vancouver">バンクーバー, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="toronto">トロント, ON</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="montreal">モントリオール, QC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="calgary">カルガリー, AB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="ottawa">オタワ, ON</button>
+              <div class="cc-dd-divider"></div>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="other">その他（カナダの都市）</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="japan">🇯🇵 日本</button>
+            </div>
+          </div>
+
+          <div class="cc-dropdown" data-cc-dropdown="lang">
+            <button class="cc-dd-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-globe"></i>
+              <span class="cc-dd-value" data-cc-dd-value="lang"></span>
+            </button>
+            <div class="cc-dd-menu" role="menu">
+              <div class="cc-dd-note">表示言語を切り替えるためのプルダウンです。</div>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="lang" data-value="ja">JP</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="lang" data-value="en">EN</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="lang" data-value="fr">FR</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="global-nav">
+      <div class="container nav-grid">
+        <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i> ホーム</a>
+        <a href="list.html" class="nav-item"><i class="fa-solid fa-tags"></i> クラシファイド</a>
+        <a href="static.html?type=school" class="nav-item"><i class="fa-solid fa-graduation-cap"></i> 学校情報</a>
+        <a href="board.html" class="nav-item"><i class="fa-solid fa-comments"></i> 掲示板</a>
+        <a href="static.html?type=links" class="nav-item"><i class="fa-solid fa-arrow-up-right-from-square"></i> 外部リンク</a>
+        <a href="static.html?type=tips" class="nav-item"><i class="fa-solid fa-lightbulb"></i> お役立ち情報</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page static-page" data-cc-page>
+    <div class="container">
+      <div id="cc-school-detail-root" class="school-detail">
+        <div class="card school-detail-card">
+          <h2 class="school-detail-h2">読み込み中...</h2>
+          <p class="muted">学校情報を読み込んでいます。</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" data-cc-footer>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <img src="logo1_transparent.png" alt="CanadaClassi Logo" class="footer-logo" />
+          <div>
+            <div class="footer-brand-title">CanadaClassi</div>
+            <div class="footer-brand-sub">カナダくらし</div>
+          </div>
+        </div>
+        <p class="footer-desc">留学・ワーホリの暮らしをつなぐクラシファイド。</p>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">サイトマップ</div>
+        <div class="footer-sitemap">
+          <a href="index.html">ホーム</a>
+          <a href="list.html">クラシファイド</a>
+          <a href="static.html?type=school">学校情報</a>
+          <a href="board.html">掲示板</a>
+          <a href="static.html?type=links">外部リンク</a>
+          <a href="static.html?type=tips">お役立ち情報</a>
+          <a href="mypage.html?tab=inquiries">メッセージ</a>
+          <a href="login.html">ログイン</a>
+          <a href="mypage.html">マイページ</a>
+          <a href="post.html">投稿</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">ご案内</div>
+        <div class="footer-links">
+          <a href="static.html?type=notice">管理者からのお知らせ</a>
+          <a href="static.html?type=guide">ご利用ガイド</a>
+          <a href="static.html?type=post-guide">投稿・取引ガイド</a>
+          <a href="static.html?type=scam">詐欺などのご注意</a>
+          <a href="static.html?type=terms">利用規約</a>
+          <a href="static.html?type=privacy">プライバシーポリシー</a>
+          <a href="sitemap.html">サイトマップ</a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <div class="footer-copy">© 2024 CanadaClassi</div>
+    </div>
+  </footer>
+
+  <script src="./data/schools_mvp.data.js"></script>
+  <script src="./script.js"></script>
+  <script>
+    (function () {
+      const qs = new URLSearchParams(location.search);
+      document.documentElement.classList.add('cc-sns-icononly');
+      document.body.dataset.ccNavTarget = 'school';
+      if (window.setGlobalNavActiveByPage) {
+        try { window.setGlobalNavActiveByPage(); } catch (e) { }
+      }
+
+      const root = document.getElementById('cc-school-detail-root');
+
+      function safeDecodeOnce(str) {
+        try { return decodeURIComponent(str); } catch (e) { return str; }
+      }
+      function ccSlugify(value) {
+        let s = String(value || '').trim().toLowerCase();
+        s = s.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        s = s.replace(/&/g, 'and');
+        s = s.replace(/[^a-z0-9]+/g, '-').replace(/-+/g, '-');
+        return s.replace(/(^-|-$)/g, '');
+      }
+      function ccStripTrailingCityFromName(name, city) {
+        const rawName = String(name || '').trim();
+        const rawCity = String(city || '').trim();
+        if (!rawName || !rawCity) return rawName;
+        const separators = [' - ', ' – ', ' — '];
+        for (const sep of separators) {
+          const suffix = `${sep}${rawCity}`;
+          if (rawName.toLowerCase().endsWith(suffix.toLowerCase())) {
+            return rawName.slice(0, -suffix.length).trim();
+          }
+        }
+        return rawName;
+      }
+      function ccComputeSchoolId(school) {
+        const base = ccStripTrailingCityFromName(school?.name, school?.city);
+        return `${ccSlugify(base)}-${ccSlugify(school?.city)}`;
+      }
+      function normalizeId(id) {
+        return ccSlugify(safeDecodeOnce(id));
+      }
+      function resolveFileUrlMaybe(pathOrUrl) {
+        const raw = String(pathOrUrl || '');
+        if (!raw) return '';
+        if (raw.startsWith('file://')) return raw;
+        if (raw.startsWith('http://') || raw.startsWith('https://')) return raw;
+        if (raw.startsWith('/Users/')) return `file://${raw}`;
+        if (raw.startsWith('/')) return `file://${raw}`;
+        return raw;
+      }
+      function resolveBackUrl() {
+        const stored = (() => {
+          try { return sessionStorage.getItem('cc_school_back_url'); } catch (e) { return ''; }
+        })();
+        if (stored && stored.includes('type=school')) return stored;
+        const backRaw = qs.get('back');
+        if (backRaw) {
+          const decoded = safeDecodeOnce(backRaw);
+          const candidate = resolveFileUrlMaybe(decoded);
+          if (candidate.includes('type=school')) return candidate;
+        }
+        return 'static.html?type=school';
+      }
+
+      async function getSchoolsData() {
+        if (Array.isArray(window.CC_SCHOOLS_MVP) && window.CC_SCHOOLS_MVP.length) {
+          return window.CC_SCHOOLS_MVP;
+        }
+        if (Array.isArray(window.__CC_SCHOOLS) && window.__CC_SCHOOLS.length) {
+          return window.__CC_SCHOOLS;
+        }
+        try {
+          const cached = sessionStorage.getItem('cc_schools_cache_v1');
+          if (cached) {
+            const parsed = JSON.parse(cached);
+            if (Array.isArray(parsed) && parsed.length) {
+              window.__CC_SCHOOLS = parsed;
+              return parsed;
+            }
+          }
+        } catch (e) {}
+        let list = [];
+        if (location.protocol === 'http:' || location.protocol === 'https:') {
+          try {
+            const res = await fetch('./data/schools_mvp.json', { cache: 'no-store' });
+            if (res.ok) {
+              const data = await res.json();
+              if (Array.isArray(data)) list = data;
+            }
+          } catch (e) {
+            list = [];
+          }
+        }
+        window.__CC_SCHOOLS = list;
+        try {
+          sessionStorage.setItem('cc_schools_cache_v1', JSON.stringify(list));
+        } catch (e) {}
+        return list;
+      }
+
+      function renderNotFound(backUrl) {
+        root.innerHTML = `
+          <div class="school-detail-nav">
+            <a class="school-back-link" href="${backUrl}">← 学校一覧に戻る</a>
+          </div>
+          <div class="card school-detail-card">
+            <h2 class="school-detail-h2">学校が見つかりません</h2>
+            <p class="muted">指定された学校が見つかりませんでした。</p>
+          </div>
+        `;
+        bindBackLink(backUrl);
+      }
+
+      function renderOpenFromList(backUrl) {
+        root.innerHTML = `
+          <div class="school-detail-nav">
+            <a class="school-back-link" href="${backUrl}">← 学校一覧に戻る</a>
+          </div>
+          <div class="card school-detail-card">
+            <h2 class="school-detail-h2">一覧から開いてください</h2>
+            <p class="muted">file:// 直開きでは詳細データを取得できないため、学校一覧から開いてください。</p>
+          </div>
+        `;
+        bindBackLink(backUrl);
+      }
+      function renderSummaryLines(lines) {
+        const rows = Array.isArray(lines) ? lines : [];
+        return rows.map((line) => {
+          const value = sanitizeDetailText(line);
+          if (!value) return '';
+          const parts = value.split('：');
+          const label = parts.length > 1 ? parts.shift() : '';
+          const body = parts.join('：') || value;
+          if (!label) {
+            return `<li><span class="school-summary-text">${body}</span></li>`;
+          }
+          return `<li><span class="school-summary-label">${label}</span><span class="school-summary-text">${body}</span></li>`;
+        }).filter(Boolean).join('');
+      }
+
+      function sanitizeDetailText(text) {
+        return String(text || '')
+          .replace(/公式[^。]*。?/g, '')
+          .replace(/最新[^。]*。?/g, '')
+          .replace(/詳細[^。]*。?/g, '')
+          .replace(/参照[^。]*。?/g, '')
+          .replace(/確認[^。]*。?/g, '')
+          .replace(/[()（）]/g, '')
+          .replace(/\s{2,}/g, ' ')
+          .replace(/[。]+$/g, '')
+          .trim();
+      }
+
+      function handleSnsIconError(img) {
+        if (!img) return;
+        try {
+          img.style.display = 'none';
+          const host = img.closest('a') || img.parentElement;
+          if (host) host.classList.add('cc-sns-link--noicon');
+        } catch (e) {
+          // swallow to avoid breaking render
+        }
+      }
+
+      function renderList(items) {
+        const list = Array.isArray(items) ? items.filter(Boolean) : [];
+        if (!list.length) return '';
+        return `<ul class="school-detail-list">${list.map((item) => {
+          const value = sanitizeDetailText(item);
+          return value ? `<li>${value}</li>` : '';
+        }).filter(Boolean).join('')}</ul>`;
+      }
+
+      function renderPrograms(programs) {
+        const list = Array.isArray(programs) ? programs.filter(Boolean) : [];
+        if (!list.length) return '';
+        const first = list[0];
+        const isGrouped = first && typeof first === 'object' && Array.isArray(first.items);
+        if (isGrouped) {
+          return list.map((group) => {
+            const items = Array.isArray(group.items) ? group.items : [];
+            return `
+              <div class="school-detail-program-group">
+                <h3 class="school-detail-h3">${group.category || 'プログラム'}</h3>
+                <ul class="school-detail-list">${items.map((item) => `<li>${item}</li>`).join('')}</ul>
+              </div>
+            `;
+          }).join('');
+        }
+        return `<ul class="school-detail-list">${list.map((p) => {
+          if (typeof p === 'string') {
+            const value = sanitizeDetailText(p);
+            return value ? `<li>${value}</li>` : '';
+          }
+          const name = sanitizeDetailText(p.name || '');
+          const level = sanitizeDetailText(p.level || '');
+          const duration = sanitizeDetailText(p.duration || '');
+          const notes = sanitizeDetailText(p.notes || '');
+          const levelText = level ? `（${level}）` : '';
+          const durationText = duration ? ` / ${duration}` : '';
+          const notesText = notes ? ` - ${notes}` : '';
+          const value = `${name}${levelText}${durationText}${notesText}`.trim();
+          return value ? `<li>${value}</li>` : '';
+        }).filter(Boolean).join('')}</ul>`;
+      }
+
+      function toArray(value) {
+        if (Array.isArray(value)) return value.filter(Boolean);
+        if (typeof value === 'string' && value.trim()) return [value.trim()];
+        return [];
+      }
+
+      function renderPlaceholder(message) {
+        return `
+          <div class="school-detail-empty">準備中</div>
+          <p class="school-detail-empty-note">${message || '情報を更新中です。'}</p>
+        `;
+      }
+
+      function renderChips(values) {
+        const list = toArray(values);
+        if (!list.length) return renderPlaceholder('入学時期はコースごとに違いがあります。');
+        return `<div class="school-detail-chips">${list.map((item) => `<span class="school-detail-chip">${item}</span>`).join('')}</div>`;
+      }
+
+      function renderHighlights(values) {
+        const list = toArray(values).map(sanitizeDetailText).filter(Boolean);
+        if (!list.length) return renderPlaceholder('特徴情報を準備中です。');
+        const head = list.slice(0, 5);
+        const rest = list.slice(5);
+        const headHtml = `<ul class="school-detail-list">${head.map((item) => `<li>${item}</li>`).join('')}</ul>`;
+        if (!rest.length) return headHtml;
+        return `
+          ${headHtml}
+          <details class="school-detail-more">
+            <summary>もっと見る</summary>
+            <ul class="school-detail-list">${rest.map((item) => `<li>${item}</li>`).join('')}</ul>
+          </details>
+        `;
+      }
+
+      function renderSupport(values) {
+        const list = toArray(values).map(sanitizeDetailText).filter(Boolean);
+        if (!list.length) return renderPlaceholder('サポート情報を準備中です。');
+        return `<ul class="school-detail-checklist">${list.map((item) => `<li><i class="fa-solid fa-check"></i>${item}</li>`).join('')}</ul>`;
+      }
+
+      function buildOverviewNarrative(school) {
+        const overviewHtml = String(school.overview || '').trim();
+        const notes = String(school.notes || '').trim();
+        if (overviewHtml) {
+          return `
+            ${overviewHtml}
+            ${notes ? `<p class="cc-overview-next">${notes}</p>` : ''}
+          `;
+        }
+        const name = school.name || 'この学校';
+        const city = school.city ? `（${school.city}）` : '';
+        const summaryLong = String(school.summaryLong || '').trim();
+        const summary3 = toArray(school.summary3);
+        const highlights = toArray(school.highlights);
+        const programs = toArray(school.programs);
+        const support = toArray(school.support);
+        const intakes = String(school.intakes || '').trim();
+        const tuitionNote = String(school.tuitionNote || '').trim();
+        const accreditation = toArray(school.accreditation).slice(0, 3).join(' / ');
+        const areaInfo = String(school.areaInfo || '').trim();
+        const normalizeLine = (text) => String(text || '')
+          .replace(/[／/]/g, '、')
+          .replace(/公式[^。]*。?/g, '')
+          .trim();
+
+        const detailLines = [];
+        const baseText = summaryLong ? summaryLong : summary3.map((line) => normalizeLine(line.replace(/^[^：]+：/, ''))).filter(Boolean).join('。');
+        if (baseText) {
+          const sentences = baseText.split('。').filter(Boolean).slice(0, 4);
+          detailLines.push(...sentences.map((s) => `${s}。`));
+        }
+        if (!detailLines.length) {
+          detailLines.push(`${name}${city}は、学べる内容や環境の特徴を整理すると判断しやすい学校です。`);
+          detailLines.push('プログラム構成やサポートの範囲を把握すると比較がしやすくなります。');
+        }
+        if (highlights.length) {
+          detailLines.push(`特徴として${highlights.slice(0, 2).map(normalizeLine).join('、')}が挙げられます。`);
+        }
+
+        const learnList = [];
+        if (programs.length) learnList.push(`学べる領域: ${programs.slice(0, 4).map(normalizeLine).join('、')}`);
+        if (highlights.length) learnList.push(`特徴: ${highlights.slice(0, 3).map(normalizeLine).join('、')}`);
+        if (support.length) learnList.push(`サポート: ${support.slice(0, 2).map(normalizeLine).join('、')}`);
+        const learnItems = learnList.slice(0, 4);
+
+        const fitList = [];
+        if (programs.some((item) => /語学|英語|フランス語/.test(item))) fitList.push('語学分野を軸に選びたい人に合います');
+        if (programs.some((item) => /ビジネス|IT|ヘルス|デザイン|メディア/.test(item))) fitList.push('分野の選択肢が多い環境を重視する人に合います');
+        if (support.length) fitList.push('サポートの有無を重視する人に合います');
+        if (areaInfo) fitList.push('通学や生活環境も合わせて考えたい人に合います');
+        const fitItems = fitList.slice(0, 4);
+
+        const variableItems = [];
+        if (tuitionNote) variableItems.push('費用は受講形態と期間で変わります');
+        if (intakes) variableItems.push('開始日はコースやレベルで差が出ます');
+        if (!tuitionNote && !intakes) variableItems.push('費用や開始日は条件で変わりやすい項目です');
+        const variableList = variableItems.slice(0, 3);
+
+        return `
+          <div class="cc-overview-block">
+            ${detailLines.map((text) => `<p class="cc-overview-lead">${text}</p>`).join('')}
+          </div>
+          ${learnItems.length ? `
+          <div class="cc-overview-block">
+            <div class="cc-overview-h">できること</div>
+            <ul class="cc-overview-list">
+              ${learnItems.map((item) => `<li>${item}</li>`).join('')}
+            </ul>
+          </div>
+          ` : ''}
+          ${fitItems.length ? `
+          <div class="cc-overview-block">
+            <div class="cc-overview-h">こんな人に合う</div>
+            <ul class="cc-overview-list">
+              ${fitItems.map((item) => `<li>${item}</li>`).join('')}
+            </ul>
+          </div>
+          ` : ''}
+          <div class="cc-overview-block">
+            <div class="cc-overview-h">変動しやすい項目</div>
+            <ul class="cc-overview-list">
+              ${variableList.map((item) => `<li>${item}</li>`).join('')}
+            </ul>
+          </div>
+        `;
+      }
+
+      function getGoogleMapEmbedUrl(school) {
+        const rawLink = school?.links?.googleMaps || school?.links?.googleMapQuery || '';
+        if (rawLink) {
+          if (rawLink.includes('output=embed')) return rawLink;
+          const queryMatch = rawLink.match(/q=([^&]+)/);
+          const q = queryMatch ? queryMatch[1] : encodeURIComponent(school.address || '');
+          return `https://www.google.com/maps?q=${q}&output=embed`;
+        }
+        if (school.address) {
+          return `https://www.google.com/maps?q=${encodeURIComponent(school.address)}&output=embed`;
+        }
+        return '';
+      }
+
+      function buildMapQueryFromCampus(campus, fallbackCity) {
+        if (!campus) return '';
+        const address = String(campus.address || '').trim();
+        const label = String(campus.label || '').toLowerCase();
+        const notes = String(campus.notes || '').toLowerCase();
+        const isOnline = label.includes('online') || notes.includes('online');
+        if (address && !isOnline) return address;
+        const parts = [campus.city || fallbackCity, campus.province, campus.country || 'CA']
+          .map((v) => String(v || '').trim())
+          .filter(Boolean);
+        return parts.join(', ');
+      }
+
+      function buildMapItems(school) {
+        const campuses = Array.isArray(school?.campuses) ? school.campuses : [];
+        const baseCity = school?.city || '';
+        if (campuses.length) {
+          return campuses.map((campus) => {
+            if (campus && campus.mapExclude === true) return null;
+            const label = campus.label || campus.city || 'キャンパス';
+            const query = buildMapQueryFromCampus(campus, baseCity);
+            if (!query) return null;
+            const addr = String(campus.address || '').toLowerCase();
+            if (addr.includes('online')) return null;
+            const key = normalizeCityKey(campus.city || campus.cityKey || '');
+            if (key === 'surrey' || key === 'online') return null;
+            return { label, query };
+          }).filter(Boolean);
+        }
+        const fallbackQuery = school?.address
+          ? school.address
+          : [school?.city, school?.province, school?.country || 'CA'].filter(Boolean).join(', ');
+        return fallbackQuery ? [{ label: school?.city || '所在地', query: fallbackQuery }] : [];
+      }
+
+      function buildMapSection(mapItems, mapleredSrc, schoolName) {
+        if (!mapItems.length) return '';
+        const first = mapItems[0];
+        const tabs = mapItems.length > 1
+          ? `<div class="cc-map-tabs">
+              ${mapItems.map((item, index) => `
+                <button type="button" class="cc-map-tab${index === 0 ? ' is-active' : ''}" data-map-src="${encodeURIComponent(item.query)}">
+                  ${item.label}
+                </button>
+              `).join('')}
+            </div>`
+          : '';
+        const firstSrc = `https://www.google.com/maps?q=${encodeURIComponent(first.query)}&output=embed`;
+        return `
+          <section class="cc-detail-section cc-map-section">
+            <h2 class="cc-section-title"><img class="cc-maplered" src="${mapleredSrc}" alt=""><span>地図</span></h2>
+            ${tabs}
+            <div class="cc-map-embed">
+              <iframe title="${schoolName} map" src="${firstSrc}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </section>
+        `;
+      }
+
+      function buildSocialLinks(school) {
+        const base = school?.links?.social && typeof school.links.social === 'object' ? school.links.social : {};
+        const fallback = school?.social && typeof school.social === 'object' ? school.social : {};
+        const merged = { ...fallback, ...base };
+        return Object.entries(merged).filter(([, url]) => url);
+      }
+
+      function getSocialUrl(school, key) {
+        const value = (school?.social && school.social[key])
+          || (school?.sns && school.sns[key])
+          || (school?.links && school.links[key])
+          || (school?.links?.social && school.links.social[key])
+          || (school?.contact && school.contact[key]);
+        return typeof value === 'string' ? value : '';
+      }
+
+      function normalizeSocialLinks(school) {
+        const links = school?.links && typeof school.links === 'object' ? school.links : {};
+        const social = school?.social && typeof school.social === 'object' ? school.social : {};
+        const socialLinks = links.social && typeof links.social === 'object' ? links.social : {};
+        return {
+          ...links,
+          ...social,
+          ...socialLinks,
+          instagram: socialLinks.instagram || social.instagram || links.instagram || '',
+          facebook: socialLinks.facebook || social.facebook || links.facebook || '',
+          x: socialLinks.x || social.x || links.x || '',
+          youtube: socialLinks.youtube || social.youtube || links.youtube || '',
+          tiktok: socialLinks.tiktok || social.tiktok || links.tiktok || '',
+          linkedin: socialLinks.linkedin || social.linkedin || links.linkedin || ''
+        };
+      }
+
+      function renderHeroSocialItems(school) {
+        const normalized = normalizeSocialLinks(school);
+        const socials = [
+          { key: 'instagram', label: 'Instagram', icon: 'assets/brand/instagram/instagram-glyph.svg' },
+          { key: 'facebook', label: 'Facebook', icon: 'assets/brand/facebook/facebook-glyph.svg' },
+          { key: 'x', label: 'X', icon: 'assets/brand/x/x-glyph.svg' },
+          { key: 'youtube', label: 'YouTube', icon: 'assets/brand/youtube/youtube-glyph.svg' },
+          { key: 'tiktok', label: 'TikTok', icon: 'assets/brand/tiktok/tiktok-glyph.svg' },
+          { key: 'linkedin', label: 'LinkedIn', icon: 'assets/brand/linkedin/linkedin-glyph.svg' }
+        ];
+        const items = socials.map((item) => {
+          const url = normalized[item.key] || '';
+          if (!url) return '';
+          let iconSrc = item.icon;
+          try {
+            iconSrc = new URL(item.icon, document.baseURI).href;
+          } catch (e) {}
+          const labelHtml = `<span class="sr-only">${item.label}</span>`;
+          return `
+            <a class="cc-sns-link cc-sns-link--${item.key}" href="${url}" target="_blank" rel="noopener noreferrer" aria-label="${item.label}" title="${item.label}" data-label="${item.label}">
+              <img class="cc-sns-icon" src="${iconSrc}" alt="" aria-hidden="true" loading="lazy">
+              ${labelHtml}
+            </a>
+          `;
+        }).filter(Boolean);
+        if (items.length && window.__ccHeroSocialLogged !== true) {
+          console.log('[school-detail] social keys:', Object.keys(normalized).filter((k) => normalized[k]));
+          console.log('[school-detail] instagram:', normalized.instagram || '');
+          console.log('[school-detail] facebook:', normalized.facebook || '');
+          window.__ccHeroSocialLogged = true;
+        }
+        if (!items.length) return '';
+        return items.join('');
+      }
+
+      function normalizeNamePart(value) {
+        return String(value || '')
+          .normalize('NFKD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .toLowerCase()
+          .trim();
+      }
+
+      function stripTrailingCityFromName(name, city) {
+        const base = String(name || '').trim();
+        const cityNorm = normalizeNamePart(city);
+        if (!base || !cityNorm) return base;
+        const parts = base.split(/\s[-–—]\s/);
+        if (parts.length < 2) return base;
+        const tail = normalizeNamePart(parts[parts.length - 1]);
+        if (tail !== cityNorm) return base;
+        return parts.slice(0, -1).join(' - ').trim();
+      }
+
+      function normalizeCityKey(value) {
+        return String(value || '')
+          .normalize('NFKD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .toLowerCase()
+          .replace(/[\s_]+/g, '-')
+          .replace(/[^a-z0-9-]/g, '')
+          .replace(/(^-|-$)/g, '');
+      }
+
+      function getCampusCities(target) {
+        const campuses = Array.isArray(target?.campuses) ? target.campuses : [];
+        const list = campuses
+          .map((c) => c?.city || c?.cityKey || '')
+          .filter((value) => {
+            if (!value) return false;
+            const key = normalizeCityKey(value);
+            if (!key || key === 'online' || key === 'surrey') return false;
+            return true;
+          });
+        if (list.length) return list;
+        if (!target?.city) return [];
+        const key = normalizeCityKey(target.city);
+        if (!key || key === 'surrey') return [];
+        return [target.city];
+      }
+
+      function buildCityBadges(cities) {
+        if (!cities.length) return '';
+        const seen = new Set();
+        return cities.map((raw) => {
+          const key = normalizeCityKey(raw) || 'other';
+          if (seen.has(key)) return '';
+          seen.add(key);
+          const label = String(raw || '').trim() || 'その他';
+          const cityClass = `city-${String(key).toLowerCase().replace(/[^a-z0-9-]/g, '')}`;
+          return `<span class="school-city-pin ${cityClass}"><i class="fa-solid fa-location-dot"></i>${label}</span>`;
+        }).filter(Boolean).join('');
+      }
+
+      function renderCampusCards(campuses, contact) {
+        if (!Array.isArray(campuses) || !campuses.length) return '';
+        return `
+          <div class="cc-campus-grid">
+            ${campuses.map((campus) => {
+              const label = campus.label || (campus.city ? `${campus.city} campus` : 'キャンパス');
+              const address = campus.address || campus.notes || '';
+              const phone = campus.phone || contact?.phone || '';
+              const email = campus.email || contact?.email || '';
+              return `
+                <div class="cc-campus-card">
+                  <div class="cc-campus-title">${label}</div>
+                  ${address ? `<div class="cc-campus-address">${address}</div>` : ''}
+                  ${campus.notes ? `<div class="cc-campus-note">${campus.notes}</div>` : ''}
+                  ${(phone || email) ? `<div class="cc-campus-contact">${phone ? `<span>電話：${phone}</span>` : ''}${email ? `<span>メール：${email}</span>` : ''}</div>` : ''}
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `;
+      }
+
+      function renderDetail(target, backUrl) {
+        const city = target.city || '';
+        const campusCities = getCampusCities(target);
+        const rawName = target.name || '学校名';
+        const titleCity = campusCities[0] || city;
+        const name = stripTrailingCityFromName(rawName, titleCity) || rawName;
+        const address = target.address || '';
+        const website = target.links?.officialSite || target.url || '#';
+        const summary3 = toArray(target.summary3);
+        const description = target.summaryLong || target.description || '';
+        const highlights = toArray(target.highlights);
+        const support = toArray(target.support);
+        const accreditation = toArray(target.accreditation);
+        const areaInfo = target.areaInfo || '';
+        const tuitionNote = target.tuitionNote || '';
+        const intakes = target.intakes || '';
+        const social = target.social && typeof target.social === 'object' ? target.social : {};
+        const contact = target.contact && typeof target.contact === 'object' ? target.contact : {};
+        const programs = Array.isArray(target.programs) ? target.programs : [];
+        const heroSocialItems = renderHeroSocialItems(target);
+        if (window.__ccSchoolDetailWarned !== true) {
+          const hasCore =
+            !!description ||
+            highlights.length > 0 ||
+            programs.length > 0 ||
+            support.length > 0 ||
+            !!(contact.phone || contact.email) ||
+            (website && website !== '#');
+          if (!hasCore) {
+            console.warn('[school-detail] empty keys: core fields missing');
+          }
+          window.__ccSchoolDetailWarned = true;
+        }
+        const mapUrl = target.address
+          ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(target.address)}`
+          : '';
+        const mapEmbedUrl = getGoogleMapEmbedUrl(target);
+        const image = target.image || target.image_url || '';
+        const accessLine = target.access || (areaInfo ? String(areaInfo).split('。')[0].trim() : '');
+        const accreditationText = accreditation.length ? accreditation.join(' / ') : '';
+        const tuitionText = tuitionNote || '';
+        const intakeText = intakes;
+        const mapleredSrc = './Mapleleaf_transparent.png';
+        const mapItems = buildMapItems(target);
+        const mapSection = buildMapSection(mapItems, mapleredSrc, name);
+        const cityBadges = buildCityBadges(campusCities.length ? campusCities : (city ? [city] : []));
+        const sanitizeQuickLine = (text) => String(text || '')
+          .replace(/公式[^。]*。?/g, '')
+          .replace(/最新[^。]*。?/g, '')
+          .replace(/詳細[^。]*。?/g, '')
+          .replace(/参照[^。]*。?/g, '')
+          .replace(/確認[^。]*。?/g, '')
+          .replace(/[()（）]/g, '')
+          .replace(/[。]+$/g, '')
+          .replace(/\s{2,}/g, ' ')
+          .trim();
+        const sanitizeQuickValue = (label, value) => {
+          if (Array.isArray(value)) {
+            const cleaned = value.map((item) => sanitizeQuickLine(item)).filter(Boolean);
+            return cleaned.length ? cleaned : value;
+          }
+          const cleaned = sanitizeQuickLine(value);
+          if (cleaned) return cleaned;
+          switch (label) {
+            case '費用メモ':
+              return '費用はコース・週数・受講形態で変わります。';
+            case '入学時期':
+              return '開始日や期間はコースにより差があります。';
+            case 'アクセス':
+              return '通学しやすい立地が多いエリアです。';
+            default:
+              return '';
+          }
+        };
+        const quickPairs = [
+          { label: '住所', icon: 'fa-location-dot', value: address },
+          { label: 'アクセス', icon: 'fa-train-subway', value: sanitizeQuickValue('アクセス', accessLine) },
+          { label: '入学時期', icon: 'fa-calendar', value: sanitizeQuickValue('入学時期', intakeText) },
+          { label: '費用メモ', icon: 'fa-coins', value: sanitizeQuickValue('費用メモ', tuitionText) },
+          { label: '認定', icon: 'fa-certificate', value: sanitizeQuickValue('認定', accreditationText) },
+          { label: '周辺情報', icon: 'fa-map', value: sanitizeQuickValue('周辺情報', areaInfo) }
+        ];
+        const campusCards = renderCampusCards(target.campuses || [], contact);
+        root.innerHTML = `
+          <div class="school-detail-nav">
+            <a class="school-back-link" href="${backUrl}">← 学校一覧に戻る</a>
+          </div>
+          <section class="cc-detail-sheet">
+            <div class="school-detail-hero">
+            <div class="school-detail-hero-media">
+              ${image ? `<img src="${image}" alt="${name}" loading="lazy" onerror="this.remove();this.parentElement.classList.add('is-empty');">` : ''}
+              <div class="school-detail-hero-placeholder"><i class="fa-solid fa-school"></i></div>
+            </div>
+            <div class="school-detail-hero-main">
+              <h1 class="school-detail-title">${name}${cityBadges}</h1>
+              <div class="school-detail-hero-cta">
+                <a class="cc-sns-link cc-sns-link--official" href="${website}" target="_blank" rel="noopener" aria-label="公式サイト" title="公式サイト" data-label="公式サイト">
+                  <svg class="cc-sns-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="currentColor" d="M14 5h5v5h-2V8.4l-6.6 6.6-1.4-1.4L15.6 7H14V5Zm-7 3h3v2H8v7h7v-2h2v3a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/>
+                  </svg>
+                  <span class="sr-only">公式サイト</span>
+                </a>
+                ${heroSocialItems}
+              </div>
+            </div>
+            </div>
+            <div class="cc-detail-sections">
+              <section class="cc-detail-section">
+                <h2 class="cc-section-title"><img class="cc-maplered" src="${mapleredSrc}" alt=""><span>クイック情報</span></h2>
+                <div class="school-detail-quick-grid">
+                  ${quickPairs.map((item) => {
+                    const value = item.value;
+                    const hasValue = Array.isArray(value) ? value.length : String(value || '').trim();
+                    const content = item.isChips ? renderChips(value) : (hasValue ? `<p>${value}</p>` : renderPlaceholder('情報を更新中です。'));
+                    return `
+                      <div class="school-detail-quick-item">
+                        <div class="school-detail-quick-label"><i class="fa-solid ${item.icon}"></i>${item.label}</div>
+                        <div class="school-detail-quick-value">${content}</div>
+                      </div>
+                    `;
+                  }).join('')}
+                </div>
+              </section>
+              <section class="cc-detail-section">
+                <h2 class="cc-section-title"><img class="cc-maplered" src="${mapleredSrc}" alt=""><span>概要（ガイド）</span></h2>
+                ${buildOverviewNarrative(target)}
+              </section>
+              ${campusCards ? `
+              <section class="cc-detail-section">
+                <h2 class="cc-section-title"><img class="cc-maplered" src="${mapleredSrc}" alt=""><span>キャンパス / 所在地</span></h2>
+                ${campusCards}
+              </section>
+              ` : ''}
+              <section class="cc-detail-section">
+                <h2 class="cc-section-title"><img class="cc-maplered" src="${mapleredSrc}" alt=""><span>特徴</span></h2>
+                ${renderHighlights(highlights)}
+              </section>
+              <section class="cc-detail-section">
+                <h2 class="cc-section-title"><img class="cc-maplered" src="${mapleredSrc}" alt=""><span>コース / プログラム</span></h2>
+                ${programs.length ? renderPrograms(programs) : renderPlaceholder('コース情報を準備中です。')}
+              </section>
+              <section class="cc-detail-section">
+                <h2 class="cc-section-title"><img class="cc-maplered" src="${mapleredSrc}" alt=""><span>サポート</span></h2>
+                ${renderSupport(support)}
+              </section>
+              <section class="cc-detail-section">
+                <h2 class="cc-section-title"><img class="cc-maplered" src="${mapleredSrc}" alt=""><span>連絡先</span></h2>
+                ${(contact.phone || contact.email)
+                  ? `<ul class="school-detail-list">${contact.phone ? `<li>電話：${contact.phone}</li>` : ''}${contact.email ? `<li>メール：${contact.email}</li>` : ''}</ul>`
+                  : renderPlaceholder('連絡先情報を準備中です。')}
+              </section>
+              ${mapSection}
+            </div>
+          </section>
+        `;
+        bindBackLink(backUrl);
+        const icons = root.querySelectorAll('.cc-sns-icon');
+        icons.forEach((img) => {
+          if (img.dataset.snsBound) return;
+          img.dataset.snsBound = '1';
+          if (img.tagName === 'IMG') {
+            img.addEventListener('error', (e) => handleSnsIconError(e.currentTarget));
+          }
+        });
+        const mapTabs = root.querySelectorAll('.cc-map-tab');
+        if (mapTabs.length) {
+          const iframe = root.querySelector('.cc-map-embed iframe');
+          mapTabs.forEach((tab) => {
+            tab.addEventListener('click', () => {
+              mapTabs.forEach((btn) => btn.classList.remove('is-active'));
+              tab.classList.add('is-active');
+              if (!iframe) return;
+              const query = decodeURIComponent(tab.getAttribute('data-map-src') || '');
+              iframe.src = `https://www.google.com/maps?q=${encodeURIComponent(query)}&output=embed`;
+            });
+          });
+        }
+      }
+
+      function bindBackLink(backUrl) {
+        const link = root.querySelector('.school-back-link');
+        if (!link) return;
+        link.addEventListener('click', () => {
+          try {
+            sessionStorage.setItem('cc_school_restore_pending', '1');
+          } catch (e) {}
+        });
+        link.setAttribute('href', backUrl);
+      }
+
+      function normalizeLegacyId(value) {
+        const raw = normalizeId(value);
+        if (!raw) return '';
+        return raw.replace(/-+/g, '-').replace(/(^-|-$)/g, '');
+      }
+
+      function mergePreferNonEmpty(base, full) {
+        const src = full && typeof full === 'object' ? full : {};
+        const dst = base && typeof base === 'object' ? base : {};
+        const merged = { ...dst, ...src };
+        const keys = ['summary3', 'highlights', 'programs', 'support', 'accreditation'];
+        keys.forEach((key) => {
+          const srcArr = Array.isArray(src[key]) ? src[key].filter(Boolean) : [];
+          const dstArr = Array.isArray(dst[key]) ? dst[key].filter(Boolean) : [];
+          merged[key] = srcArr.length ? srcArr : dstArr;
+        });
+        merged.links = { ...(dst.links || {}), ...(src.links || {}) };
+        merged.contact = { ...(dst.contact || {}), ...(src.contact || {}) };
+        merged.social = { ...(dst.social || {}), ...(src.social || {}) };
+        const isEmptyText = (value) => {
+          const raw = String(value || '').trim();
+          if (!raw) return true;
+          return /準備中/.test(raw);
+        };
+        merged.summaryLong = isEmptyText(src.summaryLong) ? (dst.summaryLong || '') : (src.summaryLong || '');
+        merged.areaInfo = isEmptyText(src.areaInfo) ? (dst.areaInfo || '') : (src.areaInfo || '');
+        merged.tuitionNote = isEmptyText(src.tuitionNote) ? (dst.tuitionNote || '') : (src.tuitionNote || '');
+        merged.intakes = isEmptyText(src.intakes) ? (dst.intakes || '') : (src.intakes || '');
+        merged.description = isEmptyText(src.description) ? (dst.description || '') : (src.description || '');
+        return merged;
+      }
+
+      function getStoredPayload(id) {
+        const key = id ? `cc_school_detail_payload:${id}` : '';
+        const raw = key ? sessionStorage.getItem(key) : '';
+        if (raw) return raw;
+        return sessionStorage.getItem('cc_school_detail_payload') || '';
+      }
+
+      (async function init() {
+        const backUrl = resolveBackUrl();
+        const idParam = qs.get('id') || '';
+        let wanted = normalizeId(idParam);
+        const isFileProtocol = location.protocol === 'file:';
+
+        let payload = null;
+        const storedPayloadRaw = getStoredPayload(wanted);
+        if (storedPayloadRaw) {
+          try {
+            const parsed = JSON.parse(storedPayloadRaw);
+            if (parsed) {
+              const payloadId = normalizeId(parsed.id || ccComputeSchoolId(parsed));
+              if (!wanted) {
+                wanted = payloadId;
+              }
+              if (!wanted || payloadId === wanted) payload = parsed;
+            }
+          } catch (e) {}
+        }
+        if (!wanted) {
+          const backFocus = (() => {
+            try {
+              return sessionStorage.getItem('cc_school_focus_id') || sessionStorage.getItem('cc_school_back_focus') || '';
+            } catch (e) {
+              return '';
+            }
+          })();
+          if (backFocus) wanted = normalizeId(backFocus);
+        }
+        if (!wanted && payload) {
+          wanted = normalizeId(payload.id || ccComputeSchoolId(payload));
+        }
+        if (wanted && !idParam) {
+          try {
+            const nextUrl = new URL(location.href);
+            nextUrl.searchParams.set('id', wanted);
+            history.replaceState(null, '', nextUrl.toString());
+          } catch (e) {}
+        }
+        if (!wanted) {
+          renderOpenFromList(backUrl);
+          return;
+        }
+
+        let full = null;
+        if (!isFileProtocol) {
+          try {
+            const schools = await getSchoolsData();
+            const map = {};
+            schools.forEach((s) => {
+              const id = normalizeId(s.id || ccComputeSchoolId(s));
+              if (id) map[id] = s;
+              const aliases = Array.isArray(s.aliases) ? s.aliases : [];
+              aliases.forEach((alias) => {
+                const aid = normalizeId(alias);
+                if (aid && !map[aid]) map[aid] = s;
+              });
+            });
+            full = map[wanted] || null;
+            if (!full && wanted) {
+              const parts = wanted.split('-');
+              if (parts.length >= 2 && parts[parts.length - 1] === parts[parts.length - 2]) {
+                parts.splice(parts.length - 1, 1);
+                full = map[parts.join('-')] || null;
+              }
+            }
+            if (!full && idParam) {
+              const legacy = normalizeLegacyId(idParam);
+              if (legacy) full = map[legacy] || null;
+            }
+          } catch (e) {}
+        } else if (!payload) {
+          renderOpenFromList(backUrl);
+          return;
+        }
+
+        const merged = mergePreferNonEmpty(payload, full);
+        if (!merged || (!merged.name && !merged.id)) {
+          if (isFileProtocol && !payload) {
+            renderOpenFromList(backUrl);
+          } else {
+            renderNotFound(backUrl);
+          }
+          return;
+        }
+        if (window.__ccSchoolDetailBootLogged !== true) {
+          console.log('[school-detail] boot', {
+            protocol: location.protocol,
+            urlId: idParam || '',
+            payloadRecovered: Boolean(payload),
+            finalId: wanted,
+            fullHit: Boolean(full)
+          });
+          window.__ccSchoolDetailBootLogged = true;
+        }
+        renderDetail(merged, backUrl);
+        if (window.annotateI18nDefaults) {
+          try { window.annotateI18nDefaults(); } catch (e) { }
+        }
+        if (window.applyI18n) {
+          try { window.applyI18n(); } catch (e) { }
+        }
+      })();
+    })();
+  </script>
+</body>
+</html>

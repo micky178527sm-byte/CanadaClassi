@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>マイページ | CanadaClassi</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body class="mypage-page">
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="logo">
+      <a href="index.html" class="logo-link">
+        <img src="logo1_transparent.png" alt="CanadaClassi Logo" class="logo-img" />
+        <div class="logo-text">
+          <span class="en">CanadaClassi</span>
+          <span class="ja">カナダくらし</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="header-right-pc">
+        <div class="auth-buttons">
+          <div class="cc-notice">
+            <button type="button" class="btn-icon btn-notice-bell" id="notifBell" title="お知らせ" aria-label="お知らせ" data-cc-notice-toggle>
+              <svg class="cc-icon cc-bell-icon" viewBox="0 0 448 512" aria-hidden="true">
+                <path d="M224 512a64 64 0 0 0 64-64H160a64 64 0 0 0 64 64zm215.39-149.33C419.37 343 384 312 384 240c0-79.7-56.5-145.6-128-158.5V48a48 48 0 1 0-96 0v33.5C88.5 94.4 32 160.3 32 240c0 72-35.4 103-55.4 122.7A31.9 31.9 0 0 0 0 384a32 32 0 0 0 32 32h384a32 32 0 0 0 32-32 31.9 31.9 0 0 0-8.61-21.33z" fill="currentColor"/>
+              </svg>
+              <span class="sr-only cc-notif-label">お知らせ</span>
+              <span class="notification-dot"></span>
+            </button>
+            <div class="cc-notice-dropdown" data-cc-notice-dropdown hidden>
+              <div class="cc-notice-header">
+                <div class="cc-notice-title">お知らせ</div>
+                <label class="cc-notice-filter">
+                  <input type="checkbox" data-cc-notice-unread />
+                  <span>未読のみ</span>
+                </label>
+                <button type="button" class="cc-notice-markall" data-cc-notice-markall>すべて既読</button>
+              </div>
+              <div class="cc-notice-list" data-cc-notice-list></div>
+              <div class="cc-notice-footer">
+                <a href="mypage.html?tab=notices">すべて見る</a>
+              </div>
+            </div>
+          </div>
+
+          <a href="post.html" class="btn-post" id="post-button">
+            <i class="fa-solid fa-camera"></i> 投稿作成
+          </a>
+
+          <a href="login.html" class="btn-login" id="login-button">
+            <i class="fa-regular fa-circle-user"></i> ログイン・新規登録
+          </a>
+        </div>
+
+        <div class="settings-group">
+          <select id="area-select" name="header-area" class="cc-hidden-select" aria-label="エリア（主要）">
+            <option value="canada_all">🇨🇦 全カナダ</option>
+            <option value="vancouver">バンクーバー, BC</option>
+            <option value="victoria">ビクトリア, BC</option>
+            <option value="whistler">ウィスラー, BC</option>
+            <option value="kelowna">ケロウナ, BC</option>
+            <option value="calgary">カルガリー, AB</option>
+            <option value="banff">バンフ, AB</option>
+            <option value="edmonton">エドモントン, AB</option>
+            <option value="winnipeg">ウィニペグ, MB</option>
+            <option value="ottawa">オタワ, ON</option>
+            <option value="toronto">トロント, ON</option>
+            <option value="montreal">モントリオール, QC</option>
+            <option value="halifax">ハリファックス, NS</option>
+            <option value="other">その他（カナダの都市）</option>
+            <option value="japan">🇯🇵 日本</option>
+          </select>
+          <select id="area-select-sub" name="header-area-sub" class="cc-hidden-select" aria-label="その他の都市">
+            <option value="">その他のカナダ都市</option>
+            <optgroup label="ユーコン準州（YT）">
+              <option value="whitehorse">ホワイトホース, YT</option>
+            </optgroup>
+            <optgroup label="ブリティッシュコロンビア州（BC）">
+              <option value="abbotsford">アボッツフォード, BC</option>
+              <option value="burnaby">バーナビー, BC</option>
+              <option value="kamloops">カムループス, BC</option>
+              <option value="nanaimo">ナナイモ, BC</option>
+              <option value="prince_george">プリンスジョージ, BC</option>
+              <option value="richmond">リッチモンド, BC</option>
+              <option value="surrey">サレー, BC</option>
+            </optgroup>
+            <optgroup label="アルバータ州（AB）">
+              <option value="kananaskis">カナナスキス, AB</option>
+              <option value="canmore">キャンモア, AB</option>
+              <option value="fort_mcmurray">フォートマクマレー, AB</option>
+              <option value="medicine_hat">メディシンハット, AB</option>
+              <option value="lake_louise">ルイーズ湖, AB</option>
+              <option value="red_deer">レッドディア, AB</option>
+              <option value="lethbridge">レスブリッジ, AB</option>
+            </optgroup>
+            <optgroup label="サスカチュワン州（SK）">
+              <option value="regina">レジャイナ, SK</option>
+              <option value="saskatoon">サスカトゥーン, SK</option>
+            </optgroup>
+            <optgroup label="マニトバ州（MB）">
+              <option value="brandon">ブランドン, MB</option>
+            </optgroup>
+            <optgroup label="オンタリオ州（ON）">
+              <option value="oakville">オークビル, ON</option>
+              <option value="oshawa">オシャワ, ON</option>
+              <option value="kingston">キングストン, ON</option>
+              <option value="kitchener">キッチナー, ON</option>
+              <option value="guelph">ゲルフ, ON</option>
+              <option value="sudbury">サドベリー, ON</option>
+              <option value="thunder_bay">サンダーベイ, ON</option>
+              <option value="niagara_falls">ナイアガラフォールズ, ON</option>
+              <option value="barrie">バリー, ON</option>
+              <option value="hamilton">ハミルトン, ON</option>
+              <option value="mississauga">ミシサガ, ON</option>
+              <option value="markham">マーカム, ON</option>
+              <option value="vaughan">ヴォーン, ON</option>
+              <option value="london_on">ロンドン, ON</option>
+              <option value="waterloo">ウォータールー, ON</option>
+              <option value="windsor">ウィンザー, ON</option>
+            </optgroup>
+            <optgroup label="ケベック州（QC）">
+              <option value="gatineau">ガティノー, QC</option>
+              <option value="laval">ラヴァル, QC</option>
+              <option value="longueuil">ロンゲール, QC</option>
+              <option value="quebec_city">ケベックシティ, QC</option>
+            </optgroup>
+            <optgroup label="ニューブランズウィック州（NB）">
+              <option value="fredericton">フレデリクトン, NB</option>
+              <option value="moncton">モンクトン, NB</option>
+              <option value="saint_john">セントジョン, NB</option>
+            </optgroup>
+            <optgroup label="プリンスエドワードアイランド州（PE）">
+              <option value="charlottetown">シャーロットタウン, PE</option>
+            </optgroup>
+            <optgroup label="ノバスコシア州（NS）">
+              <option value="sydney_ns">シドニー, NS</option>
+            </optgroup>
+            <optgroup label="ニューファンドランド・ラブラドール州（NL）">
+              <option value="st_johns">セントジョンズ, NL</option>
+            </optgroup>
+          </select>
+          <select id="lang-select" name="header-lang" class="cc-hidden-select" aria-label="言語">
+            <option value="ja">JP</option>
+            <option value="en">EN</option>
+            <option value="fr">FR</option>
+          </select>
+
+          <div class="cc-dropdown" data-cc-dropdown="area">
+            <button class="cc-dd-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-location-dot"></i>
+              <span class="cc-dd-value" data-cc-dd-value="area"></span>
+            </button>
+            <div class="cc-dd-menu" role="menu">
+              <div class="cc-dd-note">表示する都市を切り替え、カレンダーや投稿一覧の内容を変更します。</div>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="canada_all">🇨🇦 全カナダ</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="vancouver">バンクーバー, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="victoria">ビクトリア, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="whistler">ウィスラー, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="kelowna">ケロウナ, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="calgary">カルガリー, AB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="banff">バンフ, AB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="edmonton">エドモントン, AB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="winnipeg">ウィニペグ, MB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="ottawa">オタワ, ON</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="toronto">トロント, ON</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="montreal">モントリオール, QC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="halifax">ハリファックス, NS</button>
+              <div class="cc-dd-submenu" data-cc-dd-submenu>
+                <button class="cc-dd-item cc-dd-subtoggle" type="button" data-cc-dd-subtoggle>
+                  その他のカナダ都市
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
+                <div class="cc-dd-subpanel" hidden>
+                  <div class="cc-dd-group-title">ユーコン準州（YT）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="whitehorse">ホワイトホース, YT</button>
+                  <div class="cc-dd-group-title">ブリティッシュコロンビア州（BC）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="abbotsford">アボッツフォード, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="burnaby">バーナビー, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kamloops">カムループス, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="nanaimo">ナナイモ, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="prince_george">プリンスジョージ, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="richmond">リッチモンド, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="surrey">サレー, BC</button>
+                  <div class="cc-dd-group-title">アルバータ州（AB）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kananaskis">カナナスキス, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="canmore">キャンモア, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="fort_mcmurray">フォートマクマレー, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="medicine_hat">メディシンハット, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="lake_louise">ルイーズ湖, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="red_deer">レッドディア, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="lethbridge">レスブリッジ, AB</button>
+                  <div class="cc-dd-group-title">サスカチュワン州（SK）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="regina">レジャイナ, SK</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="saskatoon">サスカトゥーン, SK</button>
+                  <div class="cc-dd-group-title">マニトバ州（MB）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="brandon">ブランドン, MB</button>
+                  <div class="cc-dd-group-title">オンタリオ州（ON）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="oakville">オークビル, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="oshawa">オシャワ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kingston">キングストン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kitchener">キッチナー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="guelph">ゲルフ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="sudbury">サドベリー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="thunder_bay">サンダーベイ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="niagara_falls">ナイアガラフォールズ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="barrie">バリー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="hamilton">ハミルトン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="mississauga">ミシサガ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="markham">マーカム, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="vaughan">ヴォーン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="london_on">ロンドン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="waterloo">ウォータールー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="windsor">ウィンザー, ON</button>
+                  <div class="cc-dd-group-title">ケベック州（QC）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="gatineau">ガティノー, QC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="laval">ラヴァル, QC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="longueuil">ロンゲール, QC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="quebec_city">ケベックシティ, QC</button>
+                  <div class="cc-dd-group-title">ニューブランズウィック州（NB）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="fredericton">フレデリクトン, NB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="moncton">モンクトン, NB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="saint_john">セントジョン, NB</button>
+                  <div class="cc-dd-group-title">プリンスエドワードアイランド州（PE）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="charlottetown">シャーロットタウン, PE</button>
+                  <div class="cc-dd-group-title">ノバスコシア州（NS）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="sydney_ns">シドニー, NS</button>
+                  <div class="cc-dd-group-title">ニューファンドランド・ラブラドール州（NL）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="st_johns">セントジョンズ, NL</button>
+                </div>
+              </div>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="japan">🇯🇵 日本</button>
+            </div>
+          </div>
+
+          <div class="cc-dropdown" data-cc-dropdown="lang">
+            <button class="cc-dd-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-globe"></i>
+              <span class="cc-dd-value" data-cc-dd-value="lang"></span>
+            </button>
+            <div class="cc-dd-menu" role="menu">
+              <div class="cc-dd-note">表示言語を切り替えるためのプルダウンです。</div>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="lang" data-value="ja">JP</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="lang" data-value="en">EN</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="lang" data-value="fr">FR</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <nav class="global-nav">
+    <div class="container nav-grid">
+      <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i> ホーム</a>
+      <a href="list.html" class="nav-item"><i class="fa-solid fa-tags"></i> クラシファイド</a>
+      <a href="static.html?type=school" class="nav-item"><i class="fa-solid fa-graduation-cap"></i> 学校情報</a>
+      <a href="board.html" class="nav-item"><i class="fa-solid fa-comments"></i> 掲示板</a>
+      <a href="static.html?type=links" class="nav-item"><i class="fa-solid fa-arrow-up-right-from-square"></i> 外部リンク</a>
+      <a href="static.html?type=tips" class="nav-item"><i class="fa-solid fa-lightbulb"></i> お役立ち情報</a>
+    </div>
+  </nav>
+</header>
+
+<main class="container mypage-shell">
+  <section class="mypage-hero">
+    <div class="mypage-hero-card">
+      <div class="hero-profile">
+        <div class="hero-avatar">
+          <i class="fa-solid fa-circle-user"></i>
+        </div>
+        <div class="hero-meta">
+          <div class="hero-eyebrow">マイページ</div>
+          <div class="hero-name"><span id="mypage-account-name">（ログインすると表示）</span></div>
+          <div class="hero-sub"><i class="fa-solid fa-location-dot"></i><span id="mypage-default-city">（登録情報）</span></div>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a class="hero-action primary" href="post.html"><i class="fa-solid fa-camera"></i> 投稿作成</a>
+        <a class="hero-action ghost" href="mypage.html?tab=inquiries"><i class="fa-regular fa-message"></i> メッセージ</a>
+        <a class="hero-action ghost" href="#mypage-panel-settings" data-target="mypage-panel-settings"><i class="fa-solid fa-gear"></i> アカウント設定</a>
+        <a class="hero-action ghost" href="profile-view.html"><i class="fa-regular fa-user"></i> プロフィールを表示</a>
+      </div>
+    </div>
+    <div class="mypage-hero-panel">
+      <div class="hero-panel-title">あなたの状況</div>
+      <div class="hero-kpis">
+        <div class="kpi-card">
+          <span class="kpi-label">受付中の投稿</span>
+          <span class="kpi-value" id="mypage-kpi-open">—</span>
+          <span class="kpi-note">返信待ち 1</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">お気に入り</span>
+          <span class="kpi-value" id="mypage-kpi-favorites">—</span>
+          <span class="kpi-note">保存した投稿</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">新着通知</span>
+          <span class="kpi-value">2</span>
+          <span class="kpi-note">未読のみ表示</span>
+        </div>
+      </div>
+      <div class="hero-panel-tip">
+        <i class="fa-solid fa-lightbulb"></i>
+        進行中の取引は「自分の投稿」タブから簡単に管理できます。
+      </div>
+    </div>
+  </section>
+
+  <div class="mypage-tabs" role="tablist" aria-label="マイページメニュー">
+    <button class="mypage-section-tab is-active" type="button" data-target="mypage-panel-posts" role="tab" aria-selected="true">
+      <i class="fa-solid fa-pen-to-square"></i> 自分の投稿
+    </button>
+    <button class="mypage-section-tab" type="button" data-target="mypage-panel-inquiries" role="tab" aria-selected="false">
+      <i class="fa-regular fa-message"></i> メッセージ
+    </button>
+    <button class="mypage-section-tab" type="button" data-target="mypage-panel-favorites" role="tab" aria-selected="false">
+      <i class="fa-solid fa-heart"></i> お気に入り
+    </button>
+    <button class="mypage-section-tab" type="button" data-target="mypage-panel-news" role="tab" aria-selected="false">
+      <i class="fa-solid fa-bell"></i> お知らせ
+    </button>
+    <button class="mypage-section-tab" type="button" data-target="mypage-panel-settings" role="tab" aria-selected="false">
+      <i class="fa-solid fa-gear"></i> 設定
+    </button>
+    <button class="mypage-section-tab" type="button" data-target="mypage-panel-options" role="tab" aria-selected="false">
+      <i class="fa-solid fa-layer-group"></i> オプション
+    </button>
+  </div>
+
+  <section id="mypage-panel-posts" class="mypage-panel is-active" role="tabpanel">
+    <div class="section-header">
+      <h2>自分の投稿</h2>
+    </div>
+    <div class="myposts-toolbar cc-search-row">
+      <div class="cc-search-bar">
+        <i class="fa-solid fa-magnifying-glass cc-search-icon" aria-hidden="true"></i>
+        <input class="cc-search-input" id="myposts-search" name="myposts-search" type="text" placeholder="投稿タイトルや場所で検索" aria-label="投稿を検索" />
+        <button class="cc-search-btn" id="myposts-search-btn" type="button" aria-label="検索">
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+      <div class="myposts-sort">
+        <div class="cc-dropdown cc-select">
+          <button class="cc-dd-toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+            <span class="cc-dd-value"></span>
+          </button>
+          <div class="cc-dd-menu" role="listbox"></div>
+          <select class="cc-hidden-select" name="myposts-sort" aria-label="並び順">
+            <option>新しい順</option>
+            <option>古い順</option>
+            <option>閲覧数順</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="myposts-tabs" role="tablist" aria-label="投稿ステータス">
+      <button class="myposts-tab is-active" type="button" data-target="myposts-open" role="tab" aria-selected="true">受付中</button>
+      <button class="myposts-tab" type="button" data-target="myposts-closed" role="tab" aria-selected="false">受付終了</button>
+    </div>
+
+    <div id="myposts-open" class="myposts-panel is-active" role="tabpanel">
+      <div class="listings-grid"></div>
+    </div>
+
+    <div id="myposts-closed" class="myposts-panel" role="tabpanel" hidden>
+      <div class="listings-grid"></div>
+    </div>
+    <div class="myposts-pagination">
+      <button type="button" class="pager-btn">前へ</button>
+      <span class="pager-status">1 / 3</span>
+      <button type="button" class="pager-btn">次へ</button>
+    </div>
+  </section>
+
+  <section id="mypage-panel-inquiries" class="mypage-panel cc-inbox" role="tabpanel" hidden>
+    <div class="section-header">
+      <h2>問い合わせ履歴</h2>
+    </div>
+    <div class="cc-inbox-layout">
+      <div class="cc-inbox-list" id="inquiry-inbox-list">
+        <div class="cc-inbox-list-header">
+          <div class="cc-inbox-search cc-search-bar">
+            <i class="fa-solid fa-magnifying-glass cc-search-icon" aria-hidden="true"></i>
+            <input class="cc-search-input" id="inquiry-search" name="inquiry-search" type="text" placeholder="タイトル・都市・本文で検索" aria-label="問い合わせ履歴を検索" />
+            <button class="cc-search-btn" id="inquiry-search-btn" type="button" aria-label="検索">
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+          <div class="cc-inbox-filters-row">
+            <div class="cc-inbox-filters">
+              <button class="filter-chip is-active" type="button" data-inquiry-filter="all">全て</button>
+              <button class="filter-chip" type="button" data-inquiry-filter="unread">未読のみ</button>
+            </div>
+            <div class="cc-dropdown cc-select cc-inbox-sort">
+              <button class="cc-dd-toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+                <span class="cc-dd-value"></span>
+              </button>
+              <div class="cc-dd-menu" role="listbox"></div>
+              <select id="inquiry-sort-select" name="inquiry-sort" class="cc-hidden-select" aria-label="並び替え">
+                <option value="new">新しい順</option>
+                <option value="old">古い順</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="cc-inbox-list-body" id="inquiry-history-list"></div>
+      </div>
+      <div class="cc-inbox-detail" id="inquiry-history-detail">
+        <div class="cc-inbox-empty">
+          <i class="fa-regular fa-comment-dots" aria-hidden="true"></i>
+          <div>左のリストから選択してください。</div>
+          <p>投稿サマリと会話履歴がここに表示されます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="mypage-panel-favorites" class="mypage-panel" role="tabpanel" hidden>
+    <div class="section-header">
+      <h2>お気に入り</h2>
+    </div>
+    <div class="myposts-toolbar favorites-toolbar cc-search-row">
+      <div class="cc-search-bar">
+        <i class="fa-solid fa-magnifying-glass cc-search-icon" aria-hidden="true"></i>
+        <input class="cc-search-input" name="favorites-search" type="text" placeholder="お気に入りを検索" aria-label="お気に入りを検索" data-favorites-search />
+        <button class="cc-search-btn" type="button" aria-label="検索" data-favorites-search-btn>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+      <div class="myposts-sort">
+        <div class="cc-dropdown cc-select">
+          <button class="cc-dd-toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+            <span class="cc-dd-value"></span>
+          </button>
+          <div class="cc-dd-menu" role="listbox"></div>
+          <select class="cc-hidden-select" name="favorites-sort" aria-label="並び順" data-favorites-sort>
+            <option value="new">新しい順</option>
+            <option value="old">古い順</option>
+            <option value="title">タイトル順</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="listings-grid">
+      <article class="card" data-created-at="2024-12-18T13:30:00" data-cat="sell">
+        <a href="detail.html">
+          <div class="card-thumb">
+            <img src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=1000&q=70" alt="Fav" />
+            <div class="post-price">$20.00</div>
+            <div class="post-cat cat-sell"><i class="fa-solid fa-tag"></i><span>売ります・譲ります</span></div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">ダイニングテーブル</h3>
+            <div class="card-meta">
+              <span class="left"><i class="fa-solid fa-location-dot"></i><span>Toronto</span></span>
+              <span class="time">—</span>
+            </div>
+            <div class="card-author"><i class="fa-regular fa-user"></i><span>投稿者</span></div>
+          </div>
+        </a>
+      </article>
+    </div>
+  </section>
+
+  <section id="mypage-panel-news" class="mypage-panel" role="tabpanel" hidden>
+    <div class="section-header">
+      <h2>お知らせ</h2>
+    </div>
+    <div class="mypage-notice-center">
+      <div class="mypage-notice-filters">
+        <button class="filter-chip is-active" type="button" data-mypage-notice-filter="all">すべて</button>
+        <button class="filter-chip" type="button" data-mypage-notice-filter="unread">未読</button>
+        <button class="filter-chip" type="button" data-mypage-notice-filter="hidden">非表示</button>
+      </div>
+      <div class="mypage-notice-list" id="mypage-notice-list"></div>
+    </div>
+  </section>
+
+  <section id="mypage-panel-settings" class="mypage-panel" role="tabpanel" hidden>
+    <div class="section-header">
+      <h2>設定</h2>
+    </div>
+    <div class="mypage-setting-grid">
+      <div class="setting-card">
+        <div class="setting-title"><i class="fa-solid fa-location-dot"></i> デフォルト都市とタイムゾーン</div>
+        <div class="setting-desc">検索や一覧表示の基準となる都市を設定します。タイムゾーンは都市に応じて自動で提案されますが、必要に応じて手動で変更できます。</div>
+        <div class="setting-row">
+          <label class="setting-label" for="mypage-default-city-primary">都市</label>
+          <div class="cc-dropdown cc-dropdown-setting" data-cc-dd-scope="mypage-area">
+            <button class="cc-dd-toggle setting-input" type="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-location-dot"></i>
+              <span class="cc-dd-value" data-cc-dd-value="mypage-area"></span>
+            </button>
+            <div class="cc-dd-menu" role="menu">
+            </div>
+          </div>
+          <select id="mypage-default-city-primary" name="mypage-default-city" class="cc-hidden-select" aria-label="デフォルト都市（主要）">
+            <option value="vancouver">バンクーバー, BC</option>
+            <option value="victoria">ビクトリア, BC</option>
+            <option value="whistler">ウィスラー, BC</option>
+            <option value="kelowna">ケロウナ, BC</option>
+            <option value="calgary">カルガリー, AB</option>
+            <option value="banff">バンフ, AB</option>
+            <option value="edmonton">エドモントン, AB</option>
+            <option value="winnipeg">ウィニペグ, MB</option>
+            <option value="ottawa">オタワ, ON</option>
+            <option value="toronto">トロント, ON</option>
+            <option value="montreal">モントリオール, QC</option>
+            <option value="halifax">ハリファックス, NS</option>
+            <option value="japan">日本</option>
+          </select>
+        </div>
+        <div class="setting-row">
+          <label class="setting-label" for="mypage-timezone-select">タイムゾーン</label>
+          <select id="mypage-timezone-select" name="mypage-timezone" class="cc-hidden-select" aria-label="タイムゾーン">
+            <option value="America/Vancouver">太平洋標準時（PST）</option>
+            <option value="America/Edmonton">山岳部標準時（MST）</option>
+            <option value="America/Regina">中部標準時（CST）</option>
+            <option value="America/Winnipeg">中部標準時（CST/Winnipeg）</option>
+            <option value="America/Toronto">東部標準時（EST）</option>
+            <option value="America/Halifax">大西洋標準時（AST）</option>
+            <option value="America/St_Johns">ニューファンドランド標準時（NST）</option>
+            <option value="Asia/Tokyo">日本標準時（JST）</option>
+          </select>
+          <div class="cc-dropdown cc-dropdown-setting" data-cc-dd-scope="mypage-timezone">
+            <button class="cc-dd-toggle setting-input" type="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-clock"></i>
+              <span class="cc-dd-value" data-cc-dd-value="mypage-timezone"></span>
+            </button>
+            <div class="cc-dd-menu" role="menu">
+            </div>
+          </div>
+        </div>
+        <div class="setting-actions">
+          <button class="setting-action" type="button" data-mypage-save-area>変更を保存</button>
+        </div>
+      </div>
+
+      <div class="setting-card">
+        <div class="setting-title"><i class="fa-solid fa-bell"></i> 通知設定</div>
+        <div class="setting-desc">通知はアカウント作成時に登録したメールに届きます。</div>
+        <div class="setting-toggle-list">
+          <label class="setting-toggle">
+            <input type="checkbox" name="notify-messages" checked />
+            <span>メッセージ新着</span>
+            <small>相手からメッセージが届いたときに通知</small>
+          </label>
+          <label class="setting-toggle">
+            <input type="checkbox" name="notify-posts" checked />
+            <span>投稿新着</span>
+            <small>フォロー中カテゴリに新規投稿があったときに通知</small>
+          </label>
+          <label class="setting-toggle">
+            <input type="checkbox" name="notify-closed" />
+            <span>受付終了</span>
+            <small>取引完了や受付終了が反映されたときに通知</small>
+          </label>
+        </div>
+        <div class="setting-actions">
+          <button class="setting-action" id="mypage-save-notifications" type="button">変更を保存</button>
+        </div>
+      </div>
+
+      <div class="setting-card">
+        <div class="setting-title"><i class="fa-solid fa-globe"></i> 表示言語</div>
+        <div class="setting-desc">メニューや見出しの言語を選択します。</div>
+        <div class="setting-row">
+          <label class="setting-label" for="mypage-lang-select">言語</label>
+          <select id="mypage-lang-select" name="mypage-language" class="cc-hidden-select" aria-label="表示言語">
+            <option value="ja">JP（日本語）</option>
+            <option value="en">EN（English）</option>
+            <option value="fr">FR（Français）</option>
+          </select>
+          <div class="cc-dropdown cc-dropdown-setting" data-cc-dd-scope="mypage-lang">
+            <button class="cc-dd-toggle setting-input" type="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-globe"></i>
+              <span class="cc-dd-value" data-cc-dd-value="mypage-lang"></span>
+            </button>
+            <div class="cc-dd-menu" role="menu">
+              <div class="cc-dd-note">表示言語を切り替えます。</div>
+              <button class="cc-dd-item" type="button" data-cc-settings-select="lang" data-value="ja">JP（日本語）</button>
+              <button class="cc-dd-item" type="button" data-cc-settings-select="lang" data-value="en">EN（English）</button>
+              <button class="cc-dd-item" type="button" data-cc-settings-select="lang" data-value="fr">FR（Français）</button>
+            </div>
+          </div>
+        </div>
+        <div class="setting-actions">
+          <button class="setting-action" type="button" data-mypage-save-lang>変更を保存</button>
+        </div>
+      </div>
+
+      <div class="setting-card">
+        <div class="setting-title"><i class="fa-solid fa-user-gear"></i> アカウント管理</div>
+        <div class="setting-desc">プロフィール編集やパスワード変更ができます。</div>
+        <div class="setting-actions setting-actions-row">
+          <a class="setting-action action-pill" href="profile-edit.html"><i class="fa-solid fa-pen"></i>プロフィール編集</a>
+          <button class="setting-action action-pill" type="button"><i class="fa-solid fa-key"></i>パスワード変更</button>
+          <button class="setting-action action-pill danger" type="button"><i class="fa-solid fa-right-from-bracket"></i>ログアウト</button>
+          <button class="setting-action action-pill danger" type="button"><i class="fa-solid fa-user-slash"></i>退会</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="mypage-panel-options" class="mypage-panel" role="tabpanel" hidden>
+    <div class="section-header">
+      <h2>オプション</h2>
+    </div>
+    <div class="mypage-option-card">
+      <div class="option-title">プレミアム掲載（準備中）</div>
+      <div class="option-desc">注目枠への掲載や優先表示は、近日公開予定です。</div>
+      <button class="setting-action" type="button" disabled>準備中</button>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <div class="footer-brand">
+        <img src="logo1_transparent.png" alt="CanadaClassi Logo" class="footer-logo" />
+        <div>
+          <div class="footer-brand-title">CanadaClassi</div>
+          <div class="footer-brand-sub">カナダくらし</div>
+        </div>
+      </div>
+      <p class="footer-desc">留学・ワーホリの暮らしをつなぐクラシファイド。</p>
+    </div>
+
+    <div class="footer-col">
+      <div class="footer-title">サイトマップ</div>
+      <div class="footer-sitemap">
+        <a href="index.html">ホーム</a>
+        <a href="list.html">クラシファイド</a>
+        <a href="static.html?type=school">学校情報</a>
+        <a href="board.html">掲示板</a>
+        <a href="static.html?type=links">外部リンク</a>
+        <a href="static.html?type=tips">お役立ち情報</a>
+        <a href="mypage.html?tab=inquiries">メッセージ</a>
+        <a href="login.html">ログイン</a>
+        <a href="mypage.html">マイページ</a>
+        <a href="post.html">投稿</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <div class="footer-title">ご案内</div>
+      <div class="footer-links">
+        <a href="static.html?type=notice">管理者からのお知らせ</a>
+        <a href="static.html?type=guide">ご利用ガイド</a>
+        <a href="static.html?type=post-guide">投稿・取引ガイド</a>
+        <a href="static.html?type=scam">詐欺などのご注意</a>
+        <a href="static.html?type=terms">利用規約</a>
+        <a href="static.html?type=privacy">プライバシーポリシー</a>
+        <a href="sitemap.html">サイトマップ</a>
+      </div>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <div class="footer-copy">© 2024 CanadaClassi</div>
+  </div>
+</footer>
+
+  <script src="script.js"></script>
+  <script>
+    (function () {
+      var sectionTabs = document.querySelectorAll('.mypage-section-tab');
+      var sectionPanels = document.querySelectorAll('.mypage-panel');
+      var sectionJumpers = document.querySelectorAll('[data-target^="mypage-panel-"]');
+      var inquiryTab = document.querySelector('.mypage-section-tab[data-target="mypage-panel-inquiries"]');
+      var tabsBar = document.querySelector('.mypage-tabs');
+      var isBanned = (typeof isCurrentUserBanned === 'function') ? isCurrentUserBanned() : false;
+      if (isBanned && inquiryTab) {
+        inquiryTab.disabled = true;
+        inquiryTab.classList.add('is-disabled');
+        inquiryTab.setAttribute('aria-disabled', 'true');
+      }
+      var activateSection = function (targetId) {
+        if (targetId === 'mypage-panel-inquiries' && isBanned) {
+          if (typeof assertNotBanned === 'function') {
+            assertNotBanned('アカウントが停止されているため問い合わせ履歴は利用できません。');
+          }
+          return;
+        }
+        sectionTabs.forEach(function (t) {
+          var isActive = t.getAttribute('data-target') === targetId;
+          t.classList.toggle('is-active', isActive);
+          t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+        sectionPanels.forEach(function (panel) {
+          var isActive = panel.id === targetId;
+          panel.classList.toggle('is-active', isActive);
+          panel.hidden = !isActive;
+        });
+      };
+      var params = new URLSearchParams(window.location.search || '');
+      var targetTab = params.get('tab');
+      var storedTab = '';
+      var scrollTopFlag = '';
+      try {
+        storedTab = localStorage.getItem('mypage_active_tab') || '';
+        scrollTopFlag = localStorage.getItem('mypage_scroll_top') || '';
+      } catch (e) { }
+      if (storedTab) {
+        activateSection(storedTab);
+        try { localStorage.removeItem('mypage_active_tab'); } catch (e) { }
+      } else if (targetTab === 'inquiries') {
+        activateSection('mypage-panel-inquiries');
+      }
+
+      if (sectionTabs.length) {
+        sectionTabs.forEach(function (tab) {
+          tab.addEventListener('click', function () {
+            activateSection(tab.getAttribute('data-target'));
+          });
+        });
+      }
+      if (sectionJumpers.length) {
+        sectionJumpers.forEach(function (link) {
+          link.addEventListener('click', function (event) {
+            var targetId = link.getAttribute('data-target');
+            if (!targetId) return;
+            event.preventDefault();
+            activateSection(targetId);
+          });
+        });
+      }
+      if (scrollTopFlag === '1') {
+        try { localStorage.removeItem('mypage_scroll_top'); } catch (e) { }
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      }
+
+      var mypostTabs = document.querySelectorAll('.myposts-tab');
+      if (!mypostTabs.length) return;
+      mypostTabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          mypostTabs.forEach(function (t) { t.classList.remove('is-active'); t.setAttribute('aria-selected', 'false'); });
+          tab.classList.add('is-active');
+          tab.setAttribute('aria-selected', 'true');
+          var targetId = tab.getAttribute('data-target');
+          document.querySelectorAll('.myposts-panel').forEach(function (panel) {
+            var isActive = panel.id === targetId;
+            panel.classList.toggle('is-active', isActive);
+            panel.hidden = !isActive;
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

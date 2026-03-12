@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>掲示板 新規作成 | CanadaClassi</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    referrerpolicy="no-referrer"
+  />
+</head>
+<body class="page-home">
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">
+        <a href="index.html" class="logo-link">
+          <img src="logo1_transparent.png" alt="CanadaClassi Logo" class="logo-img" />
+          <div class="logo-text">
+            <span class="en">CanadaClassi</span>
+            <span class="ja">カナダくらし</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="header-right-pc">
+        <div class="auth-buttons">
+          <div class="cc-notice">
+            <button type="button" class="btn-icon btn-notice-bell" id="notifBell" title="お知らせ" aria-label="お知らせ" data-cc-notice-toggle>
+              <svg class="cc-icon cc-bell-icon" viewBox="0 0 448 512" aria-hidden="true">
+                <path d="M224 512a64 64 0 0 0 64-64H160a64 64 0 0 0 64 64zm215.39-149.33C419.37 343 384 312 384 240c0-79.7-56.5-145.6-128-158.5V48a48 48 0 1 0-96 0v33.5C88.5 94.4 32 160.3 32 240c0 72-35.4 103-55.4 122.7A31.9 31.9 0 0 0 0 384a32 32 0 0 0 32 32h384a32 32 0 0 0 32-32 31.9 31.9 0 0 0-8.61-21.33z" fill="currentColor"/>
+              </svg>
+              <span class="sr-only cc-notif-label">お知らせ</span>
+              <span class="notification-dot"></span>
+            </button>
+            <div class="cc-notice-dropdown" data-cc-notice-dropdown hidden>
+              <div class="cc-notice-header">
+                <div class="cc-notice-title">お知らせ</div>
+                <label class="cc-notice-filter">
+                  <input type="checkbox" data-cc-notice-unread />
+                  <span>未読のみ</span>
+                </label>
+                <button type="button" class="cc-notice-markall" data-cc-notice-markall>すべて既読</button>
+              </div>
+              <div class="cc-notice-list" data-cc-notice-list></div>
+              <div class="cc-notice-footer">
+                <a href="mypage.html?tab=notices">すべて見る</a>
+              </div>
+            </div>
+          </div>
+
+          <a href="post.html" class="btn-post" id="post-button">
+            <i class="fa-solid fa-camera"></i> 投稿作成
+          </a>
+
+          <a href="login.html" class="btn-login" id="login-button">
+            <i class="fa-regular fa-circle-user"></i> ログイン・新規登録
+          </a>
+        </div>
+
+        <div class="settings-group">
+          <select id="area-select" class="cc-hidden-select" aria-label="エリア（主要）">
+            <option value="canada_all">🇨🇦 全カナダ</option>
+            <option value="vancouver">バンクーバー, BC</option>
+            <option value="victoria">ビクトリア, BC</option>
+            <option value="whistler">ウィスラー, BC</option>
+            <option value="kelowna">ケロウナ, BC</option>
+            <option value="calgary">カルガリー, AB</option>
+            <option value="banff">バンフ, AB</option>
+            <option value="edmonton">エドモントン, AB</option>
+            <option value="winnipeg">ウィニペグ, MB</option>
+            <option value="ottawa">オタワ, ON</option>
+            <option value="toronto">トロント, ON</option>
+            <option value="montreal">モントリオール, QC</option>
+            <option value="halifax">ハリファックス, NS</option>
+            <option value="other">その他（カナダの都市）</option>
+          </select>
+          <select id="area-select-sub" class="cc-hidden-select" aria-label="その他の都市">
+            <option value="">その他のカナダ都市</option>
+            <optgroup label="ユーコン準州（YT）">
+              <option value="whitehorse">ホワイトホース, YT</option>
+            </optgroup>
+            <optgroup label="ブリティッシュコロンビア州（BC）">
+              <option value="abbotsford">アボッツフォード, BC</option>
+              <option value="burnaby">バーナビー, BC</option>
+              <option value="kamloops">カムループス, BC</option>
+              <option value="nanaimo">ナナイモ, BC</option>
+              <option value="prince_george">プリンスジョージ, BC</option>
+              <option value="richmond">リッチモンド, BC</option>
+              <option value="surrey">サレー, BC</option>
+            </optgroup>
+            <optgroup label="アルバータ州（AB）">
+              <option value="kananaskis">カナナスキス, AB</option>
+              <option value="canmore">キャンモア, AB</option>
+              <option value="fort_mcmurray">フォートマクマレー, AB</option>
+              <option value="medicine_hat">メディシンハット, AB</option>
+              <option value="lake_louise">ルイーズ湖, AB</option>
+              <option value="red_deer">レッドディア, AB</option>
+              <option value="lethbridge">レスブリッジ, AB</option>
+            </optgroup>
+            <optgroup label="サスカチュワン州（SK）">
+              <option value="regina">レジャイナ, SK</option>
+              <option value="saskatoon">サスカトゥーン, SK</option>
+            </optgroup>
+            <optgroup label="マニトバ州（MB）">
+              <option value="brandon">ブランドン, MB</option>
+            </optgroup>
+            <optgroup label="オンタリオ州（ON）">
+              <option value="oakville">オークビル, ON</option>
+              <option value="oshawa">オシャワ, ON</option>
+              <option value="kingston">キングストン, ON</option>
+              <option value="kitchener">キッチナー, ON</option>
+              <option value="guelph">ゲルフ, ON</option>
+              <option value="sudbury">サドベリー, ON</option>
+              <option value="thunder_bay">サンダーベイ, ON</option>
+              <option value="niagara_falls">ナイアガラフォールズ, ON</option>
+              <option value="barrie">バリー, ON</option>
+              <option value="hamilton">ハミルトン, ON</option>
+              <option value="mississauga">ミシサガ, ON</option>
+              <option value="markham">マーカム, ON</option>
+              <option value="vaughan">ヴォーン, ON</option>
+              <option value="london_on">ロンドン, ON</option>
+              <option value="waterloo">ウォータールー, ON</option>
+              <option value="windsor">ウィンザー, ON</option>
+            </optgroup>
+            <optgroup label="ケベック州（QC）">
+              <option value="gatineau">ガティノー, QC</option>
+              <option value="laval">ラヴァル, QC</option>
+              <option value="longueuil">ロンゲール, QC</option>
+              <option value="quebec_city">ケベックシティ, QC</option>
+            </optgroup>
+            <optgroup label="ニューブランズウィック州（NB）">
+              <option value="fredericton">フレデリクトン, NB</option>
+              <option value="moncton">モンクトン, NB</option>
+              <option value="saint_john">セントジョン, NB</option>
+            </optgroup>
+            <optgroup label="プリンスエドワードアイランド州（PE）">
+              <option value="charlottetown">シャーロットタウン, PE</option>
+            </optgroup>
+            <optgroup label="ノバスコシア州（NS）">
+              <option value="sydney_ns">シドニー, NS</option>
+            </optgroup>
+            <optgroup label="ニューファンドランド・ラブラドール州（NL）">
+              <option value="st_johns">セントジョンズ, NL</option>
+            </optgroup>
+          </select>
+          <select id="lang-select" class="cc-hidden-select" aria-label="言語">
+            <option value="ja">JP</option>
+            <option value="en">EN</option>
+            <option value="fr">FR</option>
+          </select>
+
+          <div class="cc-dropdown" data-cc-dropdown="area">
+            <button class="cc-dd-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-location-dot"></i>
+              <span class="cc-dd-value" data-cc-dd-value="area"></span>
+            </button>
+            <div class="cc-dd-menu" role="menu">
+              <div class="cc-dd-note">表示する都市を切り替え、カレンダーや投稿一覧の内容を変更します。</div>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="canada_all">🇨🇦 全カナダ</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="vancouver">バンクーバー, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="victoria">ビクトリア, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="whistler">ウィスラー, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="kelowna">ケロウナ, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="calgary">カルガリー, AB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="banff">バンフ, AB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="edmonton">エドモントン, AB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="winnipeg">ウィニペグ, MB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="ottawa">オタワ, ON</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="toronto">トロント, ON</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="montreal">モントリオール, QC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="halifax">ハリファックス, NS</button>
+              <div class="cc-dd-submenu" data-cc-dd-submenu>
+                <button class="cc-dd-item cc-dd-subtoggle" type="button" data-cc-dd-subtoggle>
+                  その他のカナダ都市
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
+                <div class="cc-dd-subpanel" hidden>
+                  <div class="cc-dd-group-title">ユーコン準州（YT）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="whitehorse">ホワイトホース, YT</button>
+                  <div class="cc-dd-group-title">ブリティッシュコロンビア州（BC）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="abbotsford">アボッツフォード, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="burnaby">バーナビー, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kamloops">カムループス, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="nanaimo">ナナイモ, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="prince_george">プリンスジョージ, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="richmond">リッチモンド, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="surrey">サレー, BC</button>
+                  <div class="cc-dd-group-title">アルバータ州（AB）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kananaskis">カナナスキス, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="canmore">キャンモア, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="fort_mcmurray">フォートマクマレー, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="medicine_hat">メディシンハット, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="lake_louise">ルイーズ湖, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="red_deer">レッドディア, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="lethbridge">レスブリッジ, AB</button>
+                  <div class="cc-dd-group-title">サスカチュワン州（SK）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="regina">レジャイナ, SK</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="saskatoon">サスカトゥーン, SK</button>
+                  <div class="cc-dd-group-title">マニトバ州（MB）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="brandon">ブランドン, MB</button>
+                  <div class="cc-dd-group-title">オンタリオ州（ON）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="oakville">オークビル, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="oshawa">オシャワ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kingston">キングストン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kitchener">キッチナー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="guelph">ゲルフ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="sudbury">サドベリー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="thunder_bay">サンダーベイ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="niagara_falls">ナイアガラフォールズ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="barrie">バリー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="hamilton">ハミルトン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="mississauga">ミシサガ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="markham">マーカム, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="vaughan">ヴォーン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="london_on">ロンドン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="waterloo">ウォータールー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="windsor">ウィンザー, ON</button>
+                  <div class="cc-dd-group-title">ケベック州（QC）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="gatineau">ガティノー, QC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="laval">ラヴァル, QC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="longueuil">ロンゲール, QC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="quebec_city">ケベックシティ, QC</button>
+                  <div class="cc-dd-group-title">ニューブランズウィック州（NB）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="fredericton">フレデリクトン, NB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="moncton">モンクトン, NB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="saint_john">セントジョン, NB</button>
+                  <div class="cc-dd-group-title">プリンスエドワードアイランド州（PE）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="charlottetown">シャーロットタウン, PE</button>
+                  <div class="cc-dd-group-title">ノバスコシア州（NS）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="sydney_ns">シドニー, NS</button>
+                  <div class="cc-dd-group-title">ニューファンドランド・ラブラドール州（NL）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="st_johns">セントジョンズ, NL</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cc-dropdown" data-cc-dropdown="lang">
+            <button class="cc-dd-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-globe"></i>
+              <span class="cc-dd-value" data-cc-dd-value="lang"></span>
+            </button>
+            <div class="cc-dd-menu" role="menu">
+              <div class="cc-dd-note">表示言語を切り替えるためのプルダウンです。</div>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="lang" data-value="ja">JP</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="lang" data-value="en">EN</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="lang" data-value="fr">FR</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="global-nav">
+      <div class="container nav-grid">
+        <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i> ホーム</a>
+        <a href="list.html" class="nav-item"><i class="fa-solid fa-tags"></i> クラシファイド</a>
+        <a href="static.html?type=school" class="nav-item"><i class="fa-solid fa-graduation-cap"></i> 学校情報</a>
+        <a href="board.html" class="nav-item"><i class="fa-solid fa-comments"></i> 掲示板</a>
+        <a href="static.html?type=links" class="nav-item"><i class="fa-solid fa-arrow-up-right-from-square"></i> 外部リンク</a>
+        <a href="static.html?type=tips" class="nav-item"><i class="fa-solid fa-lightbulb"></i> お役立ち情報</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container board-form cc-board">
+    <div class="board-head">
+      <h1 class="board-title-main">
+        <span class="board-title-accent" aria-hidden="true"></span>
+        掲示板を新規作成
+      </h1>
+      <div class="board-head-meta">質問・相談・仲間募集を気軽に投稿</div>
+    </div>
+
+    <form class="board-form-card" id="board-form">
+      <div class="field-error field-error--wrap" id="board-form-error" role="alert" hidden></div>
+      <label class="form-label">タイトル（最大50文字）</label>
+      <input id="board-title" type="text" maxlength="50" placeholder="例：バンクーバーでおすすめのスーパー" />
+
+      <label class="form-label">カテゴリ</label>
+      <div class="board-select" data-board-select>
+        <button class="board-select-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+          <span class="board-select-value">住まい</span>
+          <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </button>
+        <div class="board-select-menu" role="listbox">
+          <button class="board-select-option is-selected" type="button" data-value="住まい">住まい</button>
+          <button class="board-select-option" type="button" data-value="仕事・ワーホリ">仕事・ワーホリ</button>
+          <button class="board-select-option" type="button" data-value="学校・留学">学校・留学</button>
+          <button class="board-select-option" type="button" data-value="ビザ・手続き">ビザ・手続き</button>
+          <button class="board-select-option" type="button" data-value="医療・健康">医療・健康</button>
+          <button class="board-select-option" type="button" data-value="交通">交通</button>
+          <button class="board-select-option" type="button" data-value="買い物・お金">買い物・お金</button>
+          <button class="board-select-option" type="button" data-value="食・レストラン">食・レストラン</button>
+          <button class="board-select-option" type="button" data-value="イベント・交流">イベント・交流</button>
+          <button class="board-select-option" type="button" data-value="初心者Q&A">初心者Q&A</button>
+          <button class="board-select-option" type="button" data-value="トラブル注意">トラブル注意</button>
+          <button class="board-select-option" type="button" data-value="雑談">雑談</button>
+        </div>
+      </div>
+      <select id="board-category" class="cc-hidden-select" aria-hidden="true" tabindex="-1">
+        <option>住まい</option>
+        <option>仕事・ワーホリ</option>
+        <option>学校・留学</option>
+        <option>ビザ・手続き</option>
+        <option>医療・健康</option>
+        <option>交通</option>
+        <option>買い物・お金</option>
+        <option>食・レストラン</option>
+        <option>イベント・交流</option>
+        <option>初心者Q&A</option>
+        <option>トラブル注意</option>
+        <option>雑談</option>
+      </select>
+
+      <label class="form-label">都市</label>
+      <div class="board-area-selects">
+        <select id="board-area-select" data-cc-area-scope="local">
+          <option value="">都市を選択</option>
+          <option value="vancouver">バンクーバー, BC</option>
+          <option value="victoria">ビクトリア, BC</option>
+          <option value="whistler">ウィスラー, BC</option>
+          <option value="kelowna">ケロウナ, BC</option>
+          <option value="calgary">カルガリー, AB</option>
+          <option value="banff">バンフ, AB</option>
+          <option value="edmonton">エドモントン, AB</option>
+          <option value="winnipeg">ウィニペグ, MB</option>
+          <option value="ottawa">オタワ, ON</option>
+          <option value="toronto">トロント, ON</option>
+          <option value="montreal">モントリオール, QC</option>
+          <option value="halifax">ハリファックス, NS</option>
+          <option value="other">その他のカナダ都市</option>
+        </select>
+        <select id="board-area-select-sub" data-cc-area-scope="local" hidden>
+          <option value="">その他の都市を選択</option>
+          <optgroup label="ユーコン準州（YT）">
+            <option value="whitehorse">ホワイトホース, YT</option>
+          </optgroup>
+          <optgroup label="ブリティッシュコロンビア州（BC）">
+            <option value="abbotsford">アボッツフォード, BC</option>
+            <option value="burnaby">バーナビー, BC</option>
+            <option value="kamloops">カムループス, BC</option>
+            <option value="nanaimo">ナナイモ, BC</option>
+            <option value="prince_george">プリンスジョージ, BC</option>
+            <option value="richmond">リッチモンド, BC</option>
+            <option value="surrey">サレー, BC</option>
+          </optgroup>
+          <optgroup label="アルバータ州（AB）">
+            <option value="kananaskis">カナナスキス, AB</option>
+            <option value="canmore">キャンモア, AB</option>
+            <option value="fort_mcmurray">フォートマクマレー, AB</option>
+            <option value="medicine_hat">メディシンハット, AB</option>
+            <option value="lake_louise">ルイーズ湖, AB</option>
+            <option value="red_deer">レッドディア, AB</option>
+            <option value="lethbridge">レスブリッジ, AB</option>
+          </optgroup>
+          <optgroup label="サスカチュワン州（SK）">
+            <option value="regina">レジャイナ, SK</option>
+            <option value="saskatoon">サスカトゥーン, SK</option>
+          </optgroup>
+          <optgroup label="マニトバ州（MB）">
+            <option value="brandon">ブランドン, MB</option>
+          </optgroup>
+          <optgroup label="オンタリオ州（ON）">
+            <option value="oakville">オークビル, ON</option>
+            <option value="oshawa">オシャワ, ON</option>
+            <option value="kingston">キングストン, ON</option>
+            <option value="kitchener">キッチナー, ON</option>
+            <option value="guelph">ゲルフ, ON</option>
+            <option value="sudbury">サドベリー, ON</option>
+            <option value="thunder_bay">サンダーベイ, ON</option>
+            <option value="niagara_falls">ナイアガラフォールズ, ON</option>
+            <option value="barrie">バリー, ON</option>
+            <option value="hamilton">ハミルトン, ON</option>
+            <option value="mississauga">ミシサガ, ON</option>
+            <option value="markham">マーカム, ON</option>
+            <option value="vaughan">ヴォーン, ON</option>
+            <option value="london_on">ロンドン, ON</option>
+            <option value="waterloo">ウォータールー, ON</option>
+            <option value="windsor">ウィンザー, ON</option>
+          </optgroup>
+          <optgroup label="ケベック州（QC）">
+            <option value="gatineau">ガティノー, QC</option>
+            <option value="laval">ラヴァル, QC</option>
+            <option value="longueuil">ロンゲール, QC</option>
+            <option value="quebec_city">ケベックシティ, QC</option>
+          </optgroup>
+          <optgroup label="ニューブランズウィック州（NB）">
+            <option value="fredericton">フレデリクトン, NB</option>
+            <option value="moncton">モンクトン, NB</option>
+            <option value="saint_john">セントジョン, NB</option>
+          </optgroup>
+          <optgroup label="プリンスエドワードアイランド州（PE）">
+            <option value="charlottetown">シャーロットタウン, PE</option>
+          </optgroup>
+          <optgroup label="ノバスコシア州（NS）">
+            <option value="sydney_ns">シドニー, NS</option>
+          </optgroup>
+          <optgroup label="ニューファンドランド・ラブラドール州（NL）">
+            <option value="st_johns">セントジョンズ, NL</option>
+          </optgroup>
+        </select>
+      </div>
+      <label class="form-label">本文（最大800文字）</label>
+      <textarea id="board-body" rows="8" maxlength="800" placeholder="詳細を入力してください。写真の添付はできません。"></textarea>
+
+      <label class="form-label">通知設定（任意）</label>
+      <div class="board-notify">
+        <label class="filter-check"><input id="board-notify" type="checkbox" /> 返信があったら通知する</label>
+      </div>
+      <div class="board-form-actions">
+        <a class="btn btn-secondary" href="board.html">キャンセル</a>
+        <div class="board-form-actions-right">
+          <div class="anon-toggle-row">
+            <span class="anon-toggle-label">匿名で投稿</span>
+            <button class="board-anon-toggle" type="button" id="board-anon-toggle" aria-pressed="false" aria-label="匿名で投稿"></button>
+          </div>
+          <button class="btn btn-primary" type="button" id="board-submit">投稿する</button>
+        </div>
+      </div>
+    </form>
+
+    <div class="ad-banner">広告スペース</div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <img src="logo1_transparent.png" alt="CanadaClassi Logo" class="footer-logo" />
+          <div>
+            <div class="footer-brand-title">CanadaClassi</div>
+            <div class="footer-brand-sub">カナダくらし</div>
+          </div>
+        </div>
+        <p class="footer-desc">留学・ワーホリの暮らしをつなぐクラシファイド。</p>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">サイトマップ</div>
+        <div class="footer-sitemap">
+          <a href="index.html">ホーム</a>
+          <a href="list.html">クラシファイド</a>
+          <a href="static.html?type=school">学校情報</a>
+          <a href="board.html">掲示板</a>
+          <a href="static.html?type=links">外部リンク</a>
+          <a href="static.html?type=tips">お役立ち情報</a>
+          <a href="mypage.html?tab=inquiries">メッセージ</a>
+          <a href="login.html">ログイン</a>
+          <a href="mypage.html">マイページ</a>
+          <a href="post.html">投稿</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">ご案内</div>
+        <div class="footer-links">
+          <a href="static.html?type=notice">管理者からのお知らせ</a>
+          <a href="static.html?type=guide">ご利用ガイド</a>
+          <a href="static.html?type=post-guide">投稿・取引ガイド</a>
+          <a href="static.html?type=scam">詐欺などのご注意</a>
+          <a href="static.html?type=terms">利用規約</a>
+          <a href="static.html?type=privacy">プライバシーポリシー</a>
+          <a href="sitemap.html">サイトマップ</a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <div class="footer-copy">© 2024 CanadaClassi</div>
+    </div>
+  </footer>
+
+  <script src="./script.js"></script>
+  <script>
+    (function () {
+      if (typeof isCurrentUserBanned === "function" && isCurrentUserBanned()) {
+        if (typeof assertNotBanned === "function") {
+          assertNotBanned("アカウントが停止されているため投稿できません。");
+        }
+        var banMessage = "アカウントが停止されているため投稿できません。";
+        var banError = document.getElementById("board-form-error");
+        if (banError) {
+          banError.textContent = banMessage;
+          banError.hidden = false;
+        }
+        ["board-title", "board-body", "board-category", "board-area-select", "board-area-select-sub"].forEach(function (id) {
+          var el = document.getElementById(id);
+          if (!el) return;
+          el.disabled = true;
+          el.setAttribute("aria-disabled", "true");
+        });
+        var submitBtn = document.getElementById("board-submit");
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.setAttribute("aria-disabled", "true");
+        }
+        var anonToggle = document.getElementById("board-anon-toggle");
+        if (anonToggle) {
+          anonToggle.disabled = true;
+          anonToggle.setAttribute("aria-disabled", "true");
+        }
+        return;
+      }
+      var submit = document.getElementById("board-submit");
+      var formError = document.getElementById("board-form-error");
+      var selectRoot = document.querySelector("[data-board-select]");
+      var selectEl = document.getElementById("board-category");
+      var titleInput = document.getElementById("board-title");
+      var bodyInput = document.getElementById("board-body");
+      var selectTrigger = selectRoot ? selectRoot.querySelector(".board-select-trigger") : null;
+      var selectValue = selectRoot ? selectRoot.querySelector(".board-select-value") : null;
+      var selectOptions = selectRoot ? Array.prototype.slice.call(selectRoot.querySelectorAll(".board-select-option")) : [];
+      var areaSelect = document.getElementById("board-area-select");
+      var areaSub = document.getElementById("board-area-select-sub");
+      var anonToggle = document.getElementById("board-anon-toggle");
+      var isAnonymous = false;
+
+      function closeSelect() {
+        if (!selectRoot || !selectTrigger) return;
+        selectRoot.classList.remove("is-open");
+        selectTrigger.setAttribute("aria-expanded", "false");
+      }
+
+      if (selectRoot && selectTrigger && selectValue && selectEl) {
+        selectTrigger.addEventListener("click", function () {
+          var next = !selectRoot.classList.contains("is-open");
+          selectRoot.classList.toggle("is-open", next);
+          selectTrigger.setAttribute("aria-expanded", next ? "true" : "false");
+        });
+
+        selectOptions.forEach(function (option) {
+          option.addEventListener("click", function () {
+            var value = option.getAttribute("data-value") || "";
+            selectOptions.forEach(function (opt) { opt.classList.remove("is-selected"); });
+            option.classList.add("is-selected");
+            selectValue.textContent = value || "住まい";
+            selectEl.value = value || "住まい";
+            closeSelect();
+            maybeClearFormError();
+          });
+        });
+
+        document.addEventListener("click", function (event) {
+          if (!selectRoot.contains(event.target)) closeSelect();
+        });
+      }
+      if (!submit || !window.CanadaClassiDev) return;
+
+      function getSelectedCityInfo() {
+        if (!areaSelect) return { area: "", cityLabel: "" };
+        var mainValue = String(areaSelect.value || "");
+        var mainLabel = areaSelect.options && areaSelect.selectedIndex >= 0
+          ? String(areaSelect.options[areaSelect.selectedIndex].textContent || "").trim()
+          : "";
+        if (mainValue === "other") {
+          var subValue = areaSub ? String(areaSub.value || "") : "";
+          var subLabel = (areaSub && areaSub.options && areaSub.selectedIndex >= 0)
+            ? String(areaSub.options[areaSub.selectedIndex].textContent || "").trim()
+            : "";
+          return { area: subValue, cityLabel: subLabel };
+        }
+        return { area: mainValue, cityLabel: mainLabel };
+      }
+
+      function syncAreaSubSelect() {
+        if (!areaSelect || !areaSub) return;
+        var isOther = String(areaSelect.value || "") === "other";
+        areaSub.hidden = !isOther;
+        if (!isOther) areaSub.value = "";
+      }
+
+      function showError(message) {
+        if (!formError) return;
+        if (message) {
+          formError.textContent = message;
+          formError.hidden = false;
+        } else {
+          formError.textContent = "";
+          formError.hidden = true;
+        }
+      }
+
+      function markRequired(el, isEmpty) {
+        if (!el) return;
+        if (isEmpty) el.classList.add("is-required-empty");
+        else el.classList.remove("is-required-empty");
+      }
+
+      function clearErrors() {
+        showError("");
+        markRequired(titleInput, false);
+        markRequired(bodyInput, false);
+        if (selectRoot) selectRoot.classList.remove("is-required-empty");
+        markRequired(areaSelect, false);
+        markRequired(areaSub, false);
+      }
+
+      function maybeClearFormError() {
+        var info = getSelectedCityInfo();
+        var ok = !!(titleInput && titleInput.value.trim()) &&
+          !!(bodyInput && bodyInput.value.trim()) &&
+          !!(selectEl && selectEl.value) &&
+          !!info.area;
+        if (ok) clearErrors();
+      }
+
+      syncAreaSubSelect();
+      if (areaSelect) {
+        areaSelect.addEventListener("change", function () {
+          syncAreaSubSelect();
+          maybeClearFormError();
+        });
+      }
+      if (areaSub) {
+        areaSub.addEventListener("change", function () {
+          maybeClearFormError();
+        });
+      }
+      if (titleInput) titleInput.addEventListener("input", maybeClearFormError);
+      if (bodyInput) bodyInput.addEventListener("input", maybeClearFormError);
+      if (anonToggle) {
+        anonToggle.addEventListener("click", function () {
+          isAnonymous = !isAnonymous;
+          anonToggle.classList.toggle("is-active", isAnonymous);
+          anonToggle.setAttribute("aria-pressed", isAnonymous ? "true" : "false");
+        });
+      }
+
+      function handleSubmit(isAnonymous) {
+        if (typeof assertNotBanned === "function") {
+          if (!assertNotBanned("アカウントが停止されているため投稿できません。")) return;
+        }
+        var titleEl = document.getElementById("board-title");
+        var catEl = document.getElementById("board-category");
+        var bodyEl = document.getElementById("board-body");
+        var title = titleEl ? titleEl.value.trim() : "";
+        var cat = catEl ? catEl.value : "住まい";
+        var body = bodyEl ? bodyEl.value.trim() : "";
+        var cityInfo = getSelectedCityInfo();
+        var errors = [];
+        if (!title) {
+          markRequired(titleEl, true);
+          errors.push("タイトル");
+        } else {
+          markRequired(titleEl, false);
+        }
+        if (!body) {
+          markRequired(bodyEl, true);
+          errors.push("本文");
+        } else {
+          markRequired(bodyEl, false);
+        }
+        if (!cat) {
+          if (selectRoot) selectRoot.classList.add("is-required-empty");
+          errors.push("カテゴリ");
+        } else if (selectRoot) {
+          selectRoot.classList.remove("is-required-empty");
+        }
+        if (!cityInfo.area) {
+          markRequired(areaSelect, true);
+          if (areaSub && !areaSub.hidden) markRequired(areaSub, true);
+          errors.push("都市");
+        } else {
+          markRequired(areaSelect, false);
+          markRequired(areaSub, false);
+        }
+        if (errors.length) {
+          showError(errors.join("・") + "を入力してください。");
+          return;
+        }
+        clearErrors();
+        if (window.CanadaClassiDev && typeof window.CanadaClassiDev.ccCheckNgWords === "function") {
+          if (!window.CanadaClassiDev.ccCheckNgWords([title, body].join(" "), "board")) return;
+        }
+
+        var profile = (typeof ccGetDefaultAuthorProfile === "function")
+          ? ccGetDefaultAuthorProfile()
+          : { authorName: "ユーザー", authorIcon: "icon_red_gray.png", isAnonymous: false };
+        var authorName = isAnonymous ? "匿名" : profile.authorName;
+        var authorIcon = isAnonymous
+          ? (typeof ccPickAnonymousIcon === "function" ? ccPickAnonymousIcon() : "icon_red_gray.png")
+          : profile.authorIcon;
+
+        var id = "t_" + Date.now();
+        var created = window.CanadaClassiDev.ccAddBoardThread({
+          id: id,
+          title: title,
+          category: cat,
+          authorName: authorName,
+          authorIcon: authorIcon,
+          isAnonymous: isAnonymous,
+          body: body,
+          area: cityInfo.area,
+          cityLabel: cityInfo.cityLabel,
+          notify: !!(document.getElementById("board-notify") || {}).checked,
+          created_at: new Date().toISOString(),
+          replies: []
+        });
+
+        if (!created) {
+          window.location.href = "board.html";
+          return;
+        }
+        window.location.href = "board_detail.html?thread=" + encodeURIComponent(id);
+      }
+
+      if (submit) {
+        submit.addEventListener("click", function () { handleSubmit(isAnonymous); });
+      }
+    })();
+  </script>
+</body>
+</html>

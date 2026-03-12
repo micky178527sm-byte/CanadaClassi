@@ -1,0 +1,1263 @@
+window.CC_SCHOOLS_MVP = [
+  {
+    "id": "ilac-international-language-academy-of-canada",
+    "name": "ILAC (International Language Academy of Canada)",
+    "city": "Toronto",
+    "address": "688 W Hastings St, Vancouver, BC V6B 1P1",
+    "description": "カナダ最大級の語学学校チェーンの一つ。一般英語〜試験対策など幅広いコース展開。",
+    "summary3": [
+      "トロント/バンクーバーで英語学習を中心に学べる語学学校チェーン。",
+      "一般英語から目的別コースまで選択肢がある構成。",
+      "都市型キャンパスで通学しやすい環境。"
+    ],
+    "highlights": [
+      "都市中心部へのアクセスが良いキャンパス",
+      "英語学習の複数コースが案内されている"
+    ],
+    "programs": [
+      "一般英語",
+      "目的別英語コース（試験対策など）"
+    ],
+    "support": [
+      "キャンパス案内や入学相談の情報"
+    ],
+    "social": {},
+    "intakes": [
+      "開始日はコースにより異なります"
+    ],
+    "tuitionNote": "費用はコース・週数・受講形態で変わります。",
+    "accreditation": [],
+    "areaInfo": "都市中心部で通学しやすいエリア。",
+    "ai_detail": "ILACはカナダ最大級の語学学校チェーンで、一般英語から試験対策まで幅広いプログラムを提供します。",
+    "courses": [
+      "一般英語",
+      "IELTS対策"
+    ],
+    "sns": {},
+    "contact": {
+      "phone": "",
+      "email": ""
+    },
+    "google_map_url": "",
+    "url": "https://www.ilac.com/",
+    "image": "https://www.ilac.com/wp-content/uploads/2022/05/ilac-logo-white.webp",
+    "access": "バンクーバー中心部のキャンパス。通学しやすい立地です。",
+    "summaryLong": "",
+    "programsNote": "",
+    "links": {
+      "officialSite": "https://www.ilac.com/",
+      "social": {
+        "instagram": "https://www.instagram.com/ilac_canada/",
+        "facebook": "https://www.facebook.com/iloveilac/",
+        "youtube": "https://www.youtube.com/channel/UCd-VksCRQlBWOLp95PwPFeA",
+        "tiktok": "https://www.tiktok.com/@ilac_canada",
+        "x": "https://x.com/iloveilac",
+        "linkedin": ""
+      }
+    },
+    "overview": "<div class=\"cc-overview-block\"><p class=\"cc-overview-lead\">ILAC はトロント/バンクーバーに拠点を持つ語学学校チェーンで、英語学習を中心に学べる環境が整っています。</p><p class=\"cc-overview-lead\">都市型キャンパスのため、生活動線と通学の両立を考えやすい構成です。</p></div><div class=\"cc-overview-block\"><div class=\"cc-overview-h\">できること</div><ul class=\"cc-overview-list\"><li>学べる分野: 一般英語/目的別コース</li><li>特徴: 都市中心部のキャンパス</li></ul></div><div class=\"cc-overview-block\"><div class=\"cc-overview-h\">こんな人に合う</div><ul class=\"cc-overview-list\"><li>英語学習を軸に学校を選びたい人</li><li>都市部で通学しやすい環境を重視する人</li></ul></div><div class=\"cc-overview-block\"><div class=\"cc-overview-h\">変動しやすい項目</div><ul class=\"cc-overview-list\"><li>費用はコース・週数・受講形態で変わります</li><li>開始日はコースやレベルで差が出ます</li><li>提供プログラムは時期で入替の可能性があります</li></ul></div>",
+    "notes": "料金・開始日・入学条件はコースや時期で変わることがあります。申込前に必ず最新条件を確認してください。"
+  },
+  {
+    "id": "vgc-international-college-vancouver",
+    "name": "VGC International College (Vancouver)",
+    "city": "Vancouver",
+    "address": "411 W Hastings St, Vancouver, BC V6B 1L4",
+    "description": "バンクーバーの語学学校。一般英語・進学系などのプログラムを提供。",
+    "summary3": [
+      "バンクーバー中心部にある語学学校。",
+      "一般英語や進学準備系のコース情報が公開。",
+      "都市型キャンパスで通学しやすい環境。"
+    ],
+    "highlights": [
+      "バンクーバー中心部のキャンパス",
+      "一般英語/進学準備の情報が公開"
+    ],
+    "programs": [
+      "一般英語",
+      "進学準備系プログラム"
+    ],
+    "support": [
+      "生活サポートや進路相談の情報"
+    ],
+    "social": {},
+    "intakes": [
+      "開始日はコースにより異なります"
+    ],
+    "tuitionNote": "費用はコース・週数・受講形態で変わります。",
+    "accreditation": [],
+    "areaInfo": "バンクーバー中心部のエリア。",
+    "ai_detail": "VGCはバンクーバー中心部にキャンパスを構え、一般英語や進学準備などを提供する語学学校です。",
+    "courses": [
+      "一般英語",
+      "進学準備"
+    ],
+    "sns": {},
+    "contact": {
+      "phone": "",
+      "email": ""
+    },
+    "google_map_url": "",
+    "url": "https://vgc.ca/",
+    "image": "https://www.vgc.ca/wp-content/uploads/2020/05/vgc-logo-red.svg",
+    "access": "バンクーバー中心部のキャンパス。",
+    "summaryLong": "",
+    "programsNote": "",
+    "links": {
+      "officialSite": "https://www.vgc.ca/",
+      "social": {
+        "instagram": "https://www.instagram.com/vgcinternationalcollege/",
+        "facebook": "",
+        "youtube": "https://www.youtube.com/@blicanadat",
+        "tiktok": "",
+        "x": "https://x.com/blicanada",
+        "linkedin": ""
+      }
+    },
+    "overview": "<div class=\"cc-overview-block\"><p class=\"cc-overview-lead\">VGC International College はバンクーバー中心部に拠点を持つ語学学校です。</p><p class=\"cc-overview-lead\">一般英語や進学準備系のコース情報が公開されています。</p></div>\n<div class=\"cc-overview-block\"><div class=\"cc-overview-h\">できること</div><ul class=\"cc-overview-list\"><li>学べる分野: 一般英語/進学準備系</li><li>特徴: 都市中心部のキャンパス</li></ul></div>\n<div class=\"cc-overview-block\"><div class=\"cc-overview-h\">こんな人に合う</div><ul class=\"cc-overview-list\"><li>都市部で通学しやすい環境を重視する人</li><li>進学準備も視野に入れて比較したい人</li></ul></div>\n<div class=\"cc-overview-block\"><div class=\"cc-overview-h\">変動しやすい項目</div><ul class=\"cc-overview-list\"><li>費用はコース・週数・受講形態で変わります</li><li>開始日はコースやレベルで差が出ます</li><li>提供プログラムは時期で入替の可能性があります</li></ul></div>",
+    "notes": "料金・開始日・入学条件はコースや時期で変わることがあります。申込前に必ず最新条件を確認してください。"
+  },
+  {
+    "id": "bli-bouchereau-lingua-international-montreal",
+    "name": "BLI (Bouchereau Lingua International) - Montréal",
+    "city": "Montréal",
+    "address": "70 Rue Notre-Dame Ouest, Suite 400, Montréal, QC H2Y 1S6, Canada",
+    "description": "モントリオール拠点の語学学校。英語・フランス語プログラムを提供。",
+    "summary3": [
+      "モントリオールの語学学校。英語・フランス語に対応",
+      "一般/集中など目的別にコース選択が可能",
+      "開始日：毎週月曜開始該当プログラム"
+    ],
+    "summaryLong": "BLI Montreal はモントリオールにある語学学校で、英語とフランス語の学習プログラムを提供しています。一般/集中など目的別に選びやすく、バイリンガル英仏にも対応しています。開始日や期間はコースごとに異なるため、スケジュールに合わせて選べます",
+    "highlights": [
+      "英語/フランス語の語学プログラム",
+      "モントリオール中心部エリア",
+      "レベル/期間/受講形態を目的に合わせて選択できる",
+      "開始日は毎週月曜該当プログラム",
+      "目的別にコース選択が可能"
+    ],
+    "programs": [
+      "English programs（General/Intensive など）",
+      "French programs（General/Intensive など）",
+      "バイリンガル（英仏）プログラム",
+      "試験対策/進学系はコースにより設定"
+    ],
+    "support": [
+      "入学相談問い合わせ窓口",
+      "滞在/生活情報の案内あり"
+    ],
+    "social": {},
+    "intakes": [
+      "開始日・期間はコースにより異なります"
+    ],
+    "tuitionNote": "料金はコース/週数/受講形態で変動します",
+    "accreditation": [
+      "Languages Canada 掲載/加盟情報あり"
+    ],
+    "areaInfo": "モントリオール中心部エリア。アクセスや周辺環境を見て通学距離をイメージできます",
+    "ai_detail": "BLIはモントリオール拠点の語学学校で、英語・フランス語の両方を学べる環境が魅力です。",
+    "courses": [
+      "一般英語",
+      "フランス語"
+    ],
+    "sns": {},
+    "contact": {
+      "phone": "514 842 3847",
+      "email": "info@bli.ca"
+    },
+    "google_map_url": "",
+    "links": {
+      "officialSite": "https://www.bli.ca/",
+      "montrealPage": "https://bli.ca/bli-montreal/",
+      "googleMapQuery": "https://www.google.com/maps?q=70+Rue+Notre+Dame+Ouest+Suite+400+Montr%C3%A9al",
+      "social": {
+        "instagram": "https://www.instagram.com/bli.canada/",
+        "facebook": "https://www.facebook.com/blicanada.ca",
+        "youtube": "https://www.youtube.com/c/VGCInternationalCollege",
+        "tiktok": "https://www.tiktok.com/@vgccollege",
+        "x": "",
+        "linkedin": ""
+      }
+    },
+    "sources": {
+      "officialSite": "https://www.bli.ca/",
+      "campusPage": "https://bli.ca/bli-montreal/"
+    },
+    "aliases": [
+      "bli-bouchereau-lingua-international---montreal-montreal",
+      "bli-bouchereau-lingua-international-montreal"
+    ],
+    "url": "https://bli.ca/",
+    "image": "",
+    "access": "モントリオール中心部エリア",
+    "programsNote": "",
+    "overview": "<div class=\"cc-overview-block\"><p class=\"cc-overview-lead\">BLI Montreal はモントリオールにある語学学校で、英語とフランス語の学習プログラムを提供しています。</p><p class=\"cc-overview-lead\">一般/集中など目的別に選びやすく、バイリンガル英仏にも対応しています。</p><p class=\"cc-overview-lead\">開始日や期間はコースごとに異なるため、スケジュールに合わせて選べます。</p></div>\n<div class=\"cc-overview-block\"><div class=\"cc-overview-h\">できること</div><ul class=\"cc-overview-list\"><li>学べる分野: English programsGeneral/Intensive など、French programsGeneral/Intensive など、バイリンガル英仏プログラム、試験対策/進学系はコースにより設定</li><li>特徴: 英語/フランス語の語学プログラム、モントリオール中心部エリア、レベル/期間/受講形態を目的に合わせて選択できる</li><li>サポート: 入学相談問い合わせ窓口、滞在/生活情報の案内あり</li></ul></div>\n<div class=\"cc-overview-block\"><div class=\"cc-overview-h\">こんな人に合う</div><ul class=\"cc-overview-list\"><li>サポートの有無を重視する人に合います</li><li>通学や生活環境も含めて比較したい人に合います</li></ul></div>\n<div class=\"cc-overview-block\"><div class=\"cc-overview-h\">変動しやすい項目</div><ul class=\"cc-overview-list\"><li>費用は受講形態と期間で変わります</li><li>開始日はコースやレベルで差が出ます</li><li>提供プログラムは時期で入替の可能性があります</li></ul></div>",
+    "notes": "料金・開始日・入学条件はコースや時期で変わることがあります。申込前に必ず最新条件を確認してください。"
+  },
+  {
+    "id": "ec-montreal",
+    "name": "EC Montréal",
+    "city": "Montréal",
+    "address": "1610 Sainte Catherine Street West, Montreal, QC H3H 2S2, Canada",
+    "province": "QC",
+    "description": "ECのモントリオール校。英語学習と都市体験を組み合わせたい層に人気。",
+    "summary3": [
+      "モントリオール中心部にある英語学校。",
+      "一般英語や試験対策など目的別コースを用意。",
+      "都市型キャンパスで生活と学習を両立しやすい。"
+    ],
+    "highlights": [
+      "モントリオール中心部の都市型キャンパス",
+      "一般英語・試験対策などのコース構成"
+    ],
+    "programs": [
+      {
+        "name": "一般英語",
+        "level": "初級〜上級",
+        "duration": "",
+        "notes": ""
+      },
+      {
+        "name": "試験対策",
+        "level": "中級〜上級",
+        "duration": "",
+        "notes": ""
+      }
+    ],
+    "support": [
+      "生活・学習サポートの案内",
+      "進学相談の案内"
+    ],
+    "social": {},
+    "intakes": [
+      "開始日や期間はコースにより異なります。"
+    ],
+    "tuitionNote": "費用はコース/期間/受講形態で変動します。",
+    "accreditation": [],
+    "areaInfo": "モントリオール中心部エリア。アクセスしやすい立地です。",
+    "ai_detail": "EC Montréalは都市体験と英語学習を両立したい方に人気の校舎です。",
+    "courses": [
+      "一般英語",
+      "試験対策"
+    ],
+    "sns": {},
+    "contact": {
+      "phone": "",
+      "email": ""
+    },
+    "google_map_url": "",
+    "url": "https://www.ecenglish.com/en/schools/canada/learn-english-in-montreal",
+    "image": "",
+    "access": "中心部エリアから通学しやすい立地です。",
+    "summaryLong": "",
+    "programsNote": "",
+    "links": {
+      "officialSite": "https://www.ecenglish.com/en/schools/canada/learn-english-in-montreal",
+      "social": {
+        "instagram": "https://www.instagram.com/ecenglish/",
+        "facebook": "https://www.facebook.com/EC.Montreal/",
+        "youtube": "https://www.youtube.com/@Ecenglish",
+        "tiktok": "",
+        "x": "",
+        "linkedin": ""
+      }
+    },
+    "overview": "<div class=\"cc-overview-block\"><p class=\"cc-overview-lead\">EC Montréal はモントリオール中心部にある英語学校で、一般英語から試験対策まで幅広いコースを用意しています。</p><p class=\"cc-overview-lead\">都市型キャンパスのため、生活動線と学習を両立しやすい環境です。</p></div>\n<div class=\"cc-overview-block\"><div class=\"cc-overview-h\">できること</div><ul class=\"cc-overview-list\"><li>学べる分野: 一般英語、試験対策</li><li>特徴: 都市型キャンパス、目的別コース構成</li><li>サポート: 生活・学習サポートの案内</li></ul></div>\n<div class=\"cc-overview-block\"><div class=\"cc-overview-h\">こんな人に合う</div><ul class=\"cc-overview-list\"><li>短期集中や都市滞在も組み合わせたい人</li><li>目的別にコースを選びたい人</li><li>通学しやすさを重視する人</li></ul></div>\n<div class=\"cc-overview-block\"><div class=\"cc-overview-h\">変動しやすい項目</div><ul class=\"cc-overview-list\"><li>費用は受講形態と期間で変わります</li><li>開始日はコースやレベルで差が出ます</li><li>提供プログラムは時期で入替の可能性があります</li></ul></div>",
+    "notes": "料金・開始日・入学条件はコースや時期で変わることがあります。申込前に必ず最新条件を確認してください。"
+  },
+  {
+    "id": "ilsc-montreal",
+    "name": "ILSC Montréal",
+    "city": "Montréal",
+    "cityKey": "montreal",
+    "country": "CA",
+    "province": "QC",
+    "address": "410-1200 rue Sherbrooke Ouest, Montreal, QC H3A 1H6, Canada",
+    "description": "モントリオールの語学学校。英語・フランス語コースを提供。",
+    "summary3": [
+      "モントリオール中心部の語学学校。",
+      "英語/フランス語のコース選択が可能。",
+      "都市型キャンパスで通学しやすい。"
+    ],
+    "highlights": [
+      "英語・フランス語の語学プログラム",
+      "目的別/レベル別のコース構成",
+      "中心部エリアのキャンパス"
+    ],
+    "programs": [
+      "英語コース",
+      "フランス語コース"
+    ],
+    "support": [
+      "学習計画の相談",
+      "生活情報の案内"
+    ],
+    "intakes": [
+      "開始日や期間はコースにより異なります。"
+    ],
+    "tuitionNote": "費用はコース/期間/受講形態で変動します。",
+    "accreditation": [],
+    "areaInfo": "モントリオール中心部エリア。アクセスしやすい立地です。",
+    "contact": {
+      "phone": "",
+      "email": ""
+    },
+    "links": {
+      "officialSite": "https://www.ilsc.com/language-schools/locations/montreal",
+      "social": {
+        "instagram": "https://www.instagram.com/ilsc/",
+        "facebook": "https://www.facebook.com/ilscmontreal/",
+        "youtube": "https://www.youtube.com/user/ilscTV"
+      }
+    },
+    "aliases": [
+      "ILSC Montreal",
+      "ILSC"
+    ],
+    "url": "https://www.ilsc.com/language-schools/locations/montreal",
+    "image": "",
+    "access": "中心部から通学しやすい立地です。",
+    "overview": "<div class=\"cc-overview-block\"><p class=\"cc-overview-lead\">ILSC Montréal はモントリオール中心部にある語学学校で、英語とフランス語の学習を提供しています。</p><p class=\"cc-overview-lead\">目的やレベルに合わせてコースを選びやすい構成です。</p></div>\n<div class=\"cc-overview-block\"><div class=\"cc-overview-h\">できること</div><ul class=\"cc-overview-list\"><li>学べる分野: 英語コース、フランス語コース</li><li>特徴: 目的別/レベル別のコース構成</li><li>サポート: 学習計画・生活情報の案内</li></ul></div>\n<div class=\"cc-overview-block\"><div class=\"cc-overview-h\">こんな人に合う</div><ul class=\"cc-overview-list\"><li>語学学習を計画的に進めたい人</li><li>都市型キャンパスで通学しやすさを重視する人</li></ul></div>\n<div class=\"cc-overview-block\"><div class=\"cc-overview-h\">変動しやすい項目</div><ul class=\"cc-overview-list\"><li>費用は受講形態と期間で変わります</li><li>開始日はコースやレベルで差が出ます</li><li>提供プログラムは時期で入替の可能性があります</li></ul></div>",
+    "notes": "料金・開始日・入学条件はコースや時期で変わることがあります。申込前に必ず最新条件を確認してください。"
+  },
+  {
+    "id": "oxford-international-english-schools-toronto",
+    "name": "Oxford International English Schools - Toronto",
+    "city": "Toronto",
+    "address": "875-505 Burrard Street, Vancouver, BC V7X 1M6, Canada",
+    "description": "カナダで展開する語学学校ブランドの一つ。一般英語や試験対策の情報が公開されています。",
+    "summary3": [
+      "英語学習を中心としたコース情報が公開。",
+      "一般英語/試験対策の選択肢がある構成。",
+      "都市型キャンパスで通学しやすい環境。"
+    ],
+    "highlights": [
+      "都市中心部のキャンパス",
+      "一般英語/試験対策の情報が公開"
+    ],
+    "programs": [
+      "一般英語",
+      "試験対策"
+    ],
+    "support": [
+      "学生サポートの案内あり",
+      "入学相談の情報"
+    ],
+    "social": {},
+    "intakes": [
+      "開始日はコースにより異なります"
+    ],
+    "tuitionNote": "費用はコース・週数・受講形態で変わります。",
+    "accreditation": [],
+    "areaInfo": "都市中心部のエリア。",
+    "ai_detail": "Oxford Internationalはトロントで一般英語から試験対策まで提供する語学学校です。",
+    "courses": [
+      "一般英語",
+      "試験対策"
+    ],
+    "sns": {},
+    "contact": {
+      "phone": "",
+      "email": ""
+    },
+    "google_map_url": "",
+    "url": "https://www.oxfordinternationalenglish.com/",
+    "image": "",
+    "access": "中心部エリアのキャンパス。",
+    "summaryLong": "",
+    "programsNote": "",
+    "links": {
+      "officialSite": "https://www.oxfordinternationalenglish.com/",
+      "social": {
+        "instagram": "https://www.instagram.com/oienglishschools/",
+        "facebook": "https://m.facebook.com/OxfordInternationalEnglishSchools/",
+        "youtube": "https://www.youtube.com/c/OxfordInternationalEducationGroup",
+        "tiktok": "",
+        "x": "",
+        "linkedin": ""
+      }
+    },
+    "overview": "<div class=\"cc-overview-block\"><p class=\"cc-overview-lead\">Oxford International English Schools は英語学習を中心としたコース情報が公開されている語学学校ブランドです。</p><p class=\"cc-overview-lead\">都市中心部のキャンパスで通学しやすい環境です。</p></div><div class=\"cc-overview-block\"><div class=\"cc-overview-h\">できること</div><ul class=\"cc-overview-list\"><li>学べる分野: 一般英語/試験対策</li><li>特徴: 都市中心部のキャンパス</li></ul></div><div class=\"cc-overview-block\"><div class=\"cc-overview-h\">こんな人に合う</div><ul class=\"cc-overview-list\"><li>英語学習を軸に選びたい人</li><li>試験対策も視野に入れたい人</li></ul></div><div class=\"cc-overview-block\"><div class=\"cc-overview-h\">変動しやすい項目</div><ul class=\"cc-overview-list\"><li>費用はコース・週数・受講形態で変わります</li><li>開始日はコースやレベルで差が出ます</li><li>提供プログラムは時期で入替の可能性があります</li></ul></div>",
+    "notes": "料金・開始日・入学条件はコースや時期で変わることがあります。申込前に必ず最新条件を確認してください。"
+  },
+  {
+    "id": "kaplan-international-languages-toronto",
+    "name": "Kaplan International Languages - Toronto",
+    "city": "Toronto",
+    "address": "35 The Esplanade, Toronto, ON M5E 1C3",
+    "description": "Kaplanのトロント校。一般英語・試験対策など（校舎・詳細は公式資料参照）。",
+    "summary3": [
+      "国際的な語学学校ブランドのトロント校。",
+      "一般英語や試験対策の情報が公開。",
+      "中心部のキャンパスで通学しやすい環境。"
+    ],
+    "highlights": [
+      "トロント中心部のキャンパス",
+      "一般英語/試験対策の情報が公開"
+    ],
+    "programs": [
+      "一般英語",
+      "試験対策"
+    ],
+    "support": [
+      "学生サポートの案内あり",
+      "入学相談の情報"
+    ],
+    "social": {},
+    "intakes": [
+      "開始日はコースにより異なります"
+    ],
+    "tuitionNote": "費用はコース・週数・受講形態で変わります。",
+    "accreditation": [],
+    "areaInfo": "トロント中心部のエリア。",
+    "ai_detail": "Kaplanのトロント校は一般英語や試験対策など幅広いプログラムに対応しています。",
+    "courses": [
+      "一般英語",
+      "試験対策"
+    ],
+    "sns": {},
+    "contact": {
+      "phone": "",
+      "email": ""
+    },
+    "google_map_url": "",
+    "url": "https://www.kaplaninternational.com/",
+    "image": "",
+    "access": "トロント中心部のキャンパス。通学しやすい立地です。",
+    "summaryLong": "",
+    "programsNote": "",
+    "links": {
+      "officialSite": "https://www.kaplaninternational.com/",
+      "social": {
+        "instagram": "https://www.instagram.com/kaplaninternational/",
+        "facebook": "",
+        "youtube": "https://www.youtube.com/user/kaplaninternational",
+        "tiktok": "",
+        "x": "https://x.com/kaplanintl",
+        "linkedin": ""
+      }
+    },
+    "overview": "<div class=\"cc-overview-block\"><p class=\"cc-overview-lead\">Kaplan International Languages は英語学習を中心とした語学学校で、トロント校の案内が公開されています。</p><p class=\"cc-overview-lead\">中心部のキャンパスで生活動線と学習を両立しやすい環境です。</p></div><div class=\"cc-overview-block\"><div class=\"cc-overview-h\">できること</div><ul class=\"cc-overview-list\"><li>学べる分野: 一般英語/試験対策</li><li>特徴: 都市中心部のキャンパス</li></ul></div><div class=\"cc-overview-block\"><div class=\"cc-overview-h\">こんな人に合う</div><ul class=\"cc-overview-list\"><li>英語学習を軸に選びたい人</li><li>通学しやすい立地を重視する人</li></ul></div><div class=\"cc-overview-block\"><div class=\"cc-overview-h\">変動しやすい項目</div><ul class=\"cc-overview-list\"><li>費用はコース・週数・受講形態で変わります</li><li>開始日はコースやレベルで差が出ます</li><li>提供プログラムは時期で入替の可能性があります</li></ul></div>",
+    "notes": "料金・開始日・入学条件はコースや時期で変わることがあります。申込前に必ず最新条件を確認してください。"
+  },
+  {
+    "id": "bow-valley-college-calgary",
+    "name": "Bow Valley College - Calgary",
+    "city": "Calgary",
+    "address": "345 6 Ave SE, Calgary, AB T2G 4V1, Canada",
+    "description": "カルガリー中心部に位置するカレッジ。ESLやキャリア系プログラムの情報が公開されています。",
+    "summary3": [
+      "カルガリー中心部のカレッジ。",
+      "ESLやキャリア系プログラムの情報が公開。",
+      "都市型キャンパスで通学しやすい環境。"
+    ],
+    "highlights": [
+      "カルガリー中心部のキャンパス",
+      "ESLやキャリア系プログラムの情報が公開",
+      "都市型の通学動線"
+    ],
+    "programs": [
+      "ESL（レベル別）",
+      "キャリア/職業系プログラム（分野別）"
+    ],
+    "support": [
+      "学生サポートの案内あり",
+      "キャリア/学習相談の情報"
+    ],
+    "social": {},
+    "intakes": [
+      "開始日はコースにより異なります"
+    ],
+    "tuitionNote": "費用はコース・週数・受講形態で変わります。",
+    "accreditation": [],
+    "areaInfo": "ダウンタウンに近いエリア。",
+    "ai_detail": "Bow Valley Collegeはカルガリー中心部に位置し、ESLやキャリア系のプログラムを提供します。",
+    "courses": [
+      "ESL",
+      "キャリア系プログラム"
+    ],
+    "sns": {},
+    "contact": {
+      "phone": "",
+      "email": ""
+    },
+    "google_map_url": "",
+    "url": "https://www.bowvalleycollege.ca/",
+    "image": "",
+    "access": "カルガリー中心部のキャンパス。",
+    "summaryLong": "",
+    "programsNote": "",
+    "links": {
+      "officialSite": "https://www.bowvalleycollege.ca/",
+      "social": {
+        "instagram": "https://www.instagram.com/bowvalley/",
+        "facebook": "",
+        "youtube": "https://www.youtube.com/@BowValleyCollege",
+        "tiktok": "",
+        "x": "https://x.com/BowValley",
+        "linkedin": ""
+      }
+    },
+    "overview": "<div class=\"cc-overview-block\"><p class=\"cc-overview-lead\">Bow Valley College はカルガリー中心部に位置するカレッジで、ESLやキャリア系プログラムの情報が公開されています。</p><p class=\"cc-overview-lead\">都市型キャンパスで通学しやすい環境です。</p></div>\n<div class=\"cc-overview-block\"><div class=\"cc-overview-h\">できること</div><ul class=\"cc-overview-list\"><li>学べる分野: ESL（レベル別）/ キャリア・職業系プログラム</li><li>特徴: 中心部のキャンパス、通学動線が良い立地</li><li>サポート: 学生サポートやキャリア相談の情報が公開されています</li></ul></div>\n<div class=\"cc-overview-block\"><div class=\"cc-overview-h\">こんな人に合う</div><ul class=\"cc-overview-list\"><li>都市部での通学環境を重視する人</li><li>ESLやキャリア系の選択肢を比較したい人</li></ul></div>\n<div class=\"cc-overview-block\"><div class=\"cc-overview-h\">変動しやすい項目</div><ul class=\"cc-overview-list\"><li>費用はコース・週数・受講形態で変わります</li><li>開始日はコースやレベルで差が出ます</li><li>提供プログラムは時期で入替の可能性があります</li></ul></div>",
+    "notes": "料金・開始日・入学条件はコースや時期で変わることがあります。申込前に必ず最新条件を確認してください。"
+  },
+  {
+    "id": "algonquin-college-ottawa",
+    "name": "Algonquin College - Ottawa",
+    "city": "Ottawa",
+    "address": "1385 Woodroffe Ave, Ottawa, ON K2G 1V8, Canada",
+    "description": "オタワの公立カレッジ。語学・専門プログラムが充実。",
+    "summary3": [
+      "オタワの公立カレッジ。実践的なプログラムと就職志向の学びが特徴",
+      "分野：IT/ビジネス/ヘルス等の多様な専攻",
+      "留学生向けの案内・相談窓口が用意されています"
+    ],
+    "summaryLong": "Algonquin CollegeOttawaは、オンタリオ州オタワにある公立カレッジです。学位・ディプロマ・サーティフィケートなど幅広い学びがあり、実践的スキルを重視したプログラム構成が特徴です。出願や手続きの案内が用意されています",
+    "highlights": [
+      "公立カレッジOttawa",
+      "実践型・キャリア志向の学び",
+      "国際学生向け窓口ありInternational Education Centre",
+      "複数キャンパスOttawa/Pembroke/Perth",
+      "募集要件はプログラムごとに案内"
+    ],
+    "programs": [
+      "学位/ディプロマ/サーティフィケート（分野別）",
+      "パートタイム/継続教育（AC Online 等）",
+      "国際学生向け案内（窓口あり）"
+    ],
+    "programsNote": "プログラムごとに要件や",
+    "support": [
+      "学生サポートWelcome Centre/Student Support Services の案内あり",
+      "国際学生向け窓口international@algonquincollege.com"
+    ],
+    "social": {},
+    "intakes": [
+      "入学時期・出願締切はプログラムにより異なります"
+    ],
+    "tuitionNote": "授業料はプログラム/学期/在留区分で変動します",
+    "accreditation": [
+      "公立カレッジ州の高等教育機関として運営"
+    ],
+    "areaInfo": "Woodroffe Avenue のメインキャンパス。公共交通や車でアクセス可能です",
+    "ai_detail": "Algonquin Collegeはオタワの公立カレッジで、語学から専門プログラムまで幅広く提供しています。",
+    "courses": [
+      "語学",
+      "専門プログラム"
+    ],
+    "sns": {},
+    "contact": {
+      "phone": "613-727-4723",
+      "email": "international@algonquincollege.com"
+    },
+    "google_map_url": "",
+    "links": {
+      "officialSite": "https://www.algonquincollege.com/",
+      "contactPage": "https://www.algonquincollege.com/future-students/contact-information/",
+      "social": {
+        "instagram": "https://www.instagram.com/algonquincollege/",
+        "facebook": "https://www.facebook.com/AlgonquinCollege/",
+        "youtube": "",
+        "tiktok": "",
+        "x": "",
+        "linkedin": ""
+      }
+    },
+    "sources": {
+      "officialSite": "https://www.algonquincollege.com/"
+    },
+    "aliases": [
+      "algonquin-college---ottawa-ottawa",
+      "algonquin-college-ottawa"
+    ],
+    "url": "https://www.algonquincollege.com/",
+    "image": "",
+    "access": "Woodroffe Avenue のメインキャンパス",
+    "overview": "<div class=\"cc-overview-block\"><p class=\"cc-overview-lead\">Algonquin CollegeOttawaは、オンタリオ州オタワにある公立カレッジです。</p><p class=\"cc-overview-lead\">学位・ディプロマ・サーティフィケートなど幅広い学びがあり、実践的スキルを重視したプログラム構成が特徴です。</p><p class=\"cc-overview-lead\">出願や手続きの案内が用意されています。</p></div>\n<div class=\"cc-overview-block\"><div class=\"cc-overview-h\">できること</div><ul class=\"cc-overview-list\"><li>学べる分野: 学位/ディプロマ/サーティフィケート分野別、パートタイム/継続教育AC Online 等、国際学生向け案内窓口あり</li><li>特徴: 公立カレッジOttawa、実践型・キャリア志向の学び、国際学生向け窓口ありInternational Education Centre</li><li>サポート: 学生サポートWelcome Centre/Student Support Services の案内あり、国際学生向け窓口international@algonquincollege.com</li></ul></div>\n<div class=\"cc-overview-block\"><div class=\"cc-overview-h\">こんな人に合う</div><ul class=\"cc-overview-list\"><li>サポートの有無を重視する人に合います</li><li>通学や生活環境も含めて比較したい人に合います</li></ul></div>\n<div class=\"cc-overview-block\"><div class=\"cc-overview-h\">変動しやすい項目</div><ul class=\"cc-overview-list\"><li>費用は受講形態と期間で変わります</li><li>開始日はコースやレベルで差が出ます</li><li>提供プログラムは時期で入替の可能性があります</li></ul></div>",
+    "notes": "料金・開始日・入学条件はコースや時期で変わることがあります。申込前に必ず最新条件を確認してください。"
+  },
+  {
+    "id": "norquest-college-edmonton",
+    "name": "NorQuest College - Edmonton",
+    "city": "Edmonton",
+    "address": "10215 108 St NW, Edmonton, AB T5J 1L6, Canada",
+    "description": "エドモントン拠点。語学・医療系プログラムに強み。",
+    "summary3": [
+      "エドモントン中心部に拠点を持つカレッジ。",
+      "語学や専門分野のプログラム情報が公開。",
+      "都市型キャンパスで通学しやすい環境。"
+    ],
+    "highlights": [
+      "エドモントン中心部のキャンパス",
+      "語学/専門分野のプログラム情報が公開",
+      "都市型の通学動線"
+    ],
+    "programs": [
+      "語学プログラム",
+      "専門分野プログラム（分野別）"
+    ],
+    "support": [
+      "学生サポートの案内あり",
+      "学習/進路相談の情報"
+    ],
+    "social": {},
+    "intakes": [
+      "開始日はコースにより異なります"
+    ],
+    "tuitionNote": "費用はコース・週数・受講形態で変わります。",
+    "accreditation": [],
+    "areaInfo": "中心部エリア。",
+    "ai_detail": "NorQuest Collegeは語学や医療系プログラムに強みを持つエドモントンのカレッジです。",
+    "courses": [
+      "語学",
+      "医療系プログラム"
+    ],
+    "sns": {},
+    "contact": {
+      "phone": "",
+      "email": ""
+    },
+    "google_map_url": "",
+    "url": "https://www.norquest.ca/",
+    "image": "",
+    "access": "エドモントン中心部のキャンパス。",
+    "summaryLong": "",
+    "programsNote": "",
+    "links": {
+      "officialSite": "https://www.norquest.ca/",
+      "social": {
+        "instagram": "https://www.instagram.com/norquestcollege",
+        "facebook": "https://www.facebook.com/NorQuestCollege",
+        "youtube": "https://www.youtube.com/user/NorQuestCollege",
+        "tiktok": "",
+        "x": "https://twitter.com/NorQuest",
+        "linkedin": ""
+      }
+    },
+    "overview": "<div class=\"cc-overview-block\"><p class=\"cc-overview-lead\">NorQuest College はエドモントン中心部に拠点を持つカレッジで、語学や専門分野のプログラム情報が公開されています。</p><p class=\"cc-overview-lead\">都市型キャンパスで通学しやすい環境です。</p></div><div class=\"cc-overview-block\"><div class=\"cc-overview-h\">できること</div><ul class=\"cc-overview-list\"><li>学べる分野: 語学/専門分野のプログラム</li><li>特徴: 中心部のキャンパス</li></ul></div><div class=\"cc-overview-block\"><div class=\"cc-overview-h\">こんな人に合う</div><ul class=\"cc-overview-list\"><li>専門分野も含めて比較したい人</li><li>エドモントンでの通学を検討する人</li></ul></div><div class=\"cc-overview-block\"><div class=\"cc-overview-h\">変動しやすい項目</div><ul class=\"cc-overview-list\"><li>費用はコース・週数・受講形態で変わります</li><li>開始日はコースやレベルで差が出ます</li><li>提供プログラムは時期で入替の可能性があります</li></ul></div>",
+    "notes": "料金・開始日・入学条件はコースや時期で変わることがあります。申込前に必ず最新条件を確認してください。"
+  },
+  {
+    "id": "red-river-college-polytechnic-winnipeg",
+    "name": "Red River College Polytechnic - Winnipeg",
+    "city": "Winnipeg",
+    "address": "2055 Notre Dame Ave, Winnipeg, MB R3H 0J9, Canada",
+    "description": "ウィニペグの公立カレッジ。ESLや専門プログラムを提供。",
+    "summary3": [
+      "ウィニペグの公立カレッジ。",
+      "ESLや専門分野のプログラム情報が公開。",
+      "都市型キャンパスで通学しやすい環境。"
+    ],
+    "highlights": [
+      "ウィニペグ市内のキャンパス",
+      "ESLや専門分野の情報が公開"
+    ],
+    "programs": [
+      "ESL（レベル別）",
+      "専門分野プログラム（分野別）"
+    ],
+    "support": [
+      "学生サポートの案内あり",
+      "学習/進路相談の情報"
+    ],
+    "social": {},
+    "intakes": [
+      "開始日はコースにより異なります"
+    ],
+    "tuitionNote": "費用はコース・週数・受講形態で変わります。",
+    "accreditation": [],
+    "areaInfo": "ウィニペグ市内のエリア。",
+    "ai_detail": "Red River College Polytechnicはウィニペグの公立カレッジで、ESLや専門プログラムを提供しています。",
+    "courses": [
+      "ESL",
+      "専門プログラム"
+    ],
+    "sns": {},
+    "contact": {
+      "phone": "",
+      "email": ""
+    },
+    "google_map_url": "",
+    "url": "https://www.rrc.ca/",
+    "image": "",
+    "access": "ウィニペグ市内のキャンパス。",
+    "summaryLong": "",
+    "programsNote": "",
+    "links": {
+      "officialSite": "https://www.rrc.ca/",
+      "social": {
+        "instagram": "https://www.instagram.com/redrivercollege/",
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "x": "",
+        "linkedin": ""
+      }
+    },
+    "overview": "<div class=\"cc-overview-block\"><p class=\"cc-overview-lead\">Red River College Polytechnic はウィニペグに拠点を持つ公立カレッジで、ESLや専門分野の情報が公開されています。</p><p class=\"cc-overview-lead\">都市型キャンパスで通学しやすい環境です。</p></div>\n<div class=\"cc-overview-block\"><div class=\"cc-overview-h\">できること</div><ul class=\"cc-overview-list\"><li>学べる分野: ESL/専門分野プログラム</li><li>特徴: ウィニペグ市内のキャンパス</li></ul></div>\n<div class=\"cc-overview-block\"><div class=\"cc-overview-h\">こんな人に合う</div><ul class=\"cc-overview-list\"><li>ESLと専門分野を比較したい人</li><li>ウィニペグでの通学を検討する人</li></ul></div>\n<div class=\"cc-overview-block\"><div class=\"cc-overview-h\">変動しやすい項目</div><ul class=\"cc-overview-list\"><li>費用はコース・週数・受講形態で変わります</li><li>開始日はコースやレベルで差が出ます</li><li>提供プログラムは時期で入替の可能性があります</li></ul></div>",
+    "notes": "料金・開始日・入学条件はコースや時期で変わることがあります。申込前に必ず最新条件を確認してください。"
+  },
+  {
+    "id": "saint-marys-university-halifax",
+    "name": "Saint Mary's University - Halifax",
+    "city": "Halifax",
+    "address": "923 Robie St, Halifax, NS B3H 3C3, Canada",
+    "description": "ハリファックスの大学。語学・進学プログラムを提供。",
+    "summary3": [
+      "ハリファックスの大学。",
+      "語学や進学準備の情報が公開。",
+      "都市型キャンパスで通学しやすい環境。"
+    ],
+    "highlights": [
+      "ハリファックス市内のキャンパス",
+      "語学/進学準備の情報が公開"
+    ],
+    "programs": [
+      "語学プログラム",
+      "進学準備プログラム"
+    ],
+    "support": [
+      "学生サポートの案内あり",
+      "進学相談の情報"
+    ],
+    "social": {},
+    "intakes": [
+      "開始日はコースにより異なります"
+    ],
+    "tuitionNote": "費用はコース・週数・受講形態で変わります。",
+    "accreditation": [],
+    "areaInfo": "ハリファックス市内のエリア。",
+    "ai_detail": "Saint Mary's Universityはハリファックスの大学で、語学や進学向けプログラムを提供しています。",
+    "courses": [
+      "語学プログラム",
+      "進学準備"
+    ],
+    "sns": {},
+    "contact": {
+      "phone": "",
+      "email": ""
+    },
+    "google_map_url": "",
+    "url": "https://www.smu.ca/",
+    "image": "",
+    "access": "ハリファックス市内のキャンパス。",
+    "summaryLong": "",
+    "programsNote": "",
+    "links": {
+      "officialSite": "https://www.smu.ca/",
+      "social": {
+        "instagram": "",
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "x": "",
+        "linkedin": ""
+      }
+    },
+    "overview": "<div class=\"cc-overview-block\"><p class=\"cc-overview-lead\">Saint Mary's University はハリファックスに拠点を持つ大学で、語学や進学準備の情報が公開されています。</p><p class=\"cc-overview-lead\">都市型キャンパスで通学しやすい環境です。</p></div>\n<div class=\"cc-overview-block\"><div class=\"cc-overview-h\">できること</div><ul class=\"cc-overview-list\"><li>学べる分野: 語学プログラム/進学準備</li><li>特徴: ハリファックス市内のキャンパス</li></ul></div>\n<div class=\"cc-overview-block\"><div class=\"cc-overview-h\">こんな人に合う</div><ul class=\"cc-overview-list\"><li>語学学習を軸に選びたい人</li><li>ハリファックスでの通学を検討する人</li></ul></div>\n<div class=\"cc-overview-block\"><div class=\"cc-overview-h\">変動しやすい項目</div><ul class=\"cc-overview-list\"><li>費用はコース・週数・受講形態で変わります</li><li>開始日はコースやレベルで差が出ます</li><li>提供プログラムは時期で入替の可能性があります</li></ul></div>",
+    "notes": "料金・開始日・入学条件はコースや時期で変わることがあります。申込前に必ず最新条件を確認してください。"
+  },
+  {
+    "id": "universite-laval-quebec-city",
+    "name": "Université Laval - Québec City",
+    "city": "Québec City",
+    "address": "2325 Rue de l'Université, Québec, QC G1V 0A6, Canada",
+    "description": "ケベックシティの大学。フランス語プログラムが充実。",
+    "summary3": [
+      "ケベックシティの大学。",
+      "フランス語学習の情報が公開。",
+      "キャンパス型の学習環境。"
+    ],
+    "highlights": [
+      "ケベックシティのキャンパス",
+      "フランス語学習の情報が公開"
+    ],
+    "programs": [
+      "フランス語プログラム",
+      "大学プログラム（分野別）"
+    ],
+    "support": [
+      "学生サポートの案内あり",
+      "学習/進学相談の情報"
+    ],
+    "social": {},
+    "intakes": [
+      "開始日はコースにより異なります"
+    ],
+    "tuitionNote": "費用はコース・週数・受講形態で変わります。",
+    "accreditation": [],
+    "areaInfo": "ケベックシティ市内のエリア。",
+    "ai_detail": "Université Lavalはケベックシティの大学で、フランス語プログラムが充実しています。",
+    "courses": [
+      "フランス語",
+      "大学進学プログラム"
+    ],
+    "sns": {},
+    "contact": {
+      "phone": "",
+      "email": ""
+    },
+    "google_map_url": "",
+    "url": "https://www.ulaval.ca/",
+    "image": "",
+    "access": "ケベックシティのキャンパス。",
+    "summaryLong": "",
+    "programsNote": "",
+    "links": {
+      "officialSite": "https://www.ulaval.ca/",
+      "social": {
+        "instagram": "https://www.instagram.com/universitelaval/",
+        "facebook": "",
+        "youtube": "https://www.youtube.com/ulavaltv",
+        "tiktok": "",
+        "x": "https://x.com/universitelaval",
+        "linkedin": ""
+      }
+    },
+    "overview": "<div class=\"cc-overview-block\"><p class=\"cc-overview-lead\">Université Laval はケベックシティに拠点を持つ大学で、フランス語学習の情報が公開されています。</p><p class=\"cc-overview-lead\">キャンパス型の環境で学びやすい構成です。</p></div>\n<div class=\"cc-overview-block\"><div class=\"cc-overview-h\">できること</div><ul class=\"cc-overview-list\"><li>学べる分野: フランス語プログラム/大学分野別プログラム</li><li>特徴: ケベックシティのキャンパス</li></ul></div>\n<div class=\"cc-overview-block\"><div class=\"cc-overview-h\">こんな人に合う</div><ul class=\"cc-overview-list\"><li>フランス語学習を軸に選びたい人</li><li>ケベックシティでの通学を検討する人</li></ul></div>\n<div class=\"cc-overview-block\"><div class=\"cc-overview-h\">変動しやすい項目</div><ul class=\"cc-overview-list\"><li>費用はコース・週数・受講形態で変わります</li><li>開始日はコースやレベルで差が出ます</li><li>提供プログラムは時期で入替の可能性があります</li></ul></div>",
+    "notes": "料金・開始日・入学条件はコースや時期で変わることがあります。申込前に必ず最新条件を確認してください。"
+  },
+  {
+    "id": "camosun-college-victoria",
+    "name": "Camosun College - Victoria",
+    "city": "Victoria",
+    "address": "3100 Foul Bay Road, Victoria, BC V8P 5J2, Canada",
+    "description": "ビクトリアの公立カレッジ。語学・専門プログラムを提供。",
+    "summary3": [
+      "ビクトリアの公立カレッジ。",
+      "Lansdowne/Interurban の2キャンパス体制。",
+      "語学や専門分野の情報が公開。"
+    ],
+    "highlights": [
+      "Lansdowne と Interurban の2キャンパス",
+      "ビクトリア市内で通学しやすい環境"
+    ],
+    "programs": [
+      "語学プログラム",
+      "専門分野プログラム（分野別）"
+    ],
+    "support": [
+      "学生サポートの案内あり",
+      "学習/進学相談の情報"
+    ],
+    "social": {},
+    "intakes": [
+      "開始日はコースにより異なります"
+    ],
+    "tuitionNote": "費用はコース・週数・受講形態で変わります。",
+    "accreditation": [],
+    "areaInfo": "ビクトリア市内のエリア。",
+    "ai_detail": "Camosun Collegeはビクトリアの公立カレッジで、語学や専門プログラムを提供します。",
+    "courses": [
+      "語学",
+      "専門プログラム"
+    ],
+    "sns": {},
+    "contact": {
+      "phone": "",
+      "email": ""
+    },
+    "google_map_url": "",
+    "url": "https://camosun.ca/",
+    "image": "",
+    "access": "キャンパス: Lansdowne / Interurban（2拠点）。",
+    "summaryLong": "",
+    "programsNote": "",
+    "links": {
+      "officialSite": "https://camosun.ca/",
+      "social": {
+        "instagram": "",
+        "facebook": "",
+        "youtube": "https://www.youtube.com/MyCamosun",
+        "tiktok": "https://www.tiktok.com/@camosuncollege",
+        "linkedin": ""
+      }
+    },
+    "overview": "<div class=\"cc-overview-block\"><p class=\"cc-overview-lead\">Camosun College はビクトリアに拠点を持つ公立カレッジで、Lansdowne と Interurban の2キャンパスを運営しています。</p><p class=\"cc-overview-lead\">目的に応じて学習環境を選びやすい構成です。</p></div><div class=\"cc-overview-block\"><div class=\"cc-overview-h\">できること</div><ul class=\"cc-overview-list\"><li>学べる分野: 語学/専門分野のプログラム</li><li>特徴: 2キャンパス体制</li></ul></div><div class=\"cc-overview-block\"><div class=\"cc-overview-h\">こんな人に合う</div><ul class=\"cc-overview-list\"><li>キャンパス環境を比較して選びたい人</li><li>ビクトリアでの通学を検討する人</li></ul></div><div class=\"cc-overview-block\"><div class=\"cc-overview-h\">変動しやすい項目</div><ul class=\"cc-overview-list\"><li>費用はコース・週数・受講形態で変わります</li><li>開始日はコースやレベルで差が出ます</li><li>提供プログラムは時期で入替の可能性があります</li></ul></div>",
+    "notes": "料金・開始日・入学条件はコースや時期で変わることがあります。申込前に必ず最新条件を確認してください。"
+  },
+  {
+    "id": "ciccc-vancouver",
+    "name": "Cornerstone International Community College of Canada",
+    "city": "Vancouver",
+    "address": "",
+    "province": "BC",
+    "description": "バンクーバーの語学・キャリア系カレッジ。英語学習と実務寄りのプログラムを提供。",
+    "summary3": [
+      "バンクーバー拠点の語学・キャリア系カレッジ",
+      "英語学習と実務寄りのプログラムを組み合わせやすい",
+      "都市型キャンパスで通学しやすい"
+    ],
+    "highlights": [
+      "バンクーバー中心部エリア",
+      "英語学習とキャリア系プログラムの構成",
+      "都市型キャンパスで通学しやすい"
+    ],
+    "programs": [
+      "英語学習プログラム",
+      "キャリア系プログラム（分野はコースにより異なる）"
+    ],
+    "support": [
+      "入学手続きの案内",
+      "学生サポート情報の案内"
+    ],
+    "social": {},
+    "intakes": [
+      "開始日や期間はコースにより異なります。"
+    ],
+    "tuitionNote": "費用はコース/期間/受講形態で変動します。",
+    "accreditation": [],
+    "areaInfo": "バンクーバー中心部エリア。通学動線をイメージしやすい立地です。",
+    "ai_detail": "",
+    "courses": [],
+    "sns": {},
+    "contact": {},
+    "google_map_url": "",
+    "url": "https://ciccc.ca/",
+    "image": "",
+    "access": "",
+    "summaryLong": "Cornerstone International Community College of Canada（CICCC）はバンクーバー拠点のカレッジです。英語学習とキャリア志向のプログラムを組み合わせやすく、都市型キャンパスで通学しやすい点が特徴です。",
+    "programsNote": "",
+    "links": {
+      "officialSite": "https://ciccc.ca/",
+      "social": {
+        "instagram": "https://www.instagram.com/cicccvancouver/",
+        "facebook": "https://www.facebook.com/cicccvancouver/",
+        "youtube": "https://www.youtube.com/channel/UCDj9ILg0V9aAF0NxCVDUlww",
+        "tiktok": "https://www.tiktok.com/@cicccvancouver/"
+      }
+    },
+    "overview": "",
+    "notes": "料金・開始日・入学条件はコースや時期で変わることがあります。申込前に一度条件を照合してください。",
+    "aliases": [
+      "CICCC",
+      "CICCC Vancouver",
+      "Cornerstone International Community College of Canada Vancouver"
+    ],
+    "campuses": [
+      {
+        "label": "Vancouver - Hastings",
+        "address": "609 W Hastings St, Vancouver, BC V6B 4W4",
+        "city": "Vancouver",
+        "cityKey": "vancouver",
+        "province": "BC",
+        "country": "CA",
+        "email": "info@ciccc.ca",
+        "phone": "+1 604 620 1111"
+      },
+      {
+        "label": "Vancouver - Granville",
+        "address": "978 Granville St, Vancouver, BC V6Z 1L2",
+        "city": "Vancouver",
+        "cityKey": "vancouver",
+        "province": "BC",
+        "country": "CA",
+        "email": "info@ciccc.ca",
+        "phone": "+1 604 620 1111"
+      },
+      {
+        "label": "Vancouver - Seymour",
+        "address": "543 Seymour St, Vancouver, BC V6B 4W4",
+        "city": "Vancouver",
+        "cityKey": "vancouver",
+        "province": "BC",
+        "country": "CA",
+        "email": "info@ciccc.ca",
+        "phone": "+1 604 620 1111"
+      },
+      {
+        "label": "Online education",
+        "address": "Online",
+        "email": "info@ciccc.ca",
+        "phone": "+1 604 620 1111",
+        "mapExclude": true
+      }
+    ]
+  },
+  {
+    "id": "access-english-toronto",
+    "name": "ACCESS English",
+    "city": "Toronto",
+    "address": "730 Yonge Street, Suite 203. Toronto, Ontario, M4Y 2B7, Canada",
+    "province": "ON",
+    "description": "トロント拠点の語学学校。英語学習コースを提供。",
+    "summary3": [
+      "トロントの語学学校",
+      "英語学習を目的別に選びやすい構成",
+      "都市型キャンパスで通学しやすい"
+    ],
+    "highlights": [
+      "トロント中心部エリア",
+      "英語学習コース",
+      "都市型キャンパス"
+    ],
+    "programs": [
+      "一般英語",
+      "目的別英語コース"
+    ],
+    "support": [
+      "学習相談の案内",
+      "生活サポート情報の案内"
+    ],
+    "social": {},
+    "intakes": [
+      "開始日や期間はコースにより異なります。"
+    ],
+    "tuitionNote": "費用はコース/期間/受講形態で変動します。",
+    "accreditation": [],
+    "areaInfo": "トロント中心部エリア。通学しやすい立地です。",
+    "ai_detail": "",
+    "courses": [],
+    "sns": {},
+    "contact": {},
+    "google_map_url": "",
+    "url": "https://www.accessenglish.com/",
+    "image": "",
+    "access": "",
+    "summaryLong": "ACCESS English はトロント拠点の語学学校です。英語学習を目的別に選びやすい構成で、都市型キャンパスとして通学しやすい点が特徴です。",
+    "programsNote": "",
+    "links": {
+      "officialSite": "https://www.accessenglish.com/",
+      "social": {
+        "instagram": "https://www.instagram.com/access.english/",
+        "facebook": "https://www.facebook.com/accessenglish/",
+        "youtube": "https://www.youtube.com/c/Accessenglish"
+      }
+    },
+    "overview": "",
+    "notes": "料金・開始日・入学条件はコースや時期で変わることがあります。申込前に一度条件を照合してください。",
+    "aliases": [
+      "Access English",
+      "ACCESS English Toronto"
+    ]
+  },
+  {
+    "id": "gcc-vancouver",
+    "name": "Global College",
+    "city": "Vancouver",
+    "address": "#298, 1199 W Pender St, Vancouver, BC V6E 2R1",
+    "province": "BC",
+    "description": "バンクーバー拠点の語学学校。英語学習コースを提供。",
+    "summary3": [
+      "バンクーバーの語学学校",
+      "英語学習を目的別に選びやすい構成",
+      "都市型キャンパスで通学しやすい"
+    ],
+    "highlights": [
+      "バンクーバー中心部エリア",
+      "英語学習コース",
+      "都市型キャンパス"
+    ],
+    "programs": [
+      "一般英語",
+      "目的別英語コース"
+    ],
+    "support": [
+      "学習相談の案内",
+      "生活サポート情報の案内"
+    ],
+    "social": {},
+    "intakes": [
+      "開始日や期間はコースにより異なります。"
+    ],
+    "tuitionNote": "費用はコース/期間/受講形態で変動します。",
+    "accreditation": [],
+    "areaInfo": "バンクーバー中心部エリア。通学しやすい立地です。",
+    "ai_detail": "",
+    "courses": [],
+    "sns": {},
+    "contact": {},
+    "google_map_url": "",
+    "url": "https://gcc-canada.com/",
+    "image": "",
+    "access": "",
+    "summaryLong": "Global College（GCC Canada）はバンクーバー拠点の語学学校です。英語学習を目的別に選びやすい構成で、都市型キャンパスとして通学しやすい点が特徴です。",
+    "programsNote": "",
+    "links": {
+      "officialSite": "https://gcc-canada.com/",
+      "social": {
+        "instagram": "https://www.instagram.com/gc_canada/",
+        "facebook": "https://www.facebook.com/gcvancouver/",
+        "youtube": "https://www.youtube.com/channel/UCgA4o2No54qAhJgbVFsx0yw"
+      }
+    },
+    "overview": "",
+    "notes": "料金・開始日・入学条件はコースや時期で変わることがあります。申込前に一度条件を照合してください。",
+    "aliases": [
+      "GC",
+      "GCC",
+      "GCC Canada",
+      "Global College Vancouver"
+    ]
+  },
+  {
+    "id": "centre-of-english-studies",
+    "name": "Centre of English Studies",
+    "city": "Toronto",
+    "address": "",
+    "description": "カナダ拠点の語学学校。Toronto / Vancouver の2都市で英語学習コースを提供。",
+    "summary3": [
+      "Toronto・Vancouverの2都市展開",
+      "英語学習の目的別コースを用意",
+      "都市型キャンパスで通学しやすい"
+    ],
+    "highlights": [
+      "Toronto/Vancouverの2都市展開",
+      "目的別の英語コース構成",
+      "都市型キャンパス"
+    ],
+    "programs": [
+      "一般英語",
+      "目的別英語コース"
+    ],
+    "support": [
+      "学習相談の案内",
+      "生活サポート情報の案内"
+    ],
+    "social": {},
+    "intakes": [
+      "開始日や期間はコースにより異なります。"
+    ],
+    "tuitionNote": "費用はコース/期間/受講形態で変動します。",
+    "accreditation": [],
+    "areaInfo": "都市型キャンパスで通学しやすい立地です。",
+    "ai_detail": "",
+    "courses": [],
+    "sns": {},
+    "contact": {},
+    "google_map_url": "",
+    "url": "https://ces-schools.com/",
+    "image": "https://www.ilac.com/wp-content/uploads/2022/05/ilac-logo-white.webp",
+    "access": "",
+    "summaryLong": "Centre of English Studies（CES）は英語学習の語学学校です。TorontoとVancouverの2都市にキャンパスを持ち、目的別のコース構成で学習計画を立てやすい点が特徴です。",
+    "programsNote": "",
+    "links": {
+      "officialSite": "https://ces-schools.com/",
+      "social": {
+        "instagram": "https://www.instagram.com/cesschools/",
+        "facebook": "https://www.facebook.com/CESDublin/",
+        "youtube": "https://www.youtube.com/@cesschools",
+        "x": "https://twitter.com/CESschools",
+        "tiktok": "https://www.tiktok.com/@cesschools"
+      }
+    },
+    "overview": "",
+    "notes": "料金・開始日・入学条件はコースや時期で変わることがあります。申込前に一度条件を照合してください。",
+    "province": "ON",
+    "aliases": [
+      "CES",
+      "CES Toronto",
+      "CES Vancouver",
+      "ces-toronto",
+      "ces-vancouver",
+      "Centre of English Studies Toronto",
+      "Centre of English Studies Vancouver"
+    ],
+    "campuses": [
+      {
+        "label": "Toronto campus",
+        "address": "112 Elizabeth Street, Toronto, ON - Canada, M5G 1P5",
+        "city": "Toronto",
+        "cityKey": "toronto",
+        "province": "ON",
+        "country": "CA"
+      },
+      {
+        "label": "Vancouver campus",
+        "address": "322 Water Street, Mezzanine, Vancouver, BC, V6B 1B6 - Canada",
+        "city": "Vancouver",
+        "cityKey": "vancouver",
+        "province": "BC",
+        "country": "CA"
+      }
+    ]
+  },
+  {
+    "id": "sslc",
+    "name": "SSLC",
+    "city": "Toronto",
+    "address": "",
+    "description": "カナダ拠点の語学学校ブランド。Toronto / Vancouver / Victoria に展開。",
+    "summary3": [
+      "Toronto・Vancouver・Victoriaの3都市展開",
+      "英語学習コースを提供",
+      "都市型キャンパスで通学しやすい"
+    ],
+    "highlights": [
+      "3都市展開（Toronto/Vancouver/Victoria）",
+      "英語学習コース",
+      "都市型キャンパス"
+    ],
+    "programs": [
+      "一般英語",
+      "目的別英語コース"
+    ],
+    "support": [
+      "学習相談の案内",
+      "生活サポート情報の案内"
+    ],
+    "social": {},
+    "intakes": [
+      "開始日や期間はコースにより異なります。"
+    ],
+    "tuitionNote": "費用はコース/期間/受講形態で変動します。",
+    "accreditation": [],
+    "areaInfo": "複数都市に展開。通学しやすい立地です。",
+    "ai_detail": "",
+    "courses": [],
+    "sns": {},
+    "contact": {},
+    "google_map_url": "",
+    "url": "https://www.studysslc.com/",
+    "image": "https://www.ilac.com/wp-content/uploads/2022/05/ilac-logo-white.webp",
+    "access": "",
+    "summaryLong": "SSLCは語学学校ブランドとして英語学習コースを提供しています。Toronto/Vancouver/Victoriaの3都市にキャンパスを持ち、都市型キャンパスで通学しやすい点が特徴です。",
+    "programsNote": "",
+    "links": {
+      "officialSite": "https://www.studysslc.com/",
+      "social": {
+        "instagram": "https://www.instagram.com/studysslc/",
+        "facebook": "https://www.facebook.com/studysslc/",
+        "x": "https://x.com/StudySSLC",
+        "tiktok": "https://www.tiktok.com/@studysslc",
+        "youtube": "https://www.youtube.com/studysslc"
+      }
+    },
+    "overview": "",
+    "notes": "料金・開始日・入学条件はコースや時期で変わることがあります。申込前に一度条件を照合してください。",
+    "province": "ON",
+    "aliases": [
+      "sslc-toronto",
+      "sslc-vancouver",
+      "sslc-victoria",
+      "SSLC Toronto",
+      "Sprott Shaw Language College",
+      "Sprott Shaw Language College Toronto"
+    ],
+    "campuses": [
+      {
+        "label": "Victoria campus",
+        "address": "31 Bastion Square, #101, Victoria, BC V8W 1J1",
+        "city": "Victoria",
+        "cityKey": "victoria",
+        "province": "BC",
+        "country": "CA"
+      },
+      {
+        "label": "Vancouver campus",
+        "address": "549 Howe St 2nd Floor, Vancouver, BC V6C 2C2",
+        "city": "Vancouver",
+        "cityKey": "vancouver",
+        "province": "BC",
+        "country": "CA"
+      },
+      {
+        "label": "Toronto campus",
+        "address": "120 Eglinton Ave E, Toronto, ON M4P 1E2",
+        "city": "Toronto",
+        "cityKey": "toronto",
+        "province": "ON",
+        "country": "CA"
+      }
+    ]
+  }
+];

@@ -1,0 +1,814 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>掲示板詳細 | CanadaClassi</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    referrerpolicy="no-referrer"
+  />
+</head>
+<body class="page-home" data-cc-nav-target="board">
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">
+        <a href="index.html" class="logo-link">
+          <img src="logo1_transparent.png" alt="CanadaClassi Logo" class="logo-img" />
+          <div class="logo-text">
+            <span class="en">CanadaClassi</span>
+            <span class="ja">カナダくらし</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="header-right-pc">
+        <div class="auth-buttons">
+          <div class="cc-notice">
+            <button type="button" class="btn-icon btn-notice-bell" id="notifBell" title="お知らせ" aria-label="お知らせ" data-cc-notice-toggle>
+              <svg class="cc-icon cc-bell-icon" viewBox="0 0 448 512" aria-hidden="true">
+                <path d="M224 512a64 64 0 0 0 64-64H160a64 64 0 0 0 64 64zm215.39-149.33C419.37 343 384 312 384 240c0-79.7-56.5-145.6-128-158.5V48a48 48 0 1 0-96 0v33.5C88.5 94.4 32 160.3 32 240c0 72-35.4 103-55.4 122.7A31.9 31.9 0 0 0 0 384a32 32 0 0 0 32 32h384a32 32 0 0 0 32-32 31.9 31.9 0 0 0-8.61-21.33z" fill="currentColor"/>
+              </svg>
+              <span class="sr-only cc-notif-label">お知らせ</span>
+              <span class="notification-dot"></span>
+            </button>
+            <div class="cc-notice-dropdown" data-cc-notice-dropdown hidden>
+              <div class="cc-notice-header">
+                <div class="cc-notice-title">お知らせ</div>
+                <label class="cc-notice-filter">
+                  <input type="checkbox" data-cc-notice-unread />
+                  <span>未読のみ</span>
+                </label>
+                <button type="button" class="cc-notice-markall" data-cc-notice-markall>すべて既読</button>
+              </div>
+              <div class="cc-notice-list" data-cc-notice-list></div>
+              <div class="cc-notice-footer">
+                <a href="mypage.html?tab=notices">すべて見る</a>
+              </div>
+            </div>
+          </div>
+
+          <a href="post.html" class="btn-post" id="post-button">
+            <i class="fa-solid fa-camera"></i> 投稿作成
+          </a>
+
+          <a href="login.html" class="btn-login" id="login-button">
+            <i class="fa-regular fa-circle-user"></i> ログイン・新規登録
+          </a>
+        </div>
+
+        <div class="settings-group">
+          <select id="area-select" class="cc-hidden-select" aria-label="エリア（主要）">
+            <option value="canada_all">🇨🇦 全カナダ</option>
+            <option value="vancouver">バンクーバー, BC</option>
+            <option value="victoria">ビクトリア, BC</option>
+            <option value="whistler">ウィスラー, BC</option>
+            <option value="kelowna">ケロウナ, BC</option>
+            <option value="calgary">カルガリー, AB</option>
+            <option value="banff">バンフ, AB</option>
+            <option value="edmonton">エドモントン, AB</option>
+            <option value="winnipeg">ウィニペグ, MB</option>
+            <option value="ottawa">オタワ, ON</option>
+            <option value="toronto">トロント, ON</option>
+            <option value="montreal">モントリオール, QC</option>
+            <option value="halifax">ハリファックス, NS</option>
+            <option value="other">その他（カナダの都市）</option>
+          </select>
+          <select id="area-select-sub" class="cc-hidden-select" aria-label="その他の都市">
+            <option value="">その他のカナダ都市</option>
+            <optgroup label="ユーコン準州（YT）">
+              <option value="whitehorse">ホワイトホース, YT</option>
+            </optgroup>
+            <optgroup label="ブリティッシュコロンビア州（BC）">
+              <option value="abbotsford">アボッツフォード, BC</option>
+              <option value="burnaby">バーナビー, BC</option>
+              <option value="kamloops">カムループス, BC</option>
+              <option value="nanaimo">ナナイモ, BC</option>
+              <option value="prince_george">プリンスジョージ, BC</option>
+              <option value="richmond">リッチモンド, BC</option>
+              <option value="surrey">サレー, BC</option>
+            </optgroup>
+            <optgroup label="アルバータ州（AB）">
+              <option value="kananaskis">カナナスキス, AB</option>
+              <option value="canmore">キャンモア, AB</option>
+              <option value="fort_mcmurray">フォートマクマレー, AB</option>
+              <option value="medicine_hat">メディシンハット, AB</option>
+              <option value="lake_louise">ルイーズ湖, AB</option>
+              <option value="red_deer">レッドディア, AB</option>
+              <option value="lethbridge">レスブリッジ, AB</option>
+            </optgroup>
+            <optgroup label="サスカチュワン州（SK）">
+              <option value="regina">レジャイナ, SK</option>
+              <option value="saskatoon">サスカトゥーン, SK</option>
+            </optgroup>
+            <optgroup label="マニトバ州（MB）">
+              <option value="brandon">ブランドン, MB</option>
+            </optgroup>
+            <optgroup label="オンタリオ州（ON）">
+              <option value="oakville">オークビル, ON</option>
+              <option value="oshawa">オシャワ, ON</option>
+              <option value="kingston">キングストン, ON</option>
+              <option value="kitchener">キッチナー, ON</option>
+              <option value="guelph">ゲルフ, ON</option>
+              <option value="sudbury">サドベリー, ON</option>
+              <option value="thunder_bay">サンダーベイ, ON</option>
+              <option value="niagara_falls">ナイアガラフォールズ, ON</option>
+              <option value="barrie">バリー, ON</option>
+              <option value="hamilton">ハミルトン, ON</option>
+              <option value="mississauga">ミシサガ, ON</option>
+              <option value="markham">マーカム, ON</option>
+              <option value="vaughan">ヴォーン, ON</option>
+              <option value="london_on">ロンドン, ON</option>
+              <option value="waterloo">ウォータールー, ON</option>
+              <option value="windsor">ウィンザー, ON</option>
+            </optgroup>
+            <optgroup label="ケベック州（QC）">
+              <option value="gatineau">ガティノー, QC</option>
+              <option value="laval">ラヴァル, QC</option>
+              <option value="longueuil">ロンゲール, QC</option>
+              <option value="quebec_city">ケベックシティ, QC</option>
+            </optgroup>
+            <optgroup label="ニューブランズウィック州（NB）">
+              <option value="fredericton">フレデリクトン, NB</option>
+              <option value="moncton">モンクトン, NB</option>
+              <option value="saint_john">セントジョン, NB</option>
+            </optgroup>
+            <optgroup label="プリンスエドワードアイランド州（PE）">
+              <option value="charlottetown">シャーロットタウン, PE</option>
+            </optgroup>
+            <optgroup label="ノバスコシア州（NS）">
+              <option value="sydney_ns">シドニー, NS</option>
+            </optgroup>
+            <optgroup label="ニューファンドランド・ラブラドール州（NL）">
+              <option value="st_johns">セントジョンズ, NL</option>
+            </optgroup>
+          </select>
+          <select id="lang-select" class="cc-hidden-select" aria-label="言語">
+            <option value="ja">JP</option>
+            <option value="en">EN</option>
+            <option value="fr">FR</option>
+          </select>
+
+          <div class="cc-dropdown" data-cc-dropdown="area">
+            <button class="cc-dd-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-location-dot"></i>
+              <span class="cc-dd-value" data-cc-dd-value="area"></span>
+            </button>
+            <div class="cc-dd-menu" role="menu">
+              <div class="cc-dd-note">表示する都市を切り替え、カレンダーや投稿一覧の内容を変更します。</div>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="canada_all">🇨🇦 全カナダ</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="vancouver">バンクーバー, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="victoria">ビクトリア, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="whistler">ウィスラー, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="kelowna">ケロウナ, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="calgary">カルガリー, AB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="banff">バンフ, AB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="edmonton">エドモントン, AB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="winnipeg">ウィニペグ, MB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="ottawa">オタワ, ON</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="toronto">トロント, ON</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="montreal">モントリオール, QC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="halifax">ハリファックス, NS</button>
+              <div class="cc-dd-submenu" data-cc-dd-submenu>
+                <button class="cc-dd-item cc-dd-subtoggle" type="button" data-cc-dd-subtoggle>
+                  その他のカナダ都市
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
+                <div class="cc-dd-subpanel" hidden>
+                  <div class="cc-dd-group-title">ユーコン準州（YT）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="whitehorse">ホワイトホース, YT</button>
+                  <div class="cc-dd-group-title">ブリティッシュコロンビア州（BC）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="abbotsford">アボッツフォード, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="burnaby">バーナビー, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kamloops">カムループス, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="nanaimo">ナナイモ, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="prince_george">プリンスジョージ, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="richmond">リッチモンド, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="surrey">サレー, BC</button>
+                  <div class="cc-dd-group-title">アルバータ州（AB）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kananaskis">カナナスキス, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="canmore">キャンモア, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="fort_mcmurray">フォートマクマレー, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="medicine_hat">メディシンハット, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="lake_louise">ルイーズ湖, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="red_deer">レッドディア, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="lethbridge">レスブリッジ, AB</button>
+                  <div class="cc-dd-group-title">サスカチュワン州（SK）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="regina">レジャイナ, SK</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="saskatoon">サスカトゥーン, SK</button>
+                  <div class="cc-dd-group-title">マニトバ州（MB）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="brandon">ブランドン, MB</button>
+                  <div class="cc-dd-group-title">オンタリオ州（ON）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="oakville">オークビル, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="oshawa">オシャワ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kingston">キングストン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kitchener">キッチナー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="guelph">ゲルフ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="sudbury">サドベリー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="thunder_bay">サンダーベイ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="niagara_falls">ナイアガラフォールズ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="barrie">バリー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="hamilton">ハミルトン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="mississauga">ミシサガ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="markham">マーカム, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="vaughan">ヴォーン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="london_on">ロンドン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="waterloo">ウォータールー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="windsor">ウィンザー, ON</button>
+                  <div class="cc-dd-group-title">ケベック州（QC）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="gatineau">ガティノー, QC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="laval">ラヴァル, QC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="longueuil">ロンゲール, QC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="quebec_city">ケベックシティ, QC</button>
+                  <div class="cc-dd-group-title">ニューブランズウィック州（NB）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="fredericton">フレデリクトン, NB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="moncton">モンクトン, NB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="saint_john">セントジョン, NB</button>
+                  <div class="cc-dd-group-title">プリンスエドワードアイランド州（PE）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="charlottetown">シャーロットタウン, PE</button>
+                  <div class="cc-dd-group-title">ノバスコシア州（NS）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="sydney_ns">シドニー, NS</button>
+                  <div class="cc-dd-group-title">ニューファンドランド・ラブラドール州（NL）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="st_johns">セントジョンズ, NL</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cc-dropdown" data-cc-dropdown="lang">
+            <button class="cc-dd-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-globe"></i>
+              <span class="cc-dd-value" data-cc-dd-value="lang"></span>
+            </button>
+            <div class="cc-dd-menu" role="menu">
+              <div class="cc-dd-note">表示言語を切り替えるためのプルダウンです。</div>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="lang" data-value="ja">JP</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="lang" data-value="en">EN</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="lang" data-value="fr">FR</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="global-nav">
+      <div class="container nav-grid">
+        <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i> ホーム</a>
+        <a href="list.html" class="nav-item"><i class="fa-solid fa-tags"></i> クラシファイド</a>
+        <a href="static.html?type=school" class="nav-item"><i class="fa-solid fa-graduation-cap"></i> 学校情報</a>
+        <a href="board.html" class="nav-item"><i class="fa-solid fa-comments"></i> 掲示板</a>
+        <a href="static.html?type=links" class="nav-item"><i class="fa-solid fa-arrow-up-right-from-square"></i> 外部リンク</a>
+        <a href="static.html?type=tips" class="nav-item"><i class="fa-solid fa-lightbulb"></i> お役立ち情報</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container board-detail cc-board">
+    <div class="board-thread">
+      <div class="board-thread-head">
+        <span class="board-tag" id="thread-category">—</span>
+        <h1 id="thread-title">—</h1>
+        <div class="board-meta" id="thread-meta">—</div>
+      </div>
+      <p id="thread-body">—</p>
+      <div class="ad-banner">広告スペース</div>
+    </div>
+
+    <section class="board-replies">
+      <div class="board-replies-head">
+        <h2>返信</h2>
+        <div class="board-replies-actions">
+          <span class="board-last-updated" id="board-last-updated">最終更新: —</span>
+          <div class="cc-dropdown cc-select board-select">
+            <button class="cc-dd-toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+              <span class="cc-dd-value"></span>
+            </button>
+            <div class="cc-dd-menu" role="listbox"></div>
+            <select id="reply-sort" class="cc-hidden-select" aria-label="返信の並び替え">
+              <option value="oldest">古い順</option>
+              <option value="newest">新しい順</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div id="reply-list" class="board-reply-list"></div>
+    </section>
+
+    <section class="board-reply-form" id="reply-form">
+      <h2>返信を書く</h2>
+      <div class="reply-target" id="reply-target" hidden>
+        <span id="reply-target-label">返信先: —</span>
+        <button type="button" id="reply-target-clear">解除</button>
+      </div>
+      <textarea id="reply-body" rows="5" placeholder="返信内容を入力してください（写真添付はできません）"></textarea>
+      <div class="board-form-note">
+        <label class="filter-check"><input id="reply-notify" type="checkbox" /> 返信通知を受け取る</label>
+      </div>
+      <div class="board-form-actions">
+        <a class="btn btn-secondary" href="board.html"><i class="fa-solid fa-arrow-left"></i> 掲示板一覧へ戻る</a>
+        <div class="board-form-actions-right">
+          <div class="anon-toggle-row">
+            <span class="anon-toggle-label">匿名で返信</span>
+            <button class="board-anon-toggle" type="button" id="reply-anon-toggle" aria-pressed="false" aria-label="匿名で返信"></button>
+          </div>
+          <button class="btn btn-primary" type="button" id="reply-submit">返信する</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <img src="logo1_transparent.png" alt="CanadaClassi Logo" class="footer-logo" />
+          <div>
+            <div class="footer-brand-title">CanadaClassi</div>
+            <div class="footer-brand-sub">カナダくらし</div>
+          </div>
+        </div>
+        <p class="footer-desc">留学・ワーホリの暮らしをつなぐクラシファイド。</p>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">サイトマップ</div>
+        <div class="footer-sitemap">
+          <a href="index.html">ホーム</a>
+          <a href="list.html">クラシファイド</a>
+          <a href="static.html?type=school">学校情報</a>
+          <a href="board.html">掲示板</a>
+          <a href="static.html?type=links">外部リンク</a>
+          <a href="static.html?type=tips">お役立ち情報</a>
+          <a href="mypage.html?tab=inquiries">メッセージ</a>
+          <a href="login.html">ログイン</a>
+          <a href="mypage.html">マイページ</a>
+          <a href="post.html">投稿</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">ご案内</div>
+        <div class="footer-links">
+          <a href="static.html?type=notice">管理者からのお知らせ</a>
+          <a href="static.html?type=guide">ご利用ガイド</a>
+          <a href="static.html?type=post-guide">投稿・取引ガイド</a>
+          <a href="static.html?type=scam">詐欺などのご注意</a>
+          <a href="static.html?type=terms">利用規約</a>
+          <a href="static.html?type=privacy">プライバシーポリシー</a>
+          <a href="sitemap.html">サイトマップ</a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <div class="footer-copy">© 2024 CanadaClassi</div>
+    </div>
+  </footer>
+
+  <script src="./script.js"></script>
+  <script>
+    (function () {
+      if (typeof isCurrentUserBanned === "function" && isCurrentUserBanned()) {
+        if (typeof assertNotBanned === "function") {
+          assertNotBanned("アカウントが停止されているため返信できません。");
+        }
+        var noteEl = document.querySelector(".board-form-note");
+        if (noteEl) noteEl.textContent = "アカウントが停止されているため返信できません。";
+        ["reply-body", "reply-submit", "reply-anon-toggle"].forEach(function (id) {
+          var el = document.getElementById(id);
+          if (!el) return;
+          el.disabled = true;
+          el.setAttribute("aria-disabled", "true");
+        });
+      }
+      function timeAgo(createdAt) {
+        var t = createdAt ? new Date(createdAt).getTime() : 0;
+        if (!t) return "";
+        var diff = Date.now() - t;
+        if (diff < 0) diff = 0;
+        var hours = Math.floor(diff / 3600000);
+        if (hours < 1) return "1時間以内";
+        if (hours < 24) return hours + "時間前";
+        var days = Math.floor(hours / 24);
+        return days + "日前";
+      }
+
+      function escapeHtml(str) {
+        return String(str || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function normalizeCategory(category) {
+        var raw = String(category || "").trim();
+        if (!raw) return "住まい";
+        if (raw === "求人相談") return "仕事・ワーホリ";
+        if (raw === "生活情報") return "初心者Q&A";
+        if (raw === "イベント") return "イベント・交流";
+        if (raw === "学校/留学") return "学校・留学";
+        if (raw === "ビザ/移民") return "ビザ・手続き";
+        if (raw === "交通/車") return "交通";
+        if (raw === "売買") return "買い物・お金";
+        return raw;
+      }
+
+      function getTagClass(category) {
+        var normalized = normalizeCategory(category);
+        if (normalized === "住まい") return "housing";
+        if (normalized === "仕事・ワーホリ") return "work";
+        if (normalized === "学校・留学") return "school";
+        if (normalized === "ビザ・手続き") return "visa";
+        if (normalized === "医療・健康") return "health";
+        if (normalized === "交通") return "transport";
+        if (normalized === "買い物・お金") return "money";
+        if (normalized === "食・レストラン") return "food";
+        if (normalized === "イベント・交流") return "event";
+        if (normalized === "初心者Q&A") return "faq";
+        if (normalized === "トラブル注意") return "trouble";
+        if (normalized === "雑談") return "chat";
+        return "";
+      }
+
+      function getCategoryIcon(category) {
+        var normalized = normalizeCategory(category);
+        if (normalized === "住まい") return "fa-house";
+        if (normalized === "仕事・ワーホリ") return "fa-briefcase";
+        if (normalized === "学校・留学") return "fa-graduation-cap";
+        if (normalized === "ビザ・手続き") return "fa-passport";
+        if (normalized === "医療・健康") return "fa-heart-pulse";
+        if (normalized === "交通") return "fa-bus";
+        if (normalized === "買い物・お金") return "fa-cart-shopping";
+        if (normalized === "食・レストラン") return "fa-utensils";
+        if (normalized === "イベント・交流") return "fa-calendar-days";
+        if (normalized === "初心者Q&A") return "fa-circle-question";
+        if (normalized === "トラブル注意") return "fa-triangle-exclamation";
+        if (normalized === "雑談") return "fa-comments";
+        return "fa-layer-group";
+      }
+
+      function getCityLabel(item) {
+        var label = String(item.cityLabel || "").trim();
+        if (!label && typeof window.getDisplayAreaName === "function") {
+          label = String(window.getDisplayAreaName(item.area || "") || "").trim();
+        }
+        return label || "未設定";
+      }
+
+      var threadIsMock = false;
+      function getAuthorProfile(item) {
+        var name = String(item.authorName || item.author || "").trim() || "匿名";
+        var icon = String(item.authorIcon || "").trim() || "icon_red_gray.png";
+        if (window.CanadaClassiDev && window.CanadaClassiDev.ccGetDisplayNameWithMock) {
+          name = window.CanadaClassiDev.ccGetDisplayNameWithMock(name, threadIsMock);
+        }
+        return { name: name, icon: icon };
+      }
+
+      function renderReplies(list) {
+        var wrap = document.getElementById("reply-list");
+        if (!wrap) return null;
+        wrap.innerHTML = "";
+        if (!list || !list.length) {
+          var empty = document.createElement("p");
+          empty.className = "muted";
+          empty.textContent = "まだ返信がありません。";
+          wrap.appendChild(empty);
+          return null;
+        }
+
+        var lastCard = null;
+
+        function renderReplyItem(r, depth) {
+        var profile = getAuthorProfile(r);
+        var card = document.createElement("div");
+        card.className = "reply-card";
+        if (r && r.id) {
+          card.id = "reply-" + String(r.id);
+        }
+        if (window.CanadaClassiDev && window.CanadaClassiDev.ccIsBoardReplyHidden) {
+          if (window.CanadaClassiDev.ccIsBoardReplyHidden(r.id)) {
+            return null;
+          }
+        }
+
+          var head = document.createElement("div");
+          head.className = "reply-head";
+          head.innerHTML =
+            "<img class=\"reply-head-avatar\" src=\"" + escapeHtml(profile.icon) + "\" alt=\"\" />" +
+            "<span class=\"reply-author\">" + escapeHtml(profile.name) + "</span>" +
+            "<span class=\"reply-date\">" + timeAgo(r.created_at) + "</span>";
+
+          var body = document.createElement("p");
+          body.textContent = r.body || "";
+
+          var actions = document.createElement("div");
+          actions.className = "comment-actions";
+
+          var replyBtn = document.createElement("button");
+          replyBtn.type = "button";
+          replyBtn.className = "comment-action";
+          replyBtn.innerHTML = '<i class="fa-solid fa-reply"></i><span>返信</span>';
+          replyBtn.addEventListener("click", function () {
+            setReplyTarget(r.id, profile.name);
+            var formEl = document.getElementById("reply-form");
+            var textarea = document.getElementById("reply-body");
+            if (formEl && formEl.scrollIntoView) {
+              formEl.scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+            if (textarea && textarea.focus) textarea.focus({ preventScroll: true });
+          });
+          actions.appendChild(replyBtn);
+
+          var reportBtn = document.createElement("button");
+          reportBtn.type = "button";
+          reportBtn.className = "comment-action comment-report reply-report-btn";
+          reportBtn.innerHTML = '<i class="fa-regular fa-flag"></i><span>通報</span>';
+          reportBtn.setAttribute("aria-label", "通報する");
+          reportBtn.setAttribute("data-tip", "通報する");
+          reportBtn.addEventListener("click", function() {
+            if (window.CanadaClassiDev && window.CanadaClassiDev.openReportModal) {
+              window.CanadaClassiDev.openReportModal(r.id, "board_reply", "返信を通報", {
+                board_post_key: id,
+                reply_key: r.id
+              });
+            }
+          });
+          actions.appendChild(reportBtn);
+
+          card.appendChild(head);
+          card.appendChild(body);
+          card.appendChild(actions);
+
+          var children = Array.isArray(r.replies) ? r.replies : [];
+          if (children.length) {
+            var toggle = document.createElement("button");
+            toggle.type = "button";
+            toggle.className = "reply-branch-toggle";
+            toggle.setAttribute("aria-expanded", "true");
+            toggle.setAttribute("aria-label", "返信を折りたたむ");
+            toggle.innerHTML = "<span class=\"reply-branch-icon\">−</span>";
+            toggle.addEventListener("click", function () {
+              var next = !card.classList.contains("is-collapsed");
+              card.classList.toggle("is-collapsed", next);
+              toggle.setAttribute("aria-expanded", next ? "false" : "true");
+              toggle.setAttribute("aria-label", next ? "返信を展開" : "返信を折りたたむ");
+              toggle.innerHTML = next
+                ? "<span class=\"reply-branch-icon\">＋</span>"
+                : "<span class=\"reply-branch-icon\">−</span>";
+            });
+            card.appendChild(toggle);
+
+            var childWrap = document.createElement("div");
+            childWrap.className = "reply-children";
+            children.forEach(function (child) {
+              var childNode = renderReplyItem(child, depth + 1);
+              if (childNode) childWrap.appendChild(childNode);
+            });
+            card.appendChild(childWrap);
+          }
+
+          lastCard = card;
+          return card;
+        }
+
+        list.forEach(function (r) {
+          var node = renderReplyItem(r, 0);
+          if (node) wrap.appendChild(node);
+        });
+
+        return lastCard;
+      }
+
+      function getSortedReplies(list) {
+        var sorted = Array.isArray(list) ? list.slice() : [];
+        if (replySortEl && replySortEl.value === "newest") sorted.reverse();
+        return sorted;
+      }
+
+      var params = new URLSearchParams(location.search);
+      var id = params.get("thread") || "housing101";
+      if (!window.CanadaClassiDev || !window.CanadaClassiDev.ccGetBoardThreadById) return;
+      var thread = window.CanadaClassiDev.ccGetBoardThreadById(id, { includeHidden: true });
+      if (!thread) {
+        if (window.CanadaClassiDev && window.CanadaClassiDev.ccIsBoardHidden && window.CanadaClassiDev.ccIsBoardHidden(id)) {
+          if (typeof openGlobalConfirmModal === "function") {
+            openGlobalConfirmModal({
+              id: "cc-board-hidden-modal",
+              title: "アクセスできません",
+              message: "この投稿は非表示です。",
+              confirmText: "掲示板へ戻る",
+              cancelText: "掲示板へ戻る",
+              onConfirm: function () { window.location.href = "board.html"; }
+            });
+          }
+        }
+        return;
+      }
+      threadIsMock = !!(thread && (thread.isMock === true || thread.source === "mock"));
+
+      var titleEl = document.getElementById("thread-title");
+      var catEl = document.getElementById("thread-category");
+      var metaEl = document.getElementById("thread-meta");
+      var bodyEl = document.getElementById("thread-body");
+      var lastUpdatedEl = document.getElementById("board-last-updated");
+      var replySortEl = document.getElementById("reply-sort");
+      var replyTargetId = "";
+      var replyTargetEl = document.getElementById("reply-target");
+      var replyTargetLabelEl = document.getElementById("reply-target-label");
+      var replyTargetClear = document.getElementById("reply-target-clear");
+
+      function setReplyTarget(idValue, name) {
+        replyTargetId = String(idValue || "").trim();
+        if (!replyTargetEl || !replyTargetLabelEl) return;
+        if (!replyTargetId) {
+          replyTargetEl.hidden = true;
+          replyTargetLabelEl.textContent = "返信先: —";
+          return;
+        }
+        replyTargetLabelEl.textContent = "返信先: " + String(name || "匿名");
+        replyTargetEl.hidden = false;
+      }
+
+      function clearReplyTarget() {
+        replyTargetId = "";
+        if (replyTargetEl) replyTargetEl.hidden = true;
+        if (replyTargetLabelEl) replyTargetLabelEl.textContent = "返信先: —";
+      }
+
+      if (window.CanadaClassiDev && window.CanadaClassiDev.ccIsBoardHidden) {
+        var hidden = window.CanadaClassiDev.ccIsBoardHidden(id);
+        if (hidden) {
+          if (titleEl) titleEl.textContent = "アクセスできません";
+          if (bodyEl) bodyEl.textContent = "この投稿は非表示です。";
+          if (typeof openGlobalConfirmModal === "function") {
+            openGlobalConfirmModal({
+              id: "cc-board-hidden-modal",
+              title: "アクセスできません",
+              message: "この投稿は非表示です。",
+              confirmText: "掲示板へ戻る",
+              cancelText: "掲示板へ戻る",
+              onConfirm: function () { window.location.href = "board.html"; }
+            });
+          }
+          return;
+        }
+      }
+
+      var displayTitle = (window.CanadaClassiDev && window.CanadaClassiDev.ccGetBoardDisplayTitle)
+        ? window.CanadaClassiDev.ccGetBoardDisplayTitle(thread, "—")
+        : (thread.title || "—");
+      if (titleEl) titleEl.textContent = displayTitle;
+      if (catEl) {
+        catEl.innerHTML = "<i class=\"fa-solid " + getCategoryIcon(thread.category) + "\"></i>" + escapeHtml(normalizeCategory(thread.category));
+        catEl.className = "board-tag " + getTagClass(thread.category);
+      }
+      function formatLastUpdated(t) {
+        var replies = Array.isArray(t.replies) ? t.replies.length : 0;
+        var lastReply = replies ? t.replies[replies - 1] : null;
+        var lastAt = (lastReply && lastReply.created_at) ? lastReply.created_at : t.created_at;
+        return timeAgo(lastAt) + "更新";
+      }
+
+      function renderThreadMeta(t) {
+        if (metaEl) {
+          var replies = Array.isArray(t.replies) ? t.replies.length : 0;
+          var createdAt = t.created_at || "";
+          var last = replies ? ((t.replies[replies - 1] || {}).created_at || t.created_at) : t.created_at;
+          var cityLabel = getCityLabel(t);
+          var categoryLabel = normalizeCategory(t.category);
+          var authorProfile = getAuthorProfile(t);
+          metaEl.innerHTML =
+            "<span class=\"board-meta-item board-meta-author\"><img src=\"" + escapeHtml(authorProfile.icon) + "\" alt=\"\" /><span>" + escapeHtml(authorProfile.name) + "</span></span>" +
+            "<span class=\"board-meta-item\"><i class=\"fa-regular fa-calendar\"></i>投稿日 " + timeAgo(createdAt) + "</span>" +
+            "<span class=\"board-meta-item\"><i class=\"fa-regular fa-clock\"></i><span class=\"board-meta-strong\">" + timeAgo(last) + "更新</span></span>" +
+            "<span class=\"board-meta-item\"><i class=\"fa-solid fa-location-dot\"></i>" + escapeHtml(cityLabel) + "</span>" +
+            "<span class=\"board-meta-item\"><i class=\"fa-solid fa-tag\"></i>" + escapeHtml(categoryLabel) + "</span>" +
+            "<span class=\"board-meta-item\"><i class=\"fa-regular fa-comment\"></i>返信 " + replies + "</span>";
+          
+          var reportBtn = document.createElement("button");
+          reportBtn.type = "button";
+          reportBtn.className = "cc-icon-button board-meta-report";
+          reportBtn.innerHTML = '<i class="fa-regular fa-flag"></i>';
+          reportBtn.setAttribute("aria-label", "通報する");
+          reportBtn.setAttribute("data-tip", "通報する");
+          reportBtn.addEventListener("click", function() {
+             if (window.CanadaClassiDev && window.CanadaClassiDev.openReportModal) {
+               var reportTitle = (window.CanadaClassiDev && window.CanadaClassiDev.ccGetBoardDisplayTitle)
+                 ? window.CanadaClassiDev.ccGetBoardDisplayTitle(t, "")
+                 : (t.title || "");
+               window.CanadaClassiDev.openReportModal(id, "board_post", reportTitle, {
+                 board_post_key: id
+               });
+             }
+          });
+          metaEl.appendChild(reportBtn);
+        }
+          if (lastUpdatedEl) {
+            lastUpdatedEl.textContent = "最終更新: " + formatLastUpdated(t);
+          }
+      }
+
+      renderThreadMeta(thread);
+      if (bodyEl) bodyEl.textContent = thread.body || "";
+
+      renderReplies(getSortedReplies(thread.replies || []));
+      if (location.hash && location.hash.indexOf("#reply-") === 0) {
+        var target = document.getElementById(location.hash.slice(1));
+        if (target && target.scrollIntoView) {
+          target.scrollIntoView({ behavior: "smooth", block: "center" });
+          target.classList.add("is-highlight");
+          setTimeout(function () {
+            target.classList.remove("is-highlight");
+          }, 2500);
+        } else if (console && console.warn) {
+          console.warn("reply anchor not found", location.hash);
+        }
+      }
+
+      var notify = document.getElementById("reply-notify");
+      if (notify) {
+        var note = document.createElement("span");
+        note.className = "board-notify";
+        note.textContent = "通知オン";
+        note.style.display = "none";
+        notify.parentNode.appendChild(note);
+        notify.addEventListener("change", function () {
+          note.style.display = notify.checked ? "inline-flex" : "none";
+        });
+      }
+
+      if (replyTargetClear) {
+        replyTargetClear.addEventListener("click", function () {
+          clearReplyTarget();
+        });
+      }
+
+      var replyAnonToggle = document.getElementById("reply-anon-toggle");
+      var replyIsAnonymous = false;
+      if (replyAnonToggle) {
+        replyAnonToggle.addEventListener("click", function () {
+          replyIsAnonymous = !replyIsAnonymous;
+          replyAnonToggle.classList.toggle("is-active", replyIsAnonymous);
+          replyAnonToggle.setAttribute("aria-pressed", replyIsAnonymous ? "true" : "false");
+        });
+      }
+
+      function handleReplySubmit(isAnonymous) {
+        if (typeof assertNotBanned === "function") {
+          if (!assertNotBanned("アカウントが停止されているため返信できません。")) return;
+        }
+        var textarea = document.getElementById("reply-body");
+        var text = textarea ? textarea.value.trim() : "";
+        if (!text) return;
+        if (window.CanadaClassiDev && typeof window.CanadaClassiDev.ccCheckNgWords === "function") {
+          if (!window.CanadaClassiDev.ccCheckNgWords(text, "board")) return;
+        }
+        var profile = (typeof ccGetDefaultAuthorProfile === "function")
+          ? ccGetDefaultAuthorProfile()
+          : { authorName: "ユーザー", authorIcon: "icon_red_gray.png", isAnonymous: false };
+        var authorName = isAnonymous ? "匿名" : profile.authorName;
+        var authorIcon = isAnonymous
+          ? (typeof ccPickAnonymousIcon === "function" ? ccPickAnonymousIcon() : "icon_red_gray.png")
+          : profile.authorIcon;
+        window.CanadaClassiDev.ccAddBoardReply(id, {
+          id: "reply_" + Date.now() + "_" + Math.random().toString(36).slice(2, 6),
+          parentReplyId: replyTargetId || "",
+          authorName: authorName,
+          authorIcon: authorIcon,
+          isAnonymous: isAnonymous,
+          body: text,
+          created_at: new Date().toISOString()
+        }, replyTargetId);
+        textarea.value = "";
+        clearReplyTarget();
+        var updated = window.CanadaClassiDev.ccGetBoardThreadById(id);
+        var sorted = updated ? getSortedReplies(updated.replies || []) : [];
+        var lastCard = renderReplies(sorted);
+        if (lastCard && lastCard.scrollIntoView) {
+          lastCard.classList.add("is-highlight");
+          lastCard.scrollIntoView({ behavior: "smooth", block: "center" });
+          setTimeout(function () { lastCard.classList.remove("is-highlight"); }, 1200);
+        }
+        if (updated) renderThreadMeta(updated);
+      }
+
+      var submit = document.getElementById("reply-submit");
+      if (submit) {
+        submit.addEventListener("click", function () { handleReplySubmit(replyIsAnonymous); });
+      }
+
+      if (replySortEl) {
+        replySortEl.addEventListener("change", function () {
+          var updated = window.CanadaClassiDev.ccGetBoardThreadById(id);
+          if (!updated) return;
+          renderReplies(getSortedReplies(updated.replies || []));
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

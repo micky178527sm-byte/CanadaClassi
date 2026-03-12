@@ -1,0 +1,7 @@
+
+# --- Codex local notification system (do not commit) ---
+.codex_status.json
+tools/codex_watch.py
+tools/codex_notify_imessage.sh
+.env.local
+tools/.env.local

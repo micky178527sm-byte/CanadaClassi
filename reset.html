@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>新しいパスワード設定 | CanadaClassi</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    .auth-main { padding: 24px 0 60px; }
+    .auth-container { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+    .auth-card {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 16px;
+      box-shadow: 0 18px 44px rgba(0,0,0,0.08);
+      padding: 28px;
+    }
+    .auth-card h1 { margin: 0 0 6px; font-size: 1.3rem; }
+    .auth-card .sub { color: #666; margin: 0 0 18px; font-size: 0.95rem; }
+    .form-grid { display: grid; gap: 14px; }
+    .form-row label { font-weight: 700; margin-bottom: 6px; display: block; }
+    .form-row input { width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid #ddd; }
+    .auth-actions { margin-top: 4px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .inline-note { margin: 0; color: #666; font-size: 0.85rem; }
+    .status-box {
+      margin-top: 8px;
+      font-size: 0.95rem;
+      color: #0f5132;
+      background: #d1e7dd;
+      border: 1px solid #badbcc;
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+    .helper-links { margin-top: 12px; display: flex; gap: 12px; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <header class="site-header" data-cc-header>
+    <div class="container header-inner">
+      <div class="logo">
+        <a href="./index.html" class="logo-link" aria-label="CanadaClassi ホーム">
+          <img src="./logo1_transparent.png" alt="CanadaClassi Logo" class="logo-img" />
+          <div class="logo-text">
+            <span class="en">CanadaClassi</span>
+            <span class="ja">カナダくらし</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="header-right-pc">
+        <div class="auth-buttons">
+          <div class="cc-notice">
+            <button type="button" class="btn-icon btn-notice-bell" id="notifBell" title="お知らせ" aria-label="お知らせ" data-cc-notice-toggle>
+              <svg class="cc-icon cc-bell-icon" viewBox="0 0 448 512" aria-hidden="true">
+                <path d="M224 512a64 64 0 0 0 64-64H160a64 64 0 0 0 64 64zm215.39-149.33C419.37 343 384 312 384 240c0-79.7-56.5-145.6-128-158.5V48a48 48 0 1 0-96 0v33.5C88.5 94.4 32 160.3 32 240c0 72-35.4 103-55.4 122.7A31.9 31.9 0 0 0 0 384a32 32 0 0 0 32 32h384a32 32 0 0 0 32-32 31.9 31.9 0 0 0-8.61-21.33z" fill="currentColor"/>
+              </svg>
+              <span class="sr-only cc-notif-label">お知らせ</span>
+              <span class="notification-dot"></span>
+            </button>
+            <div class="cc-notice-dropdown" data-cc-notice-dropdown hidden>
+              <div class="cc-notice-header">
+                <div class="cc-notice-title">お知らせ</div>
+                <label class="cc-notice-filter">
+                  <input type="checkbox" data-cc-notice-unread />
+                  <span>未読のみ</span>
+                </label>
+                <button type="button" class="cc-notice-markall" data-cc-notice-markall>すべて既読</button>
+              </div>
+              <div class="cc-notice-list" data-cc-notice-list></div>
+              <div class="cc-notice-footer">
+                <a href="mypage.html?tab=notices">すべて見る</a>
+              </div>
+            </div>
+          </div>
+
+          <a href="post.html" class="btn-post" id="post-button">
+            <i class="fa-solid fa-camera"></i> 投稿作成
+          </a>
+
+          <a href="login.html" class="btn-login" id="login-button">
+            <i class="fa-regular fa-circle-user"></i> ログイン・新規登録
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="auth-main">
+    <div class="auth-container">
+      <section class="auth-card" aria-label="新しいパスワード設定">
+        <h1>新しいパスワード設定</h1>
+        <p class="sub">新しいパスワードを入力してください。</p>
+
+        <div class="status-box" id="reset-status" hidden></div>
+        <div class="field-error field-error--wrap field-error-span" id="reset-error" hidden></div>
+        <div class="helper-links" id="reset-helper-links" hidden>
+          <a href="forgot.html">再設定リンクを再送</a>
+          <a href="login.html">ログインへ戻る</a>
+        </div>
+
+        <div id="reset-form-wrap">
+          <form id="reset-form" class="form-grid" autocomplete="off">
+          <div class="form-row">
+            <label for="reset-pass">新しいパスワード</label>
+            <input id="reset-pass" type="password" autocomplete="new-password" placeholder="8〜16文字以内" required />
+          </div>
+          <div class="form-row">
+            <label for="reset-pass2">新しいパスワード（確認）</label>
+            <input id="reset-pass2" type="password" autocomplete="new-password" placeholder="もう一度入力" required />
+          </div>
+          <p class="inline-note">パスワードは8〜16文字以内。使用できる文字：英字・数字・記号（スペース不可）。</p>
+
+          <div class="auth-actions">
+            <button class="btn-primary" type="submit">パスワードを更新</button>
+            <a class="btn-secondary" href="login.html">ログインへ戻る</a>
+          </div>
+          </form>
+        </div>
+
+        <div class="helper-links">
+          <a href="forgot.html">再設定リンクを再送</a>
+          <a href="index.html">ホームに戻る</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer" aria-label="フッター">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <img src="logo1_transparent.png" alt="CanadaClassi Logo" class="footer-logo" />
+          <div>
+            <div class="footer-brand-title">CanadaClassi</div>
+            <div class="footer-brand-sub">カナダくらし</div>
+          </div>
+        </div>
+        <p class="footer-desc">留学・ワーホリの暮らしをつなぐクラシファイド。</p>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">サイトマップ</div>
+        <div class="footer-sitemap">
+          <a href="index.html">ホーム</a>
+          <a href="list.html">クラシファイド</a>
+          <a href="static.html?type=school">学校情報</a>
+          <a href="board.html">掲示板</a>
+          <a href="static.html?type=links">外部リンク</a>
+          <a href="static.html?type=tips">お役立ち情報</a>
+          <a href="mypage.html?tab=inquiries">メッセージ</a>
+          <a href="login.html">ログイン</a>
+          <a href="mypage.html">マイページ</a>
+          <a href="post.html">投稿</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">ご案内</div>
+        <div class="footer-links">
+          <a href="static.html?type=notice">管理者からのお知らせ</a>
+          <a href="static.html?type=guide">ご利用ガイド</a>
+          <a href="static.html?type=post-guide">投稿・取引ガイド</a>
+          <a href="static.html?type=scam">詐欺などのご注意</a>
+          <a href="static.html?type=terms">利用規約</a>
+          <a href="static.html?type=privacy">プライバシーポリシー</a>
+          <a href="sitemap.html">サイトマップ</a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <div class="footer-copy">© 2024 CanadaClassi</div>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

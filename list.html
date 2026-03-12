@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>クラシファイド | CanadaClassi</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    /* list.html: page-specific tweaks only.
+       Header / global-nav styling must come from style.css so index.html and list.html stay perfectly identical. */
+  </style>
+</head>
+<body class="list-page">
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">
+        <a href="index.html" class="logo-link">
+          <img src="logo1_transparent.png" alt="CanadaClassi Logo" class="logo-img" />
+          <div class="logo-text">
+            <span class="en">CanadaClassi</span>
+            <span class="ja">カナダくらし</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- list.html でも他ページと同様のヘッダー右側UIを表示（style.css / script.js と整合するクラス名で実装） -->
+      <div class="header-right-pc">
+        <div class="auth-buttons">
+          <div class="cc-notice">
+            <button type="button" class="btn-icon btn-notice-bell" id="notifBell" title="お知らせ" aria-label="お知らせ" data-cc-notice-toggle>
+              <svg class="cc-icon cc-bell-icon" viewBox="0 0 448 512" aria-hidden="true">
+                <path d="M224 512a64 64 0 0 0 64-64H160a64 64 0 0 0 64 64zm215.39-149.33C419.37 343 384 312 384 240c0-79.7-56.5-145.6-128-158.5V48a48 48 0 1 0-96 0v33.5C88.5 94.4 32 160.3 32 240c0 72-35.4 103-55.4 122.7A31.9 31.9 0 0 0 0 384a32 32 0 0 0 32 32h384a32 32 0 0 0 32-32 31.9 31.9 0 0 0-8.61-21.33z" fill="currentColor"/>
+              </svg>
+              <span class="sr-only cc-notif-label">お知らせ</span>
+              <span class="notification-dot"></span>
+            </button>
+            <div class="cc-notice-dropdown" data-cc-notice-dropdown hidden>
+              <div class="cc-notice-header">
+                <div class="cc-notice-title">お知らせ</div>
+                <label class="cc-notice-filter">
+                  <input type="checkbox" data-cc-notice-unread />
+                  <span>未読のみ</span>
+                </label>
+                <button type="button" class="cc-notice-markall" data-cc-notice-markall>すべて既読</button>
+              </div>
+              <div class="cc-notice-list" data-cc-notice-list></div>
+              <div class="cc-notice-footer">
+                <a href="mypage.html?tab=notices">すべて見る</a>
+              </div>
+            </div>
+          </div>
+
+          <a href="post.html" class="btn-post" id="post-button">
+            <i class="fa-solid fa-camera"></i> 投稿作成
+          </a>
+
+          <a href="login.html" class="btn-login" id="login-button">
+            <i class="fa-regular fa-circle-user"></i> ログイン・新規登録
+          </a>
+        </div>
+
+        <div class="settings-group">
+          <select id="area-select" class="cc-hidden-select" aria-label="エリア（主要）">
+            <option value="canada_all">🇨🇦 全カナダ</option>
+            <option value="vancouver">バンクーバー, BC</option>
+            <option value="victoria">ビクトリア, BC</option>
+            <option value="whistler">ウィスラー, BC</option>
+            <option value="kelowna">ケロウナ, BC</option>
+            <option value="calgary">カルガリー, AB</option>
+            <option value="banff">バンフ, AB</option>
+            <option value="edmonton">エドモントン, AB</option>
+            <option value="winnipeg">ウィニペグ, MB</option>
+            <option value="ottawa">オタワ, ON</option>
+            <option value="toronto">トロント, ON</option>
+            <option value="montreal">モントリオール, QC</option>
+            <option value="halifax">ハリファックス, NS</option>
+            <option value="other">その他（カナダの都市）</option>
+            <option value="japan">🇯🇵 日本</option>
+          </select>
+          <select id="area-select-sub" class="cc-hidden-select" aria-label="その他の都市">
+            <option value="">その他のカナダ都市</option>
+            <optgroup label="ユーコン準州（YT）">
+              <option value="whitehorse">ホワイトホース, YT</option>
+            </optgroup>
+            <optgroup label="ブリティッシュコロンビア州（BC）">
+              <option value="abbotsford">アボッツフォード, BC</option>
+              <option value="burnaby">バーナビー, BC</option>
+              <option value="kamloops">カムループス, BC</option>
+              <option value="nanaimo">ナナイモ, BC</option>
+              <option value="prince_george">プリンスジョージ, BC</option>
+              <option value="richmond">リッチモンド, BC</option>
+              <option value="surrey">サレー, BC</option>
+            </optgroup>
+            <optgroup label="アルバータ州（AB）">
+              <option value="kananaskis">カナナスキス, AB</option>
+              <option value="canmore">キャンモア, AB</option>
+              <option value="fort_mcmurray">フォートマクマレー, AB</option>
+              <option value="medicine_hat">メディシンハット, AB</option>
+              <option value="lake_louise">ルイーズ湖, AB</option>
+              <option value="red_deer">レッドディア, AB</option>
+              <option value="lethbridge">レスブリッジ, AB</option>
+            </optgroup>
+            <optgroup label="サスカチュワン州（SK）">
+              <option value="regina">レジャイナ, SK</option>
+              <option value="saskatoon">サスカトゥーン, SK</option>
+            </optgroup>
+            <optgroup label="マニトバ州（MB）">
+              <option value="brandon">ブランドン, MB</option>
+            </optgroup>
+            <optgroup label="オンタリオ州（ON）">
+              <option value="oakville">オークビル, ON</option>
+              <option value="oshawa">オシャワ, ON</option>
+              <option value="kingston">キングストン, ON</option>
+              <option value="kitchener">キッチナー, ON</option>
+              <option value="guelph">ゲルフ, ON</option>
+              <option value="sudbury">サドベリー, ON</option>
+              <option value="thunder_bay">サンダーベイ, ON</option>
+              <option value="niagara_falls">ナイアガラフォールズ, ON</option>
+              <option value="barrie">バリー, ON</option>
+              <option value="hamilton">ハミルトン, ON</option>
+              <option value="mississauga">ミシサガ, ON</option>
+              <option value="markham">マーカム, ON</option>
+              <option value="vaughan">ヴォーン, ON</option>
+              <option value="london_on">ロンドン, ON</option>
+              <option value="waterloo">ウォータールー, ON</option>
+              <option value="windsor">ウィンザー, ON</option>
+            </optgroup>
+            <optgroup label="ケベック州（QC）">
+              <option value="gatineau">ガティノー, QC</option>
+              <option value="laval">ラヴァル, QC</option>
+              <option value="longueuil">ロンゲール, QC</option>
+              <option value="quebec_city">ケベックシティ, QC</option>
+            </optgroup>
+            <optgroup label="ニューブランズウィック州（NB）">
+              <option value="fredericton">フレデリクトン, NB</option>
+              <option value="moncton">モンクトン, NB</option>
+              <option value="saint_john">セントジョン, NB</option>
+            </optgroup>
+            <optgroup label="プリンスエドワードアイランド州（PE）">
+              <option value="charlottetown">シャーロットタウン, PE</option>
+            </optgroup>
+            <optgroup label="ノバスコシア州（NS）">
+              <option value="sydney_ns">シドニー, NS</option>
+            </optgroup>
+            <optgroup label="ニューファンドランド・ラブラドール州（NL）">
+              <option value="st_johns">セントジョンズ, NL</option>
+            </optgroup>
+          </select>
+          <select id="lang-select" class="cc-hidden-select" aria-label="言語">
+            <option value="ja">JP</option>
+            <option value="en">EN</option>
+            <option value="fr">FR</option>
+          </select>
+
+          <div class="cc-dropdown" data-cc-dropdown="area">
+            <button class="cc-dd-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-location-dot"></i>
+              <span class="cc-dd-value" data-cc-dd-value="area"></span>
+            </button>
+            <div class="cc-dd-menu" role="menu">
+              <div class="cc-dd-note">表示する都市を切り替え、カレンダーや投稿一覧の内容を変更します。</div>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="canada_all">🇨🇦 全カナダ</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="vancouver">バンクーバー, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="victoria">ビクトリア, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="whistler">ウィスラー, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="kelowna">ケロウナ, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="calgary">カルガリー, AB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="banff">バンフ, AB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="edmonton">エドモントン, AB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="winnipeg">ウィニペグ, MB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="ottawa">オタワ, ON</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="toronto">トロント, ON</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="montreal">モントリオール, QC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="halifax">ハリファックス, NS</button>
+              <div class="cc-dd-submenu" data-cc-dd-submenu>
+                <button class="cc-dd-item cc-dd-subtoggle" type="button" data-cc-dd-subtoggle>
+                  その他のカナダ都市
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
+                <div class="cc-dd-subpanel" hidden>
+                  <div class="cc-dd-group-title">ユーコン準州（YT）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="whitehorse">ホワイトホース, YT</button>
+                  <div class="cc-dd-group-title">ブリティッシュコロンビア州（BC）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="abbotsford">アボッツフォード, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="burnaby">バーナビー, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kamloops">カムループス, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="nanaimo">ナナイモ, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="prince_george">プリンスジョージ, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="richmond">リッチモンド, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="surrey">サレー, BC</button>
+                  <div class="cc-dd-group-title">アルバータ州（AB）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kananaskis">カナナスキス, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="canmore">キャンモア, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="fort_mcmurray">フォートマクマレー, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="medicine_hat">メディシンハット, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="lake_louise">ルイーズ湖, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="red_deer">レッドディア, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="lethbridge">レスブリッジ, AB</button>
+                  <div class="cc-dd-group-title">サスカチュワン州（SK）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="regina">レジャイナ, SK</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="saskatoon">サスカトゥーン, SK</button>
+                  <div class="cc-dd-group-title">マニトバ州（MB）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="brandon">ブランドン, MB</button>
+                  <div class="cc-dd-group-title">オンタリオ州（ON）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="oakville">オークビル, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="oshawa">オシャワ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kingston">キングストン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kitchener">キッチナー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="guelph">ゲルフ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="sudbury">サドベリー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="thunder_bay">サンダーベイ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="niagara_falls">ナイアガラフォールズ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="barrie">バリー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="hamilton">ハミルトン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="mississauga">ミシサガ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="markham">マーカム, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="vaughan">ヴォーン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="london_on">ロンドン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="waterloo">ウォータールー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="windsor">ウィンザー, ON</button>
+                  <div class="cc-dd-group-title">ケベック州（QC）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="gatineau">ガティノー, QC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="laval">ラヴァル, QC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="longueuil">ロンゲール, QC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="quebec_city">ケベックシティ, QC</button>
+                  <div class="cc-dd-group-title">ニューブランズウィック州（NB）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="fredericton">フレデリクトン, NB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="moncton">モンクトン, NB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="saint_john">セントジョン, NB</button>
+                  <div class="cc-dd-group-title">プリンスエドワードアイランド州（PE）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="charlottetown">シャーロットタウン, PE</button>
+                  <div class="cc-dd-group-title">ノバスコシア州（NS）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="sydney_ns">シドニー, NS</button>
+                  <div class="cc-dd-group-title">ニューファンドランド・ラブラドール州（NL）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="st_johns">セントジョンズ, NL</button>
+                </div>
+              </div>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="japan">🇯🇵 日本</button>
+            </div>
+          </div>
+
+          <div class="cc-dropdown" data-cc-dropdown="lang">
+            <button class="cc-dd-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-globe"></i>
+              <span class="cc-dd-value" data-cc-dd-value="lang"></span>
+            </button>
+            <div class="cc-dd-menu" role="menu">
+              <div class="cc-dd-note">表示言語を切り替えるためのプルダウンです。</div>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="lang" data-value="ja">JP</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="lang" data-value="en">EN</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="lang" data-value="fr">FR</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="global-nav">
+        <div class="container nav-grid">
+            <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i> ホーム</a>
+            <a href="list.html" class="nav-item active" aria-current="page"><i class="fa-solid fa-tags"></i> クラシファイド</a>
+            <a href="static.html?type=school" class="nav-item"><i class="fa-solid fa-graduation-cap"></i> 学校情報</a>
+            <a href="board.html" class="nav-item"><i class="fa-solid fa-comments"></i> 掲示板</a>
+            <a href="static.html?type=links" class="nav-item"><i class="fa-solid fa-arrow-up-right-from-square"></i> 外部リンク</a>
+            <a href="static.html?type=tips" class="nav-item"><i class="fa-solid fa-lightbulb"></i> お役立ち情報</a>
+        </div>
+    </nav>
+  </header>
+
+  <main class="container main-layout">
+    <!-- 左：絞り込み（見た目だけ。機能は後で） -->
+    <aside class="filters">
+      <h2 class="filters-title"><img src="logo4_transparent.png" alt="" class="filters-logo" />絞り込み検索</h2>
+      <div class="filter-toast" id="filter-toast" role="status" aria-live="polite" hidden></div>
+
+      <div class="filter-block">
+        <label class="filter-label" for="q">キーワード</label>
+        <input id="q" type="text" class="filter-input" placeholder="例: ソファ, 英語, 帰国売り" />
+      </div>
+
+      <div class="filter-block">
+        <label class="filter-label" for="category-select">カテゴリー</label>
+        <div class="cc-dropdown cc-filter-dropdown" data-cc-filter-select="category-select">
+          <select id="category-select" class="filter-select cc-hidden-select">
+            <option value="all">すべて</option>
+            <option value="housing">住まい</option>
+            <option value="jobs">求人</option>
+            <option value="sell">売ります・譲ります</option>
+            <option value="help">助け合い</option>
+            <option value="services">サービス・講座</option>
+            <option value="community">仲間募集・交流</option>
+            <option value="events">イベント</option>
+            <option value="school">スクール</option>
+          </select>
+          <button class="cc-dd-toggle cc-filter-toggle" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="カテゴリー">
+            <span class="cc-dd-value"></span>
+          </button>
+          <div class="cc-dd-menu" role="listbox"></div>
+        </div>
+      </div>
+
+      <div class="filter-block">
+        <label class="filter-label" for="subcategory-select">ジャンル（詳細）</label>
+        <div class="cc-dropdown cc-filter-dropdown" data-cc-filter-select="subcategory-select">
+          <select id="subcategory-select" class="filter-select cc-hidden-select" disabled>
+            <option value="">カテゴリーを選択してください</option>
+          </select>
+          <button class="cc-dd-toggle cc-filter-toggle" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="ジャンル（詳細）">
+            <span class="cc-dd-value"></span>
+          </button>
+          <div class="cc-dd-menu" role="listbox"></div>
+        </div>
+      </div>
+
+      <div class="filter-block">
+        <label class="filter-label">エリア</label>
+        <div class="post-area-group" data-cc-area-group>
+          <div class="select-box">
+            <select class="filter-select cc-hidden-select" data-cc-area-role="primary" data-cc-area-scope="local">
+              <option value="canada_all">🇨🇦 全カナダ</option>
+              <optgroup label="主要都市">
+                <option value="vancouver">バンクーバー, BC</option>
+                <option value="victoria">ビクトリア, BC</option>
+                <option value="whistler">ウィスラー, BC</option>
+                <option value="kelowna">ケロウナ, BC</option>
+                <option value="calgary">カルガリー, AB</option>
+                <option value="banff">バンフ, AB</option>
+                <option value="edmonton">エドモントン, AB</option>
+                <option value="winnipeg">ウィニペグ, MB</option>
+                <option value="ottawa">オタワ, ON</option>
+                <option value="toronto">トロント, ON</option>
+                <option value="montreal">モントリオール, QC</option>
+                <option value="halifax">ハリファックス, NS</option>
+              </optgroup>
+              <optgroup label="その他のカナダ都市">
+                <option value="whitehorse">ホワイトホース, YT</option>
+                <option value="abbotsford">アボッツフォード, BC</option>
+                <option value="burnaby">バーナビー, BC</option>
+                <option value="kamloops">カムループス, BC</option>
+                <option value="nanaimo">ナナイモ, BC</option>
+                <option value="prince_george">プリンスジョージ, BC</option>
+                <option value="richmond">リッチモンド, BC</option>
+                <option value="surrey">サレー, BC</option>
+                <option value="kananaskis">カナナスキス, AB</option>
+                <option value="canmore">キャンモア, AB</option>
+                <option value="fort_mcmurray">フォートマクマレー, AB</option>
+                <option value="medicine_hat">メディシンハット, AB</option>
+                <option value="lake_louise">ルイーズ湖, AB</option>
+                <option value="red_deer">レッドディア, AB</option>
+                <option value="lethbridge">レスブリッジ, AB</option>
+                <option value="regina">レジャイナ, SK</option>
+                <option value="saskatoon">サスカトゥーン, SK</option>
+                <option value="brandon">ブランドン, MB</option>
+                <option value="oakville">オークビル, ON</option>
+                <option value="oshawa">オシャワ, ON</option>
+                <option value="kingston">キングストン, ON</option>
+                <option value="kitchener">キッチナー, ON</option>
+                <option value="guelph">ゲルフ, ON</option>
+                <option value="sudbury">サドベリー, ON</option>
+                <option value="thunder_bay">サンダーベイ, ON</option>
+                <option value="niagara_falls">ナイアガラフォールズ, ON</option>
+                <option value="barrie">バリー, ON</option>
+                <option value="hamilton">ハミルトン, ON</option>
+                <option value="mississauga">ミシサガ, ON</option>
+                <option value="markham">マーカム, ON</option>
+                <option value="vaughan">ヴォーン, ON</option>
+                <option value="london_on">ロンドン, ON</option>
+                <option value="waterloo">ウォータールー, ON</option>
+                <option value="windsor">ウィンザー, ON</option>
+                <option value="gatineau">ガティノー, QC</option>
+                <option value="laval">ラヴァル, QC</option>
+                <option value="longueuil">ロンゲール, QC</option>
+                <option value="quebec_city">ケベックシティ, QC</option>
+                <option value="fredericton">フレデリクトン, NB</option>
+                <option value="moncton">モンクトン, NB</option>
+                <option value="saint_john">セントジョン, NB</option>
+                <option value="charlottetown">シャーロットタウン, PE</option>
+                <option value="sydney_ns">シドニー, NS</option>
+                <option value="st_johns">セントジョンズ, NL</option>
+              </optgroup>
+              <option value="japan">🇯🇵 日本</option>
+            </select>
+            <div class="cc-dropdown cc-filter-dropdown" data-cc-filter-select="area-primary">
+              <button class="cc-dd-toggle cc-filter-toggle" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="エリア">
+                <i class="fa-solid fa-location-dot"></i>
+                <span class="cc-dd-value"></span>
+              </button>
+              <div class="cc-dd-menu" role="listbox"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="filter-block">
+        <label class="filter-label">価格帯（CA$）</label>
+        <div class="filter-range">
+          <div class="filter-range-row">
+            <input type="text" class="filter-input" placeholder="Min" inputmode="numeric" />
+            <span class="range-note">から</span>
+          </div>
+          <div class="filter-range-row">
+            <input type="text" class="filter-input" placeholder="Max" inputmode="numeric" />
+            <span class="range-note">まで</span>
+          </div>
+        </div>
+        <label class="filter-check"><input id="filter-free" type="checkbox" /> 無料（Free）のみ</label>
+      </div>
+
+      <div class="filter-block">
+        <label class="filter-label">投稿日時</label>
+        <div class="filter-radio">
+          <label><input type="radio" name="age" value="all" checked> 全期間</label>
+          <label><input type="radio" name="age" value="24h"> 24時間以内</label>
+          <label><input type="radio" name="age" value="7d"> 1週間以内</label>
+        </div>
+      </div>
+
+      <div class="filter-block" id="event-date-block">
+        <label class="filter-label" id="event-date-label">イベント開催日</label>
+        <div class="filter-range">
+          <div class="filter-range-row">
+            <input type="date" class="filter-input" id="event-date-from" />
+            <span class="range-note">から</span>
+          </div>
+          <div class="filter-range-row">
+            <input type="date" class="filter-input" id="event-date-to" />
+            <span class="range-note">まで</span>
+          </div>
+        </div>
+        <label class="filter-check" id="event-only-row"><input id="filter-event-only" type="checkbox" /> イベント・スクールのみ表示</label>
+      </div>
+
+      <div class="filter-block">
+        <label class="filter-check" id="show-completed-label">
+          <input id="cc-show-completed" type="checkbox" checked />
+          <span id="show-completed-text">受付完了分も表示</span>
+        </label>
+      </div>
+
+      <div class="filter-block">
+        <button class="btn-search" type="button" id="cc-search-button">この条件で検索</button>
+      </div>
+    </aside>
+
+    <!-- 右：一覧 -->
+    <section class="results">
+      <div class="results-header">
+        <h1 class="results-title"><span id="results-area">全カナダ</span> の検索結果 <span id="results-count">0</span>件</h1>
+        <div class="results-sort cc-sort-row">
+          <div class="cc-dropdown cc-select">
+            <button class="cc-dd-toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+              <span class="cc-dd-value"></span>
+            </button>
+            <div class="cc-dd-menu" role="listbox"></div>
+            <select class="sort-select cc-hidden-select" aria-label="並び替え">
+              <option>新しい順</option>
+              <option>古い順</option>
+              <option>価格が高い順</option>
+              <option>価格が低い順</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- 広告枠（ダミー） -->
+      <div class="ad-wide">横長バナー広告スペース</div>
+
+      <!-- カード一覧 -->
+      <div class="list-grid" id="list-cards"></div>
+
+      <div class="pager" aria-label="ページネーション" id="list-pager"></div>
+    </section>
+
+    <aside class="ad-rail" aria-label="縦長広告">縦長広告スペース</aside>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <img src="logo1_transparent.png" alt="CanadaClassi Logo" class="footer-logo" />
+          <div>
+            <div class="footer-brand-title">CanadaClassi</div>
+            <div class="footer-brand-sub">カナダくらし</div>
+          </div>
+        </div>
+        <p class="footer-desc">留学・ワーホリの暮らしをつなぐクラシファイド。</p>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">サイトマップ</div>
+        <div class="footer-sitemap">
+          <a href="index.html">ホーム</a>
+          <a href="list.html">クラシファイド</a>
+          <a href="static.html?type=school">学校情報</a>
+          <a href="board.html">掲示板</a>
+          <a href="static.html?type=links">外部リンク</a>
+          <a href="static.html?type=tips">お役立ち情報</a>
+          <a href="mypage.html?tab=inquiries">メッセージ</a>
+          <a href="login.html">ログイン</a>
+          <a href="mypage.html">マイページ</a>
+          <a href="post.html">投稿</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">ご案内</div>
+        <div class="footer-links">
+          <a href="static.html?type=notice">管理者からのお知らせ</a>
+          <a href="static.html?type=guide">ご利用ガイド</a>
+          <a href="static.html?type=post-guide">投稿・取引ガイド</a>
+          <a href="static.html?type=scam">詐欺などのご注意</a>
+          <a href="static.html?type=terms">利用規約</a>
+          <a href="static.html?type=privacy">プライバシーポリシー</a>
+          <a href="sitemap.html">サイトマップ</a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <div class="footer-copy">© 2024 CanadaClassi</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <script>
+    // list.html: 絞り込み + 取引ステータス + ページング
+    (function () {
+      var SHOW_COMPLETED_KEY = 'cc_filter_show_completed';
+      var PER_PAGE = 9;
+      var currentPage = 1;
+      var lastFiltered = [];
+
+      function isTruthy(v) {
+        if (v === null || v === undefined) return false;
+        var s = String(v).toLowerCase().trim();
+        return s === 'true' || s === '1' || s === 'yes';
+      }
+
+      function getShowCompleted() {
+        var v = localStorage.getItem(SHOW_COMPLETED_KEY);
+        if (v === null) return true;
+        return v === 'true';
+      }
+
+      function setShowCompleted(flag) {
+        localStorage.setItem(SHOW_COMPLETED_KEY, String(!!flag));
+      }
+
+      function applyAuthUI() {
+        try {
+          var isLoggedIn = isTruthy(localStorage.getItem('mock_is_logged_in'));
+
+          document.querySelectorAll('[data-auth="logged-in"]').forEach(function (el) {
+            el.style.display = isLoggedIn ? '' : 'none';
+          });
+          document.querySelectorAll('[data-auth="logged-out"]').forEach(function (el) {
+            el.style.display = isLoggedIn ? 'none' : '';
+          });
+
+          document.querySelectorAll('[data-logout]').forEach(function (btn) {
+            btn.onclick = function () {
+              localStorage.removeItem('mock_is_logged_in');
+              localStorage.removeItem('mock_user_email');
+              localStorage.removeItem('mock_account_name');
+              location.reload();
+            };
+          });
+        } catch (e) {}
+      }
+
+      function normalizeKey(v) {
+        if (window.normalizeAreaKey) return window.normalizeAreaKey(v) || String(v || '');
+        return String(v || '');
+      }
+
+      function getSelectedAreaKey() {
+        var group = document.querySelector('[data-cc-area-group]');
+        if (!group) return 'canada_all';
+        var primary = group.querySelector('[data-cc-area-role="primary"]');
+        if (!primary) return 'canada_all';
+        return normalizeKey(primary.value || 'canada_all');
+      }
+
+      function getSelectedAreaLabel() {
+        var group = document.querySelector('[data-cc-area-group]');
+        if (!group) return '全カナダ';
+        var primary = group.querySelector('[data-cc-area-role="primary"]');
+        if (!primary) return '全カナダ';
+        return primary.options[primary.selectedIndex] ? primary.options[primary.selectedIndex].text.trim() : '全カナダ';
+      }
+
+      var toastTimer = null;
+      function showToast(message) {
+        var toast = document.getElementById('filter-toast');
+        if (!toast) return;
+        toast.textContent = message;
+        toast.hidden = false;
+        if (toastTimer) window.clearTimeout(toastTimer);
+        toastTimer = window.setTimeout(function () {
+          toast.hidden = true;
+        }, 2200);
+      }
+
+      function resolveFilterSelect(dd) {
+        if (!dd) return null;
+        var direct = dd.querySelector('select');
+        if (direct) return direct;
+        var key = dd.getAttribute('data-cc-filter-select') || '';
+        if (!key) return null;
+        if (key === 'area-primary') {
+          var group = dd.closest('.post-area-group') || document.querySelector('.post-area-group');
+          if (!group) return null;
+          return group.querySelector('[data-cc-area-role="primary"]');
+        }
+        var byId = document.getElementById(key);
+        return byId || null;
+      }
+
+      function buildFilterDropdown(dd) {
+        if (!dd) return;
+        var select = resolveFilterSelect(dd);
+        var menu = dd.querySelector('.cc-dd-menu');
+        var valueEl = dd.querySelector('.cc-dd-value');
+        var toggle = dd.querySelector('.cc-dd-toggle');
+        if (!select || !menu || !valueEl || !toggle) return;
+        var isAreaFilter = dd.getAttribute('data-cc-filter-select') === 'area-primary';
+
+        var opt = select.options[select.selectedIndex];
+        valueEl.textContent = opt ? (opt.textContent || '').trim() : '';
+        if (select.disabled) {
+          dd.classList.add('is-disabled');
+          toggle.disabled = true;
+          toggle.setAttribute('aria-disabled', 'true');
+        } else {
+          dd.classList.remove('is-disabled');
+          toggle.disabled = false;
+          toggle.removeAttribute('aria-disabled');
+        }
+
+        menu.innerHTML = '';
+
+        var appendOption = function (optNode, targetMenu) {
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'cc-dd-item';
+          btn.textContent = (optNode.textContent || '').trim();
+          btn.dataset.value = optNode.value;
+          if (optNode.disabled) {
+            btn.disabled = true;
+            btn.classList.add('is-disabled');
+          }
+          if (String(optNode.value) === String(select.value)) {
+            btn.classList.add('is-active');
+          }
+          btn.addEventListener('click', function () {
+            if (optNode.disabled) return;
+            select.value = optNode.value;
+            select.dispatchEvent(new Event('change', { bubbles: true }));
+            buildFilterDropdown(dd);
+            dd.classList.remove('is-open');
+            toggle.setAttribute('aria-expanded', 'false');
+          });
+          (targetMenu || menu).appendChild(btn);
+        };
+
+        var otherGroup = null;
+        Array.from(select.children).forEach(function (child) {
+          if (!child) return;
+          if (child.tagName === 'OPTGROUP' && isAreaFilter && /その他/.test(child.label || '')) {
+            otherGroup = child;
+            return;
+          }
+          if (child.tagName === 'OPTGROUP') {
+            var label = (child.label || '').trim();
+            if (label) {
+              var title = document.createElement('div');
+              title.className = 'cc-dd-group-title';
+              title.textContent = label;
+              menu.appendChild(title);
+            }
+            Array.from(child.children).forEach(function (optNode) {
+              appendOption(optNode);
+            });
+            return;
+          }
+          if (child.tagName === 'OPTION') {
+            appendOption(child);
+          }
+        });
+
+        if (isAreaFilter && otherGroup) {
+          var subToggle = document.createElement('button');
+          subToggle.type = 'button';
+          subToggle.className = 'cc-dd-item cc-dd-subtoggle';
+          subToggle.innerHTML = '<span>その他のカナダ都市</span><span class="cc-dd-subarrow">&gt;</span>';
+          menu.appendChild(subToggle);
+
+          var subPanel = document.createElement('div');
+          subPanel.className = 'cc-dd-subpanel';
+          subPanel.hidden = true;
+          Array.from(otherGroup.children).forEach(function (optNode) {
+            appendOption(optNode, subPanel);
+          });
+          menu.appendChild(subPanel);
+
+          subToggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var nextOpen = subPanel.hidden;
+            subPanel.hidden = !nextOpen;
+            var arrow = subToggle.querySelector('.cc-dd-subarrow');
+            if (arrow) arrow.textContent = nextOpen ? 'v' : '>';
+          });
+        }
+      }
+
+      function initFilterDropdowns() {
+        var dropdowns = Array.from(document.querySelectorAll('.filters .cc-filter-dropdown'));
+        if (!dropdowns.length) return;
+
+        dropdowns.forEach(function (dd) {
+          if (dd.dataset.ccFilterReady === '1') return;
+          dd.dataset.ccFilterReady = '1';
+          var select = resolveFilterSelect(dd);
+          var toggle = dd.querySelector('.cc-dd-toggle');
+          if (select) select.classList.add('cc-hidden-select');
+          buildFilterDropdown(dd);
+          if (!select) return;
+          select.addEventListener('change', function () {
+            buildFilterDropdown(dd);
+          });
+          var menu = dd.querySelector('.cc-dd-menu');
+          if (menu) {
+            menu.addEventListener('click', function (e) {
+              e.stopPropagation();
+            });
+          }
+          var observer = new MutationObserver(function () {
+            buildFilterDropdown(dd);
+          });
+          observer.observe(select, { childList: true, subtree: true, attributes: true });
+        });
+
+        if (!document.body.dataset.ccFilterDoc) {
+          document.body.dataset.ccFilterDoc = '1';
+          document.addEventListener('click', function (e) {
+            if (e.target.closest('.cc-filter-dropdown')) return;
+            dropdowns.forEach(function (dd) {
+              dd.classList.remove('is-open');
+              var toggle = dd.querySelector('.cc-dd-toggle');
+              if (toggle) toggle.setAttribute('aria-expanded', 'false');
+              if (dd.getAttribute('data-cc-filter-select') === 'area-primary') {
+                var panel = dd.querySelector('.cc-dd-subpanel');
+                if (panel) panel.hidden = true;
+                var arrow = dd.querySelector('.cc-dd-subarrow');
+                if (arrow) arrow.textContent = '>';
+              }
+            });
+          });
+        }
+
+        if (!document.body.dataset.ccFilterToggleDoc) {
+          document.body.dataset.ccFilterToggleDoc = '1';
+          document.addEventListener('click', function (e) {
+            var toggle = e.target.closest('.cc-filter-dropdown .cc-filter-toggle');
+            if (!toggle) return;
+            e.preventDefault();
+            e.stopPropagation();
+            var dd = toggle.closest('.cc-filter-dropdown');
+            if (!dd || dd.classList.contains('is-disabled')) return;
+            var all = Array.from(document.querySelectorAll('.filters .cc-filter-dropdown'));
+            var isOpen = dd.classList.contains('is-open');
+            all.forEach(function (other) {
+              if (other !== dd) {
+                other.classList.remove('is-open');
+                var otherToggle = other.querySelector('.cc-dd-toggle');
+                if (otherToggle) otherToggle.setAttribute('aria-expanded', 'false');
+                if (other.getAttribute('data-cc-filter-select') === 'area-primary') {
+                  var otherPanel = other.querySelector('.cc-dd-subpanel');
+                  if (otherPanel) otherPanel.hidden = true;
+                  var otherArrow = other.querySelector('.cc-dd-subarrow');
+                  if (otherArrow) otherArrow.textContent = '>';
+                }
+              }
+            });
+            dd.classList.toggle('is-open', !isOpen);
+            toggle.setAttribute('aria-expanded', String(!isOpen));
+            if (isOpen && dd.getAttribute('data-cc-filter-select') === 'area-primary') {
+              var panel = dd.querySelector('.cc-dd-subpanel');
+              if (panel) panel.hidden = true;
+              var arrow = dd.querySelector('.cc-dd-subarrow');
+              if (arrow) arrow.textContent = '>';
+            }
+          });
+        }
+      }
+
+      function syncFilterDropdowns() {
+        Array.from(document.querySelectorAll('.filters .cc-filter-dropdown')).forEach(function (dd) {
+          buildFilterDropdown(dd);
+        });
+      }
+
+      function updateEventDateLabel() {
+        var label = document.getElementById('event-date-label');
+        var block = document.getElementById('event-date-block');
+        var eventOnlyRow = document.getElementById('event-only-row');
+        var catEl = document.getElementById('category-select');
+        var value = catEl ? catEl.value : 'all';
+        var showBlock = (value === 'all' || value === 'events' || value === 'school');
+        if (block) block.style.display = showBlock ? '' : 'none';
+        if (eventOnlyRow) eventOnlyRow.style.display = (value === 'all') ? '' : 'none';
+        if (!label) return;
+        if (value === 'school') {
+          label.textContent = 'スクール開催日';
+          return;
+        }
+        if (value === 'events') {
+          label.textContent = 'イベント開催日';
+          return;
+        }
+        label.textContent = '開催日';
+      }
+
+      function applyUrlFilters() {
+        try {
+          var params = new URLSearchParams(location.search);
+          var cat = params.get('cat') || '';
+          var sub = params.get('sub') || '';
+          var city = params.get('city') || '';
+          var show = params.get('show');
+          var catEl = document.getElementById('category-select');
+          var subEl = document.getElementById('subcategory-select');
+          var showEl = document.getElementById('cc-show-completed');
+          if (catEl && cat) {
+            catEl.value = cat;
+            if (window.updateSubCategories) {
+              window.updateSubCategories(cat, subEl);
+            }
+            if (subEl && sub) {
+              subEl.disabled = false;
+              subEl.value = sub;
+            }
+          }
+          if (showEl && show === '0') {
+            showEl.checked = false;
+            setShowCompleted(false);
+          }
+          if (city) {
+            var group = document.querySelector('[data-cc-area-group]');
+            if (group) {
+              var primary = group.querySelector('[data-cc-area-role="primary"]');
+              var key = (window.normalizeAreaKey ? (window.normalizeAreaKey(city) || city) : city);
+              if (key === 'free' || key === 'other_custom' || key === 'other') {
+                key = 'canada_all';
+              }
+              if (primary && primary.querySelector('option[value="' + key + '"]')) {
+                primary.value = key;
+              } else if (primary) {
+                primary.value = 'canada_all';
+              }
+            }
+          }
+          updateEventDateLabel();
+          updateCompletedToggleLabel();
+        } catch (e) {}
+      }
+
+      function updateCompletedToggleLabel() {
+        var catEl = document.getElementById('category-select');
+        var textEl = document.getElementById('show-completed-text');
+        if (!textEl) return;
+        textEl.textContent = '受付完了分も表示';
+      }
+
+      function getPriceRangeValues() {
+        var minEl = document.querySelector('.filter-range input[placeholder="Min"]');
+        var maxEl = document.querySelector('.filter-range input[placeholder="Max"]');
+        var minVal = minEl ? parsePriceNumber(minEl.value || '') : null;
+        var maxVal = maxEl ? parsePriceNumber(maxEl.value || '') : null;
+        if (Number.isNaN(minVal)) minVal = null;
+        if (Number.isNaN(maxVal)) maxVal = null;
+        return { minVal: minVal, maxVal: maxVal };
+      }
+
+      function validatePriceRange() {
+        var vals = getPriceRangeValues();
+        if (vals.minVal !== null && vals.maxVal !== null && vals.maxVal < vals.minVal) {
+          showToast('Minより大きい数値を入力してください。');
+          return false;
+        }
+        return true;
+      }
+
+      function syncEventDateMin() {
+        var eventFrom = document.getElementById('event-date-from');
+        var eventTo = document.getElementById('event-date-to');
+        if (!eventFrom || !eventTo) return;
+        var fromVal = eventFrom.value || '';
+        eventTo.min = fromVal || '';
+      }
+
+      function validateEventDateOrder() {
+        var eventFrom = document.getElementById('event-date-from');
+        var eventTo = document.getElementById('event-date-to');
+        if (!eventFrom || !eventTo) return true;
+        var fromVal = eventFrom.value || '';
+        var toVal = eventTo.value || '';
+        if (!fromVal || !toVal) return true;
+        var f = new Date(fromVal).getTime();
+        var t = new Date(toVal).getTime();
+        if (!Number.isFinite(f) || !Number.isFinite(t)) return true;
+        if (t < f) {
+          showToast('開始日より古い日付は入力できません。');
+          eventTo.value = '';
+          return false;
+        }
+        return true;
+      }
+
+      function syncLocalAreaDefaults() {
+        var group = document.querySelector('[data-cc-area-group]');
+        if (!group || !window.getInitialAreaKey) return;
+        var primary = group.querySelector('[data-cc-area-role="primary"]');
+        if (!primary) return;
+        if (primary.value && primary.value !== 'canada_all' && primary.querySelector('option[value="' + primary.value + '"]')) return;
+        var key = window.getInitialAreaKey() || 'canada_all';
+        var normalized = window.normalizeAreaKey ? (window.normalizeAreaKey(key) || key) : key;
+        if (normalized === 'free' || normalized === 'other_custom' || normalized === 'other') {
+          normalized = 'canada_all';
+        }
+        if (primary.querySelector('option[value="' + normalized + '"]')) {
+          primary.value = normalized || 'canada_all';
+        } else {
+          primary.value = 'canada_all';
+        }
+      }
+
+      function isEventClosed(post) {
+        if (!post) return false;
+        var cat = String(post.cat || '').toLowerCase();
+        if (cat !== 'events' && cat !== 'school') return false;
+        var date = String(post.event_date || '').trim();
+        if (!date) return false;
+        var time = String(post.event_end || post.event_start || '23:59').trim();
+        var dt = new Date(date + 'T' + time);
+        if (Number.isNaN(dt.getTime())) return false;
+        return Date.now() > dt.getTime();
+      }
+
+      function matchArea(selected, postCity) {
+        var key = normalizeKey(selected || 'canada_all');
+        var city = normalizeKey(postCity || '');
+        if (window.CanadaClassiDev && typeof window.CanadaClassiDev.ccIsAdminAllLocationMode === 'function' && window.CanadaClassiDev.ccIsAdminAllLocationMode()) {
+          return true;
+        }
+        if (key === 'canada_other_all') return window.isMinorAreaKey ? window.isMinorAreaKey(city) : false;
+        if (key === 'canada_all' || key === 'other') return city !== 'japan';
+        if (key === 'japan') return city === 'japan';
+        return key === city;
+      }
+
+      function isFreePrice(price) {
+        var s = String(price || '').toLowerCase();
+        return !s || s.indexOf('free') >= 0 || s.indexOf('無料') >= 0 || s.indexOf('$0') >= 0;
+      }
+
+      function parsePriceNumber(price) {
+        var s = String(price || '').replace(/[^0-9.]/g, '');
+        var n = parseFloat(s);
+        return Number.isFinite(n) ? n : null;
+      }
+
+      function getClockIcon() {
+        return '<span class="cc-icon cc-icon-clock" aria-hidden="true">' +
+          '<svg viewBox="0 0 24 24" role="img" focusable="false">' +
+          '<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>' +
+          '<path d="M12 7v6l4 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>' +
+          '</svg></span>';
+      }
+
+      function formatPostCreatedAtMeta(createdAt) {
+        if (window.formatPostCreatedAtForPublicMeta) {
+          return window.formatPostCreatedAtForPublicMeta(createdAt) || { text: '', absolute: '', isRelative: false };
+        }
+        if (window.formatPostCreatedAtForPublic) {
+          return { text: window.formatPostCreatedAtForPublic(createdAt, { context: 'list' }) || '', absolute: '', isRelative: false };
+        }
+        var d = createdAt ? new Date(createdAt) : null;
+        if (!d || Number.isNaN(d.getTime())) return { text: '', absolute: '', isRelative: false };
+        var y = d.getFullYear();
+        var m = String(d.getMonth() + 1).padStart(2, '0');
+        var day = String(d.getDate()).padStart(2, '0');
+        var hh = String(d.getHours()).padStart(2, '0');
+        var mm = String(d.getMinutes()).padStart(2, '0');
+        return { text: y + '-' + m + '-' + day + ' ' + hh + ':' + mm, absolute: '', isRelative: false };
+      }
+
+      function formatCardPrice(raw, catKey) {
+        var val = String(raw || '').trim();
+        if (!val || val === '-' || val === '—') return '';
+        if (/無料|free/i.test(val)) return '無料';
+        var hasYen = val.indexOf('JP¥') >= 0 || val.indexOf('¥') >= 0;
+        var symbol = hasYen ? '¥' : '$';
+        var numMatch = val.match(/\d+(?:\.\d+)?/);
+        var num = numMatch ? parseFloat(numMatch[0]) : null;
+        if (!Number.isFinite(num)) return val;
+        var amount = num.toFixed(2);
+        var needsMonth = String(catKey || '') === 'housing';
+        var needsHour = String(catKey || '') === 'jobs';
+        var lower = val.toLowerCase();
+        var hasMonth = lower.indexOf('/month') >= 0;
+        var hasHour = lower.indexOf('/hour') >= 0;
+        var keptUnit = hasMonth ? ' /month' : (hasHour ? ' /hour' : '');
+        var suffix = keptUnit || (needsMonth ? ' /month' : (needsHour ? ' /hour' : ''));
+        return symbol + ' ' + amount + suffix;
+      }
+
+      function formatDate(raw) {
+        var d = raw ? new Date(raw) : null;
+        if (!d || Number.isNaN(d.getTime())) return '';
+        var y = d.getFullYear();
+        var m = String(d.getMonth() + 1).padStart(2, '0');
+        var day = String(d.getDate()).padStart(2, '0');
+        return y + '/' + m + '/' + day;
+      }
+
+      function filterPosts() {
+        var posts = (window.CanadaClassiDev && window.CanadaClassiDev.ccGetPosts) ? window.CanadaClassiDev.ccGetPosts() : [];
+
+        var keyword = (document.getElementById('q') && document.getElementById('q').value || '').trim().toLowerCase();
+        var cat = (document.getElementById('category-select') && document.getElementById('category-select').value) || 'all';
+        var sub = (document.getElementById('subcategory-select') && document.getElementById('subcategory-select').value) || '';
+        var selectedArea = getSelectedAreaKey();
+        var freeOnly = !!(document.getElementById('filter-free') && document.getElementById('filter-free').checked);
+        var ageVal = (document.querySelector('input[name="age"]:checked') || {}).value || 'all';
+        var eventOnly = !!(document.getElementById('filter-event-only') && document.getElementById('filter-event-only').checked);
+        var eventFrom = document.getElementById('event-date-from');
+        var eventTo = document.getElementById('event-date-to');
+        var fromVal = eventFrom ? eventFrom.value : '';
+        var toVal = eventTo ? eventTo.value : '';
+        var minEl = document.querySelector('.filter-range input[placeholder="Min"]');
+        var maxEl = document.querySelector('.filter-range input[placeholder="Max"]');
+        var minVal = minEl ? parseFloat(minEl.value || '') : null;
+        var maxVal = maxEl ? parseFloat(maxEl.value || '') : null;
+        var allowEventFilter = (cat === 'all' || cat === 'events' || cat === 'school');
+        if (!allowEventFilter) {
+          eventOnly = false;
+          fromVal = '';
+          toVal = '';
+        }
+
+        var filtered = posts.filter(function (p) {
+          if (cat !== 'all') {
+            var postCat = String(p.cat || p.category || '').trim();
+            if (postCat && postCat !== cat) return false;
+          }
+          if (sub && sub !== 'すべて') {
+            var postSub = String(p.sub || p.subcategory || '').trim();
+            if (postSub && postSub !== sub) return false;
+          }
+          if (!matchArea(selectedArea, p.city)) return false;
+          if (!getShowCompleted() && isEventClosed(p)) return false;
+          if (keyword) {
+            var hay = (String(p.title || '') + ' ' + String(p.sub || '') + ' ' + String(p.area || '')).toLowerCase();
+            if (hay.indexOf(keyword) === -1) return false;
+          }
+          if (freeOnly && !isFreePrice(p.price)) return false;
+          if (minVal !== null || maxVal !== null) {
+            var num = parsePriceNumber(p.price);
+            if (num === null) return false;
+            if (minVal !== null && num < minVal) return false;
+            if (maxVal !== null && num > maxVal) return false;
+          }
+          if (eventOnly && !(p.cat === 'events' || p.cat === 'school')) return false;
+          if ((fromVal || toVal) && allowEventFilter) {
+            if (!(p.cat === 'events' || p.cat === 'school')) return false;
+            var ev = p.event_date ? new Date(p.event_date).getTime() : 0;
+            if (!ev) return false;
+            if (fromVal) {
+              var f = new Date(fromVal).getTime();
+              if (ev < f) return false;
+            }
+            if (toVal) {
+              var t = new Date(toVal).getTime();
+              if (ev > t) return false;
+            }
+          }
+          if (ageVal !== 'all') {
+            var created = p.created_at ? new Date(p.created_at).getTime() : 0;
+            if (created) {
+              var diff = Date.now() - created;
+              if (ageVal === '24h' && diff > 24 * 3600000) return false;
+              if (ageVal === '7d' && diff > 7 * 24 * 3600000) return false;
+            }
+          }
+          return true;
+        });
+
+        return filtered;
+      }
+
+      function sortPosts(posts) {
+        var sortEl = document.querySelector('.sort-select');
+        var mode = sortEl ? sortEl.value : '新しい順';
+        return posts.slice().sort(function (a, b) {
+          var ta = a.created_at ? new Date(a.created_at).getTime() : 0;
+          var tb = b.created_at ? new Date(b.created_at).getTime() : 0;
+          if (mode === '古い順') return ta - tb;
+          if (mode === '価格が高い順' || mode === '価格が低い順') {
+            var pa = parsePriceNumber(a.price) || 0;
+            var pb = parsePriceNumber(b.price) || 0;
+            return (mode === '価格が高い順') ? (pb - pa) : (pa - pb);
+          }
+          return tb - ta;
+        });
+      }
+
+      function applyStatusToCard(card, postKey) {
+        var status = 'active';
+        var badge = card.querySelector('[data-status-badge]');
+        var post = (window.CanadaClassiDev && window.CanadaClassiDev.ccGetPostByKey) ? window.CanadaClassiDev.ccGetPostByKey(postKey) : null;
+        var info = (window.CanadaClassiDev && window.CanadaClassiDev.ccGetPostStatusInfo) ? window.CanadaClassiDev.ccGetPostStatusInfo(post) : null;
+          if (info && info.status) {
+            status = info.status;
+            if (badge) {
+              badge.textContent = info.labels && info.labels.completed ? info.labels.completed : '取引終了';
+              badge.style.display = status === 'completed' ? 'inline-flex' : 'none';
+              badge.classList.toggle('is-completed', status === 'completed');
+            }
+          }
+
+        var btn = card.querySelector('[data-inquiry-button]');
+        if (btn) {
+          if (status === 'completed' || status === 'cancelled' || status === 'deleted') {
+            btn.setAttribute('aria-disabled', 'true');
+            btn.disabled = true;
+            btn.style.opacity = '0.6';
+            btn.style.pointerEvents = 'none';
+          } else {
+            btn.removeAttribute('aria-disabled');
+            btn.disabled = false;
+            btn.style.opacity = '';
+            btn.style.pointerEvents = '';
+          }
+        }
+        return status;
+      }
+
+      function renderCards(posts) {
+        var wrap = document.getElementById('list-cards');
+        if (!wrap) return;
+        wrap.innerHTML = '';
+
+        function formatAreaText(p) {
+          var CITY_EN = {
+            vancouver: 'Vancouver',
+            victoria: 'Victoria',
+            whistler: 'Whistler',
+            kelowna: 'Kelowna',
+            calgary: 'Calgary',
+            banff: 'Banff',
+            edmonton: 'Edmonton',
+            winnipeg: 'Winnipeg',
+            ottawa: 'Ottawa',
+            toronto: 'Toronto',
+            montreal: 'Montreal',
+            halifax: 'Halifax',
+            japan: 'Japan',
+            canada_all: 'All Canada'
+          };
+          var CITY_EN_PROV = {
+            vancouver: 'Vancouver, BC',
+            victoria: 'Victoria, BC',
+            whistler: 'Whistler, BC',
+            kelowna: 'Kelowna, BC',
+            calgary: 'Calgary, AB',
+            banff: 'Banff, AB',
+            edmonton: 'Edmonton, AB',
+            winnipeg: 'Winnipeg, MB',
+            ottawa: 'Ottawa, ON',
+            toronto: 'Toronto, ON',
+            montreal: 'Montreal, QC',
+            halifax: 'Halifax, NS',
+            whitehorse: 'Whitehorse, YT',
+            abbotsford: 'Abbotsford, BC',
+            burnaby: 'Burnaby, BC',
+            kamloops: 'Kamloops, BC',
+            nanaimo: 'Nanaimo, BC',
+            prince_george: 'Prince George, BC',
+            richmond: 'Richmond, BC',
+            surrey: 'Surrey, BC',
+            kananaskis: 'Kananaskis, AB',
+            canmore: 'Canmore, AB',
+            fort_mcmurray: 'Fort McMurray, AB',
+            medicine_hat: 'Medicine Hat, AB',
+            lake_louise: 'Lake Louise, AB',
+            red_deer: 'Red Deer, AB',
+            lethbridge: 'Lethbridge, AB',
+            regina: 'Regina, SK',
+            saskatoon: 'Saskatoon, SK',
+            brandon: 'Brandon, MB',
+            oakville: 'Oakville, ON',
+            oshawa: 'Oshawa, ON',
+            kingston: 'Kingston, ON',
+            kitchener: 'Kitchener, ON',
+            guelph: 'Guelph, ON',
+            sudbury: 'Sudbury, ON',
+            thunder_bay: 'Thunder Bay, ON',
+            niagara_falls: 'Niagara Falls, ON',
+            barrie: 'Barrie, ON',
+            hamilton: 'Hamilton, ON',
+            mississauga: 'Mississauga, ON',
+            markham: 'Markham, ON',
+            vaughan: 'Vaughan, ON',
+            london_on: 'London, ON',
+            waterloo: 'Waterloo, ON',
+            windsor: 'Windsor, ON',
+            gatineau: 'Gatineau, QC',
+            laval: 'Laval, QC',
+            longueuil: 'Longueuil, QC',
+            quebec_city: 'Quebec City, QC',
+            fredericton: 'Fredericton, NB',
+            moncton: 'Moncton, NB',
+            saint_john: 'Saint John, NB',
+            charlottetown: 'Charlottetown, PE',
+            sydney_ns: 'Sydney, NS',
+            st_johns: "St. John's, NL"
+          };
+          function toTitleCaseFromKey(key) {
+            return String(key || '')
+              .replace(/_/g, ' ')
+              .replace(/\s+/g, ' ')
+              .trim()
+              .replace(/\b[a-z]/g, function (m) { return m.toUpperCase(); });
+          }
+          function cityKeyToEnglish(key, areaRaw) {
+            var k = String(key || '').trim().toLowerCase();
+            if (CITY_EN_PROV[k]) return CITY_EN_PROV[k];
+            if (CITY_EN[k]) return CITY_EN[k];
+            if (areaRaw && /^[A-Za-z]/.test(areaRaw)) {
+              return String(areaRaw).split(',')[0].trim();
+            }
+            return k ? toTitleCaseFromKey(k) : '';
+          }
+
+          var cityKey = String(p && p.city ? p.city : '');
+          var areaRaw = String(p && p.area ? p.area : '').trim();
+          var detail = String(p && p.address ? p.address : '').trim();
+          var cityName = cityKeyToEnglish(cityKey, areaRaw);
+          var cityLabel = cityName || areaRaw || '';
+          if (detail && cityLabel) return detail + ', ' + cityLabel;
+          if (detail) return detail;
+          return cityLabel || '—';
+        }
+
+        posts.forEach(function (p) {
+          var card = document.createElement('article');
+          var postKey = p.key || p.id || p.post_id || '';
+          card.className = 'card';
+          card.setAttribute('data-post-key', postKey || '');
+
+          var images = Array.isArray(p.images) ? p.images.filter(Boolean).slice(0, 5) : [];
+          var img = images[0] || '';
+          var imgData = images.length ? encodeURIComponent(JSON.stringify(images)) : '';
+          var metaArea = formatAreaText(p);
+          var priceText = formatCardPrice(p.price, p.cat);
+          if (priceText && !/[$¥]/.test(priceText)) {
+            priceText = formatCardPrice('$' + priceText, p.cat);
+          }
+          var timeMeta = formatPostCreatedAtMeta(p.created_at);
+          var timeText = timeMeta.text || '—';
+          var timeTitle = (timeMeta.isRelative && timeMeta.absolute) ? timeMeta.absolute : '';
+          var catKey = String(p.cat || '').toLowerCase();
+          var catLabelMap = {
+            housing: '住まい',
+            jobs: '求人',
+            sell: '売ります・譲ります',
+            help: '助け合い',
+            services: 'サービス・講座',
+            community: '仲間募集・交流',
+            events: 'イベント',
+            school: 'スクール'
+          };
+          var catIconMap = {
+            housing: 'fa-house',
+            jobs: 'fa-briefcase',
+            sell: 'fa-tag',
+            help: 'fa-handshake',
+            services: 'fa-wand-magic-sparkles',
+            community: 'fa-people-group',
+            events: 'fa-calendar-days',
+            school: 'fa-graduation-cap'
+          };
+          var catJa = catLabelMap[catKey] || (p.cat || '');
+          var catIcon = catIconMap[catKey] || 'fa-tag';
+          // isOwner は後続の導線で必要になった時のために残す
+          var isOwner = (function () {
+            try {
+              var name = localStorage.getItem('mock_account_name') || localStorage.getItem('account_name') || '';
+              return name && String(p.author || '') === String(name);
+            } catch (e) {
+              return false;
+            }
+          })();
+
+          card.innerHTML = `
+            <a href="detail.html?id=${encodeURIComponent(String(postKey || ''))}">
+              <div class="card-thumb" aria-hidden="true" ${imgData ? `data-images="${imgData}"` : ''}>
+                ${img ? `<img src="${img}" alt="" />` : `<div class="thumb-placeholder"></div>`}
+                ${priceText && priceText !== '-' ? `<div class="post-price">${priceText}</div>` : ``}
+                <div class="post-cat cat-${catKey}"><i class="fa-solid ${catIcon}"></i><span>${catJa}</span></div>
+                <span class="status-badge" data-status-badge style="display:none;">取引完了</span>
+                ${images.length ? `
+                  ${images.length > 1 ? `
+                    <button type="button" class="thumb-switch prev" aria-label="前の写真">‹</button>
+                    <button type="button" class="thumb-switch next" aria-label="次の写真">›</button>
+                    <div class="thumb-count">1/${images.length}</div>
+                  ` : ``}
+                  <div class="thumb-dots" aria-hidden="true">
+                    ${Array(images.length).fill(0).map(function () { return '<span></span>'; }).join('')}
+                  </div>
+                ` : ``}
+              </div>
+              <div class="card-body">
+                <div class="card-topline">
+                  <h2 class="card-title">${((window.CanadaClassiDev && window.CanadaClassiDev.ccGetPostDisplayTitle) ? window.CanadaClassiDev.ccGetPostDisplayTitle(p, '') : (p.title || ''))}</h2>
+                </div>
+                <div class="card-meta">
+                  <div class="card-meta-row location">
+                    <span class="left"><i class="fa-solid fa-location-dot"></i><span>${metaArea}</span></span>
+                  </div>
+                  <div class="card-meta-spacer" aria-hidden="true"></div>
+              <div class="card-meta-row time">
+                <span class="time cc-date"${timeTitle ? ' title="' + timeTitle + '"' : ''}>${getClockIcon()}<span class="cc-date-text">${timeText}</span></span>
+              </div>
+                </div>
+                <div class="card-author"><i class="fa-regular fa-user"></i><span>${p.author || '—'}</span></div>
+              </div>
+            </a>
+          `;
+          wrap.appendChild(card);
+        });
+
+        applyStatusBadgesAndVisibility();
+        wireThumbSwitchers();
+      }
+
+      function wireThumbSwitchers() {
+        var thumbs = document.querySelectorAll('.card-thumb[data-images]');
+        thumbs.forEach(function (thumb) {
+          var raw = thumb.getAttribute('data-images') || '';
+          var images = [];
+          try { images = JSON.parse(decodeURIComponent(raw)) || []; } catch (e) {}
+          if (!images || images.length < 1) return;
+          var imgEl = thumb.querySelector('img');
+          var countEl = thumb.querySelector('.thumb-count');
+          var dotsEl = thumb.querySelector('.thumb-dots');
+          if (!imgEl) return;
+          var idx = 0;
+          var update = function () {
+            imgEl.src = images[idx];
+            if (countEl) countEl.textContent = (idx + 1) + '/' + images.length;
+            if (dotsEl) {
+              var dots = dotsEl.querySelectorAll('span');
+              dots.forEach(function (dot, i) {
+                dot.classList.toggle('is-active', i === idx);
+              });
+            }
+          };
+          var prevBtn = thumb.querySelector('.thumb-switch.prev');
+          var nextBtn = thumb.querySelector('.thumb-switch.next');
+          if (images.length > 1) {
+            if (prevBtn) {
+              prevBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                idx = (idx - 1 + images.length) % images.length;
+                update();
+              });
+            }
+            if (nextBtn) {
+              nextBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                idx = (idx + 1) % images.length;
+                update();
+              });
+            }
+            var startX = 0;
+            var startY = 0;
+            thumb.addEventListener('touchstart', function (e) {
+              if (!e.touches || !e.touches[0]) return;
+              startX = e.touches[0].clientX;
+              startY = e.touches[0].clientY;
+            }, { passive: true });
+            thumb.addEventListener('touchend', function (e) {
+              if (!e.changedTouches || !e.changedTouches[0]) return;
+              var endX = e.changedTouches[0].clientX;
+              var endY = e.changedTouches[0].clientY;
+              var dx = endX - startX;
+              var dy = endY - startY;
+              if (Math.abs(dx) < 30 || Math.abs(dx) < Math.abs(dy)) return;
+              idx = dx < 0 ? (idx + 1) % images.length : (idx - 1 + images.length) % images.length;
+              update();
+            }, { passive: true });
+          }
+          update();
+        });
+      }
+
+      function renderPager(total) {
+        var pager = document.getElementById('list-pager');
+        if (!pager) return;
+        pager.innerHTML = '';
+        var pages = Math.max(1, Math.ceil(total / PER_PAGE));
+        var prev = document.createElement('button');
+        prev.className = 'pager-btn';
+        prev.textContent = '<';
+        prev.disabled = currentPage <= 1;
+        prev.addEventListener('click', function () { currentPage -= 1; applyFilters(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+        pager.appendChild(prev);
+
+        for (var i = 1; i <= pages; i += 1) {
+          var b = document.createElement('button');
+          b.className = 'pager-btn' + (i === currentPage ? ' is-active' : '');
+          b.textContent = String(i);
+          b.addEventListener('click', (function (page) {
+            return function () { currentPage = page; applyFilters(); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+          })(i));
+          pager.appendChild(b);
+        }
+
+        var next = document.createElement('button');
+        next.className = 'pager-btn';
+        next.textContent = '>';
+        next.disabled = currentPage >= pages;
+        next.addEventListener('click', function () { currentPage += 1; applyFilters(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+        pager.appendChild(next);
+      }
+
+      function applyStatusBadgesAndVisibility() {
+        var showCompleted = getShowCompleted();
+        var toggle = document.getElementById('cc-show-completed');
+        if (toggle) toggle.checked = showCompleted;
+
+        var cards = document.querySelectorAll('[data-post-key]');
+        cards.forEach(function (card) {
+          var postKey = card.getAttribute('data-post-key');
+          if (!postKey) return;
+          var status = applyStatusToCard(card, postKey);
+        if (status === 'cancelled' || status === 'deleted') {
+          card.style.display = 'none';
+        } else if (!showCompleted && status === 'completed') {
+          card.style.display = 'none';
+        } else {
+            card.style.display = '';
+          }
+        });
+      }
+
+      function applyFilters() {
+        if (!validatePriceRange()) return;
+        if (!validateEventDateOrder()) return;
+        var filtered = filterPosts();
+        var sorted = sortPosts(filtered);
+        lastFiltered = sorted;
+
+        var total = sorted.length;
+        var countEl = document.getElementById('results-count');
+        if (countEl) countEl.textContent = String(total);
+        var areaEl = document.getElementById('results-area');
+        if (areaEl) areaEl.textContent = getSelectedAreaLabel();
+        if (typeof window.updateDynamicLabels === 'function') {
+          window.updateDynamicLabels();
+        }
+
+        var start = (currentPage - 1) * PER_PAGE;
+        var pageItems = sorted.slice(start, start + PER_PAGE);
+        renderCards(pageItems);
+        renderPager(total);
+        applyStatusBadgesAndVisibility();
+      }
+
+      function wireUp() {
+        applyAuthUI();
+
+        var toggle = document.getElementById('cc-show-completed');
+        if (toggle) {
+          toggle.checked = getShowCompleted();
+          toggle.addEventListener('change', function () {
+            setShowCompleted(!!toggle.checked);
+          });
+        }
+
+        initFilterDropdowns();
+
+        var catEl = document.getElementById('category-select');
+        var subEl = document.getElementById('subcategory-select');
+        if (catEl && subEl && window.updateSubCategories) {
+          catEl.addEventListener('change', function () {
+            updateEventDateLabel();
+            updateCompletedToggleLabel();
+            if (catEl.value === 'all') {
+              subEl.innerHTML = '<option value="">カテゴリーを選択してください</option>';
+              subEl.disabled = true;
+              syncFilterDropdowns();
+              return;
+            }
+            window.updateSubCategories(catEl.value, subEl);
+            syncFilterDropdowns();
+          });
+        }
+
+        updateEventDateLabel();
+        updateCompletedToggleLabel();
+        applyUrlFilters();
+        syncLocalAreaDefaults();
+        syncFilterDropdowns();
+
+        var searchBtn = document.getElementById('cc-search-button');
+        if (searchBtn) {
+          searchBtn.addEventListener('click', function () {
+            currentPage = 1;
+            applyFilters();
+          });
+        }
+
+        var eventOnly = document.getElementById('filter-event-only');
+        var eventFrom = document.getElementById('event-date-from');
+        var eventTo = document.getElementById('event-date-to');
+        var minInput = document.querySelector('.filter-range input[placeholder="Min"]');
+        var maxInput = document.querySelector('.filter-range input[placeholder="Max"]');
+        [minInput, maxInput].forEach(function (el) {
+          if (!el) return;
+          el.addEventListener('blur', function () {
+            validatePriceRange();
+          });
+        });
+        if (eventFrom) {
+          eventFrom.addEventListener('change', function () {
+            syncEventDateMin();
+          });
+          eventFrom.addEventListener('blur', function () {
+            syncEventDateMin();
+          });
+        }
+        if (eventTo) {
+          eventTo.addEventListener('change', function () {
+            validateEventDateOrder();
+          });
+          eventTo.addEventListener('blur', function () {
+            validateEventDateOrder();
+          });
+        }
+
+        syncEventDateMin();
+        applyFilters();
+      }
+
+      try {
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', wireUp);
+        } else {
+          wireUp();
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+</body>
+</html>

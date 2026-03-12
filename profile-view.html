@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>プロフィール | CanadaClassi</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    .profile-view-page .main-layout {
+      display: block;
+      margin-top: 24px;
+      margin-bottom: 60px;
+      max-width: 1500px;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .profile-view-page .breadcrumb { margin-bottom: 12px; }
+    .profile-view-page .profile-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .profile-view-page .profile-main-card { padding: 24px; }
+    .profile-view-page .profile-main-grid {
+      display: grid;
+      grid-template-columns: 220px 1fr 260px;
+      gap: 20px;
+      align-items: start;
+    }
+    .profile-view-page .profile-avatar {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.08);
+      margin: 0 auto;
+      font-size: 52px;
+      color: #9ca3af;
+    }
+    .profile-view-page .profile-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .profile-view-page .profile-block-title {
+      font-weight: 800;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .profile-view-page .profile-bio-box {
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 12px;
+      padding: 12px 14px;
+      background: #fff;
+      line-height: 1.6;
+      font-size: 0.92rem;
+      color: #333;
+      min-height: 120px;
+      white-space: pre-wrap;
+    }
+    .profile-view-page .profile-info-list {
+      display: grid;
+      gap: 8px;
+      font-size: 0.9rem;
+    }
+    .profile-view-page .profile-info-row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 10px;
+      align-items: start;
+    }
+    .profile-view-page .profile-info-row dt {
+      font-weight: 700;
+      color: #666;
+    }
+    .profile-view-page .profile-info-row dd {
+      margin: 0;
+      font-weight: 700;
+      color: #333;
+    }
+    .profile-view-page .profile-private {
+      padding: 22px;
+      text-align: center;
+      font-weight: 700;
+      color: #666;
+    }
+    .profile-view-page .profile-private .private-note {
+      margin-top: 10px;
+      color: #777;
+      font-size: 0.9rem;
+    }
+    .profile-view-page .profile-section {
+      margin-top: 24px;
+    }
+    .profile-view-page .profile-posts-empty {
+      padding: 18px 0;
+      color: #666;
+      font-weight: 700;
+    }
+    @media (max-width: 980px) {
+      .profile-view-page .profile-main-grid {
+        grid-template-columns: 1fr;
+      }
+      .profile-view-page .profile-avatar {
+        width: 120px;
+        height: 120px;
+      }
+      .profile-view-page .profile-info-row {
+        grid-template-columns: 100px 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="profile-view-page">
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="logo">
+      <a href="index.html" class="logo-link">
+        <img src="logo1_transparent.png" alt="CanadaClassi Logo" class="logo-img" />
+        <div class="logo-text">
+          <span class="en">CanadaClassi</span>
+          <span class="ja">カナダくらし</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="header-right-pc">
+        <div class="auth-buttons">
+          <div class="cc-notice">
+            <button type="button" class="btn-icon btn-notice-bell" id="notifBell" title="お知らせ" aria-label="お知らせ" data-cc-notice-toggle>
+              <svg class="cc-icon cc-bell-icon" viewBox="0 0 448 512" aria-hidden="true">
+                <path d="M224 512a64 64 0 0 0 64-64H160a64 64 0 0 0 64 64zm215.39-149.33C419.37 343 384 312 384 240c0-79.7-56.5-145.6-128-158.5V48a48 48 0 1 0-96 0v33.5C88.5 94.4 32 160.3 32 240c0 72-35.4 103-55.4 122.7A31.9 31.9 0 0 0 0 384a32 32 0 0 0 32 32h384a32 32 0 0 0 32-32 31.9 31.9 0 0 0-8.61-21.33z" fill="currentColor"/>
+              </svg>
+              <span class="sr-only cc-notif-label">お知らせ</span>
+              <span class="notification-dot"></span>
+            </button>
+            <div class="cc-notice-dropdown" data-cc-notice-dropdown hidden>
+              <div class="cc-notice-header">
+                <div class="cc-notice-title">お知らせ</div>
+                <label class="cc-notice-filter">
+                  <input type="checkbox" data-cc-notice-unread />
+                  <span>未読のみ</span>
+                </label>
+                <button type="button" class="cc-notice-markall" data-cc-notice-markall>すべて既読</button>
+              </div>
+              <div class="cc-notice-list" data-cc-notice-list></div>
+              <div class="cc-notice-footer">
+                <a href="mypage.html?tab=notices">すべて見る</a>
+              </div>
+            </div>
+          </div>
+
+          <a href="post.html" class="btn-post" id="post-button">
+            <i class="fa-solid fa-camera"></i> 投稿作成
+          </a>
+
+          <a href="login.html" class="btn-login" id="login-button">
+            <i class="fa-regular fa-circle-user"></i> ログイン・新規登録
+          </a>
+        </div>
+
+        <div class="settings-group">
+          <select id="area-select" class="cc-hidden-select" aria-label="エリア（主要）">
+            <option value="canada_all">🇨🇦 全カナダ</option>
+            <option value="vancouver">バンクーバー, BC</option>
+            <option value="victoria">ビクトリア, BC</option>
+            <option value="whistler">ウィスラー, BC</option>
+            <option value="kelowna">ケロウナ, BC</option>
+            <option value="calgary">カルガリー, AB</option>
+            <option value="banff">バンフ, AB</option>
+            <option value="edmonton">エドモントン, AB</option>
+            <option value="winnipeg">ウィニペグ, MB</option>
+            <option value="ottawa">オタワ, ON</option>
+            <option value="toronto">トロント, ON</option>
+            <option value="montreal">モントリオール, QC</option>
+            <option value="halifax">ハリファックス, NS</option>
+            <option value="other">その他（カナダの都市）</option>
+            <option value="japan">🇯🇵 日本</option>
+          </select>
+          <select id="area-select-sub" class="cc-hidden-select" aria-label="その他の都市">
+            <option value="">その他のカナダ都市</option>
+            <optgroup label="ユーコン準州（YT）">
+              <option value="whitehorse">ホワイトホース, YT</option>
+            </optgroup>
+            <optgroup label="ブリティッシュコロンビア州（BC）">
+              <option value="abbotsford">アボッツフォード, BC</option>
+              <option value="burnaby">バーナビー, BC</option>
+              <option value="kamloops">カムループス, BC</option>
+              <option value="nanaimo">ナイアガラ, BC</option>
+              <option value="prince_george">プリンスジョージ, BC</option>
+              <option value="richmond">リッチモンド, BC</option>
+              <option value="surrey">サレー, BC</option>
+            </optgroup>
+            <optgroup label="アルバータ州（AB）">
+              <option value="kananaskis">カナナスキス, AB</option>
+              <option value="canmore">キャンモア, AB</option>
+              <option value="fort_mcmurray">フォートマクマレー, AB</option>
+              <option value="medicine_hat">メディシンハット, AB</option>
+              <option value="lake_louise">ルイーズ湖, AB</option>
+              <option value="red_deer">レッドディア, AB</option>
+              <option value="lethbridge">レスブリッジ, AB</option>
+            </optgroup>
+            <optgroup label="サスカチュワン州（SK）">
+              <option value="regina">レジャイナ, SK</option>
+              <option value="saskatoon">サスカトゥーン, SK</option>
+            </optgroup>
+            <optgroup label="マニトバ州（MB）">
+              <option value="brandon">ブランドン, MB</option>
+            </optgroup>
+            <optgroup label="オンタリオ州（ON）">
+              <option value="oakville">オークビル, ON</option>
+              <option value="oshawa">オシャワ, ON</option>
+              <option value="kingston">キングストン, ON</option>
+              <option value="kitchener">キッチナー, ON</option>
+              <option value="guelph">ゲルフ, ON</option>
+              <option value="sudbury">サドベリー, ON</option>
+              <option value="thunder_bay">サンダーベイ, ON</option>
+              <option value="niagara_falls">ナイアガラフォールズ, ON</option>
+              <option value="barrie">バリー, ON</option>
+              <option value="hamilton">ハミルトン, ON</option>
+              <option value="mississauga">ミシサガ, ON</option>
+              <option value="markham">マーカム, ON</option>
+              <option value="vaughan">ヴォーン, ON</option>
+              <option value="london_on">ロンドン, ON</option>
+              <option value="waterloo">ウォータールー, ON</option>
+              <option value="windsor">ウィンザー, ON</option>
+            </optgroup>
+            <optgroup label="ケベック州（QC）">
+              <option value="gatineau">ガティノー, QC</option>
+              <option value="laval">ラヴァル, QC</option>
+              <option value="longueuil">ロンゲール, QC</option>
+              <option value="quebec_city">ケベックシティ, QC</option>
+            </optgroup>
+            <optgroup label="ニューブランズウィック州（NB）">
+              <option value="fredericton">フレデリクトン, NB</option>
+              <option value="moncton">モンクトン, NB</option>
+              <option value="saint_john">セントジョン, NB</option>
+            </optgroup>
+            <optgroup label="プリンスエドワードアイランド州（PE）">
+              <option value="charlottetown">シャーロットタウン, PE</option>
+            </optgroup>
+            <optgroup label="ノバスコシア州（NS）">
+              <option value="sydney_ns">シドニー, NS</option>
+            </optgroup>
+            <optgroup label="ニューファンドランド・ラブラドール州（NL）">
+              <option value="st_johns">セントジョンズ, NL</option>
+            </optgroup>
+          </select>
+          <select id="lang-select" class="cc-hidden-select" aria-label="言語">
+            <option value="ja">JP</option>
+            <option value="en">EN</option>
+            <option value="fr">FR</option>
+          </select>
+
+          <div class="cc-dropdown" data-cc-dropdown="area">
+            <button class="cc-dd-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-location-dot"></i>
+              <span class="cc-dd-value" data-cc-dd-value="area"></span>
+            </button>
+            <div class="cc-dd-menu" role="menu">
+              <div class="cc-dd-note">表示する都市を切り替え、カレンダーや投稿一覧の内容を変更します。</div>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="canada_all">🇨🇦 全カナダ</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="vancouver">バンクーバー, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="victoria">ビクトリア, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="whistler">ウィスラー, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="kelowna">ケロウナ, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="calgary">カルガリー, AB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="banff">バンフ, AB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="edmonton">エドモントン, AB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="winnipeg">ウィニペグ, MB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="ottawa">オタワ, ON</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="toronto">トロント, ON</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="montreal">モントリオール, QC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="halifax">ハリファックス, NS</button>
+              <div class="cc-dd-submenu" data-cc-dd-submenu>
+                <button class="cc-dd-item cc-dd-subtoggle" type="button" data-cc-dd-subtoggle>
+                  その他のカナダ都市
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
+                <div class="cc-dd-subpanel" hidden>
+                  <div class="cc-dd-group-title">ユーコン準州（YT）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="whitehorse">ホワイトホース, YT</button>
+                  <div class="cc-dd-group-title">ブリティッシュコロンビア州（BC）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="abbotsford">アボッツフォード, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="burnaby">バーナビー, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kamloops">カムループス, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="nanaimo">ナイアガラ, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="prince_george">プリンスジョージ, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="richmond">リッチモンド, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="surrey">サレー, BC</button>
+                  <div class="cc-dd-group-title">アルバータ州（AB）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kananaskis">カナナスキス, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="canmore">キャンモア, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="fort_mcmurray">フォートマクマレー, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="medicine_hat">メディシンハット, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="lake_louise">ルイーズ湖, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="red_deer">レッドディア, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="lethbridge">レスブリッジ, AB</button>
+                  <div class="cc-dd-group-title">サスカチュワン州（SK）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="regina">レジャイナ, SK</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="saskatoon">サスカトゥーン, SK</button>
+                  <div class="cc-dd-group-title">マニトバ州（MB）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="brandon">ブランドン, MB</button>
+                  <div class="cc-dd-group-title">オンタリオ州（ON）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="oakville">オークビル, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="oshawa">オシャワ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kingston">キングストン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kitchener">キッチナー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="guelph">ゲルフ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="sudbury">サドベリー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="thunder_bay">サンダーベイ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="niagara_falls">ナイアガラフォールズ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="barrie">バリー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="hamilton">ハミルトン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="mississauga">ミシサガ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="markham">マーカム, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="vaughan">ヴォーン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="london_on">ロンドン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="waterloo">ウォータールー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="windsor">ウィンザー, ON</button>
+                  <div class="cc-dd-group-title">ケベック州（QC）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="gatineau">ガティノー, QC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="laval">ラヴァル, QC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="longueuil">ロンゲール, QC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="quebec_city">ケベックシティ, QC</button>
+                  <div class="cc-dd-group-title">ニューブランズウィック州（NB）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="fredericton">フレデリクトン, NB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="moncton">モンクトン, NB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="saint_john">セントジョン, NB</button>
+                  <div class="cc-dd-group-title">プリンスエドワードアイランド州（PE）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="charlottetown">シャーロットタウン, PE</button>
+                  <div class="cc-dd-group-title">ノバスコシア州（NS）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="sydney_ns">シドニー, NS</button>
+                  <div class="cc-dd-group-title">ニューファンドランド・ラブラドール州（NL）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="st_johns">セントジョンズ, NL</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cc-dropdown" data-cc-dropdown="lang">
+            <button class="cc-dd-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-globe"></i>
+              <span class="cc-dd-value" data-cc-dd-value="lang"></span>
+            </button>
+            <div class="cc-dd-menu" role="menu">
+              <button class="cc-dd-item" type="button" data-cc-dd-select="lang" data-value="ja">JP</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="lang" data-value="en">EN</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="lang" data-value="fr">FR</button>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <nav class="global-nav">
+    <div class="container nav-grid">
+      <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i> ホーム</a>
+      <a href="list.html" class="nav-item"><i class="fa-solid fa-tags"></i> クラシファイド</a>
+      <a href="static.html?type=school" class="nav-item"><i class="fa-solid fa-graduation-cap"></i> 学校情報</a>
+      <a href="board.html" class="nav-item"><i class="fa-solid fa-comments"></i> 掲示板</a>
+      <a href="static.html?type=links" class="nav-item"><i class="fa-solid fa-arrow-up-right-from-square"></i> 外部リンク</a>
+      <a href="static.html?type=tips" class="nav-item"><i class="fa-solid fa-lightbulb"></i> お役立ち情報</a>
+    </div>
+  </nav>
+</header>
+
+<main class="container main-layout">
+  <div class="breadcrumb">
+    <a href="index.html">トップ</a> &gt; <span id="profile-breadcrumb-name">—</span>さんのプロフィール
+  </div>
+
+  <div class="profile-header">
+    <h2 id="profile-title">プロフィール</h2>
+    <a class="btn btn-secondary" id="profile-back-btn" href="list.html">戻る</a>
+  </div>
+
+  <div id="profile-error" class="card profile-private" hidden></div>
+
+  <div class="card profile-main-card" id="profile-main-card" hidden>
+    <div class="profile-main-grid">
+      <div class="profile-main-avatar">
+        <div class="profile-avatar" id="profile-avatar"><i class="fa-regular fa-user"></i></div>
+      </div>
+      <div class="profile-main-bio" id="profile-bio-block">
+        <div class="profile-block-title"><i class="fa-regular fa-file-lines"></i> 自己紹介</div>
+        <div class="profile-bio-box" id="profile-bio-text">—</div>
+      </div>
+      <div class="profile-main-info" id="profile-info-block">
+        <div class="profile-block-title"><i class="fa-solid fa-id-card"></i> 基本情報</div>
+        <dl class="profile-info-list" id="profile-info-list">
+          <div class="profile-info-row" data-row="name"><dt>アカウント名</dt><dd id="profile-name">—</dd></div>
+          <div class="profile-info-row" data-row="area"><dt>居住エリア</dt><dd id="profile-area">—</dd></div>
+          <div class="profile-info-row" data-row="languages"><dt>対応言語</dt><dd id="profile-languages">—</dd></div>
+          <div class="profile-info-row" data-row="gender"><dt>性別</dt><dd id="profile-gender">—</dd></div>
+          <div class="profile-info-row" data-row="visa"><dt>ビザ</dt><dd id="profile-visa">—</dd></div>
+          <div class="profile-info-row" data-row="age"><dt>年齢</dt><dd id="profile-age">—</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <section class="profile-section" id="profile-post-section" hidden>
+    <div class="section-header">
+      <h2>このユーザーの投稿</h2>
+    </div>
+    <div class="listings-grid" id="profile-post-list"></div>
+    <div class="profile-posts-empty" id="profile-post-empty" hidden>このユーザーの投稿はまだありません</div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <div class="footer-brand">
+        <img src="logo1_transparent.png" alt="CanadaClassi Logo" class="footer-logo" />
+        <div>
+          <div class="footer-brand-title">CanadaClassi</div>
+          <div class="footer-brand-sub">カナダくらし</div>
+        </div>
+      </div>
+      <p class="footer-desc">留学・ワーホリの暮らしをつなぐクラシファイド。</p>
+    </div>
+
+    <div class="footer-col">
+      <div class="footer-title">サイトマップ</div>
+      <div class="footer-sitemap">
+        <a href="index.html">ホーム</a>
+        <a href="list.html">クラシファイド</a>
+        <a href="static.html?type=school">学校情報</a>
+        <a href="board.html">掲示板</a>
+        <a href="static.html?type=links">外部リンク</a>
+        <a href="static.html?type=tips">お役立ち情報</a>
+        <a href="mypage.html?tab=inquiries">メッセージ</a>
+        <a href="login.html">ログイン</a>
+        <a href="mypage.html">マイページ</a>
+        <a href="post.html">投稿</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <div class="footer-title">ご案内</div>
+      <div class="footer-links">
+        <a href="static.html?type=notice">管理者からのお知らせ</a>
+        <a href="static.html?type=guide">ご利用ガイド</a>
+        <a href="static.html?type=post-guide">投稿・取引ガイド</a>
+        <a href="static.html?type=scam">詐欺などのご注意</a>
+        <a href="static.html?type=terms">利用規約</a>
+        <a href="static.html?type=privacy">プライバシーポリシー</a>
+        <a href="sitemap.html">サイトマップ</a>
+      </div>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <div class="footer-copy">© 2024 CanadaClassi</div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+  (function () {
+    const profileCard = document.getElementById("profile-main-card");
+    const profileError = document.getElementById("profile-error");
+    const profileTitle = document.getElementById("profile-title");
+    const breadcrumbName = document.getElementById("profile-breadcrumb-name");
+    const avatarWrap = document.getElementById("profile-avatar");
+    const bioBlock = document.getElementById("profile-bio-block");
+    const bioText = document.getElementById("profile-bio-text");
+    const infoList = document.getElementById("profile-info-list");
+    const postSection = document.getElementById("profile-post-section");
+    const postList = document.getElementById("profile-post-list");
+    const postEmpty = document.getElementById("profile-post-empty");
+    const backBtn = document.getElementById("profile-back-btn");
+
+    const safeText = (val) => String(val || "").trim();
+    const escapeHTML = (str) => String(str || "").replace(/[&<>"']/g, (m) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;"
+    }[m]));
+    const getBackLink = () => {
+      try {
+        const u = new URL(window.location.href);
+        const from = safeText(u.searchParams.get("from"));
+        const chat = safeText(u.searchParams.get("chat"));
+        const post = safeText(u.searchParams.get("post"));
+        if (from === "chat" && chat) return "mypage.html?tab=inquiries";
+        if (from === "detail" && post) return `detail.html?post=${encodeURIComponent(post)}`;
+      } catch (e) {}
+      return "list.html";
+    };
+
+    if (backBtn) {
+      const fallback = getBackLink();
+      backBtn.setAttribute("href", fallback);
+      backBtn.addEventListener("click", (e) => {
+        if (window.history.length > 1) {
+          e.preventDefault();
+          window.history.back();
+          return;
+        }
+        backBtn.setAttribute("href", fallback);
+      });
+    }
+
+    const loadProfile = () => {
+      try {
+        const raw = localStorage.getItem("cc_profile_v1");
+        if (!raw) return null;
+        return JSON.parse(raw);
+      } catch (e) {
+        return "__error__";
+      }
+    };
+
+    const labelMap = {
+      gender: {
+        male: "男性",
+        female: "女性",
+        other: "その他",
+        no_answer: "回答しない",
+        "": "未設定"
+      },
+      visa: {
+        working_holiday: "ワーホリ",
+        student: "学生",
+        work: "就労",
+        pr: "永住権",
+        tourist: "観光",
+        other: "その他",
+        "": "未設定"
+      },
+      lang: {
+        ja: "日本語",
+        fr: "Français",
+        en: "English",
+        other: "その他"
+      }
+    };
+
+    const calcAge = (birthday) => {
+      if (!birthday) return "";
+      const d = new Date(birthday);
+      if (Number.isNaN(d.getTime())) return "";
+      const today = new Date();
+      let age = today.getFullYear() - d.getFullYear();
+      const m = today.getMonth() - d.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < d.getDate())) age -= 1;
+      return age >= 0 ? String(age) : "";
+    };
+
+    const resolveArea = (profile) => {
+      if (!profile) return "未設定";
+      if (profile.area === "other_custom" && profile.area_other_name) return profile.area_other_name;
+      if (profile.area_other_name) return profile.area_other_name;
+      if (profile.area && typeof getDisplayAreaName === "function") {
+        const mapped = getDisplayAreaName(profile.area);
+        if (mapped) return mapped;
+      }
+      const fallback = localStorage.getItem("mock_default_city_name") || "";
+      return profile.area || fallback || "未設定";
+    };
+
+    const canShow = (profile, key) => {
+      const visibility = profile.visibility || {};
+      const val = visibility[key];
+      return val === "required" || val === "public";
+    };
+
+    const renderProfile = (profile) => {
+      const name = safeText(profile.display_name || localStorage.getItem("mock_account_name") || "ユーザー");
+      const publicOn = profile.is_profile_public !== false;
+      if (backBtn) backBtn.setAttribute("href", getBackLink());
+      profileTitle.textContent = `${name}さんのプロフィール`;
+      breadcrumbName.textContent = name;
+
+      if (!publicOn) {
+        profileError.hidden = false;
+        profileError.innerHTML = `
+          <div class="profile-avatar" style="margin:0 auto 12px;"><i class="fa-regular fa-user"></i></div>
+          <div>${escapeHTML(name)}さんのプロフィール</div>
+          <div class="private-note">このプロフィールは非公開です</div>
+        `;
+        return;
+      }
+
+      profileCard.hidden = false;
+      if (profile.icon) {
+        avatarWrap.innerHTML = `<img src="${escapeHTML(profile.icon)}" alt="" />`;
+      } else {
+        avatarWrap.innerHTML = `<i class="fa-regular fa-user"></i>`;
+      }
+
+      const bioVisible = canShow(profile, "bio");
+      if (bioVisible) {
+        bioBlock.hidden = false;
+        bioText.textContent = profile.bio ? profile.bio : "自己紹介は未設定です";
+      } else {
+        bioBlock.hidden = true;
+      }
+
+      const infoRows = infoList.querySelectorAll("[data-row]");
+      infoRows.forEach((row) => { row.hidden = false; });
+      document.getElementById("profile-name").textContent = name;
+      document.getElementById("profile-area").textContent = resolveArea(profile);
+
+      if (canShow(profile, "languages")) {
+        const langs = Array.isArray(profile.languages) ? profile.languages : [];
+        const labels = langs.map((l) => labelMap.lang[l] || l);
+        let langText = labels.join(" / ");
+        if (langs.includes("other") && profile.languages_other) {
+          langText += `（${profile.languages_other}）`;
+        }
+        document.getElementById("profile-languages").textContent = langText || "未設定";
+      } else {
+        infoList.querySelector('[data-row="languages"]').hidden = true;
+      }
+
+      if (canShow(profile, "gender")) {
+        const key = safeText(profile.gender);
+        document.getElementById("profile-gender").textContent = labelMap.gender[key] || "未設定";
+      } else {
+        infoList.querySelector('[data-row="gender"]').hidden = true;
+      }
+
+      if (canShow(profile, "visa")) {
+        const key = safeText(profile.visa_type);
+        let visaText = labelMap.visa[key] || "未設定";
+        if (key === "other" && profile.visa_other) {
+          visaText = `その他（${profile.visa_other}）`;
+        }
+        document.getElementById("profile-visa").textContent = visaText || "未設定";
+      } else {
+        infoList.querySelector('[data-row="visa"]').hidden = true;
+      }
+
+      if (canShow(profile, "age")) {
+        const age = calcAge(profile.birthday);
+        if (age) {
+          document.getElementById("profile-age").textContent = `${age}歳`;
+        } else {
+          infoList.querySelector('[data-row="age"]').hidden = true;
+        }
+      } else {
+        infoList.querySelector('[data-row="age"]').hidden = true;
+      }
+
+      postSection.hidden = false;
+      renderPosts(profile, name);
+    };
+
+    const renderPosts = (profile, displayName) => {
+      if (!postList || !postSection) return;
+      const all = (typeof ccGetPosts === "function") ? ccGetPosts() : [];
+      if (!Array.isArray(all) || !all.length) {
+        postEmpty.hidden = false;
+        return;
+      }
+      const userKey = safeText(profile.user_key);
+      const matches = [];
+      const seen = new Set();
+      all.forEach((post) => {
+        if (!post || (typeof ccIsPostDeleted === "function" && ccIsPostDeleted(post.key))) return;
+        if (userKey && post.author_key && String(post.author_key) === userKey) {
+          const key = String(post.key || post.post_id || "");
+          if (!seen.has(key)) {
+            matches.push(post);
+            seen.add(key);
+          }
+        }
+      });
+      all.forEach((post) => {
+        if (!post || post.author_key) return;
+        if (!displayName) return;
+        const candidates = [
+          post.author_name,
+          post.author,
+          post.account_name,
+          post.user_name
+        ].map((v) => safeText(v)).filter(Boolean);
+        if (!candidates.includes(displayName)) return;
+        const key = String(post.key || post.post_id || "");
+        if (seen.has(key)) return;
+        matches.push(post);
+        seen.add(key);
+      });
+
+      matches.sort((a, b) => {
+        const at = Date.parse(a.created_at || 0);
+        const bt = Date.parse(b.created_at || 0);
+        return bt - at;
+      });
+
+      if (!matches.length) {
+        postEmpty.hidden = false;
+        return;
+      }
+
+      const catLabelMap = {
+        housing: "住まい",
+        jobs: "求人",
+        sell: "売ります・譲ります",
+        help: "助け合い",
+        services: "サービス・講座",
+        community: "仲間募集・交流",
+        events: "イベント",
+        school: "スクール"
+      };
+      const catIconMap = {
+        housing: "fa-house",
+        jobs: "fa-briefcase",
+        sell: "fa-tag",
+        help: "fa-handshake",
+        services: "fa-wand-magic-sparkles",
+        community: "fa-people-group",
+        events: "fa-calendar-days",
+        school: "fa-graduation-cap"
+      };
+
+      postList.innerHTML = matches.map((post) => {
+        const catKey = String(post.cat || "").toLowerCase();
+        const catLabel = catLabelMap[catKey] || post.cat || "未設定";
+        const catIcon = catIconMap[catKey] || "fa-tag";
+        const priceText = (typeof formatCardPrice === "function")
+          ? formatCardPrice(post.price, catKey)
+          : safeText(post.price);
+        const areaText = (typeof formatAreaText === "function")
+          ? formatAreaText(post)
+          : (post.area || "");
+        const dateText = (typeof formatDateLabel === "function" && post.created_at)
+          ? formatDateLabel(post.created_at)
+          : (post.created_at ? String(post.created_at).split("T")[0] : "—");
+        const thumb = (Array.isArray(post.images) && post.images[0]) ? post.images[0] : "";
+        const postKey = post.key || post.post_key || post.post_id || "";
+        return `
+          <article class="card">
+            <a href="detail.html?post=${encodeURIComponent(String(postKey))}">
+              <div class="card-thumb">
+                ${thumb ? `<img src="${escapeHTML(thumb)}" alt="" />` : `<div class="thumb-placeholder"></div>`}
+                ${priceText ? `<div class="post-price">${escapeHTML(priceText)}</div>` : ``}
+                <div class="post-cat cat-${escapeHTML(catKey)}"><i class="fa-solid ${escapeHTML(catIcon)}"></i><span>${escapeHTML(catLabel)}</span></div>
+              </div>
+              <div class="card-body">
+                <div class="card-topline">
+                  <h2 class="card-title">${escapeHTML(post.title || "無題の投稿")}</h2>
+                </div>
+                <div class="card-meta">
+                  <div class="card-meta-row location">
+                    <span class="left"><i class="fa-solid fa-location-dot"></i><span>${escapeHTML(areaText || "—")}</span></span>
+                  </div>
+                  <div class="card-meta-spacer" aria-hidden="true"></div>
+                  <div class="card-meta-row time">
+                    <span class="time">${escapeHTML(dateText || "—")}</span>
+                  </div>
+                </div>
+                <div class="card-author"><i class="fa-regular fa-user"></i><span>${escapeHTML(post.author || displayName || "—")}</span></div>
+              </div>
+            </a>
+          </article>
+        `;
+      }).join("");
+    };
+
+    const profile = loadProfile();
+    if (profile === "__error__") {
+      profileError.hidden = false;
+      profileError.innerHTML = `
+        <div>プロフィールを読み込めませんでした</div>
+        <div style="margin-top:12px;"><a class="btn btn-secondary" href="${escapeHTML(getBackLink())}">戻る</a></div>
+      `;
+      return;
+    }
+    if (!profile) {
+      profileError.hidden = false;
+      profileError.innerHTML = `
+        <div>プロフィールが未設定です</div>
+        <div style="margin-top:12px;"><a class="btn btn-secondary" href="${escapeHTML(getBackLink())}">戻る</a></div>
+      `;
+      return;
+    }
+
+    renderProfile(profile);
+  })();
+</script>
+</body>
+</html>

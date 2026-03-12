@@ -1,0 +1,1052 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>掲示板 | CanadaClassi</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    referrerpolicy="no-referrer"
+  />
+</head>
+<body class="page-home" data-cc-nav-target="board">
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">
+        <a href="index.html" class="logo-link">
+          <img src="logo1_transparent.png" alt="CanadaClassi Logo" class="logo-img" />
+          <div class="logo-text">
+            <span class="en">CanadaClassi</span>
+            <span class="ja">カナダくらし</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="header-right-pc">
+        <div class="auth-buttons">
+          <div class="cc-notice">
+            <button type="button" class="btn-icon btn-notice-bell" id="notifBell" title="お知らせ" aria-label="お知らせ" data-cc-notice-toggle>
+              <svg class="cc-icon cc-bell-icon" viewBox="0 0 448 512" aria-hidden="true">
+                <path d="M224 512a64 64 0 0 0 64-64H160a64 64 0 0 0 64 64zm215.39-149.33C419.37 343 384 312 384 240c0-79.7-56.5-145.6-128-158.5V48a48 48 0 1 0-96 0v33.5C88.5 94.4 32 160.3 32 240c0 72-35.4 103-55.4 122.7A31.9 31.9 0 0 0 0 384a32 32 0 0 0 32 32h384a32 32 0 0 0 32-32 31.9 31.9 0 0 0-8.61-21.33z" fill="currentColor"/>
+              </svg>
+              <span class="sr-only cc-notif-label">お知らせ</span>
+              <span class="notification-dot"></span>
+            </button>
+            <div class="cc-notice-dropdown" data-cc-notice-dropdown hidden>
+              <div class="cc-notice-header">
+                <div class="cc-notice-title">お知らせ</div>
+                <label class="cc-notice-filter">
+                  <input type="checkbox" data-cc-notice-unread />
+                  <span>未読のみ</span>
+                </label>
+                <button type="button" class="cc-notice-markall" data-cc-notice-markall>すべて既読</button>
+              </div>
+              <div class="cc-notice-list" data-cc-notice-list></div>
+              <div class="cc-notice-footer">
+                <a href="mypage.html?tab=notices">すべて見る</a>
+              </div>
+            </div>
+          </div>
+
+          <a href="post.html" class="btn-post" id="post-button">
+            <i class="fa-solid fa-camera"></i> 投稿作成
+          </a>
+
+          <a href="login.html" class="btn-login" id="login-button">
+            <i class="fa-regular fa-circle-user"></i> ログイン・新規登録
+          </a>
+        </div>
+
+        <div class="settings-group">
+          <select id="area-select" class="cc-hidden-select" aria-label="エリア（主要）">
+            <option value="canada_all">🇨🇦 全カナダ</option>
+            <option value="vancouver">バンクーバー, BC</option>
+            <option value="victoria">ビクトリア, BC</option>
+            <option value="whistler">ウィスラー, BC</option>
+            <option value="kelowna">ケロウナ, BC</option>
+            <option value="calgary">カルガリー, AB</option>
+            <option value="banff">バンフ, AB</option>
+            <option value="edmonton">エドモントン, AB</option>
+            <option value="winnipeg">ウィニペグ, MB</option>
+            <option value="ottawa">オタワ, ON</option>
+            <option value="toronto">トロント, ON</option>
+            <option value="montreal">モントリオール, QC</option>
+            <option value="halifax">ハリファックス, NS</option>
+            <option value="other">その他（カナダの都市）</option>
+          </select>
+          <select id="area-select-sub" class="cc-hidden-select" aria-label="その他の都市">
+            <option value="">その他のカナダ都市</option>
+            <optgroup label="ユーコン準州（YT）">
+              <option value="whitehorse">ホワイトホース, YT</option>
+            </optgroup>
+            <optgroup label="ブリティッシュコロンビア州（BC）">
+              <option value="abbotsford">アボッツフォード, BC</option>
+              <option value="burnaby">バーナビー, BC</option>
+              <option value="kamloops">カムループス, BC</option>
+              <option value="nanaimo">ナナイモ, BC</option>
+              <option value="prince_george">プリンスジョージ, BC</option>
+              <option value="richmond">リッチモンド, BC</option>
+              <option value="surrey">サレー, BC</option>
+            </optgroup>
+            <optgroup label="アルバータ州（AB）">
+              <option value="kananaskis">カナナスキス, AB</option>
+              <option value="canmore">キャンモア, AB</option>
+              <option value="fort_mcmurray">フォートマクマレー, AB</option>
+              <option value="medicine_hat">メディシンハット, AB</option>
+              <option value="lake_louise">ルイーズ湖, AB</option>
+              <option value="red_deer">レッドディア, AB</option>
+              <option value="lethbridge">レスブリッジ, AB</option>
+            </optgroup>
+            <optgroup label="サスカチュワン州（SK）">
+              <option value="regina">レジャイナ, SK</option>
+              <option value="saskatoon">サスカトゥーン, SK</option>
+            </optgroup>
+            <optgroup label="マニトバ州（MB）">
+              <option value="brandon">ブランドン, MB</option>
+            </optgroup>
+            <optgroup label="オンタリオ州（ON）">
+              <option value="oakville">オークビル, ON</option>
+              <option value="oshawa">オシャワ, ON</option>
+              <option value="kingston">キングストン, ON</option>
+              <option value="kitchener">キッチナー, ON</option>
+              <option value="guelph">ゲルフ, ON</option>
+              <option value="sudbury">サドベリー, ON</option>
+              <option value="thunder_bay">サンダーベイ, ON</option>
+              <option value="niagara_falls">ナイアガラフォールズ, ON</option>
+              <option value="barrie">バリー, ON</option>
+              <option value="hamilton">ハミルトン, ON</option>
+              <option value="mississauga">ミシサガ, ON</option>
+              <option value="markham">マーカム, ON</option>
+              <option value="vaughan">ヴォーン, ON</option>
+              <option value="london_on">ロンドン, ON</option>
+              <option value="waterloo">ウォータールー, ON</option>
+              <option value="windsor">ウィンザー, ON</option>
+            </optgroup>
+            <optgroup label="ケベック州（QC）">
+              <option value="gatineau">ガティノー, QC</option>
+              <option value="laval">ラヴァル, QC</option>
+              <option value="longueuil">ロンゲール, QC</option>
+              <option value="quebec_city">ケベックシティ, QC</option>
+            </optgroup>
+            <optgroup label="ニューブランズウィック州（NB）">
+              <option value="fredericton">フレデリクトン, NB</option>
+              <option value="moncton">モンクトン, NB</option>
+              <option value="saint_john">セントジョン, NB</option>
+            </optgroup>
+            <optgroup label="プリンスエドワードアイランド州（PE）">
+              <option value="charlottetown">シャーロットタウン, PE</option>
+            </optgroup>
+            <optgroup label="ノバスコシア州（NS）">
+              <option value="sydney_ns">シドニー, NS</option>
+            </optgroup>
+            <optgroup label="ニューファンドランド・ラブラドール州（NL）">
+              <option value="st_johns">セントジョンズ, NL</option>
+            </optgroup>
+          </select>
+          <select id="lang-select" class="cc-hidden-select" aria-label="言語">
+            <option value="ja">JP</option>
+            <option value="en">EN</option>
+            <option value="fr">FR</option>
+          </select>
+
+          <div class="cc-dropdown" data-cc-dropdown="area">
+            <button class="cc-dd-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-location-dot"></i>
+              <span class="cc-dd-value" data-cc-dd-value="area"></span>
+            </button>
+            <div class="cc-dd-menu" role="menu">
+              <div class="cc-dd-note">表示する都市を切り替え、カレンダーや投稿一覧の内容を変更します。</div>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="canada_all">🇨🇦 全カナダ</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="vancouver">バンクーバー, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="victoria">ビクトリア, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="whistler">ウィスラー, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="kelowna">ケロウナ, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="calgary">カルガリー, AB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="banff">バンフ, AB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="edmonton">エドモントン, AB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="winnipeg">ウィニペグ, MB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="ottawa">オタワ, ON</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="toronto">トロント, ON</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="montreal">モントリオール, QC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="halifax">ハリファックス, NS</button>
+              <div class="cc-dd-submenu" data-cc-dd-submenu>
+                <button class="cc-dd-item cc-dd-subtoggle" type="button" data-cc-dd-subtoggle>
+                  その他のカナダ都市
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
+                <div class="cc-dd-subpanel" hidden>
+                  <div class="cc-dd-group-title">ユーコン準州（YT）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="whitehorse">ホワイトホース, YT</button>
+                  <div class="cc-dd-group-title">ブリティッシュコロンビア州（BC）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="abbotsford">アボッツフォード, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="burnaby">バーナビー, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kamloops">カムループス, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="nanaimo">ナナイモ, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="prince_george">プリンスジョージ, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="richmond">リッチモンド, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="surrey">サレー, BC</button>
+                  <div class="cc-dd-group-title">アルバータ州（AB）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kananaskis">カナナスキス, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="canmore">キャンモア, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="fort_mcmurray">フォートマクマレー, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="medicine_hat">メディシンハット, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="lake_louise">ルイーズ湖, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="red_deer">レッドディア, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="lethbridge">レスブリッジ, AB</button>
+                  <div class="cc-dd-group-title">サスカチュワン州（SK）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="regina">レジャイナ, SK</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="saskatoon">サスカトゥーン, SK</button>
+                  <div class="cc-dd-group-title">マニトバ州（MB）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="brandon">ブランドン, MB</button>
+                  <div class="cc-dd-group-title">オンタリオ州（ON）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="oakville">オークビル, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="oshawa">オシャワ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kingston">キングストン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kitchener">キッチナー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="guelph">ゲルフ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="sudbury">サドベリー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="thunder_bay">サンダーベイ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="niagara_falls">ナイアガラフォールズ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="barrie">バリー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="hamilton">ハミルトン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="mississauga">ミシサガ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="markham">マーカム, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="vaughan">ヴォーン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="london_on">ロンドン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="waterloo">ウォータールー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="windsor">ウィンザー, ON</button>
+                  <div class="cc-dd-group-title">ケベック州（QC）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="gatineau">ガティノー, QC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="laval">ラヴァル, QC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="longueuil">ロンゲール, QC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="quebec_city">ケベックシティ, QC</button>
+                  <div class="cc-dd-group-title">ニューブランズウィック州（NB）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="fredericton">フレデリクトン, NB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="moncton">モンクトン, NB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="saint_john">セントジョン, NB</button>
+                  <div class="cc-dd-group-title">プリンスエドワードアイランド州（PE）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="charlottetown">シャーロットタウン, PE</button>
+                  <div class="cc-dd-group-title">ノバスコシア州（NS）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="sydney_ns">シドニー, NS</button>
+                  <div class="cc-dd-group-title">ニューファンドランド・ラブラドール州（NL）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="st_johns">セントジョンズ, NL</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cc-dropdown" data-cc-dropdown="lang">
+            <button class="cc-dd-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-globe"></i>
+              <span class="cc-dd-value" data-cc-dd-value="lang"></span>
+            </button>
+            <div class="cc-dd-menu" role="menu">
+              <div class="cc-dd-note">表示言語を切り替えるためのプルダウンです。</div>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="lang" data-value="ja">JP</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="lang" data-value="en">EN</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="lang" data-value="fr">FR</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="global-nav">
+      <div class="container nav-grid">
+        <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i> ホーム</a>
+        <a href="list.html" class="nav-item"><i class="fa-solid fa-tags"></i> クラシファイド</a>
+        <a href="static.html?type=school" class="nav-item"><i class="fa-solid fa-graduation-cap"></i> 学校情報</a>
+        <a href="board.html" class="nav-item"><i class="fa-solid fa-comments"></i> 掲示板</a>
+        <a href="static.html?type=links" class="nav-item"><i class="fa-solid fa-arrow-up-right-from-square"></i> 外部リンク</a>
+        <a href="static.html?type=tips" class="nav-item"><i class="fa-solid fa-lightbulb"></i> お役立ち情報</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container board-layout cc-board">
+    <aside class="board-side">
+      <details class="board-filters board-filters-category">
+        <summary class="board-filters-summary">
+          <span>カテゴリ</span>
+        </summary>
+        <div class="board-filter-body">
+          <div class="board-box">
+            <div class="board-box-title">カテゴリ</div>
+            <div class="board-category">
+              <button class="pill active" type="button" data-cat="all"><i class="fa-solid fa-layer-group"></i>すべて</button>
+              <button class="pill" type="button" data-cat="住まい"><i class="fa-solid fa-house"></i>住まい</button>
+              <button class="pill" type="button" data-cat="仕事・ワーホリ"><i class="fa-solid fa-briefcase"></i>仕事・ワーホリ</button>
+              <button class="pill" type="button" data-cat="学校・留学"><i class="fa-solid fa-graduation-cap"></i>学校・留学</button>
+              <button class="pill" type="button" data-cat="ビザ・手続き"><i class="fa-solid fa-passport"></i>ビザ・手続き</button>
+              <button class="pill" type="button" data-cat="医療・健康"><i class="fa-solid fa-heart-pulse"></i>医療・健康</button>
+              <button class="pill" type="button" data-cat="交通"><i class="fa-solid fa-bus"></i>交通</button>
+              <button class="pill" type="button" data-cat="買い物・お金"><i class="fa-solid fa-cart-shopping"></i>買い物・お金</button>
+              <button class="pill" type="button" data-cat="食・レストラン"><i class="fa-solid fa-utensils"></i>食・レストラン</button>
+              <button class="pill" type="button" data-cat="イベント・交流"><i class="fa-solid fa-calendar-days"></i>イベント・交流</button>
+              <button class="pill" type="button" data-cat="初心者Q&A"><i class="fa-solid fa-circle-question"></i>初心者Q&A</button>
+              <button class="pill" type="button" data-cat="トラブル注意"><i class="fa-solid fa-triangle-exclamation"></i>トラブル注意</button>
+              <button class="pill" type="button" data-cat="雑談"><i class="fa-solid fa-comments"></i>雑談</button>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="board-filters board-filters-city">
+        <summary class="board-filters-summary">
+          <span>都市</span>
+        </summary>
+        <div class="board-filter-body">
+          <div class="board-box">
+            <div class="board-box-title board-box-title-row">
+              <span>都市</span>
+              <div class="cc-dropdown cc-select board-select">
+                <button class="cc-dd-toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="cc-dd-value"></span>
+                </button>
+                <div class="cc-dd-menu" role="listbox"></div>
+                <select class="board-city-sort cc-hidden-select" id="board-city-sort" aria-label="都市の並び替え">
+                  <option value="order">表示順</option>
+                  <option value="count">投稿数</option>
+                  <option value="recent">最近更新</option>
+                </select>
+              </div>
+            </div>
+            <div class="board-city-search cc-search-bar">
+              <i class="fa-solid fa-magnifying-glass cc-search-icon" aria-hidden="true"></i>
+              <input class="cc-search-input" id="board-city-search" type="search" placeholder="都市を検索" />
+              <button class="cc-search-btn" id="board-city-search-btn" type="button" aria-label="都市を検索">
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+            <div class="board-city-list" id="board-city-list"></div>
+          </div>
+        </div>
+      </details>
+
+      <div class="board-box board-helper">
+        <button class="board-clear" id="board-clear" type="button">
+          <i class="fa-solid fa-rotate-left"></i> 絞り込みクリア
+        </button>
+      </div>
+
+      <div class="ad-banner board-ad">広告スペース</div>
+    </aside>
+
+    <section class="board-main">
+      <div class="board-head">
+        <h1 class="board-title-main">
+          <span class="board-title-accent" aria-hidden="true"></span>
+          掲示板
+        </h1>
+        <div class="board-head-meta" id="board-count">最新の相談をまとめてチェック</div>
+      </div>
+
+      <div class="board-toolbar">
+        <div class="board-search-block">
+          <div class="board-search-wrap cc-search-bar">
+            <i class="fa-solid fa-magnifying-glass cc-search-icon" aria-hidden="true"></i>
+            <input class="cc-search-input" id="board-search" type="search" placeholder="キーワードで探す" />
+            <button class="cc-search-btn" id="board-search-btn" type="button" aria-label="検索">
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+          <div class="board-filter-group"></div>
+        </div>
+        <div class="board-sort-wrap">
+          <div class="cc-dropdown cc-select board-select">
+            <button class="cc-dd-toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+              <span class="cc-dd-value"></span>
+            </button>
+            <div class="cc-dd-menu" role="listbox"></div>
+            <select class="board-sort cc-hidden-select" id="board-sort" aria-label="並び替え">
+              <option value="updated">更新順</option>
+              <option value="latest">新しい順</option>
+              <option value="replies">返信数順</option>
+            </select>
+          </div>
+        </div>
+        <div class="board-post-wrap">
+          <a class="btn-post board-post-btn" href="board_new.html">
+            <i class="fa-solid fa-pen-to-square"></i> 新規投稿
+          </a>
+        </div>
+      </div>
+
+      <div class="board-list" id="board-list"></div>
+
+      <div class="pager board-pager" aria-label="ページネーション"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <img src="logo1_transparent.png" alt="CanadaClassi Logo" class="footer-logo" />
+          <div>
+            <div class="footer-brand-title">CanadaClassi</div>
+            <div class="footer-brand-sub">カナダくらし</div>
+          </div>
+        </div>
+        <p class="footer-desc">留学・ワーホリの暮らしをつなぐクラシファイド。</p>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">サイトマップ</div>
+        <div class="footer-sitemap">
+          <a href="index.html">ホーム</a>
+          <a href="list.html">クラシファイド</a>
+          <a href="static.html?type=school">学校情報</a>
+          <a href="board.html">掲示板</a>
+          <a href="static.html?type=links">外部リンク</a>
+          <a href="static.html?type=tips">お役立ち情報</a>
+          <a href="mypage.html?tab=inquiries">メッセージ</a>
+          <a href="login.html">ログイン</a>
+          <a href="mypage.html">マイページ</a>
+          <a href="post.html">投稿</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">ご案内</div>
+        <div class="footer-links">
+          <a href="static.html?type=notice">管理者からのお知らせ</a>
+          <a href="static.html?type=guide">ご利用ガイド</a>
+          <a href="static.html?type=post-guide">投稿・取引ガイド</a>
+          <a href="static.html?type=scam">詐欺などのご注意</a>
+          <a href="static.html?type=terms">利用規約</a>
+          <a href="static.html?type=privacy">プライバシーポリシー</a>
+          <a href="sitemap.html">サイトマップ</a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <div class="footer-copy">© 2024 CanadaClassi</div>
+    </div>
+  </footer>
+
+  <script src="./script.js"></script>
+  <script>
+    (function () {
+      function timeAgo(createdAt) {
+        var t = createdAt ? new Date(createdAt).getTime() : 0;
+        if (!t) return "";
+        var diff = Date.now() - t;
+        if (diff < 0) diff = 0;
+        var hours = Math.floor(diff / 3600000);
+        if (hours < 1) return "1時間以内";
+        if (hours < 24) return hours + "時間前";
+        var days = Math.floor(hours / 24);
+        return days + "日前";
+      }
+
+      function countReplies(list) {
+        if (!Array.isArray(list)) return 0;
+        return list.reduce(function (sum, r) {
+          return sum + 1 + countReplies(r.replies);
+        }, 0);
+      }
+
+      function getLatestReplyTs(list) {
+        if (!Array.isArray(list) || !list.length) return 0;
+        return list.reduce(function (max, r) {
+          var t = r && r.created_at ? new Date(r.created_at).getTime() : 0;
+          var child = getLatestReplyTs(r.replies);
+          return Math.max(max, t, child);
+        }, 0);
+      }
+
+      function lastUpdatedAt(item) {
+        var base = item && item.created_at ? new Date(item.created_at).getTime() : 0;
+        var latestReply = getLatestReplyTs(item.replies);
+        return Math.max(base, latestReply);
+      }
+
+      function getOtherCitiesFromHeader() {
+        var select = document.getElementById("area-select-sub");
+        if (!select) return [];
+        var list = [];
+        var seen = {};
+        Array.prototype.slice.call(select.options || []).forEach(function (opt) {
+          var label = String(opt.textContent || "").trim();
+          if (!label) return;
+          var city = label.split(",")[0].trim();
+          if (!city || city === "未設定" || seen[city]) return;
+          seen[city] = true;
+          list.push(city);
+        });
+        return list;
+      }
+
+      var OTHER_CITIES = getOtherCitiesFromHeader();
+
+      function getCityLabel(item) {
+        var label = String(item.cityLabel || "").trim();
+        if (!label && typeof window.getDisplayAreaName === "function") {
+          label = String(window.getDisplayAreaName(item.area || "") || "").trim();
+        }
+        return label || "未設定";
+      }
+
+      function normalizeCity(item) {
+        var label = getCityLabel(item);
+        if (label === "未設定") return "未設定";
+        var city = label.split(",")[0].trim();
+        if (!city) return "未設定";
+        if (/その他/.test(city)) return "その他の都市";
+        if (OTHER_CITIES.indexOf(city) >= 0) return "その他の都市";
+        return city;
+      }
+
+      function getCityMasterFromHeader() {
+        var select = document.getElementById("area-select");
+        if (!select) return [];
+        var seen = {};
+        var list = [];
+        Array.prototype.slice.call(select.options || []).forEach(function (opt) {
+          var label = String(opt.textContent || "").trim();
+          if (!label) return;
+          if (/全カナダ/.test(label)) return;
+          if (/その他/.test(label)) {
+            if (!seen["その他の都市"]) {
+              seen["その他の都市"] = true;
+              list.push("その他の都市");
+            }
+            return;
+          }
+          var city = label.split(",")[0].trim();
+          if (!city || city === "未設定" || seen[city]) return;
+          seen[city] = true;
+          list.push(city);
+        });
+        return list;
+      }
+
+      function getTagClass(category) {
+        var normalized = normalizeCategory(category);
+        if (normalized === "住まい") return "housing";
+        if (normalized === "仕事・ワーホリ") return "work";
+        if (normalized === "学校・留学") return "school";
+        if (normalized === "ビザ・手続き") return "visa";
+        if (normalized === "医療・健康") return "health";
+        if (normalized === "交通") return "transport";
+        if (normalized === "買い物・お金") return "money";
+        if (normalized === "食・レストラン") return "food";
+        if (normalized === "イベント・交流") return "event";
+        if (normalized === "初心者Q&A") return "faq";
+        if (normalized === "トラブル注意") return "trouble";
+        if (normalized === "雑談") return "chat";
+        return "";
+      }
+
+      function getCategoryIcon(category) {
+        var normalized = normalizeCategory(category);
+        if (normalized === "住まい") return "fa-house";
+        if (normalized === "仕事・ワーホリ") return "fa-briefcase";
+        if (normalized === "学校・留学") return "fa-graduation-cap";
+        if (normalized === "ビザ・手続き") return "fa-passport";
+        if (normalized === "医療・健康") return "fa-heart-pulse";
+        if (normalized === "交通") return "fa-bus";
+        if (normalized === "買い物・お金") return "fa-cart-shopping";
+        if (normalized === "食・レストラン") return "fa-utensils";
+        if (normalized === "イベント・交流") return "fa-calendar-days";
+        if (normalized === "初心者Q&A") return "fa-circle-question";
+        if (normalized === "トラブル注意") return "fa-triangle-exclamation";
+        if (normalized === "雑談") return "fa-comments";
+        return "fa-layer-group";
+      }
+
+      function getAuthorProfile(item) {
+        var name = String(item.authorName || item.author || "").trim() || "匿名";
+        var icon = String(item.authorIcon || "").trim() || "icon_red_gray.png";
+        if (window.CanadaClassiDev && window.CanadaClassiDev.ccGetDisplayNameWithMock) {
+          var isMock = item && (item.isMock === true || item.source === "mock");
+          name = window.CanadaClassiDev.ccGetDisplayNameWithMock(name, isMock);
+        }
+        return { name: name, icon: icon };
+      }
+
+      function normalizeCategory(category) {
+        var raw = String(category || "").trim();
+        if (!raw) return "住まい";
+        if (raw === "求人相談") return "仕事・ワーホリ";
+        if (raw === "生活情報") return "初心者Q&A";
+        if (raw === "イベント") return "イベント・交流";
+        if (raw === "学校/留学") return "学校・留学";
+        if (raw === "ビザ/移民") return "ビザ・手続き";
+        if (raw === "交通/車") return "交通";
+        if (raw === "売買") return "買い物・お金";
+        return raw;
+      }
+
+      function escapeHtml(str) {
+        return String(str || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function highlight(text, keyword) {
+        var safe = escapeHtml(text || "");
+        if (!keyword) return safe;
+        var escaped = String(keyword || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        var re = new RegExp("(" + escaped + ")", "ig");
+        return safe.replace(re, '<mark class="board-highlight">$1</mark>');
+      }
+
+      var listEl = document.getElementById("board-list");
+      var countEl = document.getElementById("board-count");
+      var cityListEl = document.getElementById("board-city-list");
+      var citySearchEl = document.getElementById("board-city-search");
+      var citySearchBtn = document.getElementById("board-city-search-btn");
+      var citySortEl = document.getElementById("board-city-sort");
+      var clearEl = document.getElementById("board-clear");
+      var filtersEls = Array.prototype.slice.call(document.querySelectorAll(".board-filters"));
+      var pills = Array.prototype.slice.call(document.querySelectorAll(".board-category .pill"));
+      var searchEl = document.getElementById("board-search");
+      var searchBtn = document.getElementById("board-search-btn");
+      var sortEl = document.getElementById("board-sort");
+      if (searchBtn) searchBtn.disabled = !(searchEl && String(searchEl.value || "").trim());
+      if (citySearchBtn) citySearchBtn.disabled = !(citySearchEl && String(citySearchEl.value || "").trim());
+      var pagerEl = document.querySelector(".board-pager");
+      var PER_PAGE = 10;
+      var currentPage = 1;
+      var currentCat = "all";
+      var currentCity = "all";
+      var currentKeyword = "";
+      var draftKeyword = "";
+      var currentSort = "updated";
+      var cityKeyword = "";
+      var draftCityKeyword = "";
+      var citySort = "order";
+      var CITY_MASTER = getCityMasterFromHeader();
+      if (!CITY_MASTER.length) {
+        CITY_MASTER = [
+          "モントリオール",
+          "トロント",
+          "バンクーバー",
+          "ビクトリア",
+          "カルガリー",
+          "オタワ",
+          "ハリファックス"
+        ];
+      }
+
+      function getItems() {
+        if (!window.CanadaClassiDev || !window.CanadaClassiDev.ccGetBoardThreads) return [];
+        return window.CanadaClassiDev.ccGetBoardThreads();
+      }
+
+      function buildCityStats(items) {
+        var map = {};
+        items.forEach(function (item) {
+          var city = normalizeCity(item);
+          if (city === "未設定") return;
+          if (!map[city]) {
+            map[city] = { label: city, count: 0, recent: 0 };
+          }
+          map[city].count += 1;
+          map[city].recent = Math.max(map[city].recent, lastUpdatedAt(item));
+        });
+        return map;
+      }
+
+      function getCityList(items) {
+        var stats = buildCityStats(items);
+        if (!CITY_MASTER.length) {
+          return Object.keys(stats).filter(function (label) {
+            return label !== "未設定";
+          }).map(function (label) {
+            return { label: label, count: stats[label].count, recent: stats[label].recent };
+          });
+        }
+        return CITY_MASTER.map(function (label) {
+          var data = stats[label] || { count: 0, recent: 0 };
+          return { label: label, count: data.count, recent: data.recent };
+        });
+      }
+
+      function renderCityList(items) {
+        if (!cityListEl) return;
+        var list = getCityList(items);
+        if (cityKeyword) {
+          var kw = cityKeyword.toLowerCase();
+          list = list.filter(function (item) {
+            return item.label.toLowerCase().indexOf(kw) >= 0;
+          });
+        }
+        if (citySort === "count") {
+          list.sort(function (a, b) {
+            if (b.count !== a.count) return b.count - a.count;
+            return a.label.localeCompare(b.label, "ja");
+          });
+        } else if (citySort === "recent") {
+          list.sort(function (a, b) {
+            if (b.recent !== a.recent) return b.recent - a.recent;
+            return a.label.localeCompare(b.label, "ja");
+          });
+        }
+
+        cityListEl.innerHTML = "";
+
+        function addCityButton(label, count, isAll, key) {
+          var displayLabel = label;
+          if (window.i18nCityLabel && key) {
+            var translated = window.i18nCityLabel(key);
+            if (translated) displayLabel = translated;
+          }
+          var btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "board-city-btn" + ((isAll && currentCity === "all") || (!isAll && currentCity === label) ? " active" : "");
+          btn.setAttribute("data-city", isAll ? "all" : label);
+          btn.innerHTML = "<span>" + escapeHtml(displayLabel) + "</span><span class=\"board-city-count\">" + count + "</span>";
+          cityListEl.appendChild(btn);
+        }
+
+        var totalCount = items.length;
+        addCityButton("全カナダ", totalCount, true, "canada_all");
+
+        list.forEach(function (item) {
+          addCityButton(item.label, item.count, false, item.key || item.label);
+        });
+      }
+
+      function applyFilters(items) {
+        var result = items.slice();
+        if (currentCat && currentCat !== "all") {
+          result = result.filter(function (t) { return normalizeCategory(t.category) === currentCat; });
+        }
+        if (currentCity && currentCity !== "all") {
+          result = result.filter(function (t) { return normalizeCity(t) === currentCity; });
+        }
+        if (currentKeyword) {
+          var kw = currentKeyword.toLowerCase();
+          result = result.filter(function (t) {
+            var hay = (String(t.title || "") + " " + String(t.body || "") + " " + String(t.authorName || t.author || "")).toLowerCase();
+            return hay.indexOf(kw) >= 0;
+          });
+        }
+        return result;
+      }
+
+      function sortItems(items) {
+        var result = items.slice();
+        if (currentSort === "replies") {
+          result.sort(function (a, b) {
+            var ra = Array.isArray(a.replies) ? a.replies.length : 0;
+            var rb = Array.isArray(b.replies) ? b.replies.length : 0;
+            if (rb !== ra) return rb - ra;
+            return lastUpdatedAt(b) - lastUpdatedAt(a);
+          });
+        } else if (currentSort === "latest") {
+          result.sort(function (a, b) {
+            return new Date(b.created_at || 0).getTime() - new Date(a.created_at || 0).getTime();
+          });
+        } else {
+          result.sort(function (a, b) {
+            return lastUpdatedAt(b) - lastUpdatedAt(a);
+          });
+        }
+        return result;
+      }
+
+      function updateCount(filteredCount, totalCount) {
+        if (!countEl) return;
+        countEl.dataset.filtered = String(filteredCount);
+        countEl.dataset.total = String(totalCount);
+        if (totalCount === 0) {
+          if (window.t) {
+            countEl.textContent = window.t("ui.boardEmpty");
+          } else {
+            countEl.textContent = "相談がありません";
+          }
+          return;
+        }
+        var isFiltered = filteredCount !== totalCount;
+        if (window.tFmt) {
+          countEl.textContent = isFiltered
+            ? window.tFmt("ui.boardCountFiltered", { n: filteredCount, total: totalCount })
+            : window.tFmt("ui.boardCountAll", { n: totalCount });
+        } else {
+          countEl.textContent = isFiltered
+            ? ("表示 " + filteredCount + "件 / 全" + totalCount + "件")
+            : ("全" + totalCount + "件の相談");
+        }
+      }
+
+      function scrollToBoardTop() {
+        var target = document.querySelector(".board-main");
+        if (!target) return;
+        var top = target.getBoundingClientRect().top + window.pageYOffset - 12;
+        window.scrollTo({ top: top, behavior: "smooth" });
+      }
+
+
+      function renderList(items) {
+        if (!listEl) return;
+        listEl.innerHTML = "";
+        if (!items.length) {
+          var empty = document.createElement("div");
+          empty.className = "board-empty";
+          empty.textContent = "該当する相談がありません。新規作成から投稿できます。";
+          listEl.appendChild(empty);
+          return;
+        }
+
+        items.forEach(function (t) {
+          var profile = getAuthorProfile(t);
+          var card = document.createElement("a");
+          card.className = "board-card";
+          card.href = "board_detail.html?thread=" + encodeURIComponent(t.id || "");
+
+          var head = document.createElement("div");
+          head.className = "board-card-head";
+
+          var titleWrap = document.createElement("div");
+          titleWrap.className = "board-title-wrap";
+
+          var tag = document.createElement("span");
+          tag.className = "board-tag " + getTagClass(t.category);
+          tag.innerHTML = "<i class=\"fa-solid " + getCategoryIcon(t.category) + "\"></i>" + escapeHtml(normalizeCategory(t.category));
+          titleWrap.appendChild(tag);
+
+          var title = document.createElement("div");
+          title.className = "board-title";
+          var displayTitle = (window.CanadaClassiDev && window.CanadaClassiDev.ccGetBoardDisplayTitle)
+            ? window.CanadaClassiDev.ccGetBoardDisplayTitle(t, "—")
+            : (t.title || "—");
+          title.innerHTML = highlight(displayTitle, currentKeyword);
+          titleWrap.appendChild(title);
+
+          var replies = countReplies(t.replies || []);
+          var repliesCount = document.createElement("div");
+          repliesCount.className = "board-replies-count";
+          repliesCount.innerHTML = "<span>返信</span><strong>" + replies + "</strong>";
+
+          head.appendChild(titleWrap);
+          head.appendChild(repliesCount);
+
+          var meta = document.createElement("div");
+          meta.className = "board-meta";
+          var cityLabel = getCityLabel(t);
+          var last = lastUpdatedAt(t);
+          meta.innerHTML =
+            "<span class=\"board-meta-item board-meta-author\"><img src=\"" + escapeHtml(profile.icon) + "\" alt=\"\" /><span>" + escapeHtml(profile.name) + "</span></span>" +
+            "<span class=\"board-meta-item\"><i class=\"fa-regular fa-clock\"></i><span class=\"board-meta-strong\">" + timeAgo(last) + "更新</span></span>" +
+            "<span class=\"board-meta-item\"><i class=\"fa-solid fa-location-dot\"></i>" + escapeHtml(cityLabel) + "</span>" +
+            "<span class=\"board-meta-item\"><i class=\"fa-solid fa-tag\"></i>" + escapeHtml(normalizeCategory(t.category)) + "</span>";
+
+          var desc = document.createElement("p");
+          desc.className = "board-desc";
+          desc.innerHTML = highlight(t.body || "", currentKeyword);
+
+          card.appendChild(head);
+          card.appendChild(meta);
+          card.appendChild(desc);
+          listEl.appendChild(card);
+        });
+      }
+
+      function renderPagination(total) {
+        if (!pagerEl) return;
+        var pages = Math.max(1, Math.ceil(total / PER_PAGE));
+        if (currentPage > pages) currentPage = pages;
+        pagerEl.innerHTML = "";
+        var prev = document.createElement("button");
+        prev.className = "pager-btn";
+        prev.textContent = "<";
+        prev.disabled = currentPage <= 1;
+        prev.addEventListener("click", function () {
+          if (currentPage <= 1) return;
+          currentPage -= 1;
+          render();
+          scrollToBoardTop();
+        });
+        pagerEl.appendChild(prev);
+        for (var i = 1; i <= pages; i += 1) {
+          var btn = document.createElement("button");
+          btn.className = "pager-btn" + (i === currentPage ? " is-active" : "");
+          btn.textContent = String(i);
+          btn.addEventListener("click", (function (page) {
+            return function () {
+              currentPage = page;
+              render();
+              scrollToBoardTop();
+            };
+          })(i));
+          pagerEl.appendChild(btn);
+        }
+        var next = document.createElement("button");
+        next.className = "pager-btn";
+        next.textContent = ">";
+        next.disabled = currentPage >= pages;
+        next.addEventListener("click", function () {
+          if (currentPage >= pages) return;
+          currentPage += 1;
+          render();
+          scrollToBoardTop();
+        });
+        pagerEl.appendChild(next);
+      }
+
+      function render() {
+        var items = getItems();
+        renderCityList(items);
+        var filtered = applyFilters(items);
+        var sorted = sortItems(filtered);
+        var total = sorted.length;
+        var pages = Math.max(1, Math.ceil(total / PER_PAGE));
+        if (currentPage > pages) currentPage = pages;
+        var start = (currentPage - 1) * PER_PAGE;
+        var pageItems = sorted.slice(start, start + PER_PAGE);
+
+        renderList(pageItems);
+        renderPagination(total);
+        updateCount(total, items.length);
+      }
+
+      pills.forEach(function (pill) {
+        pill.addEventListener("click", function () {
+          pills.forEach(function (p) { p.classList.remove("active"); });
+          pill.classList.add("active");
+          currentCat = pill.getAttribute("data-cat") || "all";
+          currentPage = 1;
+          render();
+        });
+      });
+
+      if (cityListEl) {
+        cityListEl.addEventListener("click", function (event) {
+          var target = event.target.closest("button");
+          if (!target) return;
+          currentCity = target.getAttribute("data-city") || "all";
+          currentPage = 1;
+          render();
+        });
+      }
+
+      if (citySearchEl) {
+        citySearchEl.addEventListener("input", function () {
+          draftCityKeyword = (citySearchEl.value || "").trim();
+          if (citySearchBtn) citySearchBtn.disabled = !draftCityKeyword;
+          if (!draftCityKeyword && cityKeyword) {
+            cityKeyword = "";
+            currentPage = 1;
+            render();
+          }
+        });
+        citySearchEl.addEventListener("keydown", function (e) {
+          if (e.key !== "Enter") return;
+          e.preventDefault();
+          draftCityKeyword = (citySearchEl.value || "").trim();
+          cityKeyword = draftCityKeyword;
+          if (citySearchBtn) citySearchBtn.disabled = !draftCityKeyword;
+          render();
+        });
+      }
+      if (citySearchBtn) {
+        citySearchBtn.addEventListener("click", function () {
+          if (!citySearchEl) return;
+          draftCityKeyword = (citySearchEl.value || "").trim();
+          cityKeyword = draftCityKeyword;
+          citySearchBtn.disabled = !draftCityKeyword;
+          render();
+        });
+      }
+
+      if (citySortEl) {
+        citySortEl.addEventListener("change", function () {
+          citySort = citySortEl.value || "order";
+          render();
+        });
+      }
+
+      if (searchEl) {
+        searchEl.addEventListener("input", function () {
+          draftKeyword = (searchEl.value || "").trim();
+          if (searchBtn) searchBtn.disabled = !draftKeyword;
+          if (!draftKeyword && currentKeyword) {
+            currentKeyword = "";
+            currentPage = 1;
+            render();
+          }
+        });
+        searchEl.addEventListener("keydown", function (e) {
+          if (e.key !== "Enter") return;
+          e.preventDefault();
+          draftKeyword = (searchEl.value || "").trim();
+          currentKeyword = draftKeyword;
+          if (searchBtn) searchBtn.disabled = !draftKeyword;
+          currentPage = 1;
+          render();
+        });
+      }
+      if (searchBtn) {
+        searchBtn.addEventListener("click", function () {
+          if (!searchEl) return;
+          draftKeyword = (searchEl.value || "").trim();
+          currentKeyword = draftKeyword;
+          searchBtn.disabled = !draftKeyword;
+          currentPage = 1;
+          render();
+        });
+      }
+
+      if (sortEl) {
+        sortEl.addEventListener("change", function () {
+          currentSort = sortEl.value || "updated";
+          currentPage = 1;
+          render();
+        });
+      }
+
+      if (clearEl) {
+        clearEl.addEventListener("click", function () {
+          currentCat = "all";
+          currentCity = "all";
+          currentKeyword = "";
+          currentSort = "updated";
+          cityKeyword = "";
+          citySort = "order";
+          currentPage = 1;
+          pills.forEach(function (p) { p.classList.remove("active"); });
+          if (pills[0]) pills[0].classList.add("active");
+          if (searchEl) searchEl.value = "";
+          if (citySearchEl) citySearchEl.value = "";
+          if (searchBtn) searchBtn.disabled = true;
+          if (citySearchBtn) citySearchBtn.disabled = true;
+          if (sortEl) sortEl.value = "updated";
+          if (citySortEl) citySortEl.value = "order";
+          render();
+        });
+      }
+
+      if (filtersEls.length && window.matchMedia) {
+        var desktopQuery = window.matchMedia("(min-width: 981px)");
+        var syncFiltersOpen = function () {
+          if (!filtersEls.length) return;
+          filtersEls.forEach(function (el) {
+            if (desktopQuery.matches) {
+              el.setAttribute("open", "");
+            } else {
+              el.removeAttribute("open");
+            }
+          });
+        };
+        syncFiltersOpen();
+        if (desktopQuery.addEventListener) {
+          desktopQuery.addEventListener("change", syncFiltersOpen);
+        } else if (desktopQuery.addListener) {
+          desktopQuery.addListener(syncFiltersOpen);
+        }
+      }
+
+      render();
+    })();
+  </script>
+</body>
+</html>

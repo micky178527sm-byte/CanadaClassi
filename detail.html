@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CanadaClassi | Detail</title>
+
+  <!-- Styles (single source of truth) -->
+  <link rel="stylesheet" href="./style.css" />
+
+  <!-- Icons (Font Awesome) -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    referrerpolicy="no-referrer"
+  />
+
+  <!-- DETAIL: Header hardening (scoped) -->
+  <style>
+    /* detail: keep only page-specific behaviors; all visuals must come from style.css */
+
+    /* detailでは「マイページ/ログアウト」は不要 → 固定で非表示 */
+    body[data-cc-page="detail"] [data-cc-auth="in"] { display: none !important; }
+
+    /* Safety: keep main layout intact while allowing header visuals */
+    body.page-detail.page-home main { display: block; }
+    body.page-detail.page-home main > .detail-grid { display: grid; }
+  </style>
+</head>
+
+<body data-cc-page="detail" class="page-detail page-home">
+  <!-- =========================
+       Header
+       ========================= -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">
+        <a href="index.html" class="logo-link">
+          <img src="logo1_transparent.png" alt="CanadaClassi Logo" class="logo-img" />
+          <div class="logo-text">
+            <span class="en">CanadaClassi</span>
+            <span class="ja">カナダくらし</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="header-right-pc">
+        <div class="auth-buttons">
+          <div class="cc-notice">
+            <button type="button" class="btn-icon btn-notice-bell" id="notifBell" title="お知らせ" aria-label="お知らせ" data-cc-notice-toggle>
+              <svg class="cc-icon cc-bell-icon" viewBox="0 0 448 512" aria-hidden="true">
+                <path d="M224 512a64 64 0 0 0 64-64H160a64 64 0 0 0 64 64zm215.39-149.33C419.37 343 384 312 384 240c0-79.7-56.5-145.6-128-158.5V48a48 48 0 1 0-96 0v33.5C88.5 94.4 32 160.3 32 240c0 72-35.4 103-55.4 122.7A31.9 31.9 0 0 0 0 384a32 32 0 0 0 32 32h384a32 32 0 0 0 32-32 31.9 31.9 0 0 0-8.61-21.33z" fill="currentColor"/>
+              </svg>
+              <span class="sr-only cc-notif-label">お知らせ</span>
+              <span class="notification-dot"></span>
+            </button>
+            <div class="cc-notice-dropdown" data-cc-notice-dropdown hidden>
+              <div class="cc-notice-header">
+                <div class="cc-notice-title">お知らせ</div>
+                <label class="cc-notice-filter">
+                  <input type="checkbox" data-cc-notice-unread />
+                  <span>未読のみ</span>
+                </label>
+                <button type="button" class="cc-notice-markall" data-cc-notice-markall>すべて既読</button>
+              </div>
+              <div class="cc-notice-list" data-cc-notice-list></div>
+              <div class="cc-notice-footer">
+                <a href="mypage.html?tab=notices">すべて見る</a>
+              </div>
+            </div>
+          </div>
+
+          <a href="post.html" class="btn-post" id="post-button">
+            <i class="fa-solid fa-camera"></i> 投稿作成
+          </a>
+
+          <a href="login.html" class="btn-login" id="login-button">
+            <i class="fa-regular fa-circle-user"></i> ログイン・新規登録
+          </a>
+        </div>
+
+        <div class="settings-group">
+          <select id="area-select" class="cc-hidden-select" aria-label="エリア（主要）">
+            <option value="canada_all">🇨🇦 全カナダ</option>
+            <option value="vancouver">バンクーバー, BC</option>
+            <option value="victoria">ビクトリア, BC</option>
+            <option value="whistler">ウィスラー, BC</option>
+            <option value="kelowna">ケロウナ, BC</option>
+            <option value="calgary">カルガリー, AB</option>
+            <option value="banff">バンフ, AB</option>
+            <option value="edmonton">エドモントン, AB</option>
+            <option value="winnipeg">ウィニペグ, MB</option>
+            <option value="ottawa">オタワ, ON</option>
+            <option value="toronto">トロント, ON</option>
+            <option value="montreal">モントリオール, QC</option>
+            <option value="halifax">ハリファックス, NS</option>
+            <option value="other">その他（カナダの都市）</option>
+            <option value="japan">🇯🇵 日本</option>
+          </select>
+          <select id="area-select-sub" class="cc-hidden-select" aria-label="その他の都市">
+            <option value="">その他のカナダ都市</option>
+            <optgroup label="ユーコン準州（YT）">
+              <option value="whitehorse">ホワイトホース, YT</option>
+            </optgroup>
+            <optgroup label="ブリティッシュコロンビア州（BC）">
+              <option value="abbotsford">アボッツフォード, BC</option>
+              <option value="burnaby">バーナビー, BC</option>
+              <option value="kamloops">カムループス, BC</option>
+              <option value="nanaimo">ナナイモ, BC</option>
+              <option value="prince_george">プリンスジョージ, BC</option>
+              <option value="richmond">リッチモンド, BC</option>
+              <option value="surrey">サレー, BC</option>
+            </optgroup>
+            <optgroup label="アルバータ州（AB）">
+              <option value="kananaskis">カナナスキス, AB</option>
+              <option value="canmore">キャンモア, AB</option>
+              <option value="fort_mcmurray">フォートマクマレー, AB</option>
+              <option value="medicine_hat">メディシンハット, AB</option>
+              <option value="lake_louise">ルイーズ湖, AB</option>
+              <option value="red_deer">レッドディア, AB</option>
+              <option value="lethbridge">レスブリッジ, AB</option>
+            </optgroup>
+            <optgroup label="サスカチュワン州（SK）">
+              <option value="regina">レジャイナ, SK</option>
+              <option value="saskatoon">サスカトゥーン, SK</option>
+            </optgroup>
+            <optgroup label="マニトバ州（MB）">
+              <option value="brandon">ブランドン, MB</option>
+            </optgroup>
+            <optgroup label="オンタリオ州（ON）">
+              <option value="oakville">オークビル, ON</option>
+              <option value="oshawa">オシャワ, ON</option>
+              <option value="kingston">キングストン, ON</option>
+              <option value="kitchener">キッチナー, ON</option>
+              <option value="guelph">ゲルフ, ON</option>
+              <option value="sudbury">サドベリー, ON</option>
+              <option value="thunder_bay">サンダーベイ, ON</option>
+              <option value="niagara_falls">ナイアガラフォールズ, ON</option>
+              <option value="barrie">バリー, ON</option>
+              <option value="hamilton">ハミルトン, ON</option>
+              <option value="mississauga">ミシサガ, ON</option>
+              <option value="markham">マーカム, ON</option>
+              <option value="vaughan">ヴォーン, ON</option>
+              <option value="london_on">ロンドン, ON</option>
+              <option value="waterloo">ウォータールー, ON</option>
+              <option value="windsor">ウィンザー, ON</option>
+            </optgroup>
+            <optgroup label="ケベック州（QC）">
+              <option value="gatineau">ガティノー, QC</option>
+              <option value="laval">ラヴァル, QC</option>
+              <option value="longueuil">ロンゲール, QC</option>
+              <option value="quebec_city">ケベックシティ, QC</option>
+            </optgroup>
+            <optgroup label="ニューブランズウィック州（NB）">
+              <option value="fredericton">フレデリクトン, NB</option>
+              <option value="moncton">モンクトン, NB</option>
+              <option value="saint_john">セントジョン, NB</option>
+            </optgroup>
+            <optgroup label="プリンスエドワードアイランド州（PE）">
+              <option value="charlottetown">シャーロットタウン, PE</option>
+            </optgroup>
+            <optgroup label="ノバスコシア州（NS）">
+              <option value="sydney_ns">シドニー, NS</option>
+            </optgroup>
+            <optgroup label="ニューファンドランド・ラブラドール州（NL）">
+              <option value="st_johns">セントジョンズ, NL</option>
+            </optgroup>
+          </select>
+          <select id="lang-select" class="cc-hidden-select" aria-label="言語">
+            <option value="ja">JP</option>
+            <option value="en">EN</option>
+            <option value="fr">FR</option>
+          </select>
+
+          <div class="cc-dropdown" data-cc-dropdown="area">
+            <button class="cc-dd-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-location-dot"></i>
+              <span class="cc-dd-value" data-cc-dd-value="area"></span>
+            </button>
+            <div class="cc-dd-menu" role="menu">
+              <div class="cc-dd-note">表示する都市を切り替え、カレンダーや投稿一覧の内容を変更します。</div>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="canada_all">🇨🇦 全カナダ</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="vancouver">バンクーバー, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="victoria">ビクトリア, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="whistler">ウィスラー, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="kelowna">ケロウナ, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="calgary">カルガリー, AB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="banff">バンフ, AB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="edmonton">エドモントン, AB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="winnipeg">ウィニペグ, MB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="ottawa">オタワ, ON</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="toronto">トロント, ON</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="montreal">モントリオール, QC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="halifax">ハリファックス, NS</button>
+              <div class="cc-dd-submenu" data-cc-dd-submenu>
+                <button class="cc-dd-item cc-dd-subtoggle" type="button" data-cc-dd-subtoggle>
+                  その他のカナダ都市
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
+                <div class="cc-dd-subpanel" hidden>
+                  <div class="cc-dd-group-title">ユーコン準州（YT）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="whitehorse">ホワイトホース, YT</button>
+                  <div class="cc-dd-group-title">ブリティッシュコロンビア州（BC）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="abbotsford">アボッツフォード, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="burnaby">バーナビー, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kamloops">カムループス, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="nanaimo">ナナイモ, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="prince_george">プリンスジョージ, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="richmond">リッチモンド, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="surrey">サレー, BC</button>
+                  <div class="cc-dd-group-title">アルバータ州（AB）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kananaskis">カナナスキス, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="canmore">キャンモア, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="fort_mcmurray">フォートマクマレー, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="medicine_hat">メディシンハット, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="lake_louise">ルイーズ湖, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="red_deer">レッドディア, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="lethbridge">レスブリッジ, AB</button>
+                  <div class="cc-dd-group-title">サスカチュワン州（SK）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="regina">レジャイナ, SK</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="saskatoon">サスカトゥーン, SK</button>
+                  <div class="cc-dd-group-title">マニトバ州（MB）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="brandon">ブランドン, MB</button>
+                  <div class="cc-dd-group-title">オンタリオ州（ON）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="oakville">オークビル, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="oshawa">オシャワ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kingston">キングストン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kitchener">キッチナー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="guelph">ゲルフ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="sudbury">サドベリー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="thunder_bay">サンダーベイ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="niagara_falls">ナイアガラフォールズ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="barrie">バリー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="hamilton">ハミルトン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="mississauga">ミシサガ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="markham">マーカム, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="vaughan">ヴォーン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="london_on">ロンドン, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="waterloo">ウォータールー, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="windsor">ウィンザー, ON</button>
+                  <div class="cc-dd-group-title">ケベック州（QC）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="gatineau">ガティノー, QC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="laval">ラヴァル, QC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="longueuil">ロンゲール, QC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="quebec_city">ケベックシティ, QC</button>
+                  <div class="cc-dd-group-title">ニューブランズウィック州（NB）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="fredericton">フレデリクトン, NB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="moncton">モンクトン, NB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="saint_john">セントジョン, NB</button>
+                  <div class="cc-dd-group-title">プリンスエドワードアイランド州（PE）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="charlottetown">シャーロットタウン, PE</button>
+                  <div class="cc-dd-group-title">ノバスコシア州（NS）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="sydney_ns">シドニー, NS</button>
+                  <div class="cc-dd-group-title">ニューファンドランド・ラブラドール州（NL）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="st_johns">セントジョンズ, NL</button>
+                </div>
+              </div>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="japan">🇯🇵 日本</button>
+            </div>
+          </div>
+
+          <div class="cc-dropdown" data-cc-dropdown="lang">
+            <button class="cc-dd-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-globe"></i>
+              <span class="cc-dd-value" data-cc-dd-value="lang"></span>
+            </button>
+            <div class="cc-dd-menu" role="menu">
+              <div class="cc-dd-note">表示言語を切り替えるためのプルダウンです。</div>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="lang" data-value="ja">JP</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="lang" data-value="en">EN</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="lang" data-value="fr">FR</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Global Nav: keep "クラシファイド" active on detail -->
+    <nav class="global-nav">
+      <div class="container nav-grid">
+        <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i> ホーム</a>
+        <a href="list.html" class="nav-item active"><i class="fa-solid fa-tags"></i> クラシファイド</a>
+        <a href="static.html?type=school" class="nav-item"><i class="fa-solid fa-graduation-cap"></i> 学校情報</a>
+        <a href="board.html" class="nav-item"><i class="fa-solid fa-comments"></i> 掲示板</a>
+        <a href="static.html?type=links" class="nav-item"><i class="fa-solid fa-arrow-up-right-from-square"></i> 外部リンク</a>
+        <a href="static.html?type=tips" class="nav-item"><i class="fa-solid fa-lightbulb"></i> お役立ち情報</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- =========================
+       Main (2-column; responsive to 1-column)
+       ========================= -->
+  <main class="container cc-main">
+    <div class="detail-grid cc-detail-grid">
+      <!-- Left: main content -->
+      <section class="detail-main cc-detail-main">
+        <div class="card">
+          <div class="detail-head">
+            <h1 id="post-title" class="detail-title">—</h1>
+            <div class="detail-breadcrumb" id="post-breadcrumb">—</div>
+            <div class="detail-sub">
+              <span class="cc-date">
+                <span class="cc-icon cc-icon-clock" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" role="img" focusable="false">
+                    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 7v6l4 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span id="post-date">—</span>
+              </span>
+            </div>
+          </div>
+
+          <div id="main-photo" class="detail-photo">
+            <!-- script.js will populate -->
+          </div>
+        </div>
+
+        <div class="card detail-side-block price-block detail-price-mobile detail-mobile-only">
+          <div class="section-title detail-subtitle" id="detail-price-title-mobile">価格</div>
+          <div class="price-row">
+            <div class="price" id="post-price-mobile">—</div>
+          </div>
+        </div>
+
+        <div class="card detail-desc-block">
+          <div class="section-title detail-subtitle" id="detail-desc-title">説明</div>
+          <div id="post-description" class="detail-desc">
+            <p>—</p>
+          </div>
+        </div>
+
+        <div class="card detail-side-block detail-mobile-only" id="detail-seller-mobile">
+          <div class="section-title detail-subtitle">投稿者情報</div>
+          <div class="seller-row">
+            <div class="seller-avatar" id="seller-avatar-mobile">—</div>
+            <div>
+              <a class="seller-name seller-name-link" id="seller-name-mobile" href="profile-view.html">—</a>
+              <div class="seller-rating" id="seller-rating-mobile">—</div>
+            </div>
+          </div>
+          <div class="seller-meta">
+            <div><span class="seller-meta-label">性別</span><span id="seller-gender-mobile">—</span></div>
+            <div><span class="seller-meta-label">居住都市</span><span id="seller-city-mobile">—</span></div>
+          </div>
+          <div class="seller-actions">
+            <a class="btn btn-primary" id="detail-inquiry-button-mobile" href="./inquiry.html">
+              <i class="fa-solid fa-paper-plane btn-icon" aria-hidden="true"></i>投稿者に問い合わせ
+            </a>
+            <a class="btn btn-secondary" id="detail-favorite-button-mobile" href="#">
+              <i class="fa-regular fa-heart btn-icon" aria-hidden="true"></i>投稿をお気に入り
+            </a>
+            <a class="btn btn-secondary" id="detail-report-button-mobile" href="#">
+              <i class="fa-regular fa-flag btn-icon" aria-hidden="true"></i>通報
+            </a>
+          </div>
+        </div>
+
+        <div class="card detail-side-block detail-mobile-only" id="deal-status-block-mobile">
+          <div class="section-title detail-subtitle" id="deal-status-title-mobile">取引状況</div>
+          <div class="deal-status">
+            <i class="fa-regular fa-circle-check deal-status-icon" aria-hidden="true"></i>
+            <span class="deal-status-text" id="deal-status-mobile">—</span>
+          </div>
+        </div>
+
+        <div class="detail-info-block" id="event-info-block" hidden>
+          <div class="detail-info-title detail-subtitle" id="event-info-title">開催情報</div>
+          <div class="detail-info-row">
+            <span class="detail-info-label" id="event-info-date-label">開催日</span>
+            <span class="detail-info-value" id="event-info-date">—</span>
+          </div>
+          <div class="detail-info-row">
+            <span class="detail-info-label" id="event-info-start-label">開始時間</span>
+            <span class="detail-info-value" id="event-info-start">—</span>
+          </div>
+          <div class="detail-info-row">
+            <span class="detail-info-label" id="event-info-end-label">終了時間</span>
+            <span class="detail-info-value" id="event-info-end">—</span>
+          </div>
+          <div class="detail-info-row">
+            <span class="detail-info-label" id="event-info-place-label">開催場所</span>
+            <span class="detail-info-value" id="event-info-place">—</span>
+          </div>
+          <div class="detail-info-row">
+            <span class="detail-info-label" id="event-info-fee-label">参加費</span>
+            <span class="detail-info-value" id="event-info-fee">—</span>
+          </div>
+          <div class="detail-info-row">
+            <span class="detail-info-label" id="event-info-format-label">形式</span>
+            <span class="detail-info-value" id="event-info-format">—</span>
+          </div>
+          <div class="detail-info-row">
+            <span class="detail-info-label" id="event-info-capacity-label">定員</span>
+            <span class="detail-info-value" id="event-info-capacity">—</span>
+          </div>
+        </div>
+
+        <div class="card detail-info-block detail-trade-mobile detail-mobile-only" id="trade-info-block-mobile">
+          <div class="detail-info-title detail-subtitle" id="trade-info-title-mobile">条件・連絡</div>
+          <div class="detail-info-row">
+            <span class="detail-info-label" id="trade-condition-label-mobile">状態</span>
+            <span class="detail-info-value" id="trade-condition-mobile">—</span>
+          </div>
+          <div class="detail-info-row">
+            <span class="detail-info-label" id="trade-delivery-label-mobile">受け渡し方法</span>
+            <span class="detail-info-value" id="trade-delivery-mobile">—</span>
+          </div>
+          <div class="detail-info-row">
+            <span class="detail-info-label" id="trade-contact-label-mobile">連絡方法</span>
+            <span class="detail-info-value" id="trade-contact-mobile">—</span>
+          </div>
+        </div>
+
+        <div class="card detail-location">
+          <div class="section-title detail-subtitle" id="detail-location-title">ロケーション</div>
+          <div class="detail-info-row">
+            <span class="detail-info-label">エリア</span>
+            <span class="detail-info-value" id="location-area">—</span>
+          </div>
+          <div class="detail-info-row">
+            <span class="detail-info-label">詳細</span>
+            <span class="detail-info-value" id="location-address">—</span>
+          </div>
+        </div>
+
+        <div class="card detail-side-block" id="post-map">
+          <div class="section-title detail-subtitle" id="detail-map-title">受け渡しエリア</div>
+          <div class="map-placeholder">Google Map（プロトタイプ）</div>
+        </div>
+
+        <div class="ad-space-detail">広告スペース</div>
+      </section>
+
+      <!-- Right: sidebar -->
+      <aside class="detail-side cc-detail-side">
+        <!-- Price block (events/schools should be hidden by script.js) -->
+        <div class="card detail-side-block price-block detail-side-price" id="detail-side-price-block">
+          <div class="section-title detail-subtitle">価格</div>
+          <div class="price-row">
+            <div class="price" id="post-price">—</div>
+          </div>
+          <div class="muted">※価格が無い場合は「無料」</div>
+        </div>
+
+        <!-- Event datetime (hidden by default; events/schools only) -->
+        <div class="card detail-side-block" id="post-event-datetime" hidden>
+          <div class="section-title detail-subtitle">開催日時</div>
+          <div id="event-datetime-text">—</div>
+        </div>
+
+        <!-- Trade info (non-event) -->
+        <div class="card detail-side-block" id="trade-info-block">
+          <div class="section-title detail-subtitle" id="trade-info-title">条件・連絡</div>
+          <div class="detail-info-row">
+            <span class="detail-info-label" id="trade-condition-label">状態</span>
+            <span class="detail-info-value" id="trade-condition">—</span>
+          </div>
+          <div class="detail-info-row">
+            <span class="detail-info-label" id="trade-delivery-label">受け渡し方法</span>
+            <span class="detail-info-value" id="trade-delivery">—</span>
+          </div>
+          <div class="detail-info-row">
+            <span class="detail-info-label" id="trade-contact-label">連絡方法</span>
+            <span class="detail-info-value" id="trade-contact">—</span>
+          </div>
+        </div>
+
+        <!-- Deal status -->
+        <div class="card detail-side-block">
+          <div class="section-title detail-subtitle" id="deal-status-title">取引状況</div>
+          <div class="deal-status">
+            <i class="fa-regular fa-circle-check deal-status-icon" aria-hidden="true"></i>
+            <span class="deal-status-text" id="deal-status">—</span>
+          </div>
+        </div>
+
+        <!-- Seller -->
+        <div class="card detail-side-block">
+          <div class="section-title detail-subtitle">投稿者</div>
+          <div class="seller-row">
+            <div class="seller-avatar" id="seller-avatar">—</div>
+            <div>
+              <a class="seller-name seller-name-link" id="seller-name" href="profile-view.html">—</a>
+              <div class="seller-rating" id="seller-rating">—</div>
+            </div>
+          </div>
+          <div class="seller-meta">
+            <div><span class="seller-meta-label">性別</span><span id="seller-gender">—</span></div>
+            <div><span class="seller-meta-label">居住都市</span><span id="seller-city">—</span></div>
+          </div>
+          <div class="seller-actions">
+            <a class="btn btn-primary" id="detail-inquiry-button" href="./inquiry.html">
+              <i class="fa-solid fa-paper-plane btn-icon" aria-hidden="true"></i>投稿者に問い合わせ
+            </a>
+            <a class="btn btn-secondary" id="detail-favorite-button" href="#">
+              <i class="fa-regular fa-heart btn-icon" aria-hidden="true"></i>投稿をお気に入り
+            </a>
+            <a class="btn btn-secondary" id="detail-report-button" href="#">
+              <i class="fa-regular fa-flag btn-icon" aria-hidden="true"></i>通報
+            </a>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+
+    <section class="detail-related" id="detail-related-section" hidden>
+      <div class="section-header">
+        <h2>関連する投稿</h2>
+      </div>
+      <div class="list-grid" id="detail-related-list"></div>
+      <div class="detail-related-debug" id="detail-related-debug" hidden></div>
+    </section>
+  </main>
+
+  <div class="modal-overlay" id="detail-photo-modal" hidden>
+    <div class="modal post-preview-modal detail-photo-modal">
+      <div class="modal-head">
+        <h3>写真を確認</h3>
+        <button class="modal-close" type="button" id="detail-photo-close">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="post-preview-modal-main">
+          <button class="preview-arrow preview-prev" type="button" aria-label="前の写真">
+            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+          </button>
+          <img id="detail-photo-modal-image" src="" alt="" />
+          <button class="preview-arrow preview-next" type="button" aria-label="次の写真">
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="post-preview-modal-thumbs" id="detail-photo-modal-thumbs"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <img src="logo1_transparent.png" alt="CanadaClassi Logo" class="footer-logo" />
+          <div>
+            <div class="footer-brand-title">CanadaClassi</div>
+            <div class="footer-brand-sub">カナダくらし</div>
+          </div>
+        </div>
+        <p class="footer-desc">留学・ワーホリの暮らしをつなぐクラシファイド。</p>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">サイトマップ</div>
+        <div class="footer-sitemap">
+          <a href="index.html">ホーム</a>
+          <a href="list.html">クラシファイド</a>
+          <a href="static.html?type=school">学校情報</a>
+          <a href="board.html">掲示板</a>
+          <a href="static.html?type=links">外部リンク</a>
+          <a href="static.html?type=tips">お役立ち情報</a>
+          <a href="mypage.html?tab=inquiries">メッセージ</a>
+          <a href="login.html">ログイン</a>
+          <a href="mypage.html">マイページ</a>
+          <a href="post.html">投稿</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">ご案内</div>
+        <div class="footer-links">
+          <a href="static.html?type=notice">管理者からのお知らせ</a>
+          <a href="static.html?type=guide">ご利用ガイド</a>
+          <a href="static.html?type=post-guide">投稿・取引ガイド</a>
+          <a href="static.html?type=scam">詐欺などのご注意</a>
+          <a href="static.html?type=terms">利用規約</a>
+          <a href="static.html?type=privacy">プライバシーポリシー</a>
+          <a href="sitemap.html">サイトマップ</a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <div class="footer-copy">© 2024 CanadaClassi</div>
+    </div>
+  </footer>
+
+  <!-- Script (single source of truth) -->
+  <script src="./script.js" defer></script>
+  <div class="modal-overlay" id="cc-contact-modal" hidden>
+    <div class="modal">
+      <div class="modal-head">
+        <h3>問い合わせ開始の確認</h3>
+        <button class="modal-close" type="button" data-contact-modal-close aria-label="閉じる">×</button>
+      </div>
+      <div class="modal-body">投稿者に問い合わせを開始しますか？</div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" type="button" data-contact-modal-cancel>キャンセル</button>
+        <button class="btn btn-primary" type="button" data-contact-modal-confirm>問い合わせを開始する</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>管理画面 | CanadaClassi</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    html { visibility: hidden; }
+  </style>
+  <script>
+    (function () {
+      var allowed = ["admin@canadaclassi.local"];
+      var lower = function (v) { return String(v || "").trim().toLowerCase(); };
+      var getStored = function (keys) {
+        for (var i = 0; i < keys.length; i += 1) {
+          try {
+            var v = localStorage.getItem(keys[i]);
+            if (v !== null && String(v).trim() !== "") return v;
+          } catch (e) {}
+        }
+        return "";
+      };
+      var email = getStored(["mock_user_email", "user_email", "email", "mock_email"]);
+      if (!email) {
+        location.replace("login.html?reason=admin");
+        return;
+      }
+      var isAllowed = allowed.indexOf(lower(email)) >= 0;
+      if (!isAllowed) {
+        location.replace("forbidden.html?reason=admin");
+        return;
+      }
+      document.documentElement.style.visibility = "visible";
+    })();
+  </script>
+  <noscript>
+    <meta http-equiv="refresh" content="0;url=login.html?reason=admin" />
+  </noscript>
+</head>
+
+<body class="admin-page">
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">
+        <a href="index.html" class="logo-link">
+          <img src="logo1_transparent.png" alt="CanadaClassi Logo" class="logo-img" />
+          <div class="logo-text">
+            <span class="en">CanadaClassi</span>
+            <span class="ja">カナダくらし</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="header-right-pc">
+        <div class="auth-buttons">
+          <div class="cc-notice">
+            <button type="button" class="btn-icon btn-notice-bell" id="notifBell" title="お知らせ" aria-label="お知らせ" data-cc-notice-toggle>
+              <svg class="cc-icon cc-bell-icon" viewBox="0 0 448 512" aria-hidden="true">
+                <path d="M224 512a64 64 0 0 0 64-64H160a64 64 0 0 0 64 64zm215.39-149.33C419.37 343 384 312 384 240c0-79.7-56.5-145.6-128-158.5V48a48 48 0 1 0-96 0v33.5C88.5 94.4 32 160.3 32 240c0 72-35.4 103-55.4 122.7A31.9 31.9 0 0 0 0 384a32 32 0 0 0 32 32h384a32 32 0 0 0 32-32 31.9 31.9 0 0 0-8.61-21.33z" fill="currentColor"/>
+              </svg>
+              <span class="sr-only cc-notif-label">お知らせ</span>
+              <span class="notification-dot"></span>
+            </button>
+            <div class="cc-notice-dropdown" data-cc-notice-dropdown hidden>
+              <div class="cc-notice-header">
+                <div class="cc-notice-title">お知らせ</div>
+                <label class="cc-notice-filter">
+                  <input type="checkbox" data-cc-notice-unread />
+                  <span>未読のみ</span>
+                </label>
+                <button type="button" class="cc-notice-markall" data-cc-notice-markall>すべて既読</button>
+              </div>
+              <div class="cc-notice-list" data-cc-notice-list></div>
+              <div class="cc-notice-footer">
+                <a href="mypage.html?tab=notices">すべて見る</a>
+              </div>
+            </div>
+          </div>
+
+          <a href="post.html" class="btn-post" id="post-button">
+            <i class="fa-solid fa-camera"></i> 投稿作成
+          </a>
+
+          <a href="login.html" class="btn-login" id="login-button">
+            <i class="fa-regular fa-circle-user"></i> ログイン・新規登録
+          </a>
+        </div>
+
+        <div class="settings-group">
+          <select id="area-select" class="cc-hidden-select" aria-label="エリア（主要）">
+            <option value="canada_all">🇨🇦 全カナダ</option>
+            <option value="vancouver">バンクーバー, BC</option>
+            <option value="victoria">ビクトリア, BC</option>
+            <option value="whistler">ウィスラー, BC</option>
+            <option value="kelowna">ケロウナ, BC</option>
+            <option value="calgary">カルガリー, AB</option>
+            <option value="banff">バンフ, AB</option>
+            <option value="edmonton">エドモントン, AB</option>
+            <option value="winnipeg">ウィニペグ, MB</option>
+            <option value="ottawa">オタワ, ON</option>
+            <option value="toronto">トロント, ON</option>
+            <option value="montreal">モントリオール, QC</option>
+            <option value="halifax">ハリファックス, NS</option>
+            <option value="other">その他（カナダの都市）</option>
+            <option value="japan">🇯🇵 日本</option>
+          </select>
+          <select id="area-select-sub" class="cc-hidden-select" aria-label="その他の都市">
+            <option value="">その他のカナダ都市</option>
+            <optgroup label="ユーコン準州（YT）">
+              <option value="whitehorse">ホワイトホース, YT</option>
+            </optgroup>
+            <optgroup label="ブリティッシュコロンビア州（BC）">
+              <option value="abbotsford">アボッツフォード, BC</option>
+              <option value="burnaby">バーナビー, BC</option>
+              <option value="kamloops">カムループス, BC</option>
+              <option value="nanaimo">ナナイモ, BC</option>
+              <option value="prince_george">プリンスジョージ, BC</option>
+              <option value="richmond">リッチモンド, BC</option>
+              <option value="surrey">サレー, BC</option>
+            </optgroup>
+            <optgroup label="アルバータ州（AB）">
+              <option value="kananaskis">カナナスキス, AB</option>
+              <option value="canmore">キャンモア, AB</option>
+              <option value="fort_mcmurray">フォートマクマレー, AB</option>
+              <option value="medicine_hat">メディシンハット, AB</option>
+              <option value="lake_louise">ルイーズ湖, AB</option>
+              <option value="red_deer">レッドディア, AB</option>
+              <option value="lethbridge">レスブリッジ, AB</option>
+            </optgroup>
+            <optgroup label="サスカチュワン州（SK）">
+              <option value="regina">レジャイナ, SK</option>
+              <option value="saskatoon">サスカトゥーン, SK</option>
+            </optgroup>
+            <optgroup label="マニトバ州（MB）">
+              <option value="brandon">ブランドン, MB</option>
+            </optgroup>
+            <optgroup label="オンタリオ州（ON）">
+              <option value="oakville">オークビル, ON</option>
+              <option value="oshawa">オシャワ, ON</option>
+              <option value="kingston">キングストン, ON</option>
+              <option value="kitchener">キッチナー, ON</option>
+              <option value="guelph">ゲルフ, ON</option>
+              <option value="sudbury">サドベリー, ON</option>
+              <option value="thunder_bay">サンダーベイ, ON</option>
+              <option value="niagara_falls">ナイアガラフォールズ, ON</option>
+              <option value="barrie">バリー, ON</option>
+              <option value="hamilton">ハミルトン, ON</option>
+              <option value="mississauga">ミシサガ, ON</option>
+              <option value="markham">マーカム, ON</option>
+              <option value="vaughan">ヴォーン, ON</option>
+              <option value="london_on">ロンドン, ON</option>
+              <option value="waterloo">ウォータールー, ON</option>
+              <option value="windsor">ウィンザー, ON</option>
+            </optgroup>
+            <optgroup label="ケベック州（QC）">
+              <option value="gatineau">ガティノー, QC</option>
+              <option value="laval">ラヴァル, QC</option>
+              <option value="longueuil">ロンゲール, QC</option>
+              <option value="quebec_city">ケベックシティ, QC</option>
+            </optgroup>
+            <optgroup label="ニューブランズウィック州（NB）">
+              <option value="fredericton">フレデリクトン, NB</option>
+              <option value="moncton">モンクトン, NB</option>
+              <option value="saint_john">セントジョン, NB</option>
+            </optgroup>
+            <optgroup label="プリンスエドワードアイランド州（PE）">
+              <option value="charlottetown">シャーロットタウン, PE</option>
+            </optgroup>
+            <optgroup label="ノバスコシア州（NS）">
+              <option value="sydney_ns">シドニー, NS</option>
+            </optgroup>
+            <optgroup label="ニューファンドランド・ラブラドール州（NL）">
+              <option value="st_johns">セントジョンズ, NL</option>
+            </optgroup>
+          </select>
+          <select id="lang-select" class="cc-hidden-select" aria-label="言語">
+            <option value="ja">JP</option>
+            <option value="en">EN</option>
+            <option value="fr">FR</option>
+          </select>
+
+          <div class="cc-dropdown" data-cc-dropdown="area">
+            <button class="cc-dd-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-location-dot"></i>
+              <span class="cc-dd-value" data-cc-dd-value="area"></span>
+            </button>
+            <div class="cc-dd-menu" role="menu">
+              <div class="cc-dd-note">表示する都市を切り替え、投稿一覧の内容を変更します。</div>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="canada_all">🇨🇦
+                全カナダ</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="vancouver">バンクーバー,
+                BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="victoria">ビクトリア, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="whistler">ウィスラー, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="kelowna">ケロウナ, BC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="calgary">カルガリー, AB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="banff">バンフ, AB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="edmonton">エドモントン,
+                AB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="winnipeg">ウィニペグ, MB</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="ottawa">オタワ, ON</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="toronto">トロント, ON</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="montreal">モントリオール,
+                QC</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="halifax">ハリファックス,
+                NS</button>
+              <div class="cc-dd-submenu" data-cc-dd-submenu>
+                <button class="cc-dd-item cc-dd-subtoggle" type="button" data-cc-dd-subtoggle>
+                  その他のカナダ都市
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
+                <div class="cc-dd-subpanel" hidden>
+                  <div class="cc-dd-group-title">ユーコン準州（YT）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="whitehorse">ホワイトホース,
+                    YT</button>
+                  <div class="cc-dd-group-title">ブリティッシュコロンビア州（BC）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub"
+                    data-value="abbotsford">アボッツフォード, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="burnaby">バーナビー,
+                    BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kamloops">カムループス,
+                    BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="nanaimo">ナナイモ,
+                    BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub"
+                    data-value="prince_george">プリンスジョージ, BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="richmond">リッチモンド,
+                    BC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="surrey">サレー,
+                    BC</button>
+                  <div class="cc-dd-group-title">アルバータ州（AB）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kananaskis">カナナスキス,
+                    AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="canmore">キャンモア,
+                    AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub"
+                    data-value="fort_mcmurray">フォートマクマレー, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub"
+                    data-value="medicine_hat">メディシンハット, AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="lake_louise">ルイーズ湖,
+                    AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="red_deer">レッドディア,
+                    AB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="lethbridge">レスブリッジ,
+                    AB</button>
+                  <div class="cc-dd-group-title">サスカチュワン州（SK）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="regina">レジャイナ,
+                    SK</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="saskatoon">サスカトゥーン,
+                    SK</button>
+                  <div class="cc-dd-group-title">マニトバ州（MB）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="brandon">ブランドン,
+                    MB</button>
+                  <div class="cc-dd-group-title">オンタリオ州（ON）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="oakville">オークビル,
+                    ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="oshawa">オシャワ,
+                    ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kingston">キングストン,
+                    ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="kitchener">キッチナー,
+                    ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="guelph">ゲルフ,
+                    ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="sudbury">サドベリー,
+                    ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="thunder_bay">サンダーベイ,
+                    ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub"
+                    data-value="niagara_falls">ナイアガラフォールズ, ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="barrie">バリー,
+                    ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="hamilton">ハミルトン,
+                    ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="mississauga">ミシサガ,
+                    ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="markham">マーカム,
+                    ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="vaughan">ヴォーン,
+                    ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="london_on">ロンドン,
+                    ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="waterloo">ウォータールー,
+                    ON</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="windsor">ウィンザー,
+                    ON</button>
+                  <div class="cc-dd-group-title">ケベック州（QC）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="gatineau">ガティノー,
+                    QC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="laval">ラヴァル,
+                    QC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="longueuil">ロンゲール,
+                    QC</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub"
+                    data-value="quebec_city">ケベックシティ, QC</button>
+                  <div class="cc-dd-group-title">ニューブランズウィック州（NB）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub"
+                    data-value="fredericton">フレデリクトン, NB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="moncton">モンクトン,
+                    NB</button>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="saint_john">セントジョン,
+                    NB</button>
+                  <div class="cc-dd-group-title">プリンスエドワードアイランド州（PE）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub"
+                    data-value="charlottetown">シャーロットタウン, PE</button>
+                  <div class="cc-dd-group-title">ノバスコシア州（NS）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="sydney_ns">シドニー,
+                    NS</button>
+                  <div class="cc-dd-group-title">ニューファンドランド・ラブラドール州（NL）</div>
+                  <button class="cc-dd-item" type="button" data-cc-dd-select="area-sub" data-value="st_johns">セントジョンズ,
+                    NL</button>
+                </div>
+              </div>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="area" data-value="japan">🇯🇵 日本</button>
+            </div>
+          </div>
+
+          <div class="cc-dropdown" data-cc-dropdown="lang">
+            <button class="cc-dd-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-globe"></i>
+              <span class="cc-dd-value" data-cc-dd-value="lang"></span>
+            </button>
+            <div class="cc-dd-menu" role="menu">
+              <div class="cc-dd-note">表示言語を切り替えるためのプルダウンです。</div>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="lang" data-value="ja">JP</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="lang" data-value="en">EN</button>
+              <button class="cc-dd-item" type="button" data-cc-dd-select="lang" data-value="fr">FR</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="global-nav">
+      <div class="container nav-grid">
+        <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i> ホーム</a>
+        <a href="list.html" class="nav-item"><i class="fa-solid fa-tags"></i> クラシファイド</a>
+        <a href="static.html?type=school" class="nav-item"><i class="fa-solid fa-graduation-cap"></i> 学校情報</a>
+        <a href="board.html" class="nav-item"><i class="fa-solid fa-comments"></i> 掲示板</a>
+        <a href="static.html?type=links" class="nav-item"><i class="fa-solid fa-arrow-up-right-from-square"></i>
+          外部リンク</a>
+        <a href="static.html?type=tips" class="nav-item"><i class="fa-solid fa-lightbulb"></i> お役立ち情報</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container admin-shell" id="admin-page">
+    <section class="admin-hero">
+      <div>
+        <h1>管理画面</h1>
+        <p>投稿の公開/非公開を切り替えるための管理ビューです。</p>
+      </div>
+    </section>
+
+    <section class="admin-gate" id="admin-gate">
+      <div class="admin-gate-card">
+        <h2>403 — 権限がありません</h2>
+        <p>このページは管理者のみ閲覧できます。</p>
+        <a class="btn btn-secondary" href="mypage.html">マイページへ戻る</a>
+      </div>
+    </section>
+
+    <section class="admin-layout" id="admin-app" hidden>
+      <aside class="cc-tabs admin-tabs">
+        <div class="admin-side-title">メニュー</div>
+        <button class="admin-side-item is-active" type="button" data-tab="posts">投稿管理</button>
+        <button class="admin-side-item" type="button" data-tab="board">掲示板管理<span class="admin-tab-badge is-hidden" data-tab-badge="board">0</span></button>
+        <button class="admin-side-item" type="button" data-tab="reports">通報管理<span class="admin-tab-badge is-hidden" data-tab-badge="reports">0</span></button>
+        <button class="admin-side-item" type="button" data-tab="users">ユーザー管理<span class="admin-tab-badge is-hidden" data-tab-badge="users">0</span></button>
+        <button class="admin-side-item" type="button" data-tab="conversations">会話<span class="admin-tab-badge is-hidden" data-tab-badge="conversations">0</span></button>
+        <button class="admin-side-item" type="button" data-tab="announcements">お知らせ</button>
+        <button class="admin-side-item" type="button" data-tab="static-pages">固定ページ</button>
+        <button class="admin-side-item" type="button" data-tab="settings">設定(Master)</button>
+        <button class="admin-side-item" type="button" data-tab="data">データ管理</button>
+        <button class="admin-side-item" type="button" data-tab="logs">ログ</button>
+      </aside>
+      <div class="admin-content">
+        <section class="admin-panel is-active" data-panel="posts">
+          <div class="admin-toolbar">
+            <div class="admin-search">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input id="admin-search" type="search" placeholder="タイトル・投稿ID・投稿者で検索" />
+            </div>
+            <div class="admin-filters">
+              <div class="cc-dropdown cc-select admin-select">
+                <button class="cc-dd-toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="cc-dd-value"></span>
+                </button>
+                <div class="cc-dd-menu" role="listbox"></div>
+                <select id="admin-filter" class="cc-hidden-select">
+                  <option value="all">すべて</option>
+                  <option value="public">公開中</option>
+                  <option value="hidden">非表示</option>
+                  <option value="deleted">削除済み</option>
+                </select>
+              </div>
+              <div class="admin-count">件数: <span id="admin-count">0</span></div>
+              <div class="admin-bulk-actions">
+                <button class="btn btn-secondary" type="button" id="admin-discard">破棄</button>
+                <button class="btn btn-primary" type="button" id="admin-save">保存</button>
+              </div>
+            </div>
+          </div>
+          <div class="admin-post-list" id="admin-post-list"></div>
+        </section>
+
+        <section class="admin-panel" data-panel="board">
+          <div class="admin-toolbar">
+            <div class="admin-search">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input id="admin-board-search" type="search" placeholder="タイトル・本文・投稿者で検索" />
+            </div>
+            <div class="admin-filters">
+              <div class="cc-dropdown cc-select admin-select">
+                <button class="cc-dd-toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="cc-dd-value"></span>
+                </button>
+                <div class="cc-dd-menu" role="listbox"></div>
+                <select id="admin-board-filter" class="cc-hidden-select">
+                  <option value="all">すべて</option>
+                  <option value="active">公開中</option>
+                  <option value="hidden">非表示</option>
+                </select>
+              </div>
+              <div class="admin-count">件数: <span id="admin-board-count">0</span></div>
+              <div class="admin-bulk-actions">
+                <button class="btn btn-secondary" type="button" id="admin-board-discard">破棄</button>
+                <button class="btn btn-primary" type="button" id="admin-board-save">保存</button>
+              </div>
+            </div>
+          </div>
+          <div class="admin-board-toggle">
+            <button class="btn btn-secondary is-active" type="button" data-board-view="threads">スレッド管理</button>
+            <button class="btn btn-secondary" type="button" data-board-view="replies">返信管理</button>
+          </div>
+          <div class="admin-board-view is-active" data-board-view="threads">
+            <div class="admin-board-list" id="admin-board-list"></div>
+          </div>
+          <div class="admin-board-view" data-board-view="replies">
+            <div class="admin-reply-toolbar">
+              <div class="admin-search admin-reply-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input id="admin-reply-search" type="search" placeholder="本文・投稿者で検索" />
+              </div>
+              <div class="admin-filters">
+                <div class="cc-dropdown cc-select admin-select">
+                  <button class="cc-dd-toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+                    <span class="cc-dd-value"></span>
+                  </button>
+                  <div class="cc-dd-menu" role="listbox"></div>
+                  <select id="admin-reply-filter" class="cc-hidden-select">
+                    <option value="all">すべて</option>
+                    <option value="active">公開中</option>
+                    <option value="hidden">非表示</option>
+                  </select>
+                </div>
+                <input id="admin-reply-thread" class="setting-input admin-reply-thread" type="text" placeholder="thread_key (任意)" />
+                <div class="admin-count">件数: <span id="admin-reply-count">0</span></div>
+              </div>
+            </div>
+            <div class="admin-reply-list" id="admin-reply-list"></div>
+          </div>
+        </section>
+
+        <section class="admin-panel" data-panel="reports">
+          <div class="admin-toolbar">
+            <div class="admin-search">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input id="admin-report-search" type="search" placeholder="通報ID・対象・通報者で検索" />
+            </div>
+            <div class="admin-filters">
+              <div class="cc-dropdown cc-select admin-select">
+                <button class="cc-dd-toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="cc-dd-value"></span>
+                </button>
+                <div class="cc-dd-menu" role="listbox"></div>
+                <select id="admin-report-status" class="cc-hidden-select">
+                  <option value="new" selected>新規</option>
+                  <option value="all">すべて</option>
+                  <option value="unassigned">未アサイン</option>
+                  <option value="investigating">対応中</option>
+                  <option value="resolved">対応済</option>
+                  <option value="dismissed">却下</option>
+                </select>
+              </div>
+              <div class="cc-dropdown cc-select admin-select">
+                <button class="cc-dd-toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="cc-dd-value"></span>
+                </button>
+                <div class="cc-dd-menu" role="listbox"></div>
+                <select id="admin-report-type" class="cc-hidden-select">
+                  <option value="all">全種別</option>
+                  <option value="post">投稿</option>
+                  <option value="board_post">掲示板</option>
+                  <option value="board_reply">掲示板返信</option>
+                  <option value="inquiry">問い合わせ</option>
+                </select>
+              </div>
+              <div class="cc-dropdown cc-select admin-select">
+                <button class="cc-dd-toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="cc-dd-value"></span>
+                </button>
+                <div class="cc-dd-menu" role="listbox"></div>
+                <select id="admin-report-sort" class="cc-hidden-select">
+                  <option value="newest">新しい順</option>
+                  <option value="oldest">古い順</option>
+                </select>
+              </div>
+              <div class="admin-count">件数: <span id="admin-report-count">0</span></div>
+              <div class="admin-bulk-actions">
+                <button class="btn btn-secondary" type="button" id="admin-report-discard">破棄</button>
+                <button class="btn btn-primary" type="button" id="admin-report-save">保存</button>
+              </div>
+            </div>
+          </div>
+          <div class="admin-report-list" id="admin-report-list"></div>
+        </section>
+
+        <section class="admin-panel" data-panel="users">
+          <div class="admin-toolbar">
+            <div class="admin-search">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input id="admin-user-search" type="search" placeholder="メール/ユーザー名で検索" />
+            </div>
+            <div class="admin-filters">
+              <div class="cc-dropdown cc-select admin-select">
+                <button class="cc-dd-toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="cc-dd-value"></span>
+                </button>
+                <div class="cc-dd-menu" role="listbox"></div>
+                <select id="admin-user-filter" class="cc-hidden-select">
+                  <option value="all">すべて</option>
+                  <option value="active">有効</option>
+                  <option value="banned">停止</option>
+                </select>
+              </div>
+              <div class="admin-count">件数: <span id="admin-user-count">0</span></div>
+              <div class="admin-bulk-actions">
+                <button class="btn btn-secondary" type="button" id="admin-user-discard">破棄</button>
+                <button class="btn btn-primary" type="button" id="admin-user-save">保存</button>
+              </div>
+            </div>
+          </div>
+          <div class="admin-user-list" id="admin-user-list"></div>
+        </section>
+
+        <section class="admin-panel" data-panel="conversations">
+          <div class="admin-toolbar">
+            <div class="admin-search">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input id="admin-convo-search" type="search" placeholder="スレッドID/投稿/参加者/状態で検索" />
+              <button class="btn btn-secondary admin-search-clear" type="button" id="admin-convo-clear">クリア</button>
+            </div>
+            <div class="admin-filters">
+              <div class="cc-dropdown cc-select admin-select">
+                <button class="cc-dd-toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="cc-dd-value"></span>
+                </button>
+                <div class="cc-dd-menu" role="listbox"></div>
+                <select id="admin-convo-filter" class="cc-hidden-select">
+                  <option value="all">すべて</option>
+                  <option value="frozen">凍結</option>
+                  <option value="reported">通報あり</option>
+                </select>
+              </div>
+              <div class="admin-count">件数: <span id="admin-convo-count">0</span></div>
+              <div class="admin-bulk-actions">
+                <button class="btn btn-secondary" type="button" id="admin-convo-discard">破棄</button>
+                <button class="btn btn-primary" type="button" id="admin-convo-save">保存</button>
+              </div>
+            </div>
+          </div>
+          <div class="admin-convo-list" id="admin-convo-list"></div>
+        </section>
+
+        <section class="admin-panel" data-panel="announcements">
+          <div class="admin-toolbar">
+            <div class="admin-search">
+              <i class="fa-solid fa-bullhorn"></i>
+              <div class="admin-settings-title">お知らせ管理</div>
+            </div>
+            <div class="admin-filters">
+              <div class="admin-count">未保存: <span id="admin-announce-pending">なし</span></div>
+              <div class="admin-bulk-actions">
+                <button class="btn btn-secondary" type="button" id="admin-announce-discard">破棄</button>
+                <button class="btn btn-primary" type="button" id="admin-announce-save">保存</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="admin-settings-grid">
+            <section class="admin-settings-section">
+              <div class="admin-settings-head">
+                <h3>新規お知らせ</h3>
+                <p>static.html?type=notice に表示されます。</p>
+              </div>
+              <div class="admin-settings-body">
+                <div class="admin-settings-row admin-settings-row--stack">
+                  <input id="admin-announce-title" class="setting-input" type="text" placeholder="タイトル" />
+                  <textarea id="admin-announce-body" class="setting-input" rows="3" placeholder="本文"></textarea>
+                </div>
+                <div class="admin-settings-row">
+                  <label class="checkbox-label"><input type="checkbox" id="admin-announce-visible" checked /> 表示する</label>
+                </div>
+                <div class="admin-settings-row">
+                  <button class="btn btn-secondary" type="button" id="admin-announce-add">追加</button>
+                </div>
+              </div>
+            </section>
+
+            <section class="admin-settings-section">
+              <div class="admin-settings-head">
+                <h3>お知らせ一覧</h3>
+                <p>タイトル/本文/表示状態を編集できます。</p>
+              </div>
+              <div class="admin-settings-body">
+                <div class="admin-announce-list" id="admin-announce-list"></div>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="admin-panel" data-panel="static-pages">
+          <div class="admin-toolbar">
+            <div class="admin-search">
+              <i class="fa-solid fa-file-lines"></i>
+              <div class="admin-settings-title">固定ページ管理</div>
+            </div>
+            <div class="admin-filters">
+              <div class="admin-count">状態: <span id="admin-static-status">—</span></div>
+            </div>
+          </div>
+
+          <div class="admin-settings-grid">
+            <section class="admin-settings-section">
+              <div class="admin-settings-head">
+                <h3>固定ページ編集</h3>
+                <p>static.html?type=*** に反映されます。</p>
+              </div>
+              <div class="admin-settings-body">
+                <div class="admin-settings-row admin-settings-row--stack">
+                  <label class="setting-label" for="admin-static-current">
+                    変更前HTML（読み取り専用）
+                    <span class="cc-readonly-badge">readonly</span>
+                  </label>
+                  <textarea id="admin-static-current" class="setting-input cc-readonly" rows="6" readonly></textarea>
+                </div>
+                <div class="admin-settings-row admin-settings-row--stack">
+                  <label class="setting-label" for="admin-static-type">ページ種別</label>
+                  <div class="cc-dropdown cc-select admin-select">
+                    <button class="cc-dd-toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+                      <span class="cc-dd-value"></span>
+                    </button>
+                    <div class="cc-dd-menu" role="listbox"></div>
+                    <select id="admin-static-type" class="cc-hidden-select">
+                      <option value="post-guide">投稿・取引ガイド</option>
+                      <option value="scam">詐欺などのご注意</option>
+                      <option value="school">学校情報</option>
+                      <option value="links">外部リンク</option>
+                      <option value="guide">ご利用ガイド</option>
+                      <option value="terms">利用規約</option>
+                      <option value="privacy">プライバシーポリシー</option>
+                    </select>
+                  </div>
+                  <textarea id="admin-static-body" class="setting-input" rows="10" placeholder="本文（HTML）"></textarea>
+                </div>
+                <div class="admin-settings-row">
+                  <div class="admin-static-actions">
+                    <button class="btn btn-primary" type="button" id="admin-static-save">変更を適用</button>
+                    <button class="btn btn-secondary" type="button" id="admin-static-preview">表示プレビュー</button>
+                    <button class="btn btn-secondary admin-static-reset" type="button" id="admin-static-reset">編集前に戻す</button>
+                    <a class="admin-link" id="admin-static-preview-link" href="static.html?type=post-guide" target="_blank" rel="noreferrer">公開中のページを開く</a>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="admin-settings-section">
+              <div class="admin-settings-head">
+                <h3>復元</h3>
+                <p>直前の状態に戻せます（未保存）。</p>
+              </div>
+              <div class="admin-settings-body">
+                <div class="admin-settings-row">
+                  <div class="cc-dropdown cc-select admin-select">
+                    <button class="cc-dd-toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+                      <span class="cc-dd-value"></span>
+                    </button>
+                    <div class="cc-dd-menu" role="listbox"></div>
+                    <select id="admin-static-history" class="cc-hidden-select"></select>
+                  </div>
+                  <button class="btn btn-secondary" type="button" id="admin-static-restore">この履歴に戻す</button>
+                </div>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="admin-panel" data-panel="settings">
+          <div class="admin-toolbar admin-settings-toolbar">
+            <div class="admin-search">
+              <i class="fa-solid fa-sliders"></i>
+              <div class="admin-settings-title">運用設定</div>
+            </div>
+            <div class="admin-filters">
+              <div class="admin-count">未保存: <span id="admin-settings-pending">なし</span></div>
+              <div class="admin-bulk-actions">
+                <button class="btn btn-secondary" type="button" id="admin-settings-discard">破棄</button>
+                <button class="btn btn-primary" type="button" id="admin-settings-save">保存</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="admin-settings-grid">
+            <section class="admin-settings-section">
+              <div class="admin-settings-head">
+                <h3>NGワード</h3>
+                <p>投稿・掲示板・問い合わせ送信前にチェックします。</p>
+              </div>
+              <div class="admin-settings-body">
+                <div class="setting-toggle-list">
+                  <label class="setting-toggle">
+                    <input type="checkbox" id="admin-ng-enabled" />
+                    <span>NGワードを有効化</span>
+                    <small>無効化するとチェックをスキップします。</small>
+                  </label>
+                </div>
+                <div class="admin-settings-targets">
+                  <label class="checkbox-label"><input type="checkbox" data-ng-target="post" /> 投稿</label>
+                  <label class="checkbox-label"><input type="checkbox" data-ng-target="board" /> 掲示板</label>
+                  <label class="checkbox-label"><input type="checkbox" data-ng-target="inquiry" /> 問い合わせ</label>
+                </div>
+                <div class="admin-settings-row">
+                  <input id="admin-ng-input" class="setting-input" type="text" placeholder="NGワードを追加" />
+                  <button class="btn btn-secondary" type="button" id="admin-ng-add">追加</button>
+                </div>
+                <div class="admin-tag-list" id="admin-ng-list"></div>
+              </div>
+            </section>
+
+            <section class="admin-settings-section">
+              <div class="admin-settings-head">
+                <h3>通報理由マスタ</h3>
+                <p>通報モーダルの理由選択に反映されます。</p>
+              </div>
+              <div class="admin-settings-body">
+                <div class="setting-toggle-list">
+                  <label class="setting-toggle">
+                    <input type="checkbox" id="admin-reason-enabled" />
+                    <span>通報理由を有効化</span>
+                    <small>無効時は既定の理由セットを使います。</small>
+                  </label>
+                </div>
+                <div class="admin-settings-row">
+                  <input id="admin-reason-input" class="setting-input" type="text" placeholder="理由を追加" />
+                  <button class="btn btn-secondary" type="button" id="admin-reason-add">追加</button>
+                </div>
+                <div class="admin-tag-list" id="admin-reason-list"></div>
+              </div>
+            </section>
+
+            <section class="admin-settings-section">
+              <div class="admin-settings-head">
+                <h3>お知らせ</h3>
+                <p>お知らせは「お知らせ」タブで管理します。</p>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="admin-panel" data-panel="data">
+          <div class="admin-toolbar">
+            <div class="admin-search">
+              <i class="fa-solid fa-database"></i>
+              <div class="admin-settings-title">データ管理</div>
+            </div>
+            <div class="admin-filters">
+              <div class="admin-count">運営データのバックアップ/復元</div>
+            </div>
+          </div>
+
+          <div class="admin-settings-grid">
+            <section class="admin-settings-section admin-data-restore">
+              <div class="admin-settings-head">
+                <h3>直前の状態に戻す</h3>
+                <p>直前バックアップに復元します。</p>
+              </div>
+              <div class="admin-settings-body">
+                <div class="admin-settings-row admin-data-row">
+                  <button class="btn btn-secondary" type="button" id="admin-data-restore">直前の状態に戻す</button>
+                  <span class="admin-data-filename" id="admin-data-backup">バックアップなし</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="admin-settings-section">
+              <div class="admin-settings-head">
+                <h3>エクスポート</h3>
+                <p>運営データをJSONで保存します。</p>
+              </div>
+              <div class="admin-settings-body">
+                <div class="admin-settings-row">
+                  <button class="btn btn-primary" type="button" id="admin-data-export">JSONをダウンロード</button>
+                </div>
+                <div class="admin-data-hint" id="admin-export-hint">ファイル名の目安: canadaclassi_admin_export_YYYYMMDD_HHMMSS.json</div>
+              </div>
+            </section>
+
+            <section class="admin-settings-section">
+              <div class="admin-settings-head">
+                <h3>インポート</h3>
+                <p>JSONから運営データを復元します。</p>
+              </div>
+              <div class="admin-settings-body">
+                <input id="admin-data-file" class="cc-hidden" type="file" accept="application/json" />
+                <div class="admin-settings-row admin-data-row">
+                  <button class="btn btn-secondary" type="button" id="admin-data-select">JSONを選択</button>
+                  <span class="admin-data-filename" id="admin-data-filename">未選択</span>
+                </div>
+                <div class="admin-settings-row admin-data-row">
+                  <div class="cc-dropdown cc-select admin-select">
+                    <button class="cc-dd-toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+                      <span class="cc-dd-value"></span>
+                    </button>
+                    <div class="cc-dd-menu" role="listbox"></div>
+                    <select id="admin-data-mode" class="cc-hidden-select">
+                      <option value="overwrite">上書き</option>
+                      <option value="merge">マージ（既存優先）</option>
+                    </select>
+                  </div>
+                  <button class="btn btn-primary" type="button" id="admin-data-import">インポート</button>
+                </div>
+                <div class="admin-data-hint" id="admin-import-policy">マージは既存データを優先します。</div>
+                <div class="admin-data-manifest" id="admin-data-manifest">manifest: なし（旧形式）</div>
+                <p class="admin-note">インポート後は再読み込みを推奨します。</p>
+              </div>
+            </section>
+
+            <section class="admin-settings-section">
+              <div class="admin-settings-head">
+                <h3>Seed作成</h3>
+                <p>運用開始用の初期データをエクスポートします。</p>
+              </div>
+              <div class="admin-settings-body">
+                <div class="admin-seed-options">
+                  <label class="checkbox-label"><input type="checkbox" id="seed-admin-users" checked /> adminユーザー</label>
+                  <label class="checkbox-label"><input type="checkbox" id="seed-users" checked /> 一般ユーザー</label>
+                  <label class="checkbox-label"><input type="checkbox" id="seed-posts" checked /> 投稿</label>
+                  <label class="checkbox-label"><input type="checkbox" id="seed-board" checked /> 掲示板スレッド</label>
+                  <label class="checkbox-label"><input type="checkbox" id="seed-board-replies" checked /> 掲示板返信</label>
+                  <label class="checkbox-label"><input type="checkbox" id="seed-inquiry" checked /> 問い合わせスレッド</label>
+                  <label class="checkbox-label"><input type="checkbox" id="seed-reports" /> 通報</label>
+                  <label class="checkbox-label"><input type="checkbox" id="seed-moderation" /> hidden/deleted/ban/監査ログ</label>
+                  <label class="checkbox-label"><input type="checkbox" id="seed-rules" checked /> 運用設定（NG/通報理由/お知らせ）</label>
+                </div>
+                <div class="admin-settings-row">
+                  <button class="btn btn-primary" type="button" id="admin-seed-export">Seedをエクスポート</button>
+                </div>
+                <input id="admin-seed-file" class="cc-hidden" type="file" accept="application/json" />
+                <div class="admin-settings-row admin-data-row">
+                  <button class="btn btn-secondary" type="button" id="admin-seed-select">Seed JSONを選択</button>
+                  <span class="admin-data-filename" id="admin-seed-filename">未選択</span>
+                </div>
+                <div class="admin-settings-row admin-data-row">
+                  <button class="btn btn-primary" type="button" id="admin-seed-import">Seedを取り込む</button>
+                </div>
+                <div class="admin-data-hint" id="admin-seed-keys">seed keys: —</div>
+                <div class="admin-data-hint">seedキーは CC_ADMIN_DATA_KEYS 方針 + 運用データを含みます。</div>
+                <div class="admin-data-hint">seedはインポート（上書き推奨）で初期化に使用します。</div>
+                <div class="admin-data-hint" id="admin-seed-manifest">manifest: なし</div>
+                <div class="admin-data-preview" id="admin-seed-preview"></div>
+              </div>
+            </section>
+
+            <section class="admin-settings-section">
+              <div class="admin-settings-head">
+                <h3>投稿ソース状態</h3>
+                <p>投稿データの件数と日時を確認します。</p>
+              </div>
+              <div class="admin-settings-body">
+                <div class="admin-data-preview" id="admin-post-source-status"></div>
+                <div class="admin-settings-row admin-data-row">
+                  <button class="btn btn-secondary" type="button" id="admin-mock-regenerate">モック投稿を復元（手動投稿は保持）</button>
+                  <button class="btn btn-secondary" type="button" id="admin-posts-reset">全投稿リセット（手動投稿も削除）</button>
+                </div>
+                <p class="admin-note">全投稿リセットは手動投稿も削除されます。</p>
+              </div>
+            </section>
+
+            <section class="admin-settings-section">
+              <div class="admin-settings-head">
+                <h3>Smoke Test</h3>
+                <p>短時間で最低限の動作確認を行うチェックリストです。</p>
+              </div>
+              <div class="admin-settings-body">
+                <details class="admin-smoke">
+                  <summary class="admin-smoke-summary">チェックリストを表示</summary>
+                  <div class="admin-smoke-body">
+                    <textarea id="admin-smoke-text" class="admin-smoke-text" readonly rows="28"># 通報E2E（最小回帰）
+1) 投稿を1件作成 → detailで通報モーダルを開く
+2) 理由ドロップダウンが開き、scam→spamに変更できる
+3) 通報送信 → 完了が分かる表示を確認
+4) admin通報管理で該当通報が見える
+5) 開く導線で対象を確認（inquiryはfrom=report+通報ありのみ閲覧）
+6) 監査ログに種別が分かるログが残る（report_update等）
+
+# 通報運用E2E（4系統）
+1) post通報を1件作成 → admin通報管理で概要/開く/保存が動く
+2) boardスレッド通報を1件作成 → 開くでboard_detailへ遷移
+3) board返信通報を1件作成 → #replyへジャンプ+ハイライト
+4) inquiry通報を1件作成 → from=reportで全文閲覧（送信不可）
+5) status/assigned/note/priority/dueを変更して保存
+6) ログに report_update/priority_update/due_update が残る（秒表示）
+7) inquiryは from=report を外すと閲覧不可 / 非adminは常に不可
+
+# 全体回帰（最小）
+1) guest: index表示→地域フィルタで件数変化
+2) guest: list表示→detail表示（画像/本文/メタ崩れなし）
+3) user: inquiry作成→inquiry-threadで送受信
+4) user: board_new投稿→board_detail返信
+5) BAN: board_new/board_detail送信がブロック
+6) admin: 全カナダ+日本でindex/listが0件にならない
+7) admin: 通報管理の開く導線が全種別で動く
+8) admin: from=report閲覧専用UIが表示される
+9) admin: 監査ログの秒表示/詳細差分を確認
+10) data: export→import(merge)→restoreの最短確認
+
+# 最小E2E（権限/直URL/導線）
+1) 通報を post/board/inquiry/board_reply 各1件作成→通報管理で開く
+2) inquiry: admin+from=reportのみ閲覧可 / 非admin不可
+3) 掲示板: スレッド非表示/復帰 + 返信非表示/復帰→非adminで非表示確認→ログ確認
+4) BAN: board_new/board_detail 送信不可を確認
+5) data管理: export→import(merge/overwrite)→restore→ログ確認
+
+# 相対表示の境界（7日）テスト
+1) detail/list/index を debug=1 で開く（例: detail.html?post=mock_post_01&debug=1）
+2) 対象投稿の日時が「yyyy-mm-dd hh:mm」に切り替わることを確認
+3) debug=1 を外す → 相対表示に戻ることを確認
+
+# Seedメモ
+- Data管理のSeed作成で初期データを作成
+- importは上書き推奨（manifestは有無どちらも互換）</textarea>
+                    <div class="admin-smoke-actions">
+                      <button class="btn btn-secondary" type="button" id="admin-smoke-copy">コピー</button>
+                    </div>
+                  </div>
+                </details>
+              </div>
+            </section>
+
+            <section class="admin-settings-section">
+              <div class="admin-settings-head">
+                <h3>運用ルール（要点）</h3>
+                <p>運用で迷わないための前提です。</p>
+              </div>
+              <div class="admin-settings-body">
+                <ul class="admin-rule-list">
+                  <li>inquiry-thread は通報スレッド単位で admin が閲覧（from=report 必須）</li>
+                  <li>admin閲覧は送信不可（閲覧専用）</li>
+                  <li>掲示板スレッド/返信の非表示は一般ユーザーに非公開、直URLはブロック</li>
+                  <li>BANは入力と送信の二段構えでブロック</li>
+                  <li>監査ログは秒表示、actionで何が起きたか確認</li>
+                </ul>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="admin-panel" data-panel="logs">
+          <div class="admin-toolbar">
+            <div class="admin-search">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input id="admin-log-search" type="search" placeholder="対象/管理者で検索" />
+            </div>
+            <div class="admin-filters">
+              <div class="cc-dropdown cc-select admin-select">
+                <button class="cc-dd-toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="cc-dd-value"></span>
+                </button>
+                <div class="cc-dd-menu" role="listbox"></div>
+                <select id="admin-log-range" class="cc-hidden-select">
+                  <option value="all">全期間</option>
+                  <option value="today">今日</option>
+                  <option value="7">7日</option>
+                  <option value="30">30日</option>
+                </select>
+              </div>
+              <div class="cc-dropdown cc-select admin-select">
+                <button class="cc-dd-toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="cc-dd-value"></span>
+                </button>
+                <div class="cc-dd-menu" role="listbox"></div>
+                <select id="admin-log-filter" class="cc-hidden-select">
+                  <option value="all">すべて</option>
+                  <option value="post_hide">投稿非表示</option>
+                  <option value="post_unhide">投稿復帰</option>
+                  <option value="post_delete">投稿削除</option>
+                  <option value="post_restore">投稿復元</option>
+                  <option value="report_update">通報更新</option>
+                  <option value="priority_update">通報優先度更新</option>
+                  <option value="due_update">通報期限更新</option>
+                  <option value="user_ban">ユーザー停止</option>
+                  <option value="user_unban">ユーザー解除</option>
+                  <option value="conversation_freeze">会話凍結</option>
+                  <option value="conversation_unfreeze">会話解除</option>
+                  <option value="ng_words_update">NGワード更新</option>
+                  <option value="report_reasons_update">通報理由更新</option>
+                  <option value="announcements_update">お知らせ更新</option>
+                  <option value="board_hide">掲示板非表示</option>
+                  <option value="board_unhide">掲示板復帰</option>
+                  <option value="board_reply_hide">返信非表示</option>
+                  <option value="board_reply_unhide">返信復帰</option>
+                  <option value="data_export">データエクスポート</option>
+                  <option value="data_import">データインポート</option>
+                  <option value="data_restore">データ復元</option>
+                  <option value="audit_export">監査ログエクスポート</option>
+                  <option value="seed_export">Seedエクスポート</option>
+                  <option value="seed_import">Seedインポート</option>
+                </select>
+              </div>
+              <div class="admin-count">件数: <span id="admin-log-count">0</span> / 合計: <span id="admin-log-total">0</span>
+              </div>
+            </div>
+          </div>
+          <div class="admin-log-quick">
+            <button class="btn btn-secondary" type="button" data-log-quick="all">すべて</button>
+            <button class="btn btn-secondary" type="button" data-log-quick="report_update">通報更新</button>
+            <button class="btn btn-secondary" type="button" data-log-quick="user_ban">ユーザー停止</button>
+            <button class="btn btn-secondary" type="button" data-log-quick="post_hide">投稿非表示</button>
+            <button class="btn btn-secondary" type="button" data-log-quick="board_hide">掲示板非表示</button>
+            <button class="btn btn-secondary" type="button" data-log-quick="data_import">データインポート</button>
+          </div>
+          <div class="admin-log-export">
+            <button class="btn btn-secondary" type="button" id="admin-log-export-csv">CSVエクスポート</button>
+            <button class="btn btn-secondary" type="button" id="admin-log-export-json">JSONエクスポート</button>
+          </div>
+          <div class="admin-log-list" id="admin-log-list"></div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <img src="logo1_transparent.png" alt="CanadaClassi Logo" class="footer-logo" />
+          <div>
+            <div class="footer-brand-title">CanadaClassi</div>
+            <div class="footer-brand-sub">カナダくらし</div>
+          </div>
+        </div>
+        <p class="footer-desc">留学・ワーホリの暮らしをつなぐクラシファイド。</p>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">サイトマップ</div>
+        <div class="footer-sitemap">
+          <a href="index.html">ホーム</a>
+          <a href="list.html">クラシファイド</a>
+          <a href="static.html?type=school">学校情報</a>
+          <a href="board.html">掲示板</a>
+          <a href="static.html?type=links">外部リンク</a>
+          <a href="static.html?type=tips">お役立ち情報</a>
+          <a href="mypage.html?tab=inquiries">メッセージ</a>
+          <a href="login.html">ログイン</a>
+          <a href="mypage.html">マイページ</a>
+          <a href="post.html">投稿</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">ご案内</div>
+        <div class="footer-links">
+          <a href="static.html?type=notice">管理者からのお知らせ</a>
+          <a href="static.html?type=guide">ご利用ガイド</a>
+          <a href="static.html?type=post-guide">投稿・取引ガイド</a>
+          <a href="static.html?type=scam">詐欺などのご注意</a>
+          <a href="static.html?type=terms">利用規約</a>
+          <a href="static.html?type=privacy">プライバシーポリシー</a>
+          <a href="sitemap.html">サイトマップ</a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <div class="footer-copy">© 2024 CanadaClassi</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
